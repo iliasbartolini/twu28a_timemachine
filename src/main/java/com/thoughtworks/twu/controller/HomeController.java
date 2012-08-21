@@ -28,4 +28,16 @@ public class HomeController {
         }
         return modelAndView;
     }
+
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public ModelAndView test(@RequestParam(value = "username", defaultValue = "") String username) {
+        ModelAndView modelAndView = new ModelAndView("example/home");
+        if (!username.isEmpty()) {
+            User user = userService.getUser(username);
+            modelAndView.addObject("user", user)
+                    .addObject("username", username);
+        }
+        return modelAndView;
+    }
 }
