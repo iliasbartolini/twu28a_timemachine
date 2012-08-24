@@ -3,19 +3,23 @@ $(function() {
 
     var favorite = new FavoriteTimesheet();
 
-    $.validator.addMethod("duplicateFavorite", favorite.existsFavoriteName);
+
+    $.validator.addMethod("isDuplicate", function(value) {
+        return !favorite.existsFavoriteName(value);
+    });
 
     $("#new_favorite_form").validate({
+
         rules: {
             name: {
-                duplicateFavorite : true,
+                isDuplicate : true,
                 required: true
             }
         },
         messages: {
             name: {
                 required: "Name field cannot be left blank.",
-                duplicateFavorite: "Duplicate name. Please try another name."
+                isDuplicate: "Duplicate name. Please try another name."
             }
         }
     });

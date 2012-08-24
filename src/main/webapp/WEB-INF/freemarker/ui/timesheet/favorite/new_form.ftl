@@ -23,11 +23,7 @@
         <label for="name">Name</label>
         <input type="text" name="name" id="name" value="" />
 
-        <ul id="existingFavorites" class="hidden">
-            <#list existingFavorites as item>
-                <li>${item.name}</li>
-            </#list>
-        </ul>
+
 
         <!--
         <label for="country" class="select">Country</label>

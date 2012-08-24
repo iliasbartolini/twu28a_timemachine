@@ -1,6 +1,6 @@
 function FavoriteTimesheet()
 {
-    this.existingFavorites = [];
+    this.existingFavorites = ["TWU"];
 
     this.addExistingFavoriteName = function(name) {
         this.existingFavorites.push(name);
