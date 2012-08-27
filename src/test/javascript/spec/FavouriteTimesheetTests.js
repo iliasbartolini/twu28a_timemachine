@@ -5,7 +5,7 @@ describe("Favourite Timesheet", function() {
         var favorite = new FavoriteTimesheet();
         favorite.addExistingFavoriteName("TWU");
 
-        expect(favorite.existsFavoriteName("TWU")).toEqual(true);
+        expect(favorite.isNotDuplicated("TWU")).toEqual(false);
     });
 
 });

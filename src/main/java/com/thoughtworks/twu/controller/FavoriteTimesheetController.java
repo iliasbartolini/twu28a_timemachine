@@ -2,6 +2,8 @@ package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.domain.User;
 import com.thoughtworks.twu.domain.timesheet.forms.FavoriteTimesheetForm;
+import com.thoughtworks.twu.persistence.FavoriteTimesheet;
+import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.CountryService;
 import com.thoughtworks.twu.service.FavoriteTimesheetService;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class FavoriteTimesheetController {
+
+
+
     @RequestMapping(value = "/timesheet/favorite/new", method = RequestMethod.GET)
     public ModelAndView newFavorite() {
         CountryService countryService = new CountryService();
@@ -22,14 +27,23 @@ public class FavoriteTimesheetController {
         modelAndView.addObject("countries", countryService.getCountries());
         modelAndView.addObject("existingFavorites", favoriteTimesheetService.getFavoriteTimesheets());
 
+        HibernateConnection.getInstance().getSession().close();
+
         return modelAndView;
     }
 
     @RequestMapping(value = "/timesheet/favorite/new", method = RequestMethod.POST)
-    public ModelAndView doNewFavorite(@ModelAttribute("form") FavoriteTimesheetForm form) {
+    public ModelAndView doNewFavorite(@ModelAttribute("favoriteTimesheetForm") FavoriteTimesheetForm form) {
+        System.out.println("MY FORM ======>>>> " + form.toString());
+        FavoriteTimesheetService service = new FavoriteTimesheetService();
 
+        FavoriteTimesheet favorite = form.toFavoriteTimesheet();
 
-        return newFavorite();
+        service.save(favorite);
+
+        HibernateConnection.getInstance().getSession().close();
+
+        return list();
     }
 
     @RequestMapping(value = "/timesheet/favorite/list", method = RequestMethod.GET)

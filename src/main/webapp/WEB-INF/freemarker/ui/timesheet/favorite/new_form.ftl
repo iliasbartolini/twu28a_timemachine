@@ -19,7 +19,7 @@
         <h1>My Favourite Time Sheet</h1>
     </div>
 
-    <form id="new_favorite_form" action="" method="post" data-ajax="true" class="ui-body ui-body-a ui-corner-all">
+    <form id="new_favorite_form" modelAttribute="favoriteTimesheetForm" action="" method="post" class="ui-body ui-body-a ui-corner-all">
         <label for="name">Name</label>
         <input type="text" name="name" id="name" value="" />
 

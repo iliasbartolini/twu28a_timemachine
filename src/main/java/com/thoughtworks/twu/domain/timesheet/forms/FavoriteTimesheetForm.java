@@ -1,7 +1,9 @@
 package com.thoughtworks.twu.domain.timesheet.forms;
 
+import com.thoughtworks.twu.persistence.FavoriteTimesheet;
+
 public class FavoriteTimesheetForm {
-    String name;
+    private String name;
     String country;
     String state;
     String activity;
@@ -32,5 +34,13 @@ public class FavoriteTimesheetForm {
                 ", saturday=" + saturday +
                 ", sunday=" + sunday +
                 '}';
+    }
+
+    public FavoriteTimesheet toFavoriteTimesheet() {
+        return new FavoriteTimesheet(this.name);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

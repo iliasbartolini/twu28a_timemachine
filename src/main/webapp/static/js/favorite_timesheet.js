@@ -6,16 +6,16 @@ function FavoriteTimesheet()
         this.existingFavorites.push(name);
     };
 
-    this.existsFavoriteName = function(value) {
+    this.isNotDuplicated = function(value) {
 
-        var existsFavoriteName = false;
+        var isNotDuplicated = true;
 
         $(this.existingFavorites).each(function(){
             if ( this == value ) {
-                existsFavoriteName = true;
+                isNotDuplicated = false;
             }
         });
 
-        return existsFavoriteName;
+        return isNotDuplicated;
     };
 }
