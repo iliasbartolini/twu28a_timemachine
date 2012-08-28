@@ -20,7 +20,7 @@ public class FavoriteTimesheet {
     }
 
     public FavoriteTimesheet(String name) {
-        this.name = name;
+        this.name = name.trim();
         this.userId = "1234";
     }
 

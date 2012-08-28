@@ -49,6 +49,9 @@ public class FavoriteTimesheetTest {
         int sizeAfterInsert = favoriteTimesheetService.getFavoriteTimesheets().size();
         //Then
         assertThat(sizeAfterInsert,is(sizeBeforeInsert+1));
+
+        HibernateConnection.getInstance().getSession().delete(favoriteTimesheet);
+        HibernateConnection.getInstance().getSession().flush();
     }
 
     @After

@@ -3,7 +3,15 @@ $(function() {
 
     var favorite = new FavoriteTimesheet();
 
-    $.validator.addMethod("duplicateFavorite", favorite.isNotDuplicated);
+    $("#existingFavorites li").each(function() {
+       favorite.addExistingFavoriteName($(this).text());
+    });
+
+    window.db = favorite;
+
+    $.validator.addMethod("duplicateFavorite", function(value) {
+        return !favorite.isDuplicated(value);
+    });
 
     $("#new_favorite_form").validate({
         rules: {
