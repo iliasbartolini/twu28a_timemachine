@@ -29,14 +29,14 @@
             </#list>
         </ul>
 
-        <!--
+
         <label for="country" class="select">Country</label>
         <select name="country" id="country">
             <#list countries as country>
                 <option value=${country.name}>${country.name}</option>
             </#list>
         </select>
-
+        <!--
         <label for="state" class="select">State</label>
         <select name="state" id="state">
         </select>
