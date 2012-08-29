@@ -39,12 +39,6 @@ public class FavoriteTimesheetTest {
             HibernateConnection.getInstance().getSession().close();
     }
 
-    @After
-    public void tearDown() throws Exception {
-
-
-    }
-
     @Test
     public void shouldReceiveACountryList() throws Exception {
         //Given

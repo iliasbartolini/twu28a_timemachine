@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table( name = "favoritetimesheet" )
+@Table( name = "FAVORITE_TIMESHEET" )
 public class FavoriteTimesheet {
 
     @Id
@@ -13,7 +13,10 @@ public class FavoriteTimesheet {
     @GenericGenerator(name="id", strategy = "increment")
     private int id;
 
+    @Column
     private String name;
+
+    @Column
     private String userId;
 
     public FavoriteTimesheet() {
