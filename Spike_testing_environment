@@ -1,0 +1,56 @@
+Spike: testing environment, configure CI deployment
+test environment VS production environment
+test environment: mimic the customer's environment where we deploy our application
+production environment: product release environment
+destination:
+deploy CI server's .war file to testing environment automatically, we need copy .war file to the testing environment. (CI server GO-------SSH protocol-------> Testing environment )
+method:
+scp without password (generate RSA key)
+tool:
+OpenSSH
+host_src(public key & private key) ----(scp)---> host_dest(authentication: public key)
+host_src: run the scp, ssh command machine. generate the key, has public key and private key
+host_dest: only has public key
+
+step-by-step (ubuntu):
+ON host_src:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ssh-keygen -t rsa
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-By default the public key is saved in the file ~/.ssh/id_rsa.pub, while ~/.ssh/id_rsa is the private key.
+-Now copy the id_dsa.pub file to the host_dest:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+scp ~/.ssh/id_rsa.pub username@host_dest
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+LOGIN ON host_dest:
+Copy the contents of id_rsa.pub to ~/.ssh/authorized_keys
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cat id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 700 ~/.ssh/authorized_keys
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+THEN, you can use "scp file_of_host_src host_dest" command without prompting for password.     
+Troubleshooting (if the above is unsuccessful, then take a look of the follows:)
+If you have an encrypted home directory, SSH cannot access your authorized_keys file because it is inside your encrypted home directory and won't be available until after you are authenticated. Therefore, SSH will default to password authentication.
+To solve this, create a folder outside your home named /etc/ssh/<username> (replace "<username>" with your actual username). This directory should have 755 permissions and be owned by the user. Move the authorized_keys file into it. The authorized_keys file should have 644 premissions and be owned by the user.
+Then edit your /etc/ssh/sshd_config and add:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+AuthorizedKeysFile    /etc/ssh/%u/authorized_keys
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Finally, restart ssh with:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+sudo service ssh restart
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The next time you connect with SSH you should not have to enter your password.
+on host_dest(testing environment):
+Ensure that the /etc/ssh/sshd_config contains the following lines, and that they are uncommented;
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+PubkeyAuthentication yes
+RSAAuthentication yes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-check the permissions on the authorized_keys file, only the authenticated user should have read and write permissions.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+chmod 600 .ssh/authorized_keys
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+REFERENCE
+https://help.ubuntu.com/12.04/serverguide/openssh-server.html
+https://help.ubuntu.com/community/SSH/OpenSSH/Keys
