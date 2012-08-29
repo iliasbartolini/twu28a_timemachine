@@ -1,6 +1,8 @@
 package com.thoughtworks.twu.service;
 
-import com.thoughtworks.twu.domain.Country;
+import com.thoughtworks.twu.persistence.Country;
+import com.thoughtworks.twu.persistence.HibernateConnection;
+import org.hibernate.Session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +12,14 @@ public class CountryService {
     private List<Country> countryList = new ArrayList<Country>();
 
     public CountryService() {
-        countryList.add(new Country("India"));
-        countryList.add(new Country("USA"));
-        countryList.add(new Country("Australia"));
-        countryList.add(new Country("Brazil"));
-        countryList.add(new Country("China"));
     }
 
     public List<Country> getCountries() {
+        HibernateConnection connection = HibernateConnection.getInstance();
+        Session session = connection.getSession();
+
+        countryList = session.createCriteria(Country.class).list();
+
         return countryList;
     }
 
