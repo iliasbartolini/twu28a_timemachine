@@ -24,7 +24,8 @@ dependencies {
             'hsqldb:hsqldb:1.8.0.10',
             'org.json:json:20090211',
             fileTree(dir: 'lib', include: '*.jar'),
-            group: 'org.hibernate', name: 'hibernate-core', version: '4.+'
+            group: 'org.hibernate', name: 'hibernate-core', version: '4.+',
+            'org.codehaus.groovy:groovy-all:2.0.1'
 
     testCompile 'junit:junit:4.10',
             'org.springframework:spring-test:3.1.1.RELEASE',
@@ -34,8 +35,23 @@ dependencies {
             'org.seleniumhq.selenium:selenium-firefox-driver:2.23.0'
 }
 
+war {
+    exclude '**/WEB-INF/web.xml.template'
+}
+
+jettyRun.doFirst {
+    def webXmlTemplate = file("$webAppDir/WEB-INF/web.xml.template")
+    def generatedWebXmlFile = file("$buildDir/web.xml")
+    def engine = new groovy.text.SimpleTemplateEngine()
+    def hostName = InetAddress.getLocalHost().getHostName()
+    generatedWebXmlFile.withWriter { w ->
+        w << engine.createTemplate(webXmlTemplate).make([servername: hostName]).toString()
+    }
+}
+
 jettyRun {
     contextPath = 'twu'
+    webXml= file("$buildDir/web.xml")
 }
 
 test {
@@ -43,7 +59,7 @@ test {
 }
 
 task functionalTest(type: Test, dependsOn: "test") {
-   include '**/functional/com/thoughtworks/**/*.*'
+    include '**/functional/com/thoughtworks/**/*.*'
 }
 
 functionalTest.doFirst {
