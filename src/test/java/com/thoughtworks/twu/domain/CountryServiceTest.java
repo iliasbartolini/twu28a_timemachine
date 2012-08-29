@@ -33,7 +33,7 @@ public class CountryServiceTest {
     }
 
     @Test
-    public void shouldReturnNullForNonUS() {
+    public void shouldReturnEmptyListForNonUS() {
         CountryService service=new CountryService();
         List<State> result=service.getStates("AUS");
         assertEquals(0, result.size());
