@@ -37,6 +37,7 @@ dependencies {
 
 jettyRun {
     contextPath = 'twu'
+    httpPort = 9093
 }
 
 test {
@@ -48,7 +49,7 @@ task functionalTest(type: Test, dependsOn: "test") {
 }
 
 functionalTest.doFirst {
-    jettyRun.httpPort = 9876
+    jettyRun.httpPort = 9093
     jettyRun.daemon = true
     jettyRun.execute()
 }
