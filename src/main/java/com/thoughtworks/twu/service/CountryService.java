@@ -3,9 +3,7 @@ package com.thoughtworks.twu.service;
 
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
-
 import com.thoughtworks.twu.persistence.HibernateConnection;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
