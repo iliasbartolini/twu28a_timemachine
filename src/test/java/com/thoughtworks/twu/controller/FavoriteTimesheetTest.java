@@ -27,6 +27,7 @@ public class FavoriteTimesheetTest {
     public static void beforeClass() throws Exception {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         db = builder.setType(EmbeddedDatabaseType.H2).setName("test").
+                addScript("/twu_database/cleanDB.sql").
                 addScript("/twu_database/schema.sql").
                 addScript("/twu_database/import.sql").build();
     }
