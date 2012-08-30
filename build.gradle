@@ -51,7 +51,7 @@ jettyRun.doFirst {
 }
 
 jettyRun {
-    contextPath = 'twu'
+    contextPath = 'timemachine'
     webXml= file("$buildDir/web.xml")
     httpPort = 9093
 }
