@@ -14,6 +14,8 @@
         <mapping class="com.thoughtworks.twu.persistence.FavoriteTimesheet"/>
         <mapping class="com.thoughtworks.twu.domain.Country"/>
         <mapping class="com.thoughtworks.twu.domain.State" />
+        <mapping class="com.thoughtworks.twu.domain.Activity" />
+        <mapping class="com.thoughtworks.twu.domain.Employee" />
 
     </session-factory>
 </hibernate-configuration>
