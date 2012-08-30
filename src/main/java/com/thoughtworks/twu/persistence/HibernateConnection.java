@@ -40,9 +40,6 @@ public class HibernateConnection {
     }
 
     public Session getSession() {
-        if ( !session.isOpen() )
-            session = sessionFactory.openSession();
-
         return session;
     }
 }

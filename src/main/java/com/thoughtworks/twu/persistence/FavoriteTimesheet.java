@@ -19,15 +19,9 @@ public class FavoriteTimesheet {
     @Column
     private String userId;
 
-    public FavoriteTimesheet() {
-    }
-
     public FavoriteTimesheet(String name) {
         this.name = name.trim();
         this.userId = "1234";
     }
 
-    public String getName() {
-        return name;
-    }
 }
