@@ -3,7 +3,6 @@ package com.thoughtworks.twu.service;
 
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.State;
-
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
 
@@ -27,6 +26,7 @@ public class CountryService {
 
         countries = session.createQuery("from com.thoughtworks.twu.domain.Country").list();
         states = session.createQuery("from com.thoughtworks.twu.domain.State").list();
+
         for(State state : states) {
             if(!countryStates.containsKey(state.getCountry_code())) {
                 countryStates.put(state.getCountry_code(), new ArrayList<State>());
