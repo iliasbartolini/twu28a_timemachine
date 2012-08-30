@@ -22,11 +22,15 @@ public class FavoriteTimesheetControllerTest {
     public static void beforeClass() throws Exception {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         db = builder.setType(EmbeddedDatabaseType.H2).setName("test").
-                addScript("/twu_database/schema.sql").
-                addScript("/twu_database/import.sql").build();
+                addScript("/twu_database/cleanDB.sql").
+                addScript("/twu_database/schema.sql").build();
     }
 
-
+    @AfterClass
+    public static void afterClass() throws Exception {
+        if ( HibernateConnection.getInstance().getSession().isConnected() )
+            HibernateConnection.getInstance().getSession().close();
+    }
 
     FavoriteTimesheetController controller;
 

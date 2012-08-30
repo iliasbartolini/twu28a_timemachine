@@ -1,23 +1,22 @@
 package com.thoughtworks.twu.controller;
 
-
 import com.thoughtworks.twu.domain.Country;
-
 import com.thoughtworks.twu.persistence.FavoriteTimesheet;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.CountryService;
 import com.thoughtworks.twu.service.FavoriteTimesheetService;
 import org.junit.*;
 import org.springframework.jdbc.datasource.embedded.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class FavoriteTimesheetTest {
-
 
     private static EmbeddedDatabase db;
 
@@ -36,8 +35,6 @@ public class FavoriteTimesheetTest {
 
     @AfterClass
     public static void afterClass() throws Exception {
-        if ( db != null && !db.getConnection().isClosed())
-            db.shutdown();
         if ( HibernateConnection.getInstance().getSession().isConnected() )
             HibernateConnection.getInstance().getSession().close();
     }
@@ -51,7 +48,6 @@ public class FavoriteTimesheetTest {
         //Then
         assertThat(countries.size(), is(239));
     }
-
 
     @Test
     public void shouldRetrieveMyFavoriteTimesheets()
@@ -79,5 +75,14 @@ public class FavoriteTimesheetTest {
 
         HibernateConnection.getInstance().getSession().delete(favoriteTimesheet);
         HibernateConnection.getInstance().getSession().flush();
+    }
+
+    @Test
+    public void shouldShowNewFavoriteForm() throws Exception {
+        FavoriteTimesheetController controller = new FavoriteTimesheetController();
+        ModelAndView modelAndView = controller.newFavorite();
+        List<Country> countries = (List<Country>) modelAndView.getModel().get("countries");
+
+         assertThat(countries.size(), is(239));
     }
 }
