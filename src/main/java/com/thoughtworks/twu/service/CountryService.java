@@ -1,7 +1,9 @@
 package com.thoughtworks.twu.service;
 
+
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.State;
+
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
 
@@ -19,6 +21,7 @@ public class CountryService {
     private HashMap<String, List<State>> countryStates = new HashMap<String, List<State>>();
 
     public CountryService() {
+
         connection = HibernateConnection.getInstance();
         session = connection.getSession();
 
@@ -43,6 +46,7 @@ public class CountryService {
 
     public List<State> getStates(String countryCode) {
         return countryStates.get(countryCode);
+
     }
 
 

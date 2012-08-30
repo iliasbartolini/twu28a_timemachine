@@ -1,10 +1,14 @@
 package com.thoughtworks.twu.controller;
 
+
+import com.thoughtworks.twu.domain.Country;
+
 import com.thoughtworks.twu.persistence.FavoriteTimesheet;
 import com.thoughtworks.twu.persistence.HibernateConnection;
+import com.thoughtworks.twu.service.CountryService;
 import com.thoughtworks.twu.service.FavoriteTimesheetService;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.*;
+import org.springframework.jdbc.datasource.embedded.*;
 
 import java.util.List;
 
@@ -13,6 +17,39 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 public class FavoriteTimesheetTest {
+
+
+    private static EmbeddedDatabase db;
+
+    public FavoriteTimesheetTest() {
+
+    }
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+        db = builder.setType(EmbeddedDatabaseType.H2).setName("test").
+                addScript("/twu_database/schema.sql").
+                addScript("/twu_database/import.sql").build();
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        if ( db != null && !db.getConnection().isClosed())
+            db.shutdown();
+        if ( HibernateConnection.getInstance().getSession().isConnected() )
+            HibernateConnection.getInstance().getSession().close();
+    }
+
+    @Test
+    public void shouldReceiveACountryList() throws Exception {
+        //Given
+        CountryService countryService = new CountryService();
+        //When
+        List<Country> countries = countryService.getCountries();
+        //Then
+        assertThat(countries.size(), is(239));
+    }
 
 
     @Test
@@ -41,10 +78,5 @@ public class FavoriteTimesheetTest {
 
         HibernateConnection.getInstance().getSession().delete(favoriteTimesheet);
         HibernateConnection.getInstance().getSession().flush();
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        HibernateConnection.getInstance().getSession().close();
     }
 }

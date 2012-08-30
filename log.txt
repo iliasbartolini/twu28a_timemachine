@@ -1,0 +1,33 @@
+:compileJava UP-TO-DATE
+:processResources UP-TO-DATE
+:classes UP-TO-DATE
+:jettyRun
+12:54:25.734 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+failed SelectChannelConnector@0.0.0.0:8080: java.net.BindException: Address already in use
+failed Server@d743d55: java.net.BindException: Address already in use
+
+BUILD FAILED
+
+Total time: 10.098 secs
+:compileJava UP-TO-DATE
+:processResources UP-TO-DATE
+:classes UP-TO-DATE
+:jettyRun
+12:55:07.729 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+failed SelectChannelConnector@0.0.0.0:8080: java.net.BindException: Address already in use
+failed Server@3d135554: java.net.BindException: Address already in use
+
+BUILD FAILED
+
+Total time: 13.015 secs
+:compileJava UP-TO-DATE
+:processResources UP-TO-DATE
+:classes UP-TO-DATE
+:jettyRun
+12:55:47.340 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+failed SelectChannelConnector@0.0.0.0:8080: java.net.BindException: Address already in use
+failed Server@3dad9562: java.net.BindException: Address already in use
+
+BUILD FAILED
+
+Total time: 8.957 secs

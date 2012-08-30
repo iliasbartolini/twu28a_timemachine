@@ -64,6 +64,7 @@
         <label for="name">Name</label>
         <input type="text" name="name" id="name" value="" />
 
+
         <label for="name">Date</label>
         <input id="date" name="date" />
 
@@ -81,6 +82,24 @@
 
         <select id="state" name="state">
             <option value="" selected="selected"></option>
+
+        <ul id="existingFavorites" class="hidden">
+            <#list existingFavorites as item>
+                <li>${item.name}</li>
+            </#list>
+        </ul>
+
+
+        <label for="country" class="select">Country</label>
+        <select name="country" id="country">
+            <#list countries as country>
+                <option value=${country.name}>${country.name}</option>
+            </#list>
+        </select>
+        <!--
+        <label for="state" class="select">State</label>
+        <select name="state" id="state">
+
         </select>
 
 
