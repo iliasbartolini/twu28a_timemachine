@@ -3,7 +3,10 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">org.h2.Driver</property>
-        <property name="hibernate.connection.url">jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE;MODE=ORACLE</property>
+        <property name="hibernate.connection.url">jdbc:h2:mem:test;MODE=ORACLE;INIT=create schema if not exists test\;
+            runscript from 'src/main/resources/twu_database/schema.sql'\;
+            runscript from 'src/main/resources/twu_database/te/COUNTRIES_DATA_TABLE.sql'\;
+            runscript from 'src/main/resources/twu_database/te/LOCATION_PRESENCES_DATA_TABLE.sql';DB_CLOSE_ON_EXIT=FALSE;</property>
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.connection.password"></property>
         <property name="hibernate.connection.pool_size">1</property>
@@ -13,7 +16,6 @@
         <!--<property name="hibernate.hbm2ddl.auto">update</property>-->
         <mapping class="com.thoughtworks.twu.persistence.FavoriteTimesheet"/>
         <mapping class="com.thoughtworks.twu.domain.Country"/>
-        <mapping class="com.thoughtworks.twu.domain.State" />
-
+        <mapping class="com.thoughtworks.twu.domain.LocationPresences" />
     </session-factory>
 </hibernate-configuration>

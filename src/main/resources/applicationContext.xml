@@ -12,27 +12,4 @@
     <context:annotation-config/>
     <mvc:annotation-driven/>
     <context:component-scan base-package="com.thoughtworks.twu"/>
-
-    <jdbc:embedded-database id="dataSource" type="H2">
-        <jdbc:script location="classpath:twu_database/schema.sql"/>
-        <jdbc:script location="classpath:twu_database/te/COUNTRIES_DATA_TABLE.sql"/>
-    </jdbc:embedded-database>
-
-
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <tx:annotation-driven transaction-manager="transactionManager"/>
-
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="typeAliasesPackage" value="com.thoughtworks.twu.domain" />
-    </bean>
-
-
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.thoughtworks.twu.persistence"/>
-    </bean>
-
 </beans>
