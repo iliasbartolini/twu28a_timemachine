@@ -47,7 +47,7 @@ war {
     exclude '**/WEB-INF/web.xml.template'
     include '$buildDir/web.xml'
 }
-task createWebXML(dependsOn:"jettyRun"){
+task createWebXML <<{
     def engine = new groovy.text.SimpleTemplateEngine()
     ext.serverName= InetAddress.getLocalHost().getHostName()
     if(rootProject.hasProperty("hostName"))
@@ -56,7 +56,11 @@ task createWebXML(dependsOn:"jettyRun"){
         w << engine.createTemplate(webXmlTemplate).make([servername: serverName, serverPort: serverPort]).toString()
     }
 }
-jettyRun()
+jettyRun.doFirst
+        {
+            createWebXML.execute()
+        }
+jettyRun
 {
     httpPort= serverPort
     contextPath = 'timemachine'
