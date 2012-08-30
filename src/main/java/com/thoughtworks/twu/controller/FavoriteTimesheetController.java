@@ -30,22 +30,4 @@ public class FavoriteTimesheetController {
 
         return modelAndView;
     }
-
-    @RequestMapping(value = "/timesheet/favorite/new", method = RequestMethod.POST)
-    public ModelAndView doNewFavorite(@ModelAttribute("favoriteTimesheetForm") FavoriteTimesheetForm form) {
-
-        FavoriteTimesheet favorite = form.toFavoriteTimesheet();
-        favoriteTimesheetService.save(favorite);
-
-        HibernateConnection.getInstance().getSession().close();
-
-        return list();
-    }
-
-    @RequestMapping(value = "/timesheet/favorite/list", method = RequestMethod.GET)
-    public ModelAndView list() {
-        ModelAndView modelAndView = new ModelAndView("ui/timesheet/favorite/favorite_list");
-        modelAndView.addObject("favoriteTimesheets", favoriteTimesheetService.getFavoriteTimesheets());
-        return modelAndView;
-    }
 }
