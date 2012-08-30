@@ -16,10 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class FavoriteTimesheetController {
 
+    FavoriteTimesheetService favoriteTimesheetService = new FavoriteTimesheetService();
+
     @RequestMapping(value = "/timesheet/favorite/new", method = RequestMethod.GET)
     public ModelAndView newFavorite() {
         CountryService countryService = new CountryService();
-        FavoriteTimesheetService favoriteTimesheetService = new FavoriteTimesheetService();
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/favorite/new_form");
         modelAndView.addObject("countries", countryService.getCountries());
@@ -33,11 +34,9 @@ public class FavoriteTimesheetController {
     @RequestMapping(value = "/timesheet/favorite/new", method = RequestMethod.POST)
     public ModelAndView doNewFavorite(@ModelAttribute("favoriteTimesheetForm") FavoriteTimesheetForm form) {
         System.out.println("MY FORM ======>>>> " + form.toString());
-        FavoriteTimesheetService service = new FavoriteTimesheetService();
-
         FavoriteTimesheet favorite = form.toFavoriteTimesheet();
 
-        service.save(favorite);
+        favoriteTimesheetService.save(favorite);
 
         HibernateConnection.getInstance().getSession().close();
 
@@ -47,7 +46,6 @@ public class FavoriteTimesheetController {
     @RequestMapping(value = "/timesheet/favorite/list", method = RequestMethod.GET)
     public ModelAndView list() {
 
-        FavoriteTimesheetService favoriteTimesheetService = new FavoriteTimesheetService();
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/favorite/favorite_list");
         modelAndView.addObject("favoriteTimesheets", favoriteTimesheetService.getFavoriteTimesheets());

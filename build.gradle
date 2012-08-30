@@ -36,6 +36,10 @@ dependencies {
             'org.seleniumhq.selenium:selenium-firefox-driver:2.23.0'
 }
 
+war {
+    exclude '**/WEB-INF/web.xml.template'
+}
+
 jettyRun.doFirst {
     def webXmlTemplate = file("$webAppDir/WEB-INF/web.xml.template")
     def generatedWebXmlFile = file("$buildDir/web.xml")

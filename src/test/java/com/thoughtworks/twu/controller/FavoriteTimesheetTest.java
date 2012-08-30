@@ -1,12 +1,13 @@
 package com.thoughtworks.twu.controller;
 
-import com.thoughtworks.twu.persistence.Country;
+import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.persistence.FavoriteTimesheet;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.CountryService;
 import com.thoughtworks.twu.service.FavoriteTimesheetService;
 import org.junit.*;
 import org.springframework.jdbc.datasource.embedded.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -27,14 +28,13 @@ public class FavoriteTimesheetTest {
     public static void beforeClass() throws Exception {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         db = builder.setType(EmbeddedDatabaseType.H2).setName("test").
+                addScript("/twu_database/cleanDB.sql").
                 addScript("/twu_database/schema.sql").
                 addScript("/twu_database/import.sql").build();
     }
 
     @AfterClass
     public static void afterClass() throws Exception {
-        if ( db != null && !db.getConnection().isClosed())
-            db.shutdown();
         if ( HibernateConnection.getInstance().getSession().isConnected() )
             HibernateConnection.getInstance().getSession().close();
     }
@@ -75,5 +75,14 @@ public class FavoriteTimesheetTest {
 
         HibernateConnection.getInstance().getSession().delete(favoriteTimesheet);
         HibernateConnection.getInstance().getSession().flush();
+    }
+
+    @Test
+    public void shouldShowNewFavoriteForm() throws Exception {
+        FavoriteTimesheetController controller = new FavoriteTimesheetController();
+        ModelAndView modelAndView = controller.newFavorite();
+        List<Country> countries = (List<Country>) modelAndView.getModel().get("countries");
+
+         assertThat(countries.size(), is(239));
     }
 }

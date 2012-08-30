@@ -1,18 +1,10 @@
-package com.thoughtworks.twu.persistence; /**
- * Created with IntelliJ IDEA.
- * User: shilpa
- * Date: 8/23/12
- * Time: 12:07 PM
- * To change this template use File | Settings | File Templates.
- */
+package com.thoughtworks.twu.persistence;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
-import org.json.JSONException;
 
 
 public class HibernateConnection {
@@ -20,6 +12,8 @@ public class HibernateConnection {
     private static HibernateConnection instance;
     private Session session;
     private SessionFactory sessionFactory;
+    private Configuration configuration;
+    private ServiceRegistry service;
 
     public static HibernateConnection getInstance() {
         if ( instance == null )
@@ -30,16 +24,23 @@ public class HibernateConnection {
 
     private HibernateConnection() {
         configDb();
+
     }
 
     private void configDb() {
-        Configuration configuration = new Configuration().configure();
-        ServiceRegistry service = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+        configuration = new Configuration().configure();
+        service = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+        createSession();
+    }
+
+    private void createSession() {
         sessionFactory = configuration.buildSessionFactory(service);
         session = sessionFactory.openSession();
     }
 
     public Session getSession() {
+        if ( !session.isConnected() )
+            createSession();
         return session;
     }
 }
