@@ -25,7 +25,8 @@ dependencies {
             'org.json:json:20090211',
             fileTree(dir: 'lib', include: '*.jar'),
             group: 'org.hibernate', name: 'hibernate-core', version: '4.+',
-            'com.h2database:h2:1.3.168'
+            'com.h2database:h2:1.3.168',
+            'org.codehaus.groovy:groovy-all:2.0.1'
 
     testCompile 'junit:junit:4.10',
             'org.springframework:spring-test:3.1.1.RELEASE',
@@ -35,8 +36,19 @@ dependencies {
             'org.seleniumhq.selenium:selenium-firefox-driver:2.23.0'
 }
 
+jettyRun.doFirst {
+    def webXmlTemplate = file("$webAppDir/WEB-INF/web.xml.template")
+    def generatedWebXmlFile = file("$buildDir/web.xml")
+    def engine = new groovy.text.SimpleTemplateEngine()
+    def hostName = InetAddress.getLocalHost().getHostName()
+    generatedWebXmlFile.withWriter { w ->
+        w << engine.createTemplate(webXmlTemplate).make([servername: hostName, serverPort: httpPort]).toString()
+    }
+}
+
 jettyRun {
     contextPath = 'twu'
+    webXml= file("$buildDir/web.xml")
     httpPort = 9093
 }
 
@@ -45,11 +57,11 @@ test {
 }
 
 task functionalTest(type: Test, dependsOn: "test") {
-   include '**/functional/com/thoughtworks/**/*.*'
+    include '**/functional/com/thoughtworks/**/*.*'
 }
 
 functionalTest.doFirst {
-    jettyRun.httpPort = 9093
+    jettyRun.httpPort = 9876
     jettyRun.daemon = true
     jettyRun.execute()
 }
