@@ -11,10 +11,13 @@ public class FavoriteTimesheetControllerTest {
     @Test
     public void shouldBeAbleToGetViewNameOfController() throws Exception{
        FavoriteTimesheetController controller = new FavoriteTimesheetController();
-       ModelAndView modelAndView = new ModelAndView("ui/timesheet/favorite/new_form");
-       assertEquals("ui/timesheet/favorite/new_form", modelAndView.getViewName());
+       assertEquals("ui/timesheet/favorite/new_form", controller.newFavorite().getViewName());
     }
 
-    @Test
+//    @Test
+//    public void shouldBeAbleToCreateNewFavoriteTimeSheet() throws  Exception{
+//
+//
+//    }
 
 }
