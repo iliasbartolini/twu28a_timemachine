@@ -24,4 +24,5 @@ public class FavoriteTimesheet {
         this.userId = "1234";
     }
 
+    public FavoriteTimesheet() {}
 }

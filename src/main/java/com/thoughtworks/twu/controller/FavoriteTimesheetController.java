@@ -33,9 +33,8 @@ public class FavoriteTimesheetController {
 
     @RequestMapping(value = "/timesheet/favorite/new", method = RequestMethod.POST)
     public ModelAndView doNewFavorite(@ModelAttribute("favoriteTimesheetForm") FavoriteTimesheetForm form) {
-        System.out.println("MY FORM ======>>>> " + form.toString());
-        FavoriteTimesheet favorite = form.toFavoriteTimesheet();
 
+        FavoriteTimesheet favorite = form.toFavoriteTimesheet();
         favoriteTimesheetService.save(favorite);
 
         HibernateConnection.getInstance().getSession().close();
@@ -45,8 +44,6 @@ public class FavoriteTimesheetController {
 
     @RequestMapping(value = "/timesheet/favorite/list", method = RequestMethod.GET)
     public ModelAndView list() {
-
-
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/favorite/favorite_list");
         modelAndView.addObject("favoriteTimesheets", favoriteTimesheetService.getFavoriteTimesheets());
         return modelAndView;

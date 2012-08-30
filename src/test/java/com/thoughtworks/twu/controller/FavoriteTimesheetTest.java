@@ -1,12 +1,12 @@
 package com.thoughtworks.twu.controller;
 
+import com.thoughtworks.twu.SetupTest;
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.persistence.FavoriteTimesheet;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.CountryService;
 import com.thoughtworks.twu.service.FavoriteTimesheetService;
-import org.junit.*;
-import org.springframework.jdbc.datasource.embedded.*;
+import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -14,30 +14,8 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
-public class FavoriteTimesheetTest {
-
-    private static EmbeddedDatabase db;
-
-    public FavoriteTimesheetTest() {
-
-    }
-
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        db = builder.setType(EmbeddedDatabaseType.H2).setName("test").
-                addScript("/twu_database/cleanDB.sql").
-                addScript("/twu_database/schema.sql").
-                addScript("/twu_database/import.sql").build();
-    }
-
-    @AfterClass
-    public static void afterClass() throws Exception {
-        if ( HibernateConnection.getInstance().getSession().isConnected() )
-            HibernateConnection.getInstance().getSession().close();
-    }
+public class FavoriteTimesheetTest extends SetupTest {
 
     @Test
     public void shouldReceiveACountryList() throws Exception {
@@ -50,8 +28,7 @@ public class FavoriteTimesheetTest {
     }
 
     @Test
-    public void shouldRetrieveMyFavoriteTimesheets()
-    {
+    public void shouldRetrieveMyFavoriteTimesheets() {
         //Given
         FavoriteTimesheetService timesheetService = new FavoriteTimesheetService();
         //When
@@ -61,20 +38,16 @@ public class FavoriteTimesheetTest {
     }
 
     @Test
-    public void shouldSaveMyFavoriteTimesheet()
-    {
+    public void shouldSaveMyFavoriteTimesheet() {
         //Given
-        FavoriteTimesheetService favoriteTimesheetService= new FavoriteTimesheetService();
-        FavoriteTimesheet favoriteTimesheet= new FavoriteTimesheet("TW");
+        FavoriteTimesheetService favoriteTimesheetService = new FavoriteTimesheetService();
+        FavoriteTimesheet favoriteTimesheet = new FavoriteTimesheet("TW");
         //When
         int sizeBeforeInsert = favoriteTimesheetService.getFavoriteTimesheets().size();
         favoriteTimesheetService.save(favoriteTimesheet);
         int sizeAfterInsert = favoriteTimesheetService.getFavoriteTimesheets().size();
         //Then
-        assertThat(sizeAfterInsert,is(sizeBeforeInsert+1));
-
-        HibernateConnection.getInstance().getSession().delete(favoriteTimesheet);
-        HibernateConnection.getInstance().getSession().flush();
+        assertThat(sizeAfterInsert, is(sizeBeforeInsert + 1));
     }
 
     @Test
@@ -83,6 +56,6 @@ public class FavoriteTimesheetTest {
         ModelAndView modelAndView = controller.newFavorite();
         List<Country> countries = (List<Country>) modelAndView.getModel().get("countries");
 
-         assertThat(countries.size(), is(239));
+        assertThat(countries.size(), is(239));
     }
 }
