@@ -3,30 +3,30 @@ $(function() {
 
     var favorite = new FavoriteTimesheet();
 
-
-    $("#existingFavorites li").each(function() {
-       favorite.addExistingFavoriteName($(this).text());
-    });
-
-    window.db = favorite;
-
-    $.validator.addMethod("duplicateFavorite", function(value) {
-        return !favorite.isDuplicated(value);
-    });
+<<<<<<< HEAD
 
     $.validator.addMethod("isDuplicate", function(value) {
         return !favorite.existsFavoriteName(value);
     });
-
+=======
+    $.validator.addMethod("duplicateFavorite", favorite.isNotDuplicated);
+>>>>>>> 0110c7b2a46f24a22c69557d06f93dd55022ba61
 
     $("#new_favorite_form").validate({
+<<<<<<< HEAD
+
+=======
         groups: {
             hours: "monday tuesday wednesday thursday friday saturday sunday"
         },
+>>>>>>> Added CountryService to provide countries and states
         rules: {
             name: {
                 isDuplicate : true,
                 required: true
+<<<<<<< HEAD
+            }
+=======
             },
 
             monday: {
@@ -64,12 +64,15 @@ $(function() {
                 number: true
             }
 
+>>>>>>> Added CountryService to provide countries and states
         },
         messages: {
             name: {
                 required: "Name field cannot be left blank.",
                 isDuplicate: "Duplicate name. Please try another name."
             }
+<<<<<<< HEAD
+=======
         },
         errorPlacement: function(error, element) {
             if(element.attr("name") == "name") {
@@ -79,6 +82,7 @@ $(function() {
             }
 
 
+>>>>>>> Added CountryService to provide countries and states
         }
     });
 });

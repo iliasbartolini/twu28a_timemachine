@@ -1,16 +1,38 @@
 package com.thoughtworks.twu.service;
 
 import com.thoughtworks.twu.domain.Country;
+<<<<<<< HEAD
+
+import java.util.ArrayList;
+=======
 import com.thoughtworks.twu.domain.State;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+>>>>>>> Added CountryService to provide countries and states
 import java.util.List;
 
 public class CountryService {
 
+<<<<<<< HEAD
+    private List<Country> countryList = new ArrayList<Country>();
+
+    public CountryService() {
+        countryList.add(new Country("India"));
+        countryList.add(new Country("USA"));
+        countryList.add(new Country("Australia"));
+        countryList.add(new Country("Brazil"));
+        countryList.add(new Country("China"));
+    }
+
+    public List<Country> getCountries() {
+        return countryList;
+    }
+
+
+=======
     private HibernateConnection connection;
     public Session session;
 
@@ -54,4 +76,5 @@ public class CountryService {
         }
         return null;
     }
+>>>>>>> Added CountryService to provide countries and states
 }

@@ -5,12 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../static/css/base.css" />
     <link rel="stylesheet" href="../../static/css/jquery.mobile-1.2.0-alpha.1.min.css" />
+    <link rel="stylesheet" href="../../static/css/mobiscroll-2.0.1.custom.min.css" />
+
     <script type="text/javascript" src="../../static/js/lib/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../../static/js/mobiscroll-2.0.1.custom.min.js"></script>
+
+    <script>
+        $(function(){
+            // create a datepicker with default settings
+            $("#date").scroller({ preset: 'date' });
+
+
+        });
+
+        var options = {
+            "USA" : {
+                'State One': 'http://www.apple.com/ihphone3g',
+                'State Two': 'http://www.apple.com/iphone4'
+            }
+        }
+
+        function changelist(v) {
+
+            var $t = $("#state");
+
+            //clear old options
+            $t.html('');
+            //fill up new options
+            if(options[v]){
+                for(var i in options[v]){
+                    if(options[v].hasOwnProperty(i)){
+                        $t.append('<option value="' + options[v][i] + '">' + i + '<\/option>');
+                    }
+                }
+            }
+            $t.selectmenu('refresh');
+        }
+
+
+
+    </script>
     <script type="text/javascript" src="../../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
     <script type="text/javascript" src="../../static/js/lib/jquery.form.js" ></script>
     <script type="text/javascript" src="../../static/js/lib/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../../static/js/favorite_timesheet.js"></script>
     <script type="text/javascript" src="../../static/js/ui/new_favorite.js"></script>
+
+
 </head>
 <body>
 
@@ -23,23 +64,29 @@
         <label for="name">Name</label>
         <input type="text" name="name" id="name" value="" />
 
-        <ul id="existingFavorites" class="hidden">
-            <#list existingFavorites as item>
-                <li>${item.name}</li>
-            </#list>
-        </ul>
+        <label for="name">Date</label>
+        <input id="date" name="date" />
 
-        <!--
-        <label for="country" class="select">Country</label>
-        <select name="country" id="country">
-            <#list countries as country>
-                <option value=${country.name}>${country.name}</option>
-            </#list>
+
+
+
+
+
+
+
+        <select id="country" name="country" onchange="changelist(this.value)">
+            <option value="AUS">AUS - Australia</option>
+            <option value="USA">USA - United States</option>
         </select>
 
-        <label for="state" class="select">State</label>
-        <select name="state" id="state">
+        <select id="state" name="state">
+            <option value="" selected="selected"></option>
         </select>
+
+
+
+
+
 
         <label for="activity">Activity</label>
         <input type="text" name="activity" id="activity" value=""  />
@@ -53,26 +100,41 @@
         <label for="comments">Comments</label>
         <input type="text" name="comments" id="comments" value=""  />
 
-        <label for="monday">Monday</label>
-        <input type="text" name="monday" id="monday" value=""  />
+        <div class="ui-grid-d">
+            <div class="ui-block-a">
+                Mon
+                <input type="text" name="monday" id="monday" value=""  /></div>
+            <div class="ui-block-b">
+                Tues
+                <input type="text" name="tuesday" id="tuesday" value=""  />
+            </div>
+            <div class="ui-block-c">
+                Weds
+                <input type="text" name="wednesday" id="wednesday" value=""  />
+            </div>
+            <div class="ui-block-d">
+                Thur
+                <input type="text" name="thursday" id="thursday" value=""  />
+            </div>
+            <div class="ui-block-e">
+                Fri
+                <input type="text" name="friday" id="friday" value=""  />
+            </div>
+        </div>
 
-        <label for="tuesday">Tuesday</label>
-        <input type="text" name="tuesday" id="tuesday" value=""  />
+        <div class="ui-grid-d">
+            <div class="ui-block-a">
+                Sat
+                <input type="text" name="saturday" id="saturday" value=""  />
+            </div>
+            <div class="ui-block-b">
+                Sun
+                <input type="text" name="sunday" id="sunday" value=""  />
+            </div>
+        </div>
 
-        <label for="wednesday">Wednesday</label>
-        <input type="text" name="wednesday" id="wednesday" value=""  />
 
-        <label for="thursday">Thursday</label>
-        <input type="text" name="thursday" id="thursday" value=""  />
 
-        <label for="friday">Friday</label>
-        <input type="text" name="friday" id="friday" value=""  />
-
-        <label for="saturday">Saturday</label>
-        <input type="text" name="saturday" id="saturday" value=""  />
-
-        <label for="sunday">Sunday</label>
-        <input type="text" name="sunday" id="sunday" value=""  /> -->
 
 
         <button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">Submit</button>
