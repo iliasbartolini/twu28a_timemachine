@@ -3,6 +3,13 @@ apply plugin: 'jetty'
 apply plugin: 'war'
 apply plugin: 'idea'
 
+ext
+{
+   webXmlTemplate = file("$webAppDir/WEB-INF/web.xml.template")
+   generatedWebXmlFile = file("$buildDir/web.xml")
+   serverPort = 9093
+}
+
 repositories {
     mavenCentral()
 }
@@ -38,22 +45,22 @@ dependencies {
 
 war {
     exclude '**/WEB-INF/web.xml.template'
+    include '$buildDir/web.xml'
 }
-
-jettyRun.doFirst {
-    def webXmlTemplate = file("$webAppDir/WEB-INF/web.xml.template")
-    def generatedWebXmlFile = file("$buildDir/web.xml")
+task createWebXML(dependsOn:"jettyRun"){
     def engine = new groovy.text.SimpleTemplateEngine()
-    def hostName = InetAddress.getLocalHost().getHostName()
+    ext.serverName= InetAddress.getLocalHost().getHostName()
+    if(rootProject.hasProperty("hostName"))
+        ext.serverName = rootProject.getAt("hostName")
     generatedWebXmlFile.withWriter { w ->
-        w << engine.createTemplate(webXmlTemplate).make([servername: hostName, serverPort: httpPort]).toString()
+        w << engine.createTemplate(webXmlTemplate).make([servername: serverName, serverPort: serverPort]).toString()
     }
 }
-
-jettyRun {
+jettyRun()
+{
+    httpPort= serverPort
     contextPath = 'timemachine'
-    webXml= file("$buildDir/web.xml")
-    httpPort = 9093
+    webXml= generatedWebXmlFile
 }
 
 test {
@@ -65,7 +72,6 @@ task functionalTest(type: Test, dependsOn: "test") {
 }
 
 functionalTest.doFirst {
-    jettyRun.httpPort = 9876
     jettyRun.daemon = true
     jettyRun.execute()
 }
