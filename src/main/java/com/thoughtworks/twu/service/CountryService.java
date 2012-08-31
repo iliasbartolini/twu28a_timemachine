@@ -2,13 +2,12 @@ package com.thoughtworks.twu.service;
 
 
 import com.thoughtworks.twu.domain.Country;
-import com.thoughtworks.twu.domain.State;
-
+import com.thoughtworks.twu.domain.LocationPresences;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
+import org.hibernate.criterion.Property;
+import org.hibernate.criterion.Restrictions;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class CountryService {
@@ -17,45 +16,28 @@ public class CountryService {
     public Session session;
 
     private List<Country> countries;
-    private List<State> states;
-    private HashMap<String, List<State>> countryStates = new HashMap<String, List<State>>();
+    private List<LocationPresences> locationPresenceses;
 
-    public CountryService() {
+    public List<Country> getCountries() {
 
         connection = HibernateConnection.getInstance();
         session = connection.getSession();
 
-        countries = session.createQuery("from com.thoughtworks.twu.domain.Country").list();
-        states = session.createQuery("from com.thoughtworks.twu.domain.State").list();
-        for(State state : states) {
-            if(!countryStates.containsKey(state.getCountry_code())) {
-                countryStates.put(state.getCountry_code(), new ArrayList<State>());
-            }
-            if(state.getState() != null) {
-                countryStates.get(state.getCountry_code()).add(state);
-            }
+        countries = session.createCriteria(Country.class).list();
 
-        }
-
-    }
-
-    public List<Country> getCountries() {
         return countries;
-
     }
 
-    public List<State> getStates(String countryCode) {
-        return countryStates.get(countryCode);
+    public List<LocationPresences> getStates(String countryCode) {
+        connection = HibernateConnection.getInstance();
+        session = connection.getSession();
 
-    }
+        locationPresenceses = session.createCriteria(LocationPresences.class)
+                .add(Restrictions.and(
+                        Property.forName("state").isNotNull(),
+                        Restrictions.eq("countryCode", countryCode)
+                )).list();
 
-
-    public Country getCountry(String countryCode) {
-        for(Country country : countries) {
-            if(country.getCountry_code().equals(countryCode)) {
-                return country;
-            }
-        }
-        return null;
+        return locationPresenceses;
     }
 }

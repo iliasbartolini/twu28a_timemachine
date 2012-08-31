@@ -97,7 +97,7 @@
             </#list>
         </select>
         <!--
-        <label for="state" class="select">State</label>
+        <label for="state" class="select">LocationPresences</label>
         <select name="state" id="state">
 
         </select>

@@ -1,62 +1,36 @@
 package com.thoughtworks.twu.domain;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table( name = "countries" )
 public class Country {
-    public int id;
-
-    private List<State> states= new ArrayList<State>();
-
 
     @Id
-    @GeneratedValue(generator="id")
-    @GenericGenerator(name="id", strategy = "increment")
-    public int getId() {
-        return id;
+    private String id;
+
+    @Column(name = "COUNTRY_NAME")
+    private String name;
+
+    @Column(name = "COUNTRY_CODE")
+    private String code;
+
+    public String getName() {
+        return name;
     }
 
-    public void setStates(List<State> states) {
-        this.states = states;
+    public void setName(String name) {
+        this.name = name;
     }
 
-
-    //@JoinColumn(name = "COUNTRY_CODE", nullable = true)
-    //@JoinTable(name = "COUNTRIES", joinColumns = { @JoinColumn(name = "COUNTRY_CODE") }, inverseJoinColumns = { @JoinColumn(name = "STATE") })
-    @OneToMany(mappedBy = "country_code")
-    public List<State> getStates() {
-        return states;
+    public String getCode() {
+        return code;
     }
 
-
-    public void setId(int id) {
-        this.id = id;
+    public void setCode(String code) {
+        this.code = code;
     }
-
-
-    private String country_code;
-    private String country_name;
-
-    public String getCountry_code() {
-        return country_code;
-    }
-
-    public void setCountry_code(String country_code) {
-        this.country_code = country_code;
-    }
-
-    public String getCountry_name() {
-        return country_name;
-    }
-
-    public void setCountry_name(String country_name) {
-        this.country_name = country_name;
-    }
-
-
 }

@@ -1,9 +1,7 @@
 package com.thoughtworks.twu.controller;
 
-import com.thoughtworks.twu.SetupTest;
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.persistence.FavoriteTimesheet;
-import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.CountryService;
 import com.thoughtworks.twu.service.FavoriteTimesheetService;
 import org.junit.Test;
@@ -15,7 +13,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
-public class FavoriteTimesheetTest extends SetupTest {
+public class FavoriteTimesheetTest {
 
     @Test
     public void shouldReceiveACountryList() throws Exception {

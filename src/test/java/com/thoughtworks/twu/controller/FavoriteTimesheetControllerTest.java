@@ -1,18 +1,16 @@
 package com.thoughtworks.twu.controller;
 
-import com.thoughtworks.twu.SetupTest;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.testng.Assert.assertEquals;
 
-public class FavoriteTimesheetControllerTest extends SetupTest {
+public class FavoriteTimesheetControllerTest {
 
     FavoriteTimesheetController controller;
 
     @Before
     public void setUp() throws Exception {
-        super.setUp();
         controller = new FavoriteTimesheetController();
     }
 
