@@ -9,11 +9,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import static org.junit.Assert.assertNotNull;
 
 public class LoginActivities {
     private WebDriver webDriver;
-    private String url = "localhost:9093/timemachine";
+
 
     @Before
     public void setUpAndroid() {
@@ -24,10 +27,10 @@ public class LoginActivities {
     }
 
     @Test
-    public void loginWithCAS() {
+    public void loginWithCAS() throws UnknownHostException {
         String userNameString = "test.twu";
         String passwordString = "Th0ughtW0rks@12";
-
+        String url = InetAddress.getLocalHost().getHostName() + ":9093/timemachine";
         webDriver.get(url);
 
         WebElement username = webDriver.findElement(By.id("username"));
