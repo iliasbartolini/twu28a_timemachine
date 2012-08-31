@@ -18,3 +18,4 @@ out/
 build/
 logs/
 .clover/
+src/main/webapp/WEB-INF/web.xml
