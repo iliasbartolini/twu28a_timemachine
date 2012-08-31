@@ -21,7 +21,7 @@ public class ActivityService {
         return session.createQuery("from com.thoughtworks.twu.domain.Activity").list();
     }
 
-    public List<Activity> getActivities(String searchCriteria) {
+        public List<Activity> getActivities(String searchCriteria) {
         searchCriteria = searchCriteria.toLowerCase();
         return session.createQuery("from com.thoughtworks.twu.domain.Activity where lower (client) like '%" + searchCriteria + "%' or lower (project) like '%" + searchCriteria + "%' or lower (sub_project) like '%" + searchCriteria + "%'").list();
     }
