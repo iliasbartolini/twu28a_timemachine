@@ -45,24 +45,16 @@ dependencies {
     emma "emma:emma:2.0.5312"
     emma "emma:emma_ant:2.0.5312"
 }
-
-war {
-    exclude '**/WEB-INF/web.xml.template'
-    include '$buildDir/web.xml'
-}
-task createWebXML <<{
+task createWebXML<<{
     def engine = new groovy.text.SimpleTemplateEngine()
     ext.serverName= InetAddress.getLocalHost().getHostName()
     if(rootProject.hasProperty("hostName"))
         ext.serverName = rootProject.getAt("hostName")
     generatedWebXmlFile.withWriter { w ->
         w << engine.createTemplate(webXmlTemplate).make([servername: serverName, serverPort: serverPort]).toString()
+        war.execute()
     }
 }
-jettyRun.doFirst
-        {
-            createWebXML.execute()
-        }
 jettyRun
 {
     httpPort= serverPort
