@@ -1,5 +1,7 @@
 package com.thoughtworks.twu.domain.validators;
 
+import org.springframework.validation.Validator;
+
 import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetForm;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
