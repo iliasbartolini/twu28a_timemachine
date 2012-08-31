@@ -7,7 +7,7 @@ apply from:'emma.gradle'
 ext
 {
    webXmlTemplate = file("$webAppDir/WEB-INF/web.xml.template")
-   generatedWebXmlFile = file("$buildDir/web.xml")
+   generatedWebXmlFile = file("$webAppDir/WEB-INF/web.xml")
    serverPort = 9093
 }
 
@@ -52,7 +52,6 @@ task createWebXML<<{
         ext.serverName = rootProject.getAt("hostName")
     generatedWebXmlFile.withWriter { w ->
         w << engine.createTemplate(webXmlTemplate).make([servername: serverName, serverPort: serverPort]).toString()
-        war.execute()
     }
 }
 jettyRun
