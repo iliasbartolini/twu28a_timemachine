@@ -17,12 +17,8 @@
 
 
         });
-
         var options = {
-            "USA":{
-                'State One':'http://www.apple.com/ihphone3g',
-                'State Two':'http://www.apple.com/iphone4'
-            }
+
         }
 
         function changelist(v) {
@@ -60,99 +56,77 @@
 
     <form id="new_timesheet_form" modelAttribute="favoriteTimesheetForm" action="" method="post"
           class="ui-body ui-body-a ui-corner-all">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" value=""/>
 
-
-        <label for="name">Date</label>
+        <label for="date">Date</label>
         <input id="date" name="date"/>
 
 
-        <select id="country" name="country" onchange="changelist(this.value)">
-            <option value="AUS">AUS - Australia</option>
-            <option value="USA">USA - United States</option>
+        <label for="country" class="select">Country</label>
+            <select name="country" id="country">
+            <option value="" selected="selected"></option>
+        <#list countries as country>
+            <option value=${country.name}>${country.name}</option>
+        </#list>
         </select>
 
+        <label for="State" class="select">State</label>
         <select id="state" name="state">
             <option value="" selected="selected"></option>
-
-            <ul id="existingFavorites" class="hidden">
-            <#list existingFavorites as item>
-                <li>${item.name}</li>
-            </#list>
-            </ul>
+        </select>
 
 
-            <label for="country" class="select">Country</label>
-            <select name="country" id="country">
-            <#list countries as country>
-                <option value=${country.name}>${country.name}</option>
-            </#list>
-            </select>
-            <!--
-                    <label for="state" class="select">LocationPresences</label>
-                    <select name="state" id="state">
+        <label for="activity">Activity</label>
+        <input type="text" name="activity" id="activity" value=""/>
 
-                    </select>
+        <label for="billable">Billable?</label>
+        <select name="billable" id="billable" data-role="slider">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+        </select>
 
+        <label for="task">Task</label>
+        <input type="text" name="task" id="task" value=""/>
 
-
-
-
-
-                    <label for="activity">Activity</label>
-                    <input type="text" name="activity" id="activity" value=""  />
-
-                    <label for="billable">Billable?</label>
-                    <select name="billable" id="billable" data-role="slider">
-                        <option value="false">No</option>
-                        <option value="true">Yes</option>
-                    </select>
-
-                    <label for="comments">Comments</label>
-                    <input type="text" name="comments" id="comments" value=""  />
-
-                    <div class="ui-grid-d">
-                        <div class="ui-block-a">
-                            Mon
-                            <input type="text" name="monday" id="monday" value=""  /></div>
-                        <div class="ui-block-b">
-                            Tues
-                            <input type="text" name="tuesday" id="tuesday" value=""  />
-                        </div>
-                        <div class="ui-block-c">
-                            Weds
-                            <input type="text" name="wednesday" id="wednesday" value=""  />
-                        </div>
-                        <div class="ui-block-d">
-                            Thur
-                            <input type="text" name="thursday" id="thursday" value=""  />
-                        </div>
-                        <div class="ui-block-e">
-                            Fri
-                            <input type="text" name="friday" id="friday" value=""  />
-                        </div>
-                    </div>
-
-                    <div class="ui-grid-d">
-                        <div class="ui-block-a">
-                            Sat
-                            <input type="text" name="saturday" id="saturday" value=""  />
-                        </div>
-                        <div class="ui-block-b">
-                            Sun
-                            <input type="text" name="sunday" id="sunday" value=""  />
-                        </div>
-                    </div>
-
-
-
-
-
-                    <button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">Submit</button>
-                </form>
+        <div class="ui-grid-d">
+            <div class="ui-block-a">
+                Mon
+                <input type="text" name="monday" id="monday" value=""/></div>
+            <div class="ui-block-b">
+                Tues
+                <input type="text" name="tuesday" id="tuesday" value=""/>
             </div>
+            <div class="ui-block-c">
+                Weds
+                <input type="text" name="wednesday" id="wednesday" value=""/>
+            </div>
+            <div class="ui-block-d">
+                Thur
+                <input type="text" name="thursday" id="thursday" value=""/>
+            </div>
+            <div class="ui-block-e">
+                Fri
+                <input type="text" name="friday" id="friday" value=""/>
+            </div>
+        </div>
 
-            </body>
-            </html>
+        <div class="ui-grid-d">
+            <div class="ui-block-a">
+                Sat
+                <input type="text" name="saturday" id="saturday" value=""/>
+            </div>
+            <div class="ui-block-b">
+                Sun
+                <input type="text" name="sunday" id="sunday" value=""/>
+            </div>
+        </div>
+
+
+        <button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">
+            Submit
+        </button>
+    </form>
+</div>
+
+</body>
+</html>
 
