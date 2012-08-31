@@ -1,6 +1,7 @@
 package com.thoughtworks.twu.controller;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
+import org.springframework.web.servlet.ModelAndView;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -11,6 +12,8 @@ public class DashboardControllerTest {
     public void shouldShowDashboard(){
         DashboardController dashboardController = new DashboardController();
 
-        assertThat(dashboardController.showDashboard().getViewName(), is("ui/dashboard/dashboard"));
+        ModelAndView modelAndView = dashboardController.show();
+
+        assertThat(modelAndView.getViewName(), is(dashboardController.DASHBOARD_PAGE));
     }
 }

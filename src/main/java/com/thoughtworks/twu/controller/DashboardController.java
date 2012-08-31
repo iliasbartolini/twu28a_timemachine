@@ -8,10 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class DashboardController {
 
+    public static final String DASHBOARD_PAGE = "ui/dashboard/dashboard";
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView showDashboard() {
-        ModelAndView modelAndView = new ModelAndView("ui/dashboard/dashboard");
-        return modelAndView;
+    public ModelAndView show() {
+        return new ModelAndView(DASHBOARD_PAGE);
     }
 }
 
