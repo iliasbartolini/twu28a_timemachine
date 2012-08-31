@@ -18,14 +18,26 @@ import static org.junit.matchers.JUnitMatchers.containsString;
 public class LoginActivities {
     private WebDriver webDriver;
     private String userNameString = "test.twu";
-    private String passwordString = "Th0ughtW0rks@12";
+    private String validPasswordString = "Th0ughtW0rks@12";
+    private String invalidPasswordString = "abcd";
+    private void submitCredentials(String passwordString) {
+        WebElement username = webDriver.findElement(By.id("username"));
+        username.clear();
+        username.sendKeys(userNameString);
+
+        WebElement password  = webDriver.findElement(By.id("password"));
+        password.sendKeys(passwordString);
+
+        WebElement submitButton = webDriver.findElement(By.className("btn-submit"));
+        submitButton.submit();
+    }
 
     @Before
     public void setUpAndroid() {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         String userAgent = "Android 4.0.4 - Opera 12.00";
         firefoxProfile.setPreference("general.useragent.override", userAgent );
-        webDriver = new FirefoxDriver();
+        webDriver = new FirefoxDriver(firefoxProfile);
 
     }
 
@@ -34,21 +46,27 @@ public class LoginActivities {
         String url = InetAddress.getLocalHost().getHostName() + ":9093/timemachine";
         webDriver.get(url);
 
-        submitCredentials();
+        submitCredentials(validPasswordString);
 
         assertNotNull(webDriver.findElement(By.name("add")));
 
     }
 
-    private void submitCredentials() {
-        WebElement username = webDriver.findElement(By.id("username"));
-        username.sendKeys(userNameString);
+    @Test
+    public void shouldBeAbleToRedirectToGivenURLAfterLoginAfterOneFailedLogin() throws Exception {
+        String path = ":9093/timemachine/timesheet/new";
+        String url = InetAddress.getLocalHost().getHostName() + path;
+        webDriver.get(url);
 
-        WebElement password  = webDriver.findElement(By.id("password"));
-        password.sendKeys(passwordString);
+        assertThat(webDriver.getCurrentUrl(), containsString("https://castest.thoughtworks.com/cas/login?"));
 
-        WebElement submitButton = webDriver.findElement(By.className("btn-submit"));
-        submitButton.submit();
+        submitCredentials(invalidPasswordString);
+
+        assertNotNull(webDriver.findElement(By.id("msg")));
+
+        submitCredentials(validPasswordString);
+
+        assertThat(webDriver.getCurrentUrl(), containsString(path));
     }
 
     @Test
@@ -59,7 +77,7 @@ public class LoginActivities {
 
         assertThat(webDriver.getCurrentUrl(), containsString("https://castest.thoughtworks.com/cas/login?"));
 
-        submitCredentials();
+        submitCredentials(validPasswordString);
 
         assertThat(webDriver.getCurrentUrl(), containsString(path));
     }
