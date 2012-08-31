@@ -1,7 +1,7 @@
 package com.thoughtworks.twu.controller;
 
+import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
-import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

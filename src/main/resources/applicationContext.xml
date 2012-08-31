@@ -16,6 +16,7 @@
     <jdbc:embedded-database id="dataSource" type="H2">
         <jdbc:script location="classpath:twu_database/schema.sql"/>
         <jdbc:script location="classpath:twu_database/te/COUNTRIES_DATA_TABLE.sql"/>
+        <jdbc:script location="classpath:twu_database/te/ACTIVITIES_DATA_TABLE.sql"/>
     </jdbc:embedded-database>
 
 
