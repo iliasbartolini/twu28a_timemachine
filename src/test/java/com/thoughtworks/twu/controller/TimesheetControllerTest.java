@@ -5,17 +5,17 @@ import org.junit.Test;
 
 import static org.testng.Assert.assertEquals;
 
-public class FavoriteTimesheetControllerTest {
+public class TimesheetControllerTest {
 
-    FavoriteTimesheetController controller;
+    TimesheetController controller;
 
     @Before
     public void setUp() throws Exception {
-        controller = new FavoriteTimesheetController();
+        controller = new TimesheetController();
     }
 
     @Test
     public void shouldBeAbleToGetViewNameOfController() throws Exception {
-        assertEquals("ui/timesheet/favorite/new_form", controller.newFavorite().getViewName());
+        assertEquals("ui/timesheet/new_form", controller.newFavorite().getViewName());
     }
 }
