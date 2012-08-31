@@ -1,13 +1,13 @@
 apply plugin: 'java'
 apply plugin: 'jetty'
-apply plugin: 'war'
 apply plugin: 'idea'
+apply plugin: 'war'
 apply from:'emma.gradle'
 
 ext
 {
    webXmlTemplate = file("$webAppDir/WEB-INF/web.xml.template")
-   generatedWebXmlFile = file("$webAppDir/WEB-INF/web.xml")
+   generatedWebXmlFile = file("$buildDir/web.xml")
    serverPort = 9093
 }
 
@@ -45,15 +45,15 @@ dependencies {
     emma "emma:emma:2.0.5312"
     emma "emma:emma_ant:2.0.5312"
 }
-task createWebXML<<{
+task createWebXML(dependsOn:"classes"){
     def engine = new groovy.text.SimpleTemplateEngine()
     ext.serverName= InetAddress.getLocalHost().getHostName()
     if(rootProject.hasProperty("hostName"))
         ext.serverName = rootProject.getAt("hostName")
-    generatedWebXmlFile.withWriter { w ->
+    file("$webAppDir/WEB-INF/web.xml").withWriter { w ->
         w << engine.createTemplate(webXmlTemplate).make([servername: serverName, serverPort: serverPort]).toString()
     }
-}
+ }
 jettyRun
 {
     httpPort= serverPort
