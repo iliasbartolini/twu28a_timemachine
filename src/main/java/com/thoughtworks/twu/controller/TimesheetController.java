@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class FavoriteTimesheetController {
+public class TimesheetController {
 
     FavoriteTimesheetService favoriteTimesheetService = new FavoriteTimesheetService();
 
-    @RequestMapping(value = "/timesheet/favorite/new", method = RequestMethod.GET)
+    @RequestMapping(value = "/timesheet/new", method = RequestMethod.GET)
     public ModelAndView newFavorite() {
         CountryService countryService = new CountryService();
 
-        ModelAndView modelAndView = new ModelAndView("ui/timesheet/favorite/new_form");
+        ModelAndView modelAndView = new ModelAndView("ui/timesheet/new_form");
         modelAndView.addObject("countries", countryService.getCountries());
         modelAndView.addObject("existingFavorites", favoriteTimesheetService.getFavoriteTimesheets());
 

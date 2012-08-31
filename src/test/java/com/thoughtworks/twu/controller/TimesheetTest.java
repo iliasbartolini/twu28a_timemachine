@@ -13,7 +13,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
-public class FavoriteTimesheetTest {
+public class TimesheetTest {
 
     @Test
     public void shouldReceiveACountryList() throws Exception {
@@ -50,7 +50,7 @@ public class FavoriteTimesheetTest {
 
     @Test
     public void shouldShowNewFavoriteForm() throws Exception {
-        FavoriteTimesheetController controller = new FavoriteTimesheetController();
+        TimesheetController controller = new TimesheetController();
         ModelAndView modelAndView = controller.newFavorite();
         List<Country> countries = (List<Country>) modelAndView.getModel().get("countries");
 

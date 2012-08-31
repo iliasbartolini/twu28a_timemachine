@@ -6,7 +6,7 @@
 <body>
 
 <div data-role="page" data-theme="a">
-    <a href="timesheet/favorite/new" data-role="button" type="add" data-theme="a" name="add" value="add_favorite" data-icon="plus">Add favorite</a>
+    <a href="timesheet/new" data-role="button" type="add" data-theme="a" name="add" value="add_favorite" data-icon="plus">Add new timesheet</a>
 </div>
 
 </body>
