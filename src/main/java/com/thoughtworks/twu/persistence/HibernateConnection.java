@@ -22,7 +22,7 @@ public class HibernateConnection {
         return instance;
     }
 
-    private HibernateConnection() {
+    public HibernateConnection() {
         configDb();
 
     }
