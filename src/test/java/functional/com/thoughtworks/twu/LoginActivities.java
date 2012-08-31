@@ -10,7 +10,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -23,11 +22,11 @@ public class LoginActivities {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         String userAgent = "Android 4.0.4 - Opera 12.00";
         firefoxProfile.setPreference("general.useragent.override", userAgent );
-        webDriver = new FirefoxDriver(firefoxProfile);
+        webDriver = new FirefoxDriver();
     }
 
     @Test
-    public void loginWithCAS() throws UnknownHostException {
+    public void loginWithCAS() throws Exception {
         String userNameString = "test.twu";
         String passwordString = "Th0ughtW0rks@12";
         String url = InetAddress.getLocalHost().getHostName() + ":9093/timemachine";
