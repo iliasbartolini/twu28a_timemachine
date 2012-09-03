@@ -1,3 +1,4 @@
+Truncate TABLE COUNTRIES;
 Insert into COUNTRIES (COUNTRY_CODE,COUNTRY_NAME,ID) values ('MYS','Malaysia','150');
 Insert into COUNTRIES (COUNTRY_CODE,COUNTRY_NAME,ID) values ('MYT','Mayotte','151');
 Insert into COUNTRIES (COUNTRY_CODE,COUNTRY_NAME,ID) values ('NAM','Namibia','152');

@@ -30,12 +30,16 @@ dependencies {
             'ch.qos.logback:logback-classic:1.0.0',
             'commons-lang:commons-lang:2.6',
             'hsqldb:hsqldb:1.8.0.10',
+            'org.codehaus.jackson:jackson-core-lgpl:1.9.9',
+            'org.codehaus.jackson:jackson-mapper-lgpl:1.9.9',
             'org.json:json:20090211',
             fileTree(dir: 'lib', include: '*.jar'),
             group: 'org.hibernate', name: 'hibernate-core', version: '4.+',
             'org.codehaus.groovy:groovy-all:2.0.1'
 
-    testCompile 'junit:junit:4.10',
+
+
+            testCompile 'junit:junit:4.10',
             'org.springframework:spring-test:3.1.1.RELEASE',
             'org.mockito:mockito-all:1.9.0',
             'org.testng:testng:6.1.1',

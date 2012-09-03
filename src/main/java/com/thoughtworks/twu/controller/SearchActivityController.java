@@ -1,23 +1,48 @@
 package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.persistence.HibernateConnection;
-import com.thoughtworks.twu.service.CountryService;
+import com.thoughtworks.twu.service.ActivityService;
+import org.json.JSONException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class SearchActivityController {
 
-    @RequestMapping(value = "/timesheet/search)activity", method = RequestMethod.GET)
-    public ModelAndView newFavorite() {
-        CountryService countryService = new CountryService();
+    @RequestMapping(value = "/timesheet/search_activity", method = RequestMethod.GET)
+    public ModelAndView loadSearchActivityView() {
 
-        ModelAndView modelAndView = new ModelAndView("ui/timesheet/favorite/new_form");
-        
+        ModelAndView modelAndView = new ModelAndView("ui/timesheet/search_activity");
+
+
 
         HibernateConnection.getInstance().getSession().close();
-
         return modelAndView;
+
     }
+
+    @RequestMapping(value = "/timesheet/search_activity",
+            method = RequestMethod.POST)
+    public @ResponseBody
+    String getCountryList(@RequestParam("s") String query) throws JSONException {
+        ActivityService service = new ActivityService();
+        //List<Activity> activityList = service.getActivities(query);
+
+        List<String> testList = new ArrayList<String>();
+        testList.add("One");
+        testList.add("Two");
+        testList.add("Three");
+
+        return service.getActivities(query).toString();
+    }
+
+
+
 }

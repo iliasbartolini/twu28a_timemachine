@@ -3,6 +3,9 @@ package com.thoughtworks.twu.service;
 import com.thoughtworks.twu.domain.Activity;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -21,10 +24,21 @@ public class ActivityService {
         return session.createQuery("from com.thoughtworks.twu.domain.Activity").list();
     }
 
-        public List<Activity> getActivities(String searchCriteria) {
+    public JSONArray getActivities(String searchCriteria) {
         searchCriteria = searchCriteria.toLowerCase();
-        return session.createQuery("from com.thoughtworks.twu.domain.Activity where lower (client) like '%" + searchCriteria + "%' or lower (project) like '%" + searchCriteria + "%' or lower (sub_project) like '%" + searchCriteria + "%'").list();
+        List<Activity> activityList = session.createQuery("from com.thoughtworks.twu.domain.Activity where lower (client) like '%" + searchCriteria + "%' or lower (project) like '%" + searchCriteria + "%' or lower (sub_project) like '%" + searchCriteria + "%'").list();
+        JSONArray jsonArray = new JSONArray();
+        for(Activity activity : activityList) {
+            jsonArray.put(new JSONObject(activity));
+        }
+        return jsonArray;
     }
 
+//    public JSONArray getActivitiesJSON() throws JSONException {
+//        String searchCriteria = "twu";
+//        List<Activity> twuList = session.createQuery("from com.thoughtworks.twu.domain.Activity where lower (client) like '%" + searchCriteria + "%' or lower (project) like '%" + searchCriteria + "%' or lower (sub_project) like '%" + searchCriteria + "%'").list();
+//        return new JSONArray(twuList);
+//        //return new JSONObject().put("Batman", "Catwoman");
+//    }
 
 }
