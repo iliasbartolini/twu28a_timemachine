@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<#import "/spring.ftl" as spring />
+<@spring.bind "timeSheetForm" />
 <html>
 <head>
     <title>Test UI</title>
@@ -53,30 +55,39 @@
     <div data-role="header">
         <h1>My Time Sheet</h1>
     </div>
+     <#if spring.status.error>
+            <div class="errors">
+                There were problems with the data you entered:
+                <ul>
+                    <#list spring.status.errorMessages as error>
+                        <li>${error}</li>
+                    </#list>
+                </ul>
+            </div>
+        </#if>
+
 
     <form id="new_timesheet_form" modelAttribute="favoriteTimesheetForm" action="" method="post"
           class="ui-body ui-body-a ui-corner-all">
 
-        <label for="date">Date</label>
-        <input id="date" name="date"/>
+         <label for="country" class="select">Country</label>
+                 <select name="country" id="country">
+                     <option value="" selected="selected"></option>
+                 <#list countries as country>
+                     <option value="${country.name}">${country.name}</option>
+                 </#list>
+          </select>
 
 
-        <label for="country" class="select">Country</label>
-            <select name="country" id="country">
-            <option value="" selected="selected"></option>
-        <#list countries as country>
-            <option value=${country.name}>${country.name}</option>
-        </#list>
-        </select>
+
 
         <label for="State" class="select">State</label>
         <select id="state" name="state">
             <option value="" selected="selected"></option>
         </select>
-
-
-        <label for="activity">Activity</label>
-        <input type="text" name="activity" id="activity" value=""/>
+     Activity:
+     <@spring.formInput "timeSheetForm.activity" />
+     <@spring.showErrors "<br>" />
 
         <label for="billable">Billable?</label>
         <select name="billable" id="billable" data-role="slider">

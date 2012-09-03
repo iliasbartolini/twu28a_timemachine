@@ -21,6 +21,6 @@ public class ActivityValidator implements Validator {
 
     public void validate(Object object, Errors errors){
         TimeSheetForm timeSheetForm = (TimeSheetForm) object;
-        ValidationUtils.rejectIfEmptyOrWhitespace( errors,"activity","field.required");
+        ValidationUtils.rejectIfEmptyOrWhitespace( errors,"activity","field.required","Cannot be blank");
     }
 }

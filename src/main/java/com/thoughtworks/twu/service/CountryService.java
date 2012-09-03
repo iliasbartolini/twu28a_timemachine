@@ -8,7 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 
-import java.util.List;
+import java.util.*;
 
 public class CountryService {
 
@@ -26,7 +26,21 @@ public class CountryService {
         countries = session.createCriteria(Country.class).list();
 
         return countries;
+
+
     }
+
+    public Map<String,String> getCountryNames(){
+        List<Country> countries = getCountries();
+        HashMap<String,String> countryNameCodeMap = new HashMap();
+        for (Country country:countries )
+        {
+         countryNameCodeMap.put(country.getName(), country.getCode());
+
+        }
+        return countryNameCodeMap;
+    }
+
 
     public List<LocationPresences> getStates(String countryCode) {
         connection = HibernateConnection.getInstance();

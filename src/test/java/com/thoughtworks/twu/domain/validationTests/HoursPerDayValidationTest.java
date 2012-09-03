@@ -12,13 +12,7 @@ import org.springframework.validation.Validator;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
-/**
- * Created with IntelliJ IDEA.
- * User: ewonou
- * Date: 31/8/12
- * Time: 5:15 AM
- * To change this template use File | Settings | File Templates.
- */
+
 public class HoursPerDayValidationTest {
 
 private Validator hourPerDayValidator;

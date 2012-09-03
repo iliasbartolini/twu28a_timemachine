@@ -1,10 +1,15 @@
 package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.domain.Country;
+import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetForm;
 import com.thoughtworks.twu.persistence.FavoriteTimesheet;
 import com.thoughtworks.twu.service.CountryService;
 import com.thoughtworks.twu.service.FavoriteTimesheetService;
 import org.junit.Test;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -12,6 +17,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class TimesheetTest {
 
@@ -51,7 +57,10 @@ public class TimesheetTest {
     @Test
     public void shouldShowNewFavoriteForm() throws Exception {
         TimesheetController controller = new TimesheetController();
-        ModelAndView modelAndView = controller.newFavorite();
+        TimeSheetForm timeSheetForm = new TimeSheetForm();
+        BindingResult bindingResult = mock(BindingResult.class);
+        ModelAndView modelAndView = controller.newFavorite(timeSheetForm,bindingResult);
+
         List<Country> countries = (List<Country>) modelAndView.getModel().get("countries");
 
         assertThat(countries.size(), is(239));
