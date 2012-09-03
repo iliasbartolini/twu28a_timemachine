@@ -22,34 +22,38 @@
 
     <script type="text/javascript" src="../../main/webapp/static/js/ui/newTimesheetState.js"></script>
     <script type="text/javascript">
-    (function() {
-      var jasmineEnv = jasmine.getEnv();
-      jasmineEnv.updateInterval = 1000;
+        (function() {
+            var jasmineEnv = jasmine.getEnv();
+            jasmineEnv.updateInterval = 1000;
 
-      var htmlReporter = new jasmine.HtmlReporter();
-      var console_reporter = new jasmine.ConsoleReporter();
+            var trivialReporter = new jasmine.TrivialReporter();
+            consoleReporter = new jasmine.ConsoleReporter(); // deliberately global; needed by phantom-jasmine script
 
-      jasmineEnv.addReporter(console_reporter);
-      jasmineEnv.addReporter(htmlReporter);
-      jasmineEnv.specFilter = function(spec) {
-        return htmlReporter.specFilter(spec);
-      };
+            jasmineEnv.addReporter(trivialReporter);
+            jasmineEnv.addReporter(consoleReporter);
 
-      var currentWindowOnload = window.onload;
+            jasmineEnv.specFilter = function(spec) {
+                return trivialReporter.specFilter(spec);
+            };
 
-      window.onload = function() {
-        if (currentWindowOnload) {
-          currentWindowOnload();
-        }
-        execJasmine();
-      };
+            var currentWindowOnload = window.onload;
 
-      function execJasmine() {
-        jasmineEnv.execute();
-      }
+            window.onload = function() {
+                if (currentWindowOnload) {
+                    currentWindowOnload();
+                }
+                execJasmine();
 
-    })();
-  </script>
+                document.getElementById("TrivialReporter").className += " show-passed"
+                document.getElementById("__jasmine_TrivialReporter_showPassed__").checked=true
+            };
+
+            function execJasmine() {
+                jasmineEnv.execute();
+            }
+
+        })();
+    </script>
 
 </head>
 
