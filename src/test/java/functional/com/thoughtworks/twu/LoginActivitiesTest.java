@@ -10,28 +10,31 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
 
-public class LoginActivities extends BaseTest {
+public class LoginActivitiesTest extends BaseTest {
     private String invalidPasswordString = "abcd";
     private String validPasswordString = "Th0ughtW0rks@12";
+    private String homepageUrl;
 
 
     @Before
-    public void init() {
+    public void init() throws UnknownHostException {
         super.setUpAndroid();
-}
+        homepageUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine";
+    }
 
     @Test
     public void shouldBeAbleToLoginWithCAS() throws Exception {
-        String url = InetAddress.getLocalHost().getHostName() + ":9093/timemachine";
-        webDriver.get(url);
+
+        webDriver.get(homepageUrl);
+        System.out.println(webDriver.getCurrentUrl());
 
         super.submitCredentials(validPasswordString);
-
         assertNotNull(webDriver.findElement(By.name("add")));
 
     }

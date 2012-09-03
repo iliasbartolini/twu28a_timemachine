@@ -22,7 +22,6 @@ public class TimesheetController {
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/new_form");
         modelAndView.addObject("countries", countryService.getCountries());
-        modelAndView.addObject("existingFavorites", favoriteTimesheetService.getFavoriteTimesheets());
 
         HibernateConnection.getInstance().getSession().close();
 
