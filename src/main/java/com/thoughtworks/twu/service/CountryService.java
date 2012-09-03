@@ -25,8 +25,8 @@ public class CountryService {
         session = connection.getSession();
 
         countries = session.createCriteria(Country.class).
-                            addOrder(Order.asc("name")).
-                            list();
+                addOrder(Order.asc("name")).
+                list();
 
         return countries;
     }
@@ -38,8 +38,8 @@ public class CountryService {
         locationPresences = session.createCriteria(LocationPresences.class)
                 .add(Restrictions.and(
                         Property.forName("state").isNotNull(),
-                        Restrictions.eq("countryCode", countryCode)
-                )).list();
+                        Restrictions.eq("countryCode", countryCode)))
+                .addOrder(Order.asc("state")).list();
 
         return locationPresences;
     }
