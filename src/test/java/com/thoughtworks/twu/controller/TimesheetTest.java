@@ -51,7 +51,7 @@ public class TimesheetTest {
     @Test
     public void shouldShowNewFavoriteForm() throws Exception {
         TimesheetController controller = new TimesheetController();
-        ModelAndView modelAndView = controller.newFavorite();
+        ModelAndView modelAndView = controller.newTimesheet();
         List<Country> countries = (List<Country>) modelAndView.getModel().get("countries");
 
         assertThat(countries.size(), is(239));

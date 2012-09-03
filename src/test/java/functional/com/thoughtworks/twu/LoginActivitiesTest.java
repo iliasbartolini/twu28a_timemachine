@@ -10,44 +10,31 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
 
-public class LoginActivities {
-    private WebDriver webDriver;
-    private String userNameString = "test.twu";
-    private String validPasswordString = "Th0ughtW0rks@12";
+public class LoginActivitiesTest extends BaseTest {
     private String invalidPasswordString = "abcd";
-    private void submitCredentials(String passwordString) {
-        WebElement username = webDriver.findElement(By.id("username"));
-        username.clear();
-        username.sendKeys(userNameString);
+    private String validPasswordString = "Th0ughtW0rks@12";
+    private String homepageUrl;
 
-        WebElement password  = webDriver.findElement(By.id("password"));
-        password.sendKeys(passwordString);
-
-        WebElement submitButton = webDriver.findElement(By.className("btn-submit"));
-        submitButton.submit();
-    }
 
     @Before
-    public void setUpAndroid() {
-        FirefoxProfile firefoxProfile = new FirefoxProfile();
-        String userAgent = "Android 4.0.4 - Opera 12.00";
-        firefoxProfile.setPreference("general.useragent.override", userAgent );
-        webDriver = new FirefoxDriver(firefoxProfile);
-
+    public void init() throws UnknownHostException {
+        super.setUpAndroid();
+        homepageUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine";
     }
 
     @Test
     public void shouldBeAbleToLoginWithCAS() throws Exception {
-        String url = InetAddress.getLocalHost().getHostName() + ":9093/timemachine";
-        webDriver.get(url);
 
-        submitCredentials(validPasswordString);
+        webDriver.get(homepageUrl);
+        System.out.println(webDriver.getCurrentUrl());
 
+        super.submitCredentials(validPasswordString);
         assertNotNull(webDriver.findElement(By.name("add")));
 
     }
