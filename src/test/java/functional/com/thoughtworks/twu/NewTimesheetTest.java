@@ -91,7 +91,8 @@ public class NewTimesheetTest extends BaseTest {
 //    @Test
 //    public void givenUSAIsSelectedStatesShouldBeEnabled() {
 //        //Assuage
-//        webDriver.get(url);
+//
+//        webDriver.get(newTimesheetUrl);
 //
 //        //Act
 //        WebElement country = webDriver.findElement(By.id("country"));
@@ -101,18 +102,19 @@ public class NewTimesheetTest extends BaseTest {
 //        WebElement state = webDriver.findElement(By.id("state"));
 //        Select dropDownState = new Select(state);
 //        List<WebElement> states = dropDownState.getOptions();
-//        List<String> obtainedStateNames = null;
+//        List<String> obtainedStateNames = new ArrayList<String>();
 //        for (WebElement pageState : states) {
 //            obtainedStateNames.add(pageState.getText());
 //        }
 //
 //        CountryService countryService = new CountryService();
 //        List<LocationPresences> expectedStates = countryService.getStates("USA");
-//        List<String> expectedStateNames = null;
+//        List<String> expectedStateNames = new ArrayList<String>();
 //        for (LocationPresences expectedState : expectedStates) {
 //            expectedStateNames.add(expectedState.getState());
 //        }
-//
+//    }
+
 //        //Assert
 //        assertEquals(expectedStateNames, obtainedStateNames);
 //

@@ -5,6 +5,7 @@ import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 
@@ -23,7 +24,9 @@ public class CountryService {
         connection = HibernateConnection.getInstance();
         session = connection.getSession();
 
-        countries = session.createCriteria(Country.class).list();
+        countries = session.createCriteria(Country.class).
+                            addOrder(Order.asc("name")).
+                            list();
 
         return countries;
     }
