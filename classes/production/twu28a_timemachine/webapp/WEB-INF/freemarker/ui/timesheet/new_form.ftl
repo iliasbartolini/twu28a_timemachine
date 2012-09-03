@@ -62,17 +62,19 @@
 
 
         <label for="country" class="select">Country</label>
-            <select name="country" id="country">
+        <select name="country" id="country">
             <option value="" selected="selected"></option>
         <#list countries as country>
             <option value=${country.name}>${country.name}</option>
         </#list>
         </select>
 
-        <label for="State" class="select">State</label>
-        <select id="state" name="state">
-            <option value="" selected="selected"></option>
-        </select>
+        <div id="selectState" hidden="hidden">
+            <label for="state" class="select" >State</label>
+            <select id="state" name="state">
+                <option value="" selected="selected"></option>
+            </select>
+        </div>
 
 
         <label for="activity">Activity</label>
