@@ -17,7 +17,7 @@ public class TimesheetController {
     FavoriteTimesheetService favoriteTimesheetService = new FavoriteTimesheetService();
 
     @RequestMapping(value = "/timesheet/new", method = RequestMethod.GET)
-    public ModelAndView newFavorite() {
+    public ModelAndView newTimesheet() {
         CountryService countryService = new CountryService();
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/new_form");

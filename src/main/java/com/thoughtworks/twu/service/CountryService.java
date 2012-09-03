@@ -16,7 +16,7 @@ public class CountryService {
     public Session session;
 
     private List<Country> countries;
-    private List<LocationPresences> locationPresenceses;
+    private List<LocationPresences> locationPresences;
 
     public List<Country> getCountries() {
 
@@ -32,12 +32,12 @@ public class CountryService {
         connection = HibernateConnection.getInstance();
         session = connection.getSession();
 
-        locationPresenceses = session.createCriteria(LocationPresences.class)
+        locationPresences = session.createCriteria(LocationPresences.class)
                 .add(Restrictions.and(
                         Property.forName("state").isNotNull(),
                         Restrictions.eq("countryCode", countryCode)
                 )).list();
 
-        return locationPresenceses;
+        return locationPresences;
     }
 }

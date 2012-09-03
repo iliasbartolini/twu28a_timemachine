@@ -16,6 +16,6 @@ public class TimesheetControllerTest {
 
     @Test
     public void shouldBeAbleToGetViewNameOfController() throws Exception {
-        assertEquals("ui/timesheet/new_form", controller.newFavorite().getViewName());
+        assertEquals("ui/timesheet/new_form", controller.newTimesheet().getViewName());
     }
 }
