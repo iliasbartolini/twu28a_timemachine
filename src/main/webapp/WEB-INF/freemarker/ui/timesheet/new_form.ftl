@@ -9,7 +9,7 @@
 
     <script type="text/javascript" src="../static/js/lib/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="../static/js/mobiscroll-2.0.1.custom.min.js"></script>
-
+    <script type="text/javascript" src="../static/js/ui/newTimesheetState.js"></script>
     <script>
         $(function () {
             // create a datepicker with default settings
@@ -17,33 +17,13 @@
 
 
         });
-        var options = {
-
-        }
-
-        function changelist(v) {
-
-            var $t = $("#state");
-
-            //clear old options
-            $t.html('');
-            //fill up new options
-            if (options[v]) {
-                for (var i in options[v]) {
-                    if (options[v].hasOwnProperty(i)) {
-                        $t.append('<option value="' + options[v][i] + '">' + i + '<\/option>');
-                    }
-                }
-            }
-            $t.selectmenu('refresh');
-        }
 
     </script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../static/js/favorite_timesheet.js"></script>
-    <script type="text/javascript" src="../static/js/ui/new_timesheet.js"></script>
+
 
 
 </head>
@@ -65,16 +45,19 @@
         <select name="country" id="country">
             <option value="" selected="selected"></option>
         <#list countries as country>
-            <option value=${country.name}>${country.name}</option>
+            <option value="${country.name}">${country.name}</option>
         </#list>
         </select>
 
-        <div id="selectState" hidden="hidden">
+
             <label for="state" class="select" >State</label>
-            <select id="state" name="state">
+            <select id="state" name="state" disabled="disabled" >
                 <option value="" selected="selected"></option>
+            <#list states as state>
+                <option value="${state.state}">${state.state}</option>
+            </#list>
             </select>
-        </div>
+
 
 
         <label for="activity">Activity</label>
@@ -121,6 +104,7 @@
                 <input type="text" name="sunday" id="sunday" value=""/>
             </div>
         </div>
+
 
 
         <button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">

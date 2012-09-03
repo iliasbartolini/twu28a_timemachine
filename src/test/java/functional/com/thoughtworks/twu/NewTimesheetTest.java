@@ -22,6 +22,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class NewTimesheetTest extends BaseTest {
 
@@ -88,131 +89,83 @@ public class NewTimesheetTest extends BaseTest {
         assertEquals(expectedCountryNames, obtainedCountryNames);
     }
 
-//    @Test
-//    public void givenUSAIsSelectedStatesShouldBeEnabled() {
-//        //Assuage
-//
-//        webDriver.get(newTimesheetUrl);
-//
-//        //Act
-//        WebElement country = webDriver.findElement(By.id("country"));
-//        Select dropDownCountry = new Select(country);
-//        dropDownCountry.selectByValue("USA");
-//
-//        WebElement state = webDriver.findElement(By.id("state"));
-//        Select dropDownState = new Select(state);
-//        List<WebElement> states = dropDownState.getOptions();
-//        List<String> obtainedStateNames = new ArrayList<String>();
-//        for (WebElement pageState : states) {
-//            obtainedStateNames.add(pageState.getText());
-//        }
-//
-//        CountryService countryService = new CountryService();
-//        List<LocationPresences> expectedStates = countryService.getStates("USA");
-//        List<String> expectedStateNames = new ArrayList<String>();
-//        for (LocationPresences expectedState : expectedStates) {
-//            expectedStateNames.add(expectedState.getState());
-//        }
-//    }
 
-//        //Assert
-//        assertEquals(expectedStateNames, obtainedStateNames);
-//
-//    }
-//
-//    @Test
-//    @Ignore
-//    public void changeCountryUSAToOtherStatesEmpty() {
-//        //Assuage
-//        webDriver.get(url);
-//
-//        //Act
-//        WebElement country = webDriver.findElement(By.id("country"));
-//        Select dropDownCountry = new Select(country);
-//        dropDownCountry.selectByValue("USA");
-//
-//        WebElement state = webDriver.findElement(By.id("state"));
-//        Select dropDownState = new Select(state);
-//        List<WebElement> states = dropDownState.getOptions();
-//        assertEquals(1, states.size());
-//        assertEquals("", dropDownState.getFirstSelectedOption().getText());
-//    }
-//
-//
-//    @Test
-//    public void givenUSAIsSelectedStatesShouldBeEnabled() {
-//        //Assuage
-//        webDriver.get(url);
-//
-//        //Act
-//        WebElement country = webDriver.findElement(By.id("country"));
-//        Select dropDownCountry = new Select(country);
-//        dropDownCountry.selectByValue("USA");
-//
-//        WebElement state = webDriver.findElement(By.id("state"));
-//        Select dropDownState = new Select(state);
-//        List<WebElement> states = dropDownState.getOptions();
-//        List<String> obtainedStateNames = null;
-//        for (WebElement pageState : states) {
-//            obtainedStateNames.add(pageState.getText());
-//        }
-//
-//        CountryService countryService = new CountryService();
-//        List<LocationPresences> expectedStates = countryService.getStates("USA");
-//        List<String> expectedStateNames = null;
-//        for (LocationPresences expectedState : expectedStates) {
-//            expectedStateNames.add(expectedState.getState());
-//        }
-//
-//        //Assert
-//        assertEquals(expectedStateNames, obtainedStateNames);
-//
-//    }
-//
-//    @Test
-//    public void changeCountryUSAToOtherStatesEmpty() {
-//        //Assuage
-//        webDriver.get(url);
-//
-//        //Act
-//        WebElement country = webDriver.findElement(By.id("country"));
-//        Select dropDownCountry = new Select(country);
-//        dropDownCountry.selectByValue("USA");
-//
-//        WebElement state = webDriver.findElement(By.id("state"));
-//        Select dropDownState = new Select(state);
-//        List<WebElement> states = dropDownState.getOptions();
-//
-//        //Assert
-//        assertEquals(1, states.size());
-//        assertEquals("", dropDownState.getFirstSelectedOption().getText());
-//    }
-//
-//    @Test
-//    public void checkIfStateCanBeSelected() throws UnknownHostException {
-//        //Assuage
-//        webDriver.get(url);
-//        //Act
-//        WebElement state = webDriver.findElement(By.id("state"));
-//        //Assert
-//        assertThat(state.isEnabled(), is(true));
-//    }
-//
-//    @Test
-//    public void checkIfStateBlankAndEmptyInitially() throws UnknownHostException {
-//        //Assuage
-//        webDriver.get(url);
-//        //Act
-//        WebElement state = webDriver.findElement(By.id("state"));
-//        Select dropDownState = new Select(state);
-//        List<WebElement> states = dropDownState.getOptions();
-//
-//        //Assert
-//        assertEquals(1, states.size());
-//        assertEquals("", dropDownState.getFirstSelectedOption().getText());
-//
-//
-//    }
+
+    @Test
+    public void checkIfStateIsBlankInitially() throws UnknownHostException {
+        //Assuage
+        webDriver.get(newTimesheetUrl);
+        //Act
+        WebElement state = webDriver.findElement(By.id("state"));
+        Select dropDownState = new Select(state);
+
+        //Assert
+        assertEquals("", dropDownState.getFirstSelectedOption().getText());
+    }
+
+
+    @Test
+    public void checkIfStateIsDisabledOnPageLoad() throws UnknownHostException {
+        //Assuage
+        webDriver.get(newTimesheetUrl);
+        //Act
+        WebElement state = webDriver.findElement(By.id("state"));
+        //Assert
+        assertThat(state.isEnabled(), is(false));
+    }
+
+    @Test
+    public void givenUSAIsSelectedStatesShouldBeEnabled() {
+        //Assuage
+
+        webDriver.get(newTimesheetUrl);
+
+
+        //Act
+        WebElement country = webDriver.findElement(By.id("country"));
+        Select dropDownCountry = new Select(country);
+        dropDownCountry.selectByValue("USA");
+
+
+        WebElement state = webDriver.findElement(By.id("state"));
+        Select dropDownState = new Select(state);
+        List<WebElement> states = dropDownState.getOptions();
+
+
+        List<String> obtainedStateNames = new ArrayList<String>();
+        for (WebElement pageState : states) {
+            obtainedStateNames.add(pageState.getText());
+        }
+
+        CountryService countryService = new CountryService();
+        List<LocationPresences> expectedStates = countryService.getStates("USA");
+        List<String> expectedStateNames = new ArrayList<String>();
+        expectedStateNames.add("");
+        for (LocationPresences expectedState : expectedStates) {
+            expectedStateNames.add(expectedState.getState());
+        }
+        //Assert
+        assertEquals(expectedStateNames, obtainedStateNames);
+
+    }
+
+    @Test
+    public void changeCountryUSAToOtherStatesEmpty() {
+        //Assuage
+        webDriver.get(newTimesheetUrl);
+
+        //Act
+        WebElement country = webDriver.findElement(By.id("country"));
+        Select dropDownCountry = new Select(country);
+        dropDownCountry.selectByValue("USA");
+
+        WebElement state = webDriver.findElement(By.id("state"));
+        Select dropDownState = new Select(state);
+        List<WebElement> states = dropDownState.getOptions();
+        assertEquals("", dropDownState.getFirstSelectedOption().getText());
+    }
+
+
 
     @After
     public void tearDown() {
