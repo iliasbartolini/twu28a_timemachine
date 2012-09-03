@@ -22,6 +22,7 @@ public class TimesheetController {
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/new_form");
         modelAndView.addObject("countries", countryService.getCountries());
+        modelAndView.addObject("states", countryService.getStates("USA"));
 
         HibernateConnection.getInstance().getSession().close();
 

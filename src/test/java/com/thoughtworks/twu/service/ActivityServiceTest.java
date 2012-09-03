@@ -27,14 +27,18 @@ public class ActivityServiceTest {
     @Test
     public void shouldReturnListOfActivitiesContainingCaseInsensitiveTWU() {
         ActivityService service = new ActivityService();
-        JSONArray activities = service.getActivities("twu");
+
+        JSONArray  activities = service.getActivities("twu");
+
         assertEquals(7, activities.length());
     }
 
     @Test
     public void shouldReturnEmptyListForAAA() {
         ActivityService service = new ActivityService();
-        JSONArray activities = service.getActivities("AAA");
+
+        JSONArray  activities = service.getActivities("AAA");
+
         assertEquals(0, activities.length());
     }
 
