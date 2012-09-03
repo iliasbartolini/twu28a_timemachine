@@ -12,7 +12,7 @@ describe("Favourite Timesheet", function() {
         var favorite = new FavoriteTimesheet();
         favorite.addExistingFavoriteName("TWU");
 
-        expect(favorite.isDuplicated("TWU ")).toEqual(true);
+        expect(favorite.isDuplicated("TWU ")).toEqual(false);
     });
 });
 
