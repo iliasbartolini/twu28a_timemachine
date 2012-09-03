@@ -35,11 +35,6 @@ public class SearchActivityController {
         ActivityService service = new ActivityService();
         //List<Activity> activityList = service.getActivities(query);
 
-        List<String> testList = new ArrayList<String>();
-        testList.add("One");
-        testList.add("Two");
-        testList.add("Three");
-
         return service.getActivities(query).toString();
     }
 

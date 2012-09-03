@@ -34,11 +34,5 @@ public class ActivityService {
         return jsonArray;
     }
 
-//    public JSONArray getActivitiesJSON() throws JSONException {
-//        String searchCriteria = "twu";
-//        List<Activity> twuList = session.createQuery("from com.thoughtworks.twu.domain.Activity where lower (client) like '%" + searchCriteria + "%' or lower (project) like '%" + searchCriteria + "%' or lower (sub_project) like '%" + searchCriteria + "%'").list();
-//        return new JSONArray(twuList);
-//        //return new JSONObject().put("Batman", "Catwoman");
-//    }
 
 }
