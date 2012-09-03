@@ -6,7 +6,7 @@ apply from:'emma.gradle'
 
 ext
 {
-   webXmlTemplate = file("$webAppDir/WEB-INF/web.xml")
+   webXmlTemplate = file("$webAppDir/WEB-INF/web.xml.template")
    generatedWebXmlFile = file("$buildDir/web.xml")
    serverPort = 9093
 }
@@ -49,15 +49,15 @@ dependencies {
     emma "emma:emma:2.0.5312"
     emma "emma:emma_ant:2.0.5312"
 }
-//task createWebXML(dependsOn:"classes"){
-//    def engine = new groovy.text.SimpleTemplateEngine()
-//    ext.serverName= InetAddress.getLocalHost().getHostName()
-//    if(rootProject.hasProperty("hostName"))
-//        ext.serverName = rootProject.getAt("hostName")
-//    file("$webAppDir/WEB-INF/web.xml").withWriter { w ->
-//        w << engine.createTemplate(webXmlTemplate).make([servername: serverName, serverPort: serverPort]).toString()
-//    }
-// }
+task createWebXML(dependsOn:"classes"){
+    def engine = new groovy.text.SimpleTemplateEngine()
+    ext.serverName= InetAddress.getLocalHost().getHostName()
+    if(rootProject.hasProperty("hostName"))
+        ext.serverName = rootProject.getAt("hostName")
+    file("$webAppDir/WEB-INF/web.xml").withWriter { w ->
+        w << engine.createTemplate(webXmlTemplate).make([servername: serverName, serverPort: serverPort]).toString()
+    }
+ }
 jettyRun
 {
     httpPort= serverPort
@@ -84,28 +84,3 @@ functionalTest.doFirst {
 functionalTest.doLast {
     jettyStop.execute()
 }
-
-['QA', 'CI'].each { def environmentName ->
-    //create dynamic tasks 
-    tasks.add(name: "war$environmentName", type: War) << {
-//        load properties file(used by filter below)
-        Properties props$environmentName = new Properties()
-        props$environmentName.load(new FileInputStream("$projectDir/properties/" + environmentName + ".properties"))
-                       println           props$environmentName
-        destinationDir = file("$projectDir/files_to_deploy")
-
-//        def engine = new groovy.text.SimpleTemplateEngine()
-//        file("$webAppDir/WEB-INF/web.xml").withWriter { w ->
-//        w << engine.createTemplate(file("$webAppDir/WEB-INF/web.xml.template")).make(props$environmentName).toString()
-//        }
-        //'from' is split into 2 steps so we can apply filters to a limited set of file (.xml, .bat, .sh, .properties).
-        from ('/src/main/WEB-INF') {
-            include "**/*.xml", "**/*.bat", "**/*.sh", "**/*properties"
-            filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: props$environmentName)
-        }
-
-        archiveName = 'timemachine-'+environmentName+'.war'
-    }
-}
-
-
