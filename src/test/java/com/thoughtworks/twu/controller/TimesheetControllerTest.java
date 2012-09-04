@@ -11,11 +11,17 @@ import static org.testng.Assert.assertEquals;
 public class TimesheetControllerTest {
 
     TimesheetController controller;
+    private TimeSheetForm timeSheetForm;
+    private BindingResult bindingResult;
 
     @Before
     public void setUp() throws Exception {
         controller = new TimesheetController();
+        timeSheetForm = new TimeSheetForm();
+        bindingResult = mock(BindingResult.class);
     }
+
+
 
     @Test
     public void shouldBeAbleToGetViewNameOfController() throws Exception {
@@ -23,5 +29,6 @@ public class TimesheetControllerTest {
         TimeSheetForm timeSheetForm = new TimeSheetForm();
         BindingResult bindingResult = mock(BindingResult.class);
         assertEquals("ui/timesheet/new_form", controller.newFavorite(timeSheetForm,bindingResult).getViewName());
+
     }
 }

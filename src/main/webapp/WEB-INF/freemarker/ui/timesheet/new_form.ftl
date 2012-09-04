@@ -11,7 +11,7 @@
 
     <script type="text/javascript" src="../static/js/lib/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="../static/js/mobiscroll-2.0.1.custom.min.js"></script>
-
+    <script type="text/javascript" src="../static/js/ui/newTimesheetState.js"></script>
     <script>
         $(function () {
             // create a datepicker with default settings
@@ -19,33 +19,12 @@
 
 
         });
-        var options = {
-
-        }
-
-        function changelist(v) {
-
-            var $t = $("#state");
-
-            //clear old options
-            $t.html('');
-            //fill up new options
-            if (options[v]) {
-                for (var i in options[v]) {
-                    if (options[v].hasOwnProperty(i)) {
-                        $t.append('<option value="' + options[v][i] + '">' + i + '<\/option>');
-                    }
-                }
-            }
-            $t.selectmenu('refresh');
-        }
 
     </script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../static/js/favorite_timesheet.js"></script>
-    <script type="text/javascript" src="../static/js/ui/new_timesheet.js"></script>
 
 
 </head>
@@ -53,7 +32,7 @@
 
 <div data-role="page" data-theme="a">
     <div data-role="header">
-        <h1>My Time Sheet</h1>
+        <h1>New Time Sheet</h1>
     </div>
      <#if spring.status.error>
             <div class="errors">
@@ -69,6 +48,7 @@
 
     <form id="new_timesheet_form" modelAttribute="favoriteTimesheetForm" action="" method="post"
           class="ui-body ui-body-a ui-corner-all">
+
 
          <label for="country" class="select">Country</label>
                  <select name="country" id="country">
@@ -87,14 +67,30 @@
      <@spring.formInput "timeSheetForm.activity" />
      <@spring.showErrors "<br>" />
 
-        <label for="billable">Billable?</label>
-        <select name="billable" id="billable" data-role="slider">
+
+        <#--<div data-role="fieldcontain">-->
+            <#--<fieldset data-role="controlgroup" data-type="horizontal">-->
+                <#--<input type="radio" name="radio" id="billable"/>-->
+                <#--<label for="billable">Billable</label>-->
+                <#--<input type="radio" name="radio" id="nonbillable" checked="checked"/>-->
+                <#--<label for="nonbillable">Non-Billable</label>-->
+            <#--</fieldset>-->
+        <#--</div>-->
+
+        <label>Billable?</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <select name="billable"  data-role="slider">
+
             <option value="false">No</option>
+
             <option value="true">Yes</option>
+
         </select>
 
-        <label for="task">Task</label>
-        <input type="text" name="task" id="task" value=""/>
+
+
+
+
+        <input type="text" name="task" placeholder="Type task" id="task" value=""/>
 
         <div class="ui-grid-d">
             <div class="ui-block-a">

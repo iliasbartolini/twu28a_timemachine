@@ -5,12 +5,18 @@ import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetForm;
 import com.thoughtworks.twu.persistence.FavoriteTimesheet;
 import com.thoughtworks.twu.service.CountryService;
 import com.thoughtworks.twu.service.FavoriteTimesheetService;
+<<<<<<< HEAD
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+=======
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.validation.BindingResult;
+>>>>>>> 1beb033a3ee5ef78aee9b74a33a2d3632566b0d9
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -22,6 +28,14 @@ import static org.mockito.Mockito.mock;
 
 public class TimesheetTest {
 
+    private TimeSheetForm timeSheetForm;
+    private BindingResult bindingResult;
+
+    @Before
+    public void setUp() throws Exception {
+        timeSheetForm = new TimeSheetForm();
+        bindingResult = mock(BindingResult.class);
+    }
     @Test
     public void shouldReceiveACountryList() throws Exception {
         //Given
@@ -61,6 +75,8 @@ public class TimesheetTest {
         TimeSheetForm timeSheetForm = new TimeSheetForm();
         BindingResult bindingResult = mock(BindingResult.class);
         ModelAndView modelAndView = controller.newFavorite(timeSheetForm,bindingResult);
+
+        ModelAndView modelAndView = controller.newTimesheet(timeSheetForm,bindingResult);
 
         List<Country> countries = (List<Country>) modelAndView.getModel().get("countries");
 

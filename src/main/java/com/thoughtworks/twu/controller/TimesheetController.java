@@ -8,8 +8,6 @@ import com.thoughtworks.twu.service.CountryService;
 import com.thoughtworks.twu.service.FavoriteTimesheetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,12 +22,12 @@ public class TimesheetController {
     FavoriteTimesheetService favoriteTimesheetService = new FavoriteTimesheetService();
 
     @RequestMapping(value = "/timesheet/new", method = RequestMethod.GET)
-    public ModelAndView newFavorite(@ModelAttribute("timeSheetForm") TimeSheetForm timeSheetForm, BindingResult errors) {
+    public ModelAndView newTimesheet(@ModelAttribute("timeSheetForm") TimeSheetForm timeSheetForm, BindingResult errors) {
         CountryService countryService = new CountryService();
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/new_form");
         modelAndView.addObject("countries", countryService.getCountries());
-        modelAndView.addObject("existingFavorites", favoriteTimesheetService.getFavoriteTimesheets());
+        modelAndView.addObject("states", countryService.getStates("USA"));
 
         HibernateConnection.getInstance().getSession().close();
 
@@ -37,14 +35,16 @@ public class TimesheetController {
     }
 
     @RequestMapping(value = "/timesheet/new", method = RequestMethod.POST)
-    public ModelAndView submittedTimeSheet(@ModelAttribute("timeSheetForm")   TimeSheetForm timeSheetForm, BindingResult errors){
+    public ModelAndView submittedTimeSheet(@ModelAttribute("timeSheetForm") TimeSheetForm timeSheetForm, BindingResult errors) {
+        LocationValidator locationValidator = new LocationValidator();
         ActivityValidator validator = new ActivityValidator();
+        locationValidator.validate(timeSheetForm, errors);
         validator.validate(timeSheetForm, errors);
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/new_form");
-        modelAndView.addObject("errors",errors);
+        modelAndView.addObject("errors", errors);
         CountryService countryService = new CountryService();
         modelAndView.addObject("countries", countryService.getCountries());
-        modelAndView.addObject("existingFavorites", favoriteTimesheetService.getFavoriteTimesheets());
+        modelAndView.addObject("states", countryService.getStates("USA"));
 
         modelAndView.addObject(timeSheetForm);
         return modelAndView;

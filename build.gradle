@@ -36,9 +36,12 @@ dependencies {
             fileTree(dir: 'lib', include: '*.jar'),
             group: 'org.hibernate', name: 'hibernate-core', version: '4.+',
             'org.codehaus.groovy:groovy-all:2.0.1'
+<<<<<<< HEAD
             'org.apache.maven:maven-model:3.0.4'
     "?"
 
+=======
+>>>>>>> 1beb033a3ee5ef78aee9b74a33a2d3632566b0d9
 
             testCompile 'junit:junit:4.10',
             'org.springframework:spring-test:3.1.1.RELEASE',
@@ -50,6 +53,7 @@ dependencies {
     emma "emma:emma:2.0.5312"
     emma "emma:emma_ant:2.0.5312"
 }
+
 task createWebXML(dependsOn:"classes"){
     def engine = new groovy.text.SimpleTemplateEngine()
     ext.serverName= InetAddress.getLocalHost().getHostName()
@@ -59,6 +63,7 @@ task createWebXML(dependsOn:"classes"){
         w << engine.createTemplate(webXmlTemplate).make([servername: serverName, serverPort: serverPort]).toString()
     }
  }
+
 jettyRun
 {
     httpPort= serverPort
@@ -70,7 +75,12 @@ test {
     exclude '**/functional/com/thoughtworks/**/*.*'
 }
 
-task functionalTest(type: Test, dependsOn: "test") {
+task jasmineTest(type: Exec) {
+    workingDir "src/test/javascript"
+    commandLine = ["phantomjs", "lib/phantom-jasmine/run_jasmine_test.coffee", "SpecRunner.html"]
+}
+
+task functionalTest(type: Test, dependsOn: ["test", "jasmineTest"]) {
     include '**/functional/com/thoughtworks/**/*.*'
 }
 

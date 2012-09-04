@@ -21,27 +21,19 @@ public class SearchActivityController {
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/search_activity");
 
-
-
         HibernateConnection.getInstance().getSession().close();
         return modelAndView;
 
     }
 
-    @RequestMapping(value = "/timesheet/search_activity",
-            method = RequestMethod.POST)
-    public @ResponseBody
-    String getCountryList(@RequestParam("s") String query) throws JSONException {
+    @RequestMapping(value = "/timesheet/search_activity", method = RequestMethod.POST)
+    public @ResponseBody String searchActivities(@RequestParam("s") String query) throws JSONException {
         ActivityService service = new ActivityService();
-        //List<Activity> activityList = service.getActivities(query);
-
-        List<String> testList = new ArrayList<String>();
-        testList.add("One");
-        testList.add("Two");
-        testList.add("Three");
 
         return service.getActivities(query).toString();
     }
+
+
 
 
 

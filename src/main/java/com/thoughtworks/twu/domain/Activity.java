@@ -25,6 +25,33 @@ public class Activity {
     private String client;
     private String project;
     private String sub_project;
+    private String client_name;
+    private String project_name;
+    private String sub_project_name;
+
+    public String getClient_name() {
+        return client_name;
+    }
+
+    public void setClient_name(String client_name) {
+        this.client_name = client_name;
+    }
+
+    public String getProject_name() {
+        return project_name;
+    }
+
+    public void setProject_name(String project_name) {
+        this.project_name = project_name;
+    }
+
+    public String getSub_project_name() {
+        return sub_project_name;
+    }
+
+    public void setSub_project_name(String sub_project_name) {
+        this.sub_project_name = sub_project_name;
+    }
 
     public String getClient() {
         return client;

@@ -11,6 +11,8 @@
 --------------------------------------------------------
 
   CREATE TABLE IF NOT EXISTS ACTIVITY_CLASSIFICATIONS (ID DECIMAL(38,0), CLIENT VARCHAR(15), PROJECT VARCHAR(15), SUB_PROJECT VARCHAR(15), CLASSIFICATION VARCHAR(15));
+
+  CREATE TABLE IF NOT EXISTS MESSAGES (ID DECIMAL(38,0), MESSAGE_ID VARCHAR(500), MESSAGE VARCHAR(500));
 --------------------------------------------------------
 --  DDL for Table CATEGORIES
 --------------------------------------------------------
