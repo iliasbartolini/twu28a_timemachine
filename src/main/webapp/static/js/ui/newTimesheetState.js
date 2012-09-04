@@ -14,7 +14,7 @@ function NewTimesheetState() {
         if (this.isNotUSA($('#country').val())) {
             $("#state").selectmenu('disable');
 
-            $("#state option[value='']").attr('selected', 'selected');
+            $("#state option[value='default']").attr('selected', 'selected');
             $('#state').selectmenu('refresh');
         }
         else {

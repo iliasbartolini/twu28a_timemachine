@@ -64,14 +64,23 @@
 
 
 
-        <div data-role="fieldcontain">
-            <fieldset data-role="controlgroup" data-type="horizontal">
-                <input type="radio" name="radio" id="billable" />
-                <label for="billable">Billable</label>
-                <input type="radio" name="radio" id="nonbillable"  checked="checked"  />
-                <label for="nonbillable">Non-Billable</label>
-            </fieldset>
-        </div>
+        <#--<div data-role="fieldcontain">-->
+            <#--<fieldset data-role="controlgroup" data-type="horizontal">-->
+                <#--<input type="radio" name="radio" id="billable"/>-->
+                <#--<label for="billable">Billable</label>-->
+                <#--<input type="radio" name="radio" id="nonbillable" checked="checked"/>-->
+                <#--<label for="nonbillable">Non-Billable</label>-->
+            <#--</fieldset>-->
+        <#--</div>-->
+
+        <label>Billable?</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <select name="billable"  data-role="slider">
+
+            <option value="false">No</option>
+
+            <option value="true">Yes</option>
+
+        </select>
 
 
 
