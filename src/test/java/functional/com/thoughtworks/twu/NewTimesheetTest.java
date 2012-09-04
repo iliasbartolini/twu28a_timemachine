@@ -1,43 +1,42 @@
 package functional.com.thoughtworks.twu;
 
 
-import com.thoughtworks.selenium.Selenium;
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
 import com.thoughtworks.twu.service.CountryService;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.support.ui.Select;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
+import org.junit.*;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class NewTimesheetTest extends BaseTest {
 
 
     private String validPasswordString = "Th0ughtW0rks@12";
     private String newTimesheetUrl;
+    private CountryService countryService;
+
 
     @Before
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
+        countryService = new CountryService();
         String url = InetAddress.getLocalHost().getHostName() + ":9093/timemachine";
         webDriver.get(url);
         super.submitCredentials(validPasswordString);
         newTimesheetUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine/timesheet/new";
-
     }
 
     @Test
@@ -49,7 +48,7 @@ public class NewTimesheetTest extends BaseTest {
         //Act
         Select selectBox = new Select(webDriver.findElement(By.id("country")));
         //Assert
-        assertThat(selectBox.getFirstSelectedOption().getText(), is(""));
+        assertThat(selectBox.getFirstSelectedOption().getText(), is("Select a country"));
 
     }
 
@@ -70,25 +69,12 @@ public class NewTimesheetTest extends BaseTest {
         webDriver.get(newTimesheetUrl);
 
         //Act
-        WebElement country = webDriver.findElement(By.id("country"));
-        Select dropDown = new Select(country);
-        List<WebElement> options = dropDown.getOptions();
-        List<String> obtainedCountryNames = new ArrayList<String>();
-        for (WebElement pageCountry : options) {
-            obtainedCountryNames.add(pageCountry.getText());
-        }
+        List<String> obtainedCountryNames = getActualCountryList();
 
-        CountryService countryService = new CountryService();
-        List<Country> expectedCountries = countryService.getCountries();
-        List<String> expectedCountryNames = new ArrayList<String>();
-        expectedCountryNames.add("");
-        for (Country expectedCountry : expectedCountries) {
-            expectedCountryNames.add(expectedCountry.getName());
-        }
+        List<String> expectedCountryNames = getExpectedCountryList(countryService);
         //Assert
         assertEquals(expectedCountryNames, obtainedCountryNames);
     }
-
 
 
     @Test
@@ -105,6 +91,7 @@ public class NewTimesheetTest extends BaseTest {
 
 
     @Test
+
     public void checkIfStateIsDisabledOnPageLoad() throws UnknownHostException {
         //Assuage
         webDriver.get(newTimesheetUrl);
@@ -120,13 +107,80 @@ public class NewTimesheetTest extends BaseTest {
 
         webDriver.get(newTimesheetUrl);
 
-
         //Act
+        selectCountry("USA");
+        WebElement state = webDriver.findElement(By.id("state"));
+
+        assertThat(state.isEnabled(), is(true));
+    }
+
+    @Test
+    public void changeCountryUSAToOtherStatesEmpty() {
+        //Assuage
+        webDriver.get(newTimesheetUrl);
+        selectCountry("USA");
+        selectState("GA");
+        //Act
+        selectCountry("UEA");
+        WebElement state = webDriver.findElement(By.id("state"));
+        Select dropDownState = new Select(state);
+        assertEquals("", dropDownState.getFirstSelectedOption().getText());
+    }
+
+    @Test
+    public void checkIfStateListIsAvailable() throws Exception {
+        //Assuage
+        webDriver.get(newTimesheetUrl);
+        selectCountry("USA");
+        //Act
+        List<String> obtainedStateNames = getActualStateList();
+
+        List<String> expectedStateNames = getExpectedStateList();
+        //Assert
+        assertEquals(expectedStateNames, obtainedStateNames);
+
+    }
+
+
+    private void selectCountry(String countryName) {
         WebElement country = webDriver.findElement(By.id("country"));
         Select dropDownCountry = new Select(country);
-        dropDownCountry.selectByValue("USA");
+        dropDownCountry.selectByValue(countryName);
+    }
 
 
+    private List<String> getExpectedCountryList(CountryService countryService) {
+        List<Country> expectedCountries = countryService.getCountries();
+        List<String> expectedCountryNames = new ArrayList<String>();
+        expectedCountryNames.add("Select a country");
+        for (Country expectedCountry : expectedCountries) {
+            expectedCountryNames.add(expectedCountry.getName());
+        }
+        return expectedCountryNames;
+    }
+
+    private List<String> getActualCountryList() {
+        WebElement country = webDriver.findElement(By.id("country"));
+        Select dropDown = new Select(country);
+        List<WebElement> options = dropDown.getOptions();
+        List<String> obtainedCountryNames = new ArrayList<String>();
+        for (WebElement pageCountry : options) {
+            obtainedCountryNames.add(pageCountry.getText());
+        }
+        return obtainedCountryNames;
+    }
+
+    private List<String> getExpectedStateList() {
+        List<LocationPresences> expectedStates = countryService.getStates("USA");
+        List<String> expectedStateNames = new ArrayList<String>();
+        expectedStateNames.add("Select a state");
+        for (LocationPresences expectedState : expectedStates) {
+            expectedStateNames.add(expectedState.getState());
+        }
+        return expectedStateNames;
+    }
+
+    private List<String> getActualStateList() {
         WebElement state = webDriver.findElement(By.id("state"));
         Select dropDownState = new Select(state);
         List<WebElement> states = dropDownState.getOptions();
@@ -136,36 +190,15 @@ public class NewTimesheetTest extends BaseTest {
         for (WebElement pageState : states) {
             obtainedStateNames.add(pageState.getText());
         }
-
-        CountryService countryService = new CountryService();
-        List<LocationPresences> expectedStates = countryService.getStates("USA");
-        List<String> expectedStateNames = new ArrayList<String>();
-        expectedStateNames.add("");
-        for (LocationPresences expectedState : expectedStates) {
-            expectedStateNames.add(expectedState.getState());
-        }
-        //Assert
-        assertEquals(expectedStateNames, obtainedStateNames);
-
+        return obtainedStateNames;
     }
 
-    @Test
-    public void changeCountryUSAToOtherStatesEmpty() {
-        //Assuage
-        webDriver.get(newTimesheetUrl);
 
-        //Act
-        WebElement country = webDriver.findElement(By.id("country"));
-        Select dropDownCountry = new Select(country);
-        dropDownCountry.selectByValue("USA");
-
+    private void selectState(String stateName) {
         WebElement state = webDriver.findElement(By.id("state"));
         Select dropDownState = new Select(state);
-        List<WebElement> states = dropDownState.getOptions();
-        assertEquals("", dropDownState.getFirstSelectedOption().getText());
+        dropDownState.selectByValue(stateName);
     }
-
-
 
     @After
     public void tearDown() {

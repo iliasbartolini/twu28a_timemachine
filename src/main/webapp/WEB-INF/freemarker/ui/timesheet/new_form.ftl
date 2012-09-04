@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<#import "/spring.ftl" as spring />
+<@spring.bind "timeSheetForm" />
 <html>
 <head>
     <title>Test UI</title>
@@ -28,52 +30,66 @@
     <script type="text/javascript" src="../static/js/favorite_timesheet.js"></script>
 
 
-
 </head>
 <body>
 
 <div data-role="page" data-theme="a">
     <div data-role="header">
-        <h1>My Time Sheet</h1>
+        <h1>New Time Sheet</h1>
     </div>
 
     <form id="new_timesheet_form" modelAttribute="favoriteTimesheetForm" action="" method="post"
           class="ui-body ui-body-a ui-corner-all">
 
-        <label for="date">Date</label>
+        <label for="date">Week Ending</label>
         <input id="date" name="date"/>
 
 
-        <label for="country" class="select">Country</label>
         <select name="country" id="country">
-            <option value="" selected="selected"></option>
+            <option diabled value="default" selected="selected">Select a country</option>
         <#list countries as country>
             <option value="${country.name}">${country.name}</option>
         </#list>
         </select>
 
 
-            <label for="state" class="select" >State</label>
-            <select id="state" name="state" disabled="disabled" >
-                <option value="" selected="selected"></option>
-            <#list states as state>
-                <option value="${state.state}">${state.state}</option>
-            </#list>
-            </select>
 
-
-
-        <label for="activity">Activity</label>
-        <input type="text" name="activity" id="activity" value=""/>
-
-        <label for="billable">Billable?</label>
-        <select name="billable" id="billable" data-role="slider">
-            <option value="false">No</option>
-            <option value="true">Yes</option>
+        <select id="state" name="state" disabled="disabled">
+            <option value="default" selected="selected">Select a state</option>
+        <#list states as state>
+            <option value="${state.state}">${state.state}</option>
+        </#list>
         </select>
 
-        <label for="task">Task</label>
-        <input type="text" name="task" id="task" value=""/>
+        Activity:
+         <@spring.formInput "timeSheetForm.activity" />
+         <@spring.showErrors "<br>" />
+
+
+
+        <#--<div data-role="fieldcontain">-->
+            <#--<fieldset data-role="controlgroup" data-type="horizontal">-->
+                <#--<input type="radio" name="radio" id="billable"/>-->
+                <#--<label for="billable">Billable</label>-->
+                <#--<input type="radio" name="radio" id="nonbillable" checked="checked"/>-->
+                <#--<label for="nonbillable">Non-Billable</label>-->
+            <#--</fieldset>-->
+        <#--</div>-->
+
+        <label>Billable?</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <select name="billable"  data-role="slider">
+
+            <option value="false">No</option>
+
+            <option value="true">Yes</option>
+
+        </select>
+
+
+
+
+
+        <input type="text" name="task" placeholder="Type task" id="task" value=""/>
 
         <div class="ui-grid-d">
             <div class="ui-block-a">
@@ -107,7 +123,6 @@
                 <input type="text" name="sunday" id="sunday" value=""/>
             </div>
         </div>
-
 
 
         <button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">

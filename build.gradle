@@ -6,8 +6,9 @@ apply from:'emma.gradle'
 
 ext
 {
+   hibernateConfigTemplate = file("$projectDir/src/main/resources/hibernate.cfg.xml.template")
    webXmlTemplate = file("$webAppDir/WEB-INF/web.xml.template")
-   generatedWebXmlFile = file("$buildDir/web.xml")
+   generatedWebXmlFile = file("$webAppDir/WEB-INF/web.xml")
    serverPort = 9093
 }
 
@@ -48,15 +49,39 @@ dependencies {
     emma "emma:emma_ant:2.0.5312"
 }
 
+
+['QA', 'CI', 'DEV'].each { def environmentName ->
+    //create dynamic tasks
+    tasks.add(name: "war$environmentName", type: War, evaluationDependsOn: war) {
+        destinationDir = file("$projectDir/build/libs/")
+        archiveName = 'timemachine-' + environmentName + '.war'
+        outputs.dir destinationDir
+
+        doFirst {
+            Properties props$environmentName = new Properties()
+            props$environmentName.load(new FileInputStream("$projectDir/properties/" + environmentName + ".properties"))
+            println props$environmentName
+
+
+            def engine = new groovy.text.SimpleTemplateEngine()
+            file(generatedWebXmlFile).withWriter { w ->
+                w << engine.createTemplate(webXmlTemplate).make(props$environmentName).toString()
+            }
+        }
+    }
+}
+
+
 task createWebXML(dependsOn:"classes"){
     def engine = new groovy.text.SimpleTemplateEngine()
     ext.serverName= InetAddress.getLocalHost().getHostName()
     if(rootProject.hasProperty("hostName"))
         ext.serverName = rootProject.getAt("hostName")
     file("$webAppDir/WEB-INF/web.xml").withWriter { w ->
-        w << engine.createTemplate(webXmlTemplate).make([servername: serverName, serverPort: serverPort]).toString()
+        w << engine.createTemplate(webXmlTemplate).make([serverName: serverName, serverPort: serverPort]).toString()
     }
- }
+}
+
 
 jettyRun
 {
@@ -83,9 +108,24 @@ functionalTest.doFirst {
     jettyRun.execute()
 }
 
+
+task hibernateConfig (dependsOn:"classes") {
+    def env = rootProject.hasProperty("env") ? env : "DEV"
+    Properties props = new Properties()
+    props.load(new FileInputStream("$projectDir/properties/" + env + ".properties"))
+    def engine = new groovy.text.SimpleTemplateEngine()
+    file("$projectDir/src/main/resources/hibernate.cfg.xml").withWriter { w ->
+        w << engine.createTemplate(hibernateConfigTemplate).make(props).toString()
+    }
+
+    println "Hibernate configuration file generated"
+}
+
+
 [jettyRunWar, jettyStop]*.stopPort = 8081
 [jettyRunWar, jettyStop]*.stopKey = 'stopKey'
 
 functionalTest.doLast {
     jettyStop.execute()
 }
+
