@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<#import "/spring.ftl" as spring />
+<@spring.bind "timeSheetForm" />
 <html>
 <head>
     <title>Test UI</title>
@@ -48,6 +50,7 @@
         </select>
 
 
+
         <select id="state" name="state" disabled="disabled">
             <option value="default" selected="selected">Select a state</option>
         <#list states as state>
@@ -55,8 +58,11 @@
         </#list>
         </select>
 
+        Activity:
+         <@spring.formInput "timeSheetForm.activity" />
+         <@spring.showErrors "<br>" />
 
-        <input type="text" name="activity" id="activity" value="" placeholder="Type some activity"/>
+
 
         <div data-role="fieldcontain">
             <fieldset data-role="controlgroup" data-type="horizontal">
@@ -66,6 +72,9 @@
                 <label for="nonbillable">Non-Billable</label>
             </fieldset>
         </div>
+
+
+
 
 
         <input type="text" name="task" placeholder="Type task" id="task" value=""/>
