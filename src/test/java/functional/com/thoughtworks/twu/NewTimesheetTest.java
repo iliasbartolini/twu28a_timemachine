@@ -49,7 +49,7 @@ public class NewTimesheetTest extends BaseTest {
         //Act
         Select selectBox = new Select(webDriver.findElement(By.id("country")));
         //Assert
-        assertThat(selectBox.getFirstSelectedOption().getText(), is(""));
+        assertThat(selectBox.getFirstSelectedOption().getText(), is("Select a country"));
 
     }
 
@@ -81,7 +81,7 @@ public class NewTimesheetTest extends BaseTest {
         CountryService countryService = new CountryService();
         List<Country> expectedCountries = countryService.getCountries();
         List<String> expectedCountryNames = new ArrayList<String>();
-        expectedCountryNames.add("");
+        expectedCountryNames.add("Select a country");
         for (Country expectedCountry : expectedCountries) {
             expectedCountryNames.add(expectedCountry.getName());
         }
@@ -140,7 +140,7 @@ public class NewTimesheetTest extends BaseTest {
         CountryService countryService = new CountryService();
         List<LocationPresences> expectedStates = countryService.getStates("USA");
         List<String> expectedStateNames = new ArrayList<String>();
-        expectedStateNames.add("");
+        expectedStateNames.add("Select a state");
         for (LocationPresences expectedState : expectedStates) {
             expectedStateNames.add(expectedState.getState());
         }
@@ -162,7 +162,7 @@ public class NewTimesheetTest extends BaseTest {
         WebElement state = webDriver.findElement(By.id("state"));
         Select dropDownState = new Select(state);
         List<WebElement> states = dropDownState.getOptions();
-        assertEquals("", dropDownState.getFirstSelectedOption().getText());
+        assertEquals("Select a state", dropDownState.getFirstSelectedOption().getText());
     }
 
 
