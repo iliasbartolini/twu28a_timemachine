@@ -15,8 +15,11 @@
             // create a datepicker with default settings
             $("#date").scroller({ preset:'date' });
 
+            $("activity").text(value);
+
 
         });
+
 
     </script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>

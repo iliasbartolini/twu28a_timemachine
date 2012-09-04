@@ -14,12 +14,18 @@
 </head>
 <body>
 <form action="search_activity" id="searchForm">
-    <input type="search" name="searchCriteria" placeholder="Search...type in more than 2 chars" width="20"/>
-    <input type="submit" value="Search" />
+  <fieldset class="ui-grid-a" >
+    <div class="ui-block-a" style="" id="home">
+        <input type="search" name="searchCriteria" style="width:80%" placeholder="Search...type in more than 2 chars"  >
+    </div>
+
+    <div class="ui-block-b" style=" max-width: 70px">
+        <a href="new" data-role = "button" data-icon="arrow-l" data-inline="true" data-theme="b" style="height:32px;padding-bottom:2px;padding-top:1px">Cancel</a>
+    </div>
+  </fieldset>
 </form>
 <ul data-role="listview" data-theme="g" id="activityList" name="activityList">
 </ul>
-
 <div id="result"></div>
 
 </body>
