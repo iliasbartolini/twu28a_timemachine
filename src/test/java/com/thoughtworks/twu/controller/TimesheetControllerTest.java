@@ -25,10 +25,6 @@ public class TimesheetControllerTest {
 
     @Test
     public void shouldBeAbleToGetViewNameOfController() throws Exception {
-
-        TimeSheetForm timeSheetForm = new TimeSheetForm();
-        BindingResult bindingResult = mock(BindingResult.class);
-        assertEquals("ui/timesheet/new_form", controller.newFavorite(timeSheetForm,bindingResult).getViewName());
-
+        assertEquals("ui/timesheet/new_form", controller.newTimesheet(timeSheetForm,bindingResult).getViewName());
     }
 }

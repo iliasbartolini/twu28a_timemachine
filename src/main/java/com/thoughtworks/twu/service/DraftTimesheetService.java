@@ -25,9 +25,7 @@ public class DraftTimesheetService {
         session = connection.getSession();
     }
 
-    public List<Message> getDrafts() {
-        return session.createQuery("from com.thoughtworks.twu.domain.").list();
+    public List<Time_Sheets> getAllDrafts() {
+        return session.createQuery("from com.thoughtworks.twu.domain.time_sheets WHERE TO_LOWER (status) = 'draft' ").list();
     }
-
-
 }
