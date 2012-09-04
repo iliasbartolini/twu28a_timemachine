@@ -13,11 +13,4 @@ public class SearchActivityControllerTest {
         SearchActivityController controller = new SearchActivityController();
         assertEquals("ui/timesheet/search_activity", controller.loadSearchActivityView().getViewName());
     }
-
-    @Test
-    @Ignore("Not yet Complete")
-    public void shouldReturnActivityList() throws JSONException {
-        SearchActivityController controller = new SearchActivityController();
-        assertEquals(6,controller.searchActivities("TWU").length());
-    }
 }

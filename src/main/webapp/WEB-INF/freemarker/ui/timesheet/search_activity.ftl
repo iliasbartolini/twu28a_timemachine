@@ -14,15 +14,12 @@
 </head>
 <body>
 <form action="search_activity" id="searchForm">
-    <input type="text" name="searchCriteria" placeholder="Search..." />
+    <input type="search" name="searchCriteria" placeholder="Search...type in more than 2 chars" width="20"/>
     <input type="submit" value="Search" />
 </form>
-
 <ul data-role="listview" data-theme="g" id="activityList" name="activityList">
-
 </ul>
 
-<!-- the result of the search will be rendered inside this div -->
 <div id="result"></div>
 
 </body>

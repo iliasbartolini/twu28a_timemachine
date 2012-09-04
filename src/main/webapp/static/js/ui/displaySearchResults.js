@@ -18,9 +18,10 @@ $(function() {
 
             $list.empty();
 
+            console.log(activities[1]);
             for(var i in activities){
                 var projectString = activities[i].client + " " + activities[i].project + " " + activities[i].sub_project;
-                $list.append('<li><a href="">' + projectString + '<\/a><\/li>');
+                $list.append('<li><a href=""><h3 class="ui-li-heading">' + projectString + '</h3><p class="ui-li-desc">' + activities[i].sub_project_name +'</p></a><\/li>');
             }
 
             $list.listview("refresh");

@@ -19,9 +19,9 @@ public class MessageServiceTest {
         @Test
         public void shouldReturnMessageForMessageId(){
             MessageService service = new MessageService();
-            Message message = service.getMessageMessageById("Alteast2CharsForSearch");
+            Message message = service.getMessageMessageById("NoMatchingActivity");
 
-            assertEquals("Enter atleast two characters.",message.getMessage());
+            assertEquals("No matching activity found.",message.getMessage());
 
         }
 }

@@ -2,7 +2,7 @@ Truncate TABLE MESSAGES;
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (1,'UserNamePasswordCannotBeBlank','Username is a required field.  Password is a required field.');
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (2,'UserNamePasswordMismatch','The credentials you provided cannot be determined to be authentic.');
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (3,'NoExistingTimesheets','You don''t have any saved timesheets.  ');
-Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (4,'Alteast2CharsForSearch','Enter atleast two characters.');
+Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (4,'Alteast2CharsForSearch','Type in more than two characters.');
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (5,'NoMatchingActivity','No matching activity found.');
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (6,'TimesheetnameBlank','Name field cannot be left blank.');
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (7,'DuplicateFavTimesheet','Duplicate name. Please try another name.');
