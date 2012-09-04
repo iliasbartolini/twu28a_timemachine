@@ -7,6 +7,7 @@ apply from:'emma.gradle'
 ext
 {
    webXmlTemplate = file("$webAppDir/WEB-INF/web.xml.template")
+   hibernateConfigTemplate = file("$projectDir/src/main/resources/hibernate.cfg.xml.template")
    generatedWebXmlFile = file("$buildDir/web.xml")
    serverPort = 9093
 }
@@ -88,6 +89,19 @@ functionalTest.doFirst {
     jettyRun.daemon = true
     jettyRun.execute()
 }
+
+task hibernateConfig {
+    env = rootProject.hasProperty("env") ? env : "DEV"
+    Properties props = new Properties()
+    props.load(new FileInputStream("$projectDir/properties/" + env + ".properties"))
+    def engine = new groovy.text.SimpleTemplateEngine()
+    file("$projectDir/src/main/resources/hibernate.cfg.xml").withWriter { w ->
+        w << engine.createTemplate(hibernateConfigTemplate).make(props).toString()
+    }
+
+    println "Hibernate configuration file generated"
+}
+
 
 [jettyRunWar, jettyStop]*.stopPort = 8081
 [jettyRunWar, jettyStop]*.stopKey = 'stopKey'
