@@ -19,6 +19,7 @@ public class TimesheetService {
     }
 
     public List<Timesheet> getAllTimesheets() {
+
         return session.createQuery("from com.thoughtworks.twu.domain.Timesheet").list();
     }
 

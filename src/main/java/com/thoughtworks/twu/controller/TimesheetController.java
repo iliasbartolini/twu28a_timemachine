@@ -1,10 +1,8 @@
 package com.thoughtworks.twu.controller;
 
-import com.thoughtworks.twu.domain.timesheet.forms.FavoriteTimesheetForm;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetForm;
 import com.thoughtworks.twu.domain.validators.ActivityValidator;
 import com.thoughtworks.twu.domain.validators.LocationValidator;
-import com.thoughtworks.twu.persistence.FavoriteTimesheet;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.CountryService;
 import com.thoughtworks.twu.service.FavoriteTimesheetService;
@@ -32,6 +30,7 @@ public class TimesheetController {
 
         return modelAndView;
     }
+
     @RequestMapping(value = "/timesheet/new", method = RequestMethod.POST)
     public ModelAndView submittedTimeSheet(@ModelAttribute("timeSheetForm") TimeSheetForm timeSheetForm, BindingResult errors) {
         LocationValidator locationValidator = new LocationValidator();
@@ -45,6 +44,16 @@ public class TimesheetController {
         modelAndView.addObject("states", countryService.getStates("USA"));
 
         modelAndView.addObject(timeSheetForm);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/timesheet/datepicker", method = RequestMethod.GET)
+    public ModelAndView pickDate() {
+
+        ModelAndView modelAndView = new ModelAndView("ui/timesheet/date_picker");
+
+        HibernateConnection.getInstance().getSession().close();
+
         return modelAndView;
     }
 }
