@@ -36,17 +36,28 @@ public class TimesheetController {
 
     @RequestMapping(value = "/timesheet/new", method = RequestMethod.POST)
     public ModelAndView submittedTimeSheet(@ModelAttribute("timeSheetForm") TimeSheetForm timeSheetForm, BindingResult errors) {
+
         LocationValidator locationValidator = new LocationValidator();
         ActivityValidator validator = new ActivityValidator();
         locationValidator.validate(timeSheetForm, errors);
         validator.validate(timeSheetForm, errors);
+
+        if (errors.hasErrors()){
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/new_form");
         modelAndView.addObject("errors", errors);
         CountryService countryService = new CountryService();
         modelAndView.addObject("countries", countryService.getCountries());
         modelAndView.addObject("states", countryService.getStates("USA"));
-
         modelAndView.addObject(timeSheetForm);
-        return modelAndView;
+         return modelAndView;
+        }
+        else
+        {
+          ModelAndView modelAndView = new ModelAndView("newTimesheet.ftl");
+          return modelAndView;
+
+        }
+
+
     }
 }

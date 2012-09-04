@@ -127,7 +127,7 @@
 
 
         <button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">
-            Submit
+            OK
         </button>
     </form>
 </div>
