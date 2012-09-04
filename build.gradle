@@ -109,7 +109,7 @@ functionalTest.doFirst {
 }
 
 
-task hibernateConfig << {
+task hibernateConfig (dependsOn:"classes") {
     def env = rootProject.hasProperty("env") ? env : "DEV"
     Properties props = new Properties()
     props.load(new FileInputStream("$projectDir/properties/" + env + ".properties"))
