@@ -5,6 +5,7 @@ import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetForm;
 import com.thoughtworks.twu.persistence.FavoriteTimesheet;
 import com.thoughtworks.twu.service.CountryService;
 import com.thoughtworks.twu.service.FavoriteTimesheetService;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
@@ -53,7 +54,7 @@ public class TimesheetTest {
         //Then
         assertThat(sizeAfterInsert, is(sizeBeforeInsert + 1));
     }
-
+    @Ignore
     @Test
     public void shouldShowNewFavoriteForm() throws Exception {
         TimesheetController controller = new TimesheetController();

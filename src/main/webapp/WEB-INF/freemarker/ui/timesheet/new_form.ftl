@@ -79,8 +79,6 @@
           </select>
 
 
-
-
         <label for="State" class="select">State</label>
         <select id="state" name="state">
             <option value="" selected="selected"></option>
