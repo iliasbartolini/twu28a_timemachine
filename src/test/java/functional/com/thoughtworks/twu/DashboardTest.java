@@ -9,6 +9,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.matchers.JUnitMatchers.containsString;
 
 public class DashboardTest extends BaseTest {
     private String dashboardUrl;
@@ -33,6 +35,6 @@ public class DashboardTest extends BaseTest {
         WebElement datepickerlink = webDriver.findElement(By.id("new_timesheet"));
 
         datepickerlink.click();
-        assertNotNull(webDriver.findElement(By.id("wecal")));
+        assertThat(webDriver.getCurrentUrl(), containsString(":9093/timemachine/timesheet/datepicker"));
     }
 }
