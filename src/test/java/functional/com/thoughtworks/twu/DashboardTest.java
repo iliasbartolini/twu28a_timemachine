@@ -16,12 +16,12 @@ public class DashboardTest extends BaseTest {
     private String validPasswordString = "Th0ughtW0rks@12";
 
     @Before
-
-    public void setup() throws UnknownHostException {
+  public void setup() throws Exception {
         super.setUpAndroid();
 
         dashboardUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine";
         webDriver.get(dashboardUrl);
+
         super.submitCredentials(validPasswordString);
         datePickerUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine/timesheet/datepicker";
     }
