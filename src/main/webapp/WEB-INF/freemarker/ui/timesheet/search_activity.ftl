@@ -17,19 +17,23 @@
 <form action="search_activity" id="searchForm">
   <fieldset class="ui-grid-a" >
     <div class="ui-block-a" style="" id="home">
-        <input type="search" name="searchCriteria" style="width:80%" placeholder="Search...type in more than 2 chars"  >
+        <input type="search" id="searchCriteria" name="searchCriteria" style="width:80%" placeholder="Search...type in more than 2 chars"  >
+        <ul data-role="listview" data-theme="g" id="activityList"></ul>
     </div>
 
     <div class="ui-block-b" style=" max-width: 70px">
-        <a href="new" data-role = "button" data-icon="arrow-l" data-inline="true" data-theme="b" style="height:32px;padding-bottom:2px;padding-top:1px">Cancel</a>
+        <a href="new" data-role = "button"  data-inline="true" data-theme="b" style="height:32px;padding-bottom:7px">Cancel</a>
     </div>
   </fieldset>
 </form>
 
-
-
-
 <div id="result"></div>
+
+<ul id="messages" class="hidden">
+    <#list messages as item>
+        <li data-message-id='${item.getMessageId()}'>${item.getMessage()}</li>
+    </#list>
+</ul>
 
 </body>
 </html>

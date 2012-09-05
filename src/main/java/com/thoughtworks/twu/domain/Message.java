@@ -19,4 +19,8 @@ public class Message {
     public String getMessage() {
         return message;
     }
+
+    public String getMessageId() {
+        return messageId;
+    }
 }

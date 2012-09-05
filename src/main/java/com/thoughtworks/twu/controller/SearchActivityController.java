@@ -1,5 +1,6 @@
 package com.thoughtworks.twu.controller;
 
+import com.thoughtworks.twu.domain.Message;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.ActivityService;
 import com.thoughtworks.twu.service.MessageService;
@@ -22,12 +23,16 @@ public class SearchActivityController {
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/search_activity");
         MessageService service = new MessageService();
-        modelAndView.addObject("Alteast2CharsForSearch",service.getMessageMessageById("Alteast2CharsForSearch").getMessage());
-        modelAndView.addObject("NoMatchingActivity",service.getMessageMessageById("NoMatchingActivity").getMessage());
+
+
+        List<Message> messages = new ArrayList<Message>();
+        messages.add(service.getMessageMessageById("Alteast2CharsForSearch"));
+        messages.add(service.getMessageMessageById("NoMatchingActivity"));
+
+        modelAndView.addObject("messages", messages) ;
 
         HibernateConnection.getInstance().getSession().close();
         return modelAndView;
-
     }
 
     @RequestMapping(value = "/timesheet/search_activity", method = RequestMethod.POST)
@@ -36,9 +41,4 @@ public class SearchActivityController {
 
         return service.getActivities(query).toString();
     }
-
-
-
-
-
 }
