@@ -2,13 +2,7 @@ package com.thoughtworks.twu.domain;
 
 import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: ewonou
- * Date: 4/9/12
- * Time: 10:38 AM
- * To change this template use File | Settings | File Templates.
- */
+
 public class NewTimesheetForm {
 
     private String country;

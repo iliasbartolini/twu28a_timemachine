@@ -24,12 +24,4 @@ public class NewTimesheetController {
         return modelAndView;
     }
 
-//    @RequestMapping(params ="savedActivity", method = RequestMethod.POST)
-//    public ModelAndView selectActivity(HttpServletRequest request, @ModelAttribute("newTimeSheetForm") NewTimesheetForm newTimesheetForm) {
-//        ModelAndView modelAndView = new ModelAndView("new_form");
-//
-//        return  null;
-//    }
-
-
 }

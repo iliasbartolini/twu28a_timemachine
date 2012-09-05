@@ -7,14 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * Created with IntelliJ IDEA.
- * User: ewonou
- * Date: 4/9/12
- * Time: 3:53 PM
- * To change this template use File | Settings | File Templates.
- */
-
 
 @Entity
 @Table(name = "time_sheets")
