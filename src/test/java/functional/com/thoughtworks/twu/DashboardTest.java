@@ -1,6 +1,5 @@
 package functional.com.thoughtworks.twu;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -37,9 +36,5 @@ public class DashboardTest extends BaseTest {
 
         datepickerlink.click();
         assertThat(webDriver.getCurrentUrl(), containsString(":9093/timemachine/timesheet/datepicker"));
-    }
-    @After
-    public void tearDown() {
-        webDriver.close();
     }
 }
