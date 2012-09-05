@@ -14,13 +14,19 @@
     <script type="text/javascript" src="../static/js/ui/newTimesheetState.js"></script>
     <script>
 
+        $(function () {
+            // create a datepicker with default settings
+            $("#date").scroller({ preset:'date' });
+        });
+
+
 
     </script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="../static/js/lib/jquery.cookie.js"></script>
     <script type="text/javascript" src="../static/js/favorite_timesheet.js"></script>
-
 
 </head>
 <body>
@@ -121,9 +127,9 @@
         </div>
 
 
-        <button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">
-            OK
-        </button>
+
+    <a href="/timemachine/timesheet/new" data-role="button" data-ajax="false">Submit Hella!</a>
+
     </form>
 </div>
 

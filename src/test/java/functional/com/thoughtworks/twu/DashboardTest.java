@@ -9,6 +9,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.matchers.JUnitMatchers.containsString;
 
 public class DashboardTest extends BaseTest {
     private String dashboardUrl;
@@ -16,12 +18,12 @@ public class DashboardTest extends BaseTest {
     private String validPasswordString = "Th0ughtW0rks@12";
 
     @Before
-
-    public void setup() throws UnknownHostException {
+  public void setup() throws Exception {
         super.setUpAndroid();
 
         dashboardUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine";
         webDriver.get(dashboardUrl);
+
         super.submitCredentials(validPasswordString);
         datePickerUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine/timesheet/datepicker";
     }
@@ -33,6 +35,6 @@ public class DashboardTest extends BaseTest {
         WebElement datepickerlink = webDriver.findElement(By.id("new_timesheet"));
 
         datepickerlink.click();
-        assertNotNull(webDriver.findElement(By.id("wecal")));
+        assertThat(webDriver.getCurrentUrl(), containsString(":9093/timemachine/timesheet/datepicker"));
     }
 }

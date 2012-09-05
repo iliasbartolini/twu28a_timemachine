@@ -2,6 +2,7 @@ package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.ActivityService;
+import com.thoughtworks.twu.service.MessageService;
 import org.json.JSONException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,9 @@ public class SearchActivityController {
     public ModelAndView loadSearchActivityView() {
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/search_activity");
+        MessageService service = new MessageService();
+        modelAndView.addObject("Alteast2CharsForSearch",service.getMessageMessageById("Alteast2CharsForSearch").getMessage());
+        modelAndView.addObject("NoMatchingActivity",service.getMessageMessageById("NoMatchingActivity").getMessage());
 
         HibernateConnection.getInstance().getSession().close();
         return modelAndView;

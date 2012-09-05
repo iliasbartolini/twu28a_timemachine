@@ -5,7 +5,6 @@ import com.thoughtworks.twu.domain.validators.ActivityValidator;
 import com.thoughtworks.twu.domain.validators.LocationValidator;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.CountryService;
-import com.thoughtworks.twu.service.FavoriteTimesheetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,7 +18,6 @@ import java.util.List;
 @Controller
 public class TimeRecordController {
 
-    FavoriteTimesheetService favoriteTimesheetService = new FavoriteTimesheetService();
 
     @RequestMapping(value = "/timesheet/new", method = RequestMethod.GET)
     public ModelAndView newTimesheet(@ModelAttribute("timeSheetForm") TimeSheetForm timeSheetForm, BindingResult errors) {

@@ -41,7 +41,7 @@
         </init-param>
         <init-param>
             <param-name>serverName</param-name>
-            <param-value>http://$servername:$serverPort</param-value>
+            <param-value>http://$serverName:$serverPort</param-value>
         </init-param>
     </filter>
     <filter>
@@ -53,7 +53,7 @@
         </init-param>
         <init-param>
             <param-name>serverName</param-name>
-            <param-value>http://$servername:$serverPort</param-value>
+            <param-value>http://$serverName:$serverPort</param-value>
         </init-param>
         <init-param>
             <param-name>redirectAfterValidation</param-name>

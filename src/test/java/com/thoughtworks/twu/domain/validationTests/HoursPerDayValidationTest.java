@@ -11,8 +11,6 @@ import org.springframework.validation.Validator;
 
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
-
-
 public class HoursPerDayValidationTest {
 
 private Validator hourPerDayValidator;
