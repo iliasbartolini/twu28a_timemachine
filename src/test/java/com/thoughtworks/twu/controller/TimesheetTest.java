@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -67,7 +66,7 @@ public class TimesheetTest {
     @Ignore
     @Test
     public void shouldShowNewFavoriteForm() throws Exception {
-        TimesheetController controller = new TimesheetController();
+        TimeRecordController controller = new TimeRecordController();
         TimeSheetForm timeSheetForm = new TimeSheetForm();
         BindingResult bindingResult = mock(BindingResult.class);
         ModelAndView modelAndView = controller.newTimesheet(timeSheetForm,bindingResult);

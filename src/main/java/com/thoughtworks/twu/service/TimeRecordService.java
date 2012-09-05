@@ -1,35 +1,33 @@
 package com.thoughtworks.twu.service;
 
+import com.thoughtworks.twu.domain.Time_Sheets;
 import com.thoughtworks.twu.domain.Timesheet;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
 
 import java.util.List;
 
-public class TimesheetService {
-
+public class TimeRecordService {
 
     private HibernateConnection connection;
     private Session session;
 
-    public TimesheetService() {
+    public TimeRecordService() {
         connection = HibernateConnection.getInstance();
         session = connection.getSession();
 
     }
 
-    public List<Timesheet> getAllTimesheets() {
+    public List<Timesheet> getTimeReportForUser(int timesheetID) {
 
-        return session.createQuery("from com.thoughtworks.twu.domain.Timesheet").list();
+        return session.createQuery("FROM com.thoughtworks.twu.domain.Time_reports WHERE TIME_SHEET_ID ='%" + timesheetID + "%'").list();
     }
 
-    public void saveTimesheet(Timesheet batmansTimesheet) {
+    public void saveTimeRecord(Time_Sheets timesheet) {
         session.getTransaction().begin();
-        session.save(batmansTimesheet);
+        session.save(timesheet);
         session.getTransaction().commit();
     }
 
-    public List<Timesheet> getAllDrafts() {
-        return null;
-    }
+
 }

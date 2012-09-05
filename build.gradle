@@ -37,12 +37,6 @@ dependencies {
             fileTree(dir: 'lib', include: '*.jar'),
             group: 'org.hibernate', name: 'hibernate-core', version: '4.+',
             'org.codehaus.groovy:groovy-all:2.0.1'
-<<<<<<< HEAD
-            'org.apache.maven:maven-model:3.0.4'
-    "?"
-
-=======
->>>>>>> 1beb033a3ee5ef78aee9b74a33a2d3632566b0d9
 
             testCompile 'junit:junit:4.10',
             'org.springframework:spring-test:3.1.1.RELEASE',

@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "time_sheets")
 
-public class Time_Records {
+public class TimeRecords {
 
     @Id
     @GeneratedValue(generator = "id")

@@ -18,7 +18,8 @@
         <mapping class="com.thoughtworks.twu.domain.Employee" />
         <mapping class="com.thoughtworks.twu.domain.Message" />
 
-        <mapping class="com.thoughtworks.twu.domain.Time_Records"/>
+        <mapping class="com.thoughtworks.twu.domain.Time_Sheets"/>
+        <mapping class="com.thoughtworks.twu.domain.TimeRecords"/>
         <mapping class="com.thoughtworks.twu.domain.Timesheet" />
     </session-factory>
 </hibernate-configuration>

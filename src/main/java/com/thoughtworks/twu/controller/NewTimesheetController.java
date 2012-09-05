@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class NewTimesheetController {
-    @RequestMapping(value =  "timesheet/newTimesheet", method = RequestMethod.GET)
+    @RequestMapping(value =  "/timesheet/newTimesheet", method = RequestMethod.GET)
     public ModelAndView getTimesheet() {
-        ModelAndView modelAndView = new ModelAndView("timesheet/newTimesheet");
+        ModelAndView modelAndView = new ModelAndView("ui/timesheet/newTimesheet");
         return modelAndView;
     }
 

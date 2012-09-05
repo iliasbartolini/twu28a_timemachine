@@ -1,23 +1,23 @@
 package com.thoughtworks.twu.controller;
 
-<<<<<<< Updated upstream
-import com.thoughtworks.twu.domain.timesheet.forms.FavoriteTimesheetForm;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetForm;
 import com.thoughtworks.twu.domain.validators.ActivityValidator;
 import com.thoughtworks.twu.domain.validators.LocationValidator;
-import com.thoughtworks.twu.persistence.FavoriteTimesheet;
-=======
->>>>>>> Stashed changes
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.CountryService;
 import com.thoughtworks.twu.service.FavoriteTimesheetService;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
-public class TimesheetController {
+public class TimeRecordController {
 
     FavoriteTimesheetService favoriteTimesheetService = new FavoriteTimesheetService();
 
@@ -33,28 +33,35 @@ public class TimesheetController {
 
         return modelAndView;
     }
-<<<<<<< Updated upstream
+
     @RequestMapping(value = "/timesheet/new", method = RequestMethod.POST)
-    public ModelAndView submittedTimeSheet(@ModelAttribute("timeSheetForm") TimeSheetForm timeSheetForm, BindingResult errors) {
+    public ModelAndView saveTimeSheetAsDraft(@ModelAttribute("timeSheetForm") TimeSheetForm timeSheetForm, BindingResult errors) {
+
         LocationValidator locationValidator = new LocationValidator();
         ActivityValidator validator = new ActivityValidator();
         locationValidator.validate(timeSheetForm, errors);
         validator.validate(timeSheetForm, errors);
+
+        if (errors.hasErrors()){
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/new_form");
         modelAndView.addObject("errors", errors);
         CountryService countryService = new CountryService();
         modelAndView.addObject("countries", countryService.getCountries());
         modelAndView.addObject("states", countryService.getStates("USA"));
-
         modelAndView.addObject(timeSheetForm);
-        return modelAndView;
+         return modelAndView;
+        }
+        else
+        {
+
+          ModelAndView modelAndView = new ModelAndView("newTimesheet");
+          return modelAndView;
+        }
+
+
     }
 
-@RequestMapping(value = "/timesheet/datepicker", method = RequestMethod.GET)
-=======
-
     @RequestMapping(value = "/timesheet/datepicker", method = RequestMethod.GET)
-
     public ModelAndView pickDate() {
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/date_picker");
@@ -63,13 +70,4 @@ public class TimesheetController {
 
         return modelAndView;
     }
-
 }
-
-
-
-
-
-
-
-

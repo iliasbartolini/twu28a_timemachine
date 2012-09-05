@@ -9,13 +9,7 @@ import org.springframework.validation.BindingResult;
 import static org.mockito.Mockito.mock;
 import static org.testng.Assert.assertEquals;
 
-/**
- * Created with IntelliJ IDEA.
- * User: ewonou
- * Date: 4/9/12
- * Time: 10:30 AM
- * To change this template use File | Settings | File Templates.
- */
+
 public class newTimesheetControllerTest {
     NewTimesheetController controller;
 

@@ -13,12 +13,7 @@
     <script type="text/javascript" src="../static/js/mobiscroll-2.0.1.custom.min.js"></script>
     <script type="text/javascript" src="../static/js/ui/newTimesheetState.js"></script>
     <script>
-        $(function () {
-            // create a datepicker with default settings
-            $("#date").scroller({ preset:'date' });
 
-
-        });
 
     </script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
