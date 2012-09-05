@@ -18,7 +18,6 @@ public class BaseTest {
 
     protected void submitCredentials(String passwordString) {
 
-        webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         WebElement username = webDriver.findElement(By.id("username"));
 
         username.clear();
