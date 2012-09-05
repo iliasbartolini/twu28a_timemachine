@@ -9,7 +9,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 
-import java.util.*;
+import java.util.List;
 
 public class CountryService {
 
@@ -29,21 +29,7 @@ public class CountryService {
                 list();
 
         return countries;
-
-
     }
-
-    public Map<String,String> getCountryNames(){
-        List<Country> countries = getCountries();
-        HashMap<String,String> countryNameCodeMap = new HashMap();
-        for (Country country:countries )
-        {
-         countryNameCodeMap.put(country.getName(), country.getCode());
-
-        }
-        return countryNameCodeMap;
-    }
-
 
     public List<LocationPresences> getStates(String countryCode) {
         connection = HibernateConnection.getInstance();

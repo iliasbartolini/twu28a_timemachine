@@ -29,7 +29,5 @@ public class TimesheetService {
         session.getTransaction().commit();
     }
 
-    public List<Timesheet> getAllDrafts() {
-        return null;
-    }
+
 }

@@ -13,10 +13,12 @@ public class LocationValidator implements Validator {
     }
 
     public void validate(Object object, Errors errors){
-        TimeSheetForm timesheetform = (TimeSheetForm) object;
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "country", "field.required","Country Should Be Selected");
-        if (timesheetform.getCountry() == "USA" && timesheetform.getState()== null) {
-            errors.rejectValue("state", "StateCannotBeUnspecified","State Should Be Selected");
+        TimeSheetForm timeSheetForm = (TimeSheetForm) object;
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "country", "field.required");
+
+
+        if (timeSheetForm.getCountry() == "USA" && timeSheetForm.getState()== null) {
+            errors.rejectValue("state", "StateCannotBeUnspecified");
         }
 
     }

@@ -13,12 +13,10 @@
     <script type="text/javascript" src="../static/js/mobiscroll-2.0.1.custom.min.js"></script>
     <script type="text/javascript" src="../static/js/ui/newTimesheetState.js"></script>
     <script>
-
         $(function () {
             // create a datepicker with default settings
             $("#date").scroller({ preset:'date' });
         });
-
 
 
     </script>
@@ -35,38 +33,34 @@
     <div data-role="header">
         <h1>New Time Sheet</h1>
     </div>
-     <#if spring.status.error>
-            <div class="errors">
-                There were problems with the data you entered:
-                <ul>
-                    <#list spring.status.errorMessages as error>
-                        <li>${error}</li>
-                    </#list>
-                </ul>
-            </div>
-        </#if>
-
 
     <form id="new_timesheet_form" modelAttribute="favoriteTimesheetForm" action="" method="post"
           class="ui-body ui-body-a ui-corner-all">
 
-
-         <label for="country" class="select">Country</label>
-                 <select name="country" id="country">
-                     <option value="" selected="selected"></option>
-                 <#list countries as country>
-                     <option value="${country.name}">${country.name}</option>
-                 </#list>
-          </select>
+        <label for="date">Week Ending</label>
+        <input id="date" name="date"/>
 
 
-        <label for="State" class="select">State</label>
-        <select id="state" name="state">
-            <option value="" selected="selected"></option>
+        <select name="country" id="country">
+            <option diabled value="default" selected="selected">Select a country</option>
+        <#list countries as country>
+            <option value="${country.name}">${country.name}</option>
+        </#list>
         </select>
-     Activity:
-     <@spring.formInput "timeSheetForm.activity" />
-     <@spring.showErrors "<br>" />
+
+
+
+        <select id="state" name="state" disabled="disabled">
+            <option value="default" selected="selected">Select a state</option>
+        <#list states as state>
+            <option value="${state.state}">${state.state}</option>
+        </#list>
+        </select>
+
+        Activity:
+         <@spring.formInput "timeSheetForm.activity" />
+         <@spring.showErrors "<br>" />
+
 
 
         <#--<div data-role="fieldcontain">-->
@@ -125,7 +119,6 @@
                 <input type="text" name="sunday" id="sunday" value=""/>
             </div>
         </div>
-
 
 
     <a href="/timemachine/timesheet/new" data-role="button" data-ajax="false">Submit Hella!</a>

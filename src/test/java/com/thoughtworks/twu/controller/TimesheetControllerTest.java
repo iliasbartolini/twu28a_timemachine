@@ -4,20 +4,19 @@ import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetForm;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.ModelAndView;
 
 import static org.mockito.Mockito.mock;
 import static org.testng.Assert.assertEquals;
 
-public class TimeRecordControllerTest {
+public class TimesheetControllerTest {
 
-    TimeRecordController controller;
+    TimesheetController controller;
     private TimeSheetForm timeSheetForm;
     private BindingResult bindingResult;
 
     @Before
     public void setUp() throws Exception {
-        controller = new TimeRecordController();
+        controller = new TimesheetController();
         timeSheetForm = new TimeSheetForm();
         bindingResult = mock(BindingResult.class);
     }
@@ -26,7 +25,6 @@ public class TimeRecordControllerTest {
 
     @Test
     public void shouldBeAbleToGetViewNameOfController() throws Exception {
-        assertEquals("ui/timesheet/new_form", controller.newTimesheet(timeSheetForm, bindingResult).getViewName());
+        assertEquals("ui/timesheet/new_form", controller.newTimesheet(timeSheetForm,bindingResult).getViewName());
     }
-
 }
