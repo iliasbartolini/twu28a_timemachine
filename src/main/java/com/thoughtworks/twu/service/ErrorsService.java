@@ -7,13 +7,7 @@ import org.hibernate.Session;
 import java.util.List;
 
 
-/**
- * Created with IntelliJ IDEA.
- * User: ewonou
- * Date: 31/8/12
- * Time: 11:16 AM
- * To change this template use File | Settings | File Templates.
- */
+
 public class ErrorsService {
     HibernateConnection connection;
     Session session;

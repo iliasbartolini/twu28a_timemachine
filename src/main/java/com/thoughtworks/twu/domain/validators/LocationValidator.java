@@ -5,13 +5,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-/**
- * Created with IntelliJ IDEA.
- * User: ewonou
- * Date: 31/8/12
- * Time: 10:35 AM
- * To change this template use File | Settings | File Templates.
- */
+
 public class LocationValidator implements Validator {
 
     public boolean supports(Class<?> clazz) {

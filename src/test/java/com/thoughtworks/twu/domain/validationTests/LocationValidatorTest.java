@@ -11,13 +11,6 @@ import org.springframework.validation.Validator;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
-/**
- * Created with IntelliJ IDEA.
- * User: ewonou
- * Date: 31/8/12
- * Time: 10:30 AM
- * To change this template use File | Settings | File Templates.
- */
 public class LocationValidatorTest {
     Validator locationValidator;
 

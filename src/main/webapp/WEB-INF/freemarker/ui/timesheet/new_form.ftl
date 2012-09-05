@@ -121,9 +121,8 @@
         </div>
 
 
-        <button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">
-            Submit
-        </button>
+    <a href="/timemachine/timesheet/new" data-role="button" data-ajax="false">Submit Hella!</a>
+
     </form>
 </div>
 
