@@ -46,7 +46,7 @@ public class CountryService {
         return locationPresences;
     }
 
-    public List<String> getCountryCode() throws Exception {
+    public List<String> getCountryNames() throws Exception {
         List<Country> countries = getCountries();
         List<String> countryNames=new ArrayList<String>();
         countryNames.add("Select a country");
@@ -69,6 +69,17 @@ public class CountryService {
 
 
        }
+
+    public List<String> getCountryCodes() throws Exception {
+        List<Country> countries = getCountries();
+        List<String> countryCodes=new ArrayList<String>();
+        countryCodes.add("first select");
+        for(Country country:countries)
+        {
+            countryCodes.add(country.getCode());
+        }
+        return countryCodes;
+    }
 
 
 
