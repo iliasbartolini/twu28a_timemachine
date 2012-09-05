@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <#import "/spring.ftl" as spring />
 <@spring.bind "timeRecordForm" />
-<html>
+<@spring.bind "countries" />
+<@spring.bind "states" />
 <head>
     <title>Test UI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,17 +13,12 @@
     <script type="text/javascript" src="../static/js/lib/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="../static/js/mobiscroll-2.0.1.custom.min.js"></script>
     <script type="text/javascript" src="../static/js/ui/newTimesheetState.js"></script>
-    <script type="text/javascript" src="../static/js/lib/jquery.remember-state.js"></script>
-
     <script>
         $(function () {
             // create a datepicker with default settings
             $("#date").scroller({ preset:'date' });
         });
-        $("new_timesheet_form").rememberState({ objName: "formSavedState" }).submit(function() {
-            localStorage.setObject("formSavedState", $(this).serializeArray());
-            return false;
-        });
+
 
     </script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
@@ -32,32 +28,44 @@
 </head>
 <body>
 
-<div data-role="page" data-theme="a">
+<div data-role="page" data-theme="a" id="index">
     <div data-role="header">
         <h1>New Time Sheet</h1>
     </div>
 
-    <form id="new_timesheet_form" modelAttribute="favoriteTimesheetForm" action="" method="post"
+    <script type="text/javascript">
+           $("#index").die("pageinit");
+            $('#index').live("pageinit",function(){
+                alert("Invoked");
+                $('#state').selectmenu('disable');
+               var changeState = new NewTimesheetState();
+                 changeState.toggleStateList();
+                $(".select1").change(function () {
+
+                    alert("Change invoked");
+                    changeState.toggleStateList();
+                });
+            });
+        </script>
+
+
+    <form id="new_timesheet_form" data-ajax="false" modelAttribute="favoriteTimesheetForm" action="" method="post"
           class="ui-body ui-body-a ui-corner-all">
 
+        <label for="date">Week Ending</label>
+        <input id="date" name="date"/>
+   Country:
+    <@spring.formSingleSelect "timeSheetForm.country",countries, "class= select1" />
+    <@spring.showErrors "<br>" />
+    <br>
+    State:
+    <@spring.formSingleSelect "timeSheetForm.state",states, "class=state" />
+    <@spring.showErrors "<br>" />
+        <br>
+        Activity:
 
-        <select name="country" id="country">
-            <option diabled value="default" selected="selected">Select a country</option>
-        <#list countries as country>
-            <option value="${country.name}">${country.name}</option>
-        </#list>
-        </select>
-
-
-
-        <select id="state" name="state" disabled="disabled">
-            <option value="default" selected="selected">Select a state</option>
-        <#list states as state>
-            <option value="${state.state}">${state.state}</option>
-        </#list>
-        </select>
-
-       <a href="search_activity" data-role="button" data-icon="search" data-ajax="false">Search Activity Code</a>
+         <@spring.formInput "timeRecordForm.activity" />
+         <@spring.showErrors "<br>" />
 
 
         <label>Billable?</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -68,6 +76,8 @@
             <option value="true">Yes</option>
 
         </select>
+
+
 
 
 

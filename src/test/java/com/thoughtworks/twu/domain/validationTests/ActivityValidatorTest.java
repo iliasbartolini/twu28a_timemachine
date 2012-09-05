@@ -35,11 +35,19 @@ public class ActivityValidatorTest {
     }
 
     @Test
+<<<<<<< HEAD
     public void activityShouldNotBeNul(){
         TimeRecordForm timeRecordForm = new TimeRecordForm();
         timeRecordForm.setActivity("");
         BindException errors = new BindException(timeRecordForm,"activity");
         ValidationUtils.invokeValidator(activityValidator, timeRecordForm,errors);
+=======
+    public void activityShouldNotBeNull(){
+        TimeSheetForm timeSheetForm = new TimeSheetForm();
+        timeSheetForm.setActivity("");
+        BindException errors = new BindException(timeSheetForm ,"activity");
+        ValidationUtils.invokeValidator(activityValidator,timeSheetForm,errors);
+>>>>>>> #77: Manit/Priyanka: Country validation done
         assertTrue(errors.hasErrors());
     }
 

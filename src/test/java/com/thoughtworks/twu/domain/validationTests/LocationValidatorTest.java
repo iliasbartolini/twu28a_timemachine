@@ -40,9 +40,9 @@ public class LocationValidatorTest {
         timeRecordForm.setCountry("");
         BindException errors = new BindException(timeRecordForm,"country");
         ValidationUtils.invokeValidator(locationValidator, timeRecordForm,errors);
+
         assertTrue(errors.hasErrors());
     }
-
 
     @Test
     public void stateShouldBeNullWhenCountryIsNotUSA(){
@@ -50,18 +50,18 @@ public class LocationValidatorTest {
         timeRecordForm.setCountry("India");
         BindException errors = new BindException(timeRecordForm,"state");
         ValidationUtils.invokeValidator(locationValidator, timeRecordForm,errors);
-
         assertFalse(errors.hasErrors());
 
     }
 
     @Test
     public void stateShouldNotBeNullWhenCountryIsUSA() {
+
         TimeRecordForm timeRecordForm = new TimeRecordForm();
         timeRecordForm.setCountry("USA");
+        timeRecordForm.setState("Select a state");
         BindException errors = new BindException(timeRecordForm,"state");
         ValidationUtils.invokeValidator(locationValidator, timeRecordForm,errors);
-
         assertTrue(errors.hasErrors());
 
     }
