@@ -16,10 +16,6 @@
         $(function () {
             // create a datepicker with default settings
             $("#date").scroller({ preset:'date' });
-
-            $("activity").text(value);
-
-
         });
 
 
