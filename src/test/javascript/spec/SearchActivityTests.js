@@ -16,11 +16,11 @@ describe("Search Activity", function() {
         });
     });
 
-    it("should throw exception for search criteria <2 chars",function() {
+    /*it("should throw exception for search criteria <2 chars",function() {
         var searchCriteria = "ab" ;
         var activity = new Activity();
         expect(function() {
             activity.search(searchCriteria);
         }).toThrow("Enter atleast 2 characters");
-    });
+    });  */
 });
