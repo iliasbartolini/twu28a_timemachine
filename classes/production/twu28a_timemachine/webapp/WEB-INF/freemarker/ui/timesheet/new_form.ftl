@@ -22,7 +22,6 @@
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="../static/js/favorite_timesheet.js"></script>
 
 
 
@@ -43,7 +42,7 @@
 
         <label for="country" class="select">Country</label>
         <select name="country" id="country">
-            <option value="" selected="selected"></option>
+            <option value="default" selected="selected">Select a country</option>
         <#list countries as country>
             <option value="${country.name}">${country.name}</option>
         </#list>
@@ -52,7 +51,7 @@
 
             <label for="state" class="select" >State</label>
             <select id="state" name="state" disabled="disabled" >
-                <option value="" selected="selected"></option>
+                <option value="default" selected="selected">Select a state</option>
             <#list states as state>
                 <option value="${state.state}">${state.state}</option>
             </#list>

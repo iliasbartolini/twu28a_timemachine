@@ -24,8 +24,6 @@
     <script type="text/javascript" src="../static/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.cookie.js"></script>
-    <script type="text/javascript" src="../static/js/favorite_timesheet.js"></script>
-
 </head>
 <body>
 
