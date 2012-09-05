@@ -2,10 +2,10 @@ function Activity () {
     this.search = function(searchCriteria, callback)
     {
         var activityList = document.getElementById("activityList");
-        var noMatchingActivity = document.getElementById("NoMatchingActivity").value;
-        var alteast2CharsForSearch = document.getElementById("Alteast2CharsForSearch").value;
+      // var noMatchingActivity = document.getElementById("NoMatchingActivity").value;
+        //var alteast2CharsForSearch = document.getElementById("Alteast2CharsForSearch").value;
         if(searchCriteria.length <=2){
-            activityList.innerHTML = alteast2CharsForSearch;
+         //   activityList.innerHTML = alteast2CharsForSearch;
             return;
         }
 
@@ -18,7 +18,7 @@ function Activity () {
                 }
                 else{
 
-                    activityList.innerHTML =  noMatchingActivity;
+          //          activityList.innerHTML =  noMatchingActivity;
 
                 }
         });

@@ -26,10 +26,6 @@
   </fieldset>
 </form>
 
-<ul data-role="listview" data-theme="g" id="activityList" name="activityList">
-    <input id="NoMatchingActivity" value="${NoMatchingActivity}" type="hidden">
-    <input id="Alteast2CharsForSearch" value= "${Alteast2CharsForSearch}" type="hidden">
-</ul>
 
 
 
