@@ -91,7 +91,6 @@ public class NewTimesheetTest extends BaseTest {
 
 
     @Test
-
     public void checkIfStateIsDisabledOnPageLoad() throws UnknownHostException {
         //Assuage
         webDriver.get(newTimesheetUrl);
