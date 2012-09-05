@@ -22,8 +22,8 @@ public class MessageService {
         return session.createQuery("from com.thoughtworks.twu.domain.Message").list();
     }
 
-    public Message getMessageMessageById(String alteast2CharsForSearch) {
+    public Message getMessageMessageById(String messageId) {
         return (Message) session.createCriteria(Message.class).
-                add(Restrictions.eq("messageId", alteast2CharsForSearch)).list().get(0);
+                add(Restrictions.eq("messageId", messageId)).list().get(0);
     }
 }

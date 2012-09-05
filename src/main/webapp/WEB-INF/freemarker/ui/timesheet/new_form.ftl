@@ -27,8 +27,8 @@
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="../static/js/lib/jquery.cookie.js"></script>
     <script type="text/javascript" src="../static/js/favorite_timesheet.js"></script>
-
 
 </head>
 <body>

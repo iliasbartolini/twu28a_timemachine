@@ -11,7 +11,7 @@ $(function() {
 
         var activity = new Activity();
 
-        try{
+
 
         activity.search(searchCriteria, function(activities) {
 
@@ -34,8 +34,8 @@ $(function() {
 
 
                 $a.click(function() {
-                    //$.cookie.set("ActivityCode",projectString);
-                   //console.log($.cookie("ActivityCode"));
+                    $.cookie("ActivityCode",projectString ,{ path: '/' });
+                    console.log($.cookie("ActivityCode"));
                 });
 
                 $list.append($item);
@@ -43,12 +43,6 @@ $(function() {
 
             $list.listview("refresh");
         });
-
-
-        }catch(err){
-               var $list = $("#activityList")
-               $list.empty().append("Enter atleast 2 characters");
-        }
 
         return false;
     });
