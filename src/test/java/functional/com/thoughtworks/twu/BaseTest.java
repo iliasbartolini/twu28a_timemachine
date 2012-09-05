@@ -6,6 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
@@ -14,7 +17,10 @@ public class BaseTest {
     protected String userNameString = "test.twu";
 
     protected void submitCredentials(String passwordString) {
+
+        webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         WebElement username = webDriver.findElement(By.id("username"));
+
         username.clear();
         username.sendKeys(userNameString);
 
@@ -32,7 +38,6 @@ public class BaseTest {
         firefoxProfile.setPreference("general.useragent.override", userAgent);
         webDriver = new FirefoxDriver(firefoxProfile);
     }
-
 
 
 }
