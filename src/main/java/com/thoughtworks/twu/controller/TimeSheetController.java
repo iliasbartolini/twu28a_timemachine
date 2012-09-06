@@ -15,13 +15,6 @@ package com.thoughtworks.twu.controller;
             return modelAndView;
         }
 
-        @RequestMapping(params = "newActivity", method = RequestMethod.GET)
-        public ModelAndView displayTimeSheet() {
-
-            ModelAndView modelAndView = new ModelAndView("timeRecord");
-            return modelAndView;
-        }
-
     }
 
 

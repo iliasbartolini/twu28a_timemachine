@@ -13,36 +13,11 @@
 
     <script>
 
-        var options = {
 
-        }
-
-        function changelist(v) {
-
-            var $t = $("#state");
-
-            //clear old options
-            $t.html('');
-            //fill up new options
-            if (options[v]) {
-                for (var i in options[v]) {
-                    if (options[v].hasOwnProperty(i)) {
-                        $t.append('<option value="' + options[v][i] + '">' + i + '<\/option>');
-                    }
-                }
-            }
-            $t.selectmenu('refresh');
-        }
-
-        function newActivity() {
-
-        }
     </script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="../static/js/favorite_timesheet.js"></script>
-    <script type="text/javascript" src="../static/js/ui/new_timesheet.js"></script>
 
 
 </head>
@@ -60,7 +35,8 @@
         <br>
         <br>
 
-        <input type="button" value="New Activity">
+
+        <a href="timeRecord" id="timeRecord" data-ajax="false" data-role="button" data-theme="a"  value="addtimeRecord" data-icon="plus">New Activity</a>
         <br>
 
 

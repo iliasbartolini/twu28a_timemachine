@@ -12,12 +12,17 @@
     <script type="text/javascript" src="../static/js/lib/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="../static/js/mobiscroll-2.0.1.custom.min.js"></script>
     <script type="text/javascript" src="../static/js/ui/newTimesheetState.js"></script>
+    <script type="text/javascript" src="../static/js/lib/jquery.remember-state.js"></script>
+
     <script>
         $(function () {
             // create a datepicker with default settings
             $("#date").scroller({ preset:'date' });
         });
-
+        $("new_timesheet_form").rememberState({ objName: "formSavedState" }).submit(function() {
+            localStorage.setObject("formSavedState", $(this).serializeArray());
+            return false;
+        });
 
     </script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
@@ -34,9 +39,6 @@
 
     <form id="new_timesheet_form" modelAttribute="favoriteTimesheetForm" action="" method="post"
           class="ui-body ui-body-a ui-corner-all">
-
-        <label for="date">Week Ending</label>
-        <input id="date" name="date"/>
 
 
         <select name="country" id="country">
@@ -55,20 +57,8 @@
         </#list>
         </select>
 
-        Activity:
-         <@spring.formInput "timeRecordForm.activity" />
-         <@spring.showErrors "<br>" />
+       <a href="search_activity" data-role="button" data-icon="search" data-ajax="false">Search Activity Code</a>
 
-
-
-        <#--<div data-role="fieldcontain">-->
-            <#--<fieldset data-role="controlgroup" data-type="horizontal">-->
-                <#--<input type="radio" name="radio" id="billable"/>-->
-                <#--<label for="billable">Billable</label>-->
-                <#--<input type="radio" name="radio" id="nonbillable" checked="checked"/>-->
-                <#--<label for="nonbillable">Non-Billable</label>-->
-            <#--</fieldset>-->
-        <#--</div>-->
 
         <label>Billable?</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <select name="billable"  data-role="slider">

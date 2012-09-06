@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class TimeRecordController {
 
 
-    @RequestMapping(value = "/timesheet/new", method = RequestMethod.GET)
+    @RequestMapping(value = "/timesheet/timeRecord", method = RequestMethod.GET)
     public ModelAndView newTimesheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) {
         CountryService countryService = new CountryService();
 
@@ -29,29 +29,13 @@ public class TimeRecordController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/timesheet/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/timesheet/timeRecord", method = RequestMethod.POST)
     public ModelAndView submittedTimeSheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) {
         LocationValidator locationValidator = new LocationValidator();
         ActivityValidator validator = new ActivityValidator();
         locationValidator.validate(timeRecordForm, errors);
         validator.validate(timeRecordForm, errors);
-
-        if (errors.hasErrors()){
-        ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeRecord");
-        modelAndView.addObject("errors", errors);
-        CountryService countryService = new CountryService();
-        modelAndView.addObject("countries", countryService.getCountries());
-        modelAndView.addObject("states", countryService.getStates("USA"));
-
-        modelAndView.addObject(timeRecordForm);
-        return modelAndView;
-        }
-        else
-        {
-            ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeSheet");
-            return modelAndView;
-        }
-
+        return newTimesheet(timeRecordForm, errors);
     }
 
     @RequestMapping(value = "/timesheet/datepicker", method = RequestMethod.GET)
