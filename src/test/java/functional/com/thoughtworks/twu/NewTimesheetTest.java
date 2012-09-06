@@ -107,7 +107,7 @@ public class NewTimesheetTest extends BaseTest {
         webDriver.get(newTimesheetUrl);
 
         //Act
-        selectCountry("USA");
+        selectCountry("USA - USA");
         WebElement state = webDriver.findElement(By.id("state"));
 
         assertThat(state.isEnabled(), is(true));
@@ -117,10 +117,10 @@ public class NewTimesheetTest extends BaseTest {
     public void changeCountryUSAToOtherStatesEmpty() {
         //Assuage
         webDriver.get(newTimesheetUrl);
-        selectCountry("USA");
+        selectCountry("USA - USA");
         selectState("GA");
         //Act
-        selectCountry("UEA");
+        selectCountry("IND - India");
         WebElement state = webDriver.findElement(By.id("state"));
         Select dropDownState = new Select(state);
         assertEquals("", dropDownState.getFirstSelectedOption().getText());
@@ -130,7 +130,7 @@ public class NewTimesheetTest extends BaseTest {
     public void checkIfStateListIsAvailable() throws Exception {
         //Assuage
         webDriver.get(newTimesheetUrl);
-        selectCountry("USA");
+        selectCountry("USA - USA");
         //Act
         List<String> obtainedStateNames = getActualStateList();
 
@@ -153,7 +153,7 @@ public class NewTimesheetTest extends BaseTest {
         List<String> expectedCountryNames = new ArrayList<String>();
         expectedCountryNames.add("Select a country");
         for (Country expectedCountry : expectedCountries) {
-            expectedCountryNames.add(expectedCountry.getName());
+            expectedCountryNames.add(expectedCountry.getCode()+" - "+expectedCountry.getName());
         }
         return expectedCountryNames;
     }

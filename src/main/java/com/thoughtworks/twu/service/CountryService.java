@@ -10,7 +10,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 public class CountryService {
@@ -52,7 +51,7 @@ public class CountryService {
         countryNames.add("Select a country");
         for(Country country:countries)
         {
-        countryNames.add(country.getName());
+        countryNames.add(country.getCode()+" - "+country.getName());
         }
         return countryNames;
     }
@@ -79,6 +78,17 @@ public class CountryService {
             countryCodes.add(country.getCode());
         }
         return countryCodes;
+    }
+
+    public Map trialGetMap(){
+        Map cityMap = new LinkedHashMap();
+        cityMap.put("LDN", "London");
+        cityMap.put("PRS", "Paris");
+        cityMap.put("NYC", "New York");
+
+        Map m = new HashMap();
+        m.put("cityMap", cityMap);
+        return m;
     }
 
 

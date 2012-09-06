@@ -1,5 +1,6 @@
 package com.thoughtworks.twu.domain.validationTests;
 
+
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.validators.HourPerDayValidator;
 import org.junit.Before;
@@ -21,7 +22,7 @@ public void setUp(){
 }
 @Test
  public void shouldSupportTimeSheetForm(){
-    assertTrue(hourPerDayValidator.supports(TimeRecordForm.class));
+  assertTrue(hourPerDayValidator.supports(TimeRecordForm.class));
     assertFalse(hourPerDayValidator.supports(Object.class));
 }
 @Test

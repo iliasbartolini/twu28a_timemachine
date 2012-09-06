@@ -1,5 +1,6 @@
 package com.thoughtworks.twu.domain.validationTests;
 
+
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.validators.LocationValidator;
 import org.junit.Before;
@@ -40,6 +41,7 @@ public class LocationValidatorTest {
         timeRecordForm.setCountry("");
         BindException errors = new BindException(timeRecordForm,"country");
         ValidationUtils.invokeValidator(locationValidator, timeRecordForm,errors);
+
 
         assertTrue(errors.hasErrors());
     }

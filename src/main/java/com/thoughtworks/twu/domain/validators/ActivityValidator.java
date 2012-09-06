@@ -1,6 +1,8 @@
 package com.thoughtworks.twu.domain.validators;
 
+
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
+import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetRecord;
 import com.thoughtworks.twu.service.MessageService;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -12,9 +14,9 @@ public class ActivityValidator implements Validator {
         return TimeRecordForm.class.isAssignableFrom(clazz);
     }
 
+
     public void validate(Object object, Errors errors){
 
-        TimeRecordForm timeRecordForm = (TimeRecordForm) object;
         ValidationUtils.rejectIfEmptyOrWhitespace( errors,"activity","field.required",messageService.getMessageForField(9));
     }
 }

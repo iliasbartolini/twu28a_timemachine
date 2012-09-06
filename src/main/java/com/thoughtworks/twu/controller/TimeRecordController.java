@@ -1,10 +1,12 @@
 package com.thoughtworks.twu.controller;
-
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
+
+import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetRecord;
 import com.thoughtworks.twu.domain.validators.ActivityValidator;
 import com.thoughtworks.twu.domain.validators.LocationValidator;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.CountryService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,7 +25,6 @@ public class TimeRecordController {
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeRecord");
         modelAndView.addObject("countries", countryService.getCountries());
         modelAndView.addObject("states", countryService.getStates("USA"));
-
         HibernateConnection.getInstance().getSession().close();
 
         return modelAndView;
@@ -38,5 +39,13 @@ public class TimeRecordController {
         return newTimesheet(timeRecordForm, errors);
     }
 
-    
+        @RequestMapping(value = "/timesheet/datepicker", method = RequestMethod.GET)
+    public ModelAndView pickDate() {
+
+        ModelAndView modelAndView = new ModelAndView("ui/timesheet/date_picker");
+
+        HibernateConnection.getInstance().getSession().close();
+
+        return modelAndView;
+    }
 }
