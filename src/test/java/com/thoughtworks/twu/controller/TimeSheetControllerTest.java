@@ -4,10 +4,9 @@ package com.thoughtworks.twu.controller;
 
 
     import org.junit.Before;
-    import org.junit.Test;
+import org.junit.Test;
 
-    import static org.mockito.Mockito.mock;
-    import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 
     public class TimeSheetControllerTest {
@@ -25,5 +24,9 @@ package com.thoughtworks.twu.controller;
             assertEquals("timeRecord", controller.displayTimeSheet().getViewName());
         }
 
+        @Test
+        public void shouldBeAbleToDisplayDatePickerDialog() throws Exception {
+            assertEquals("ui/timesheet/date_picker", controller.pickDate().getViewName());
+        }
     }
 
