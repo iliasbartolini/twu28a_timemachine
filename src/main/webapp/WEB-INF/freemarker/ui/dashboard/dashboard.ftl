@@ -12,17 +12,27 @@
     <script type="text/javascript" src="./static/js/lib/jquery.validate.min.js"></script>
 
 
+
 </head>
 <body>
 
 <div data-role="page" data-theme="a">
-    <a href="timesheet/datepicker" id="new_timesheet" data-ajax="false" data-role="button" type="add" data-theme="a" name="add" value="add_timesheet" data-icon="plus">New timesheet</a>
+
+
+    <div data-role="header">
+        <h1>Welcome ${employee.name}</h1>
+    </div>
+
+
+
+    <a href="timesheet/datepicker" id="new_timesheet" data-inline="true" data-rel="dialog" data-transition="pop" data-ajax="false" data-role="button" type="add" data-theme="a" name="add" value="add_timesheet" data-icon="plus">New timesheet</a>
 
     <ul data-role="listview" id="timesheet_list" data-divider-theme="a">
         <li data-role="list-divider">Week Ending</li>
         <li><a href="">2/9/2012</a></li>
         <li><a href="">9/9/2012</a></li>
     </ul>
+
 
 </div>
 

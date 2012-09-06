@@ -27,4 +27,16 @@ public class TimesheetServiceTest {
 
     }
 
+    @Test
+    public void shouldAddNewTimesheet() {
+        TimesheetService service = new TimesheetService();
+
+        Timesheet batmansTimesheet = service.addNewTimeSheet();
+
+        List<Timesheet> timesheetList = service.getAllTimesheets();
+
+        assertTrue(timesheetList.contains(batmansTimesheet));
+
+    }
+
 }
