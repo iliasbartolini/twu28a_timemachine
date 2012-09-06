@@ -19,13 +19,13 @@ import java.net.UnknownHostException;
 
 public class SearchActivityCodeTest extends BaseTest {
     private String validPasswordString = "Th0ughtW0rks@12";
-    private String searchActivityUrl;
+    private String timeRecordUrl;
     private CountryService countryService;
     @Before
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
-        searchActivityUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine/timesheet/search_activity";
-        webDriver.get(searchActivityUrl);
+        timeRecordUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine/timesheet/search_activity";
+        webDriver.get(timeRecordUrl);
         super.submitCredentials(validPasswordString);
     }
     @Test
@@ -38,7 +38,6 @@ public class SearchActivityCodeTest extends BaseTest {
         assertThat(webDriver.findElement(By.id("activity")).getText(),is(selectedActivityCode));
     }
     @Test
-    @Ignore("Search Activity Not Ready")
     public void shouldShowErrorForSearchStringLessThan2Characters() {
         //Assuage
         //Act
@@ -63,8 +62,8 @@ public class SearchActivityCodeTest extends BaseTest {
         enterSearchString("YTYOO96");
         //Find element of list: There will be only one element
         //Element.click()
-        //assertThat(webDriver.findElement(By.id("activityCode")).getText(),is("No"));
-        //assertTrue(!webDriver.findElement(By.id("activityCode")).isEnabled())
+        //assertThat(webDriver.findElement(By.id("activity")).getText(),is("No"));
+        //assertTrue(!webDriver.findElement(By.id("activity")).isEnabled())
     }
 
     @After
@@ -77,7 +76,7 @@ public class SearchActivityCodeTest extends BaseTest {
         search.submit();
     }
     private String searchAndSelectActivity(String searchString) {
-        webDriver.get(searchActivityUrl);
+        webDriver.get(timeRecordUrl);
         enterSearchString(searchString);
         WebElement searchResult = webDriver.findElement(By.className("ui-li-heading"));
         String selectedActivityCode = searchResult.getText();
