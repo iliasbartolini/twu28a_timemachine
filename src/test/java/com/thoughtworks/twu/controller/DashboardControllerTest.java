@@ -23,9 +23,6 @@ public class DashboardControllerTest {
         assertThat(modelAndView.getViewName(), is("ui/dashboard/dashboard"));
     }
 
-    @Test
-    public void shouldShowUserName(){
 
-    }
 
 }

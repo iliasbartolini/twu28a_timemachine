@@ -28,8 +28,5 @@ public class TimeRecordControllerTest {
         assertEquals("ui/timesheet/timeRecord", controller.newTimesheet(timeRecordForm,bindingResult).getViewName());
     }
 
-    @Test
-    public void shouldBeAbleToDisplayDatePickerDialog() throws Exception {
-        assertEquals("ui/timesheet/date_picker", controller.pickDate().getViewName());
-    }
+
 }

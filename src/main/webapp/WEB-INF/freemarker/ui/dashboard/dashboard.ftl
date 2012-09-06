@@ -19,7 +19,7 @@
 <div data-role="page" data-theme="a">
 
 
-    <div data-role="header">
+    <div data-role="header" id="header">
         <h1>Welcome ${employee.name}</h1>
     </div>
 
