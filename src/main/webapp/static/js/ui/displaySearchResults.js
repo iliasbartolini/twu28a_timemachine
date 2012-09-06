@@ -11,11 +11,12 @@ $(function() {
 
         try {
             var activity = new Activity();
-
+            $("#result").text("");
             activity.search(searchCriteria, function(activities) {
 
                 var $list = $("#activityList");
                 $list.empty();
+
 
                 if ( activities.length == 0 ) {
                     $("#result").text(activity.getMessages()[Messages.NoMatchingActivity]);
@@ -38,6 +39,7 @@ $(function() {
                     });
 
                     $list.append($item);
+                    $list.listview("refresh");
                 }
 
                 $list.listview("refresh");

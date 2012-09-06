@@ -12,15 +12,28 @@ describe("Search Activity", function() {
         activity.search(searchCriteria,function(activities){
             expect(activities.length).toEqual(3);
         });
+
     });
 
-//    it("should get messages",function(){
-//
-//        spyOn(window, "$").andReturn($("<li></li>"));
-//
-//        var activity = new Activity();
-//        var messages = activity.getMessages();
-//
-//        expect(messages.length).toEqual(2);
-//    });
+    it("should throw an exception for search criteria less than 2 chars",function(){
+        var searchCriteria ="T";
+        var activity = new Activity();
+
+        expect(function() { activity.search(searchCriteria) }).toThrow();
+
+    });
+
+
+    it("should throw an exception when no matching activity is found",function(){
+        var searchCriteria ="gfvgfjff";
+        var activity = new Activity();
+        activity.search(searchCriteria,function(activities){
+            expect(activities.length).toEqual(0);
+        });
+
+
+    });
+
+
 });
+
