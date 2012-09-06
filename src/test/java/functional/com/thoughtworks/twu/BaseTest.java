@@ -31,16 +31,6 @@ public class BaseTest {
         WebElement submitButton = webDriver.findElement(By.className("btn-submit"));
         submitButton.submit();
     }
-    public String getExpectedErrorMessage(String messageId) {
-        MessageService messageService = new MessageService();
-        Message message = messageService.getMessageMessageById(messageId);
-        return message.getMessage();
-    }
-    public String getObtainedErrorMessage() {
-        WebElement messageElement = webDriver.findElement(By.xpath("//label[@class='error']"));
-        return messageElement.getText();
-    }
-
     public void setUpAndroid() {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         String userAgent = "Android 4.0.4 - Opera 12.00";

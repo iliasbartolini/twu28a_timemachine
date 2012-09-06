@@ -15,7 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.List;
+
 
 public class SearchActivityCodeTest extends BaseTest {
     private String validPasswordString = "Th0ughtW0rks@12";
@@ -24,10 +24,9 @@ public class SearchActivityCodeTest extends BaseTest {
     @Before
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
-        String url = InetAddress.getLocalHost().getHostName() + ":9093/timemachine";
-        webDriver.get(url);
-        super.submitCredentials(validPasswordString);
         searchActivityUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine/timesheet/search_activity";
+        webDriver.get(searchActivityUrl);
+        super.submitCredentials(validPasswordString);
     }
     @Test
     @Ignore("Search Activity Not Ready")
@@ -45,16 +44,16 @@ public class SearchActivityCodeTest extends BaseTest {
         //Act
         enterSearchString("a");
         //Assert
-        assertThat(super.getObtainedErrorMessage(),is(super.getExpectedErrorMessage("Alteast2CharsForSearch")));
+        assertThat(getObtainedErrorMessage(),is(getExpectedErrorMessage("Alteast2CharsForSearch")));
     }
     @Test
     @Ignore("Search Activity Not Ready")
     public void shouldShowErrorForNoMatchFound() {
         //Assuage
         //Act
-        enterSearchString("XYZ");
+        enterSearchString("XYZZ");
         //Assert
-        assertThat(super.getObtainedErrorMessage(),is(super.getExpectedErrorMessage("NoMatchingActivity")));
+        assertThat(getObtainedErrorMessage(),is(getExpectedErrorMessage("NoMatchingActivity")));
     }
     @Test
     @Ignore("Search Activity Not Ready")
@@ -78,10 +77,20 @@ public class SearchActivityCodeTest extends BaseTest {
         search.submit();
     }
     private String searchAndSelectActivity(String searchString) {
+        webDriver.get(searchActivityUrl);
         enterSearchString(searchString);
         WebElement searchResult = webDriver.findElement(By.className("ui-li-heading"));
         String selectedActivityCode = searchResult.getText();
         searchResult.click();
         return selectedActivityCode;
+    }
+    private String getExpectedErrorMessage(String messageId) {
+        MessageService messageService = new MessageService();
+        Message message = messageService.getMessageMessageById(messageId);
+        return message.getMessage();
+    }
+    private String getObtainedErrorMessage() {
+        WebElement messageElement = webDriver.findElement(By.id("result"));
+        return messageElement.getText();
     }
 }
