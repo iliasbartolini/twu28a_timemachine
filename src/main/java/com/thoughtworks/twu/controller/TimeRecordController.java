@@ -1,6 +1,6 @@
 package com.thoughtworks.twu.controller;
 
-import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetForm;
+import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.validators.ActivityValidator;
 import com.thoughtworks.twu.domain.validators.LocationValidator;
 import com.thoughtworks.twu.persistence.HibernateConnection;
@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class TimesheetController {
+public class TimeRecordController {
 
 
     @RequestMapping(value = "/timesheet/new", method = RequestMethod.GET)
-    public ModelAndView newTimesheet(@ModelAttribute("timeSheetForm") TimeSheetForm timeSheetForm, BindingResult errors) {
+    public ModelAndView newTimesheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) {
         CountryService countryService = new CountryService();
 
-        ModelAndView modelAndView = new ModelAndView("ui/timesheet/new_form");
+        ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeRecord");
         modelAndView.addObject("countries", countryService.getCountries());
         modelAndView.addObject("states", countryService.getStates("USA"));
 
@@ -30,19 +30,28 @@ public class TimesheetController {
     }
 
     @RequestMapping(value = "/timesheet/new", method = RequestMethod.POST)
-    public ModelAndView submittedTimeSheet(@ModelAttribute("timeSheetForm") TimeSheetForm timeSheetForm, BindingResult errors) {
+    public ModelAndView submittedTimeSheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) {
         LocationValidator locationValidator = new LocationValidator();
         ActivityValidator validator = new ActivityValidator();
-        locationValidator.validate(timeSheetForm, errors);
-        validator.validate(timeSheetForm, errors);
-        ModelAndView modelAndView = new ModelAndView("ui/timesheet/new_form");
+        locationValidator.validate(timeRecordForm, errors);
+        validator.validate(timeRecordForm, errors);
+
+        if (errors.hasErrors()){
+        ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeRecord");
         modelAndView.addObject("errors", errors);
         CountryService countryService = new CountryService();
         modelAndView.addObject("countries", countryService.getCountries());
         modelAndView.addObject("states", countryService.getStates("USA"));
 
-        modelAndView.addObject(timeSheetForm);
+        modelAndView.addObject(timeRecordForm);
         return modelAndView;
+        }
+        else
+        {
+            ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeSheet");
+            return modelAndView;
+        }
+
     }
 
     @RequestMapping(value = "/timesheet/datepicker", method = RequestMethod.GET)

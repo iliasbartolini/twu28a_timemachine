@@ -1,7 +1,7 @@
 package com.thoughtworks.twu.domain.validationTests;
 
+import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.validators.ActivityValidator;
-import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetForm;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.validation.BindException;
@@ -21,25 +21,25 @@ public class ActivityValidatorTest {
 
     @Test
     public void supportOnlyTimeSheetForm(){
-        assertTrue(activityValidator.supports(TimeSheetForm.class));
+        assertTrue(activityValidator.supports(TimeRecordForm.class));
         assertFalse(activityValidator.supports(Object.class));
     }
 
     @Test
     public void activityIsValid(){
-        TimeSheetForm timeSheetForm = new TimeSheetForm();
-        timeSheetForm.setActivity("Scuba Diving for Research");
-        BindException errors = new BindException(timeSheetForm,"activity" );
-        ValidationUtils.invokeValidator(activityValidator, timeSheetForm,errors);
+        TimeRecordForm timeRecordForm = new TimeRecordForm();
+        timeRecordForm.setActivity("Scuba Diving for Research");
+        BindException errors = new BindException(timeRecordForm,"activity" );
+        ValidationUtils.invokeValidator(activityValidator, timeRecordForm,errors);
         assertFalse(errors.hasErrors());
     }
 
     @Test
     public void activityShouldNotBeNul(){
-        TimeSheetForm timeSheetForm = new TimeSheetForm();
-        timeSheetForm.setActivity("");
-        BindException errors = new BindException(timeSheetForm ,"activity");
-        ValidationUtils.invokeValidator(activityValidator,timeSheetForm,errors);
+        TimeRecordForm timeRecordForm = new TimeRecordForm();
+        timeRecordForm.setActivity("");
+        BindException errors = new BindException(timeRecordForm,"activity");
+        ValidationUtils.invokeValidator(activityValidator, timeRecordForm,errors);
         assertTrue(errors.hasErrors());
     }
 

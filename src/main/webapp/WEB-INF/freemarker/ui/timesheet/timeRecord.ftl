@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <#import "/spring.ftl" as spring />
-<@spring.bind "timeSheetForm" />
+<@spring.bind "timeRecordForm" />
 <html>
 <head>
     <title>Test UI</title>
@@ -56,7 +56,7 @@
         </select>
 
         Activity:
-         <@spring.formInput "timeSheetForm.activity" />
+         <@spring.formInput "timeRecordForm.activity" />
          <@spring.showErrors "<br>" />
 
 

@@ -36,6 +36,7 @@ public class DashboardTest extends BaseTest {
         WebElement datepickerlink = webDriver.findElement(By.id("new_timesheet"));
 
         datepickerlink.click();
+
         assertThat(webDriver.getCurrentUrl(), containsString(":9093/timemachine/timesheet/datepicker"));
     }
     @After

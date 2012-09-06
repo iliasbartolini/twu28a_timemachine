@@ -1,6 +1,6 @@
 package com.thoughtworks.twu.domain.validationTests;
 
-import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetForm;
+import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.validators.LocationValidator;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,35 +21,35 @@ public class LocationValidatorTest {
 
     @Test
     public void supportOnlyTimeSheetForm(){
-        assertTrue(locationValidator.supports(TimeSheetForm.class));
+        assertTrue(locationValidator.supports(TimeRecordForm.class));
         assertFalse(locationValidator.supports(Object.class));
     }
 
     @Test
     public void CountryIsValid(){
-        TimeSheetForm timeSheetForm = new TimeSheetForm();
-        timeSheetForm.setCountry("India");
-        BindException errors = new BindException(timeSheetForm,"country" );
-        ValidationUtils.invokeValidator(locationValidator, timeSheetForm, errors);
+        TimeRecordForm timeRecordForm = new TimeRecordForm();
+        timeRecordForm.setCountry("India");
+        BindException errors = new BindException(timeRecordForm,"country" );
+        ValidationUtils.invokeValidator(locationValidator, timeRecordForm, errors);
         assertFalse(errors.hasErrors());
     }
 
     @Test
     public void CountryShouldNotBeNull(){
-        TimeSheetForm timeSheetForm = new TimeSheetForm();
-        timeSheetForm.setCountry("");
-        BindException errors = new BindException(timeSheetForm ,"country");
-        ValidationUtils.invokeValidator(locationValidator,timeSheetForm,errors);
+        TimeRecordForm timeRecordForm = new TimeRecordForm();
+        timeRecordForm.setCountry("");
+        BindException errors = new BindException(timeRecordForm,"country");
+        ValidationUtils.invokeValidator(locationValidator, timeRecordForm,errors);
         assertTrue(errors.hasErrors());
     }
 
 
     @Test
     public void stateShouldBeNullWhenCountryIsNotUSA(){
-        TimeSheetForm timeSheetForm = new TimeSheetForm();
-        timeSheetForm.setCountry("India");
-        BindException errors = new BindException(timeSheetForm ,"state");
-        ValidationUtils.invokeValidator(locationValidator,timeSheetForm,errors);
+        TimeRecordForm timeRecordForm = new TimeRecordForm();
+        timeRecordForm.setCountry("India");
+        BindException errors = new BindException(timeRecordForm,"state");
+        ValidationUtils.invokeValidator(locationValidator, timeRecordForm,errors);
 
         assertFalse(errors.hasErrors());
 
@@ -57,10 +57,10 @@ public class LocationValidatorTest {
 
     @Test
     public void stateShouldNotBeNullWhenCountryIsUSA() {
-        TimeSheetForm timeSheetForm = new TimeSheetForm();
-        timeSheetForm.setCountry("USA");
-        BindException errors = new BindException(timeSheetForm ,"state");
-        ValidationUtils.invokeValidator(locationValidator,timeSheetForm,errors);
+        TimeRecordForm timeRecordForm = new TimeRecordForm();
+        timeRecordForm.setCountry("USA");
+        BindException errors = new BindException(timeRecordForm,"state");
+        ValidationUtils.invokeValidator(locationValidator, timeRecordForm,errors);
 
         assertTrue(errors.hasErrors());
 

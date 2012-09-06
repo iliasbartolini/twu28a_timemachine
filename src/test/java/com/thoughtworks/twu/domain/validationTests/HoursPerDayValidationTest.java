@@ -1,8 +1,7 @@
 package com.thoughtworks.twu.domain.validationTests;
 
-import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetForm;
+import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.validators.HourPerDayValidator;
-import org.apache.ibatis.binding.BindingException;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.validation.BindException;
@@ -22,32 +21,32 @@ public void setUp(){
 }
 @Test
  public void shouldSupportTimeSheetForm(){
-    assertTrue(hourPerDayValidator.supports(TimeSheetForm.class));
+    assertTrue(hourPerDayValidator.supports(TimeRecordForm.class));
     assertFalse(hourPerDayValidator.supports(Object.class));
 }
 @Test
  public void shouldNotAcceptDayHoursInputNotInIncrementOfPointTwentyFive(){
-   TimeSheetForm timeSheetForm = new TimeSheetForm();
-    timeSheetForm.setMonday(2.33f);
-    BindException errors = new BindException(timeSheetForm,"monday");
-    ValidationUtils.invokeValidator(hourPerDayValidator,timeSheetForm,errors);
+   TimeRecordForm timeRecordForm = new TimeRecordForm();
+    timeRecordForm.setMonday(2.33f);
+    BindException errors = new BindException(timeRecordForm,"monday");
+    ValidationUtils.invokeValidator(hourPerDayValidator, timeRecordForm,errors);
     assertTrue(errors.hasErrors());
 }
 @Test
 public void shouldAcceptedBlankInput(){
-    TimeSheetForm timeSheetForm = new TimeSheetForm();
+    TimeRecordForm timeRecordForm = new TimeRecordForm();
 
-    BindException errors = new BindException(timeSheetForm,"monday");
-    ValidationUtils.invokeValidator(hourPerDayValidator,timeSheetForm,errors);
+    BindException errors = new BindException(timeRecordForm,"monday");
+    ValidationUtils.invokeValidator(hourPerDayValidator, timeRecordForm,errors);
     assertFalse(errors.hasErrors());
 
 }
 @Test
    public void shouldAcceptInputInIncrementOfPointTwentyFive(){
-    TimeSheetForm timeSheetForm = new TimeSheetForm() ;
-    timeSheetForm.setMonday(2.25f);
-    BindException errors = new BindException(timeSheetForm, "monday");
-    ValidationUtils.invokeValidator(hourPerDayValidator,timeSheetForm,errors);
+    TimeRecordForm timeRecordForm = new TimeRecordForm() ;
+    timeRecordForm.setMonday(2.25f);
+    BindException errors = new BindException(timeRecordForm, "monday");
+    ValidationUtils.invokeValidator(hourPerDayValidator, timeRecordForm,errors);
     assertFalse(errors.hasErrors());
 }
 }

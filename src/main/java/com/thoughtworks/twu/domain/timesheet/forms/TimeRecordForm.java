@@ -2,7 +2,7 @@ package com.thoughtworks.twu.domain.timesheet.forms;
 
 import java.util.Date;
 
-public class TimeSheetForm {
+public class TimeRecordForm {
 
     private String country;
     private String state;
