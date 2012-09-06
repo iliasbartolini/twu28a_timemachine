@@ -36,7 +36,7 @@ public class NewTimesheetTest extends BaseTest {
         String url = InetAddress.getLocalHost().getHostName() + ":9093/timemachine";
         webDriver.get(url);
         super.submitCredentials(validPasswordString);
-        newTimesheetUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine/timesheet/new";
+        newTimesheetUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine/timesheet/timeRecord";
     }
 
     @Test
