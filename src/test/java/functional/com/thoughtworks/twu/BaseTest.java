@@ -1,5 +1,7 @@
 package functional.com.thoughtworks.twu;
 
+import com.thoughtworks.twu.domain.Message;
+import com.thoughtworks.twu.service.MessageService;
 import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -29,7 +31,15 @@ public class BaseTest {
         WebElement submitButton = webDriver.findElement(By.className("btn-submit"));
         submitButton.submit();
     }
-
+    public String getExpectedErrorMessage(String messageId) {
+        MessageService messageService = new MessageService();
+        Message message = messageService.getMessageMessageById(messageId);
+        return message.getMessage();
+    }
+    public String getObtainedErrorMessage() {
+        WebElement messageElement = webDriver.findElement(By.xpath("//label[@class='error']"));
+        return messageElement.getText();
+    }
 
     public void setUpAndroid() {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
