@@ -7,9 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
 
@@ -39,6 +38,17 @@ public class DashboardTest extends BaseTest {
 
         assertThat(webDriver.getCurrentUrl(), containsString(":9093/timemachine/timesheet/datepicker"));
     }
+
+    @Test
+    public void shouldDisplayNameInHeader() throws Exception {
+        webDriver.get(dashboardUrl);
+
+        WebElement header = webDriver.findElement(By.id("header"));
+
+        assertEquals("Welcome Tester", header.getText());
+
+    }
+
     @After
     public void tearDown() {
         webDriver.close();

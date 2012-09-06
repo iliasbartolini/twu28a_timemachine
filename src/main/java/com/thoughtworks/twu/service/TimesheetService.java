@@ -18,16 +18,27 @@ public class TimesheetService {
 
     }
 
-    public List<Timesheet> getAllTimesheets() {
 
+
+    public List<Timesheet> getAllTimesheets() {
         return session.createQuery("from com.thoughtworks.twu.domain.Timesheet").list();
     }
 
-    public void saveTimesheet(Timesheet batmansTimesheet) {
+    public void saveTimesheet(Timesheet timesheet) {
         session.getTransaction().begin();
-        session.save(batmansTimesheet);
+        session.save(timesheet);
         session.getTransaction().commit();
     }
 
 
+    public Timesheet addNewTimeSheet() {
+
+        session.getTransaction().begin();
+        Timesheet timesheet = new Timesheet();
+        session.save(timesheet);
+        session.getTransaction().commit();
+
+        return timesheet;
+
+    }
 }

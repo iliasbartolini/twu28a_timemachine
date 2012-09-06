@@ -18,17 +18,53 @@
     <script type="text/javascript" src="/timemachine/static/js/lib/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
 
 
+    <script>
+        $(document).ready(function(){
+//            $("#new_timesheet_form").validate();
+            $("#new_timesheet_form")
+                    .validate({
+                        rules: {
+                            wecal: {
+                                required: true
+                            }
+                        },
+                        messages: {
+                            wecal: "Week ending date is required."
+                        },
+                        errorPlacement: function(error, element) {
+
+                            error.insertAfter("#datepickerdiv");
+
+
+
+                        }
+                    });
+        });
+
+
+
+    </script>
+
+
 </head>
 <body>
 
-<div data-role="page" data-theme="a">
+<div data-role="dialog" data-theme="a">
 
-    <div data-role="fieldcontain">
-        <input name="wecal" type="text" data-role="datebox" id="wecal" data-options='{"mode":"calbox", "blackDays": [1,2,3,4,5,6], "highDays": [0], "overrideCalStartDay": 1 }'/>
-    </div>
+    <form id="new_timesheet_form" action="temp_new_timesheet" method="get"
+          class="ui-body ui-body-a ui-corner-all">
 
-    <a href="" data-role="button">Submit</a>
+        <div data-role="fieldcontain" id="datepickerdiv">
+            <input name="wecal" type="text" data-role="datebox" id="wecal" data-options='{"mode":"calbox", "blackDays": [1,2,3,4,5,6], "highDays": [0], "overrideCalStartDay": 1, "overrideDateFormat": "%-d-%b-%Y" }'/>
+        </div>
 
+
+
+        <div class="ui-grid-a">
+            <div class="ui-block-a"><button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">OK</button></div>
+            <div class="ui-block-b"><a href="/timemachine/" data-role="button" id="cancel">Cancel</a></div>
+        </div>
+    </form>
 </div>
 
 

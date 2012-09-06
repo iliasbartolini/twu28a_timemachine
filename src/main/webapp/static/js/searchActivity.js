@@ -7,14 +7,16 @@ function Activity () {
 
     var _this = this;
 
-    this.load = function() {
+   this.load = function() {
         this.messages = {};
-
+       var $list = $("#activityList");
+       $list.empty();
         $("#messages li").each(function() {
             var $current = $(this);
             _this.messages[ $current.data("message-id") ] = $current.text();
         });
-    };
+
+   };
 
     this.load();
 
@@ -24,9 +26,11 @@ function Activity () {
 
     this.search = function(searchCriteria, callback)
     {
-        if(searchCriteria.length <= 2) {
+        if(searchCriteria.length < 2) {
              throw new Error(this.getMessages()[Messages.Alteast2CharsForSearch]);
         }
+
+
 
         $.post( "", { s: searchCriteria },function( data ) {
                 var activities = JSON.parse(data);

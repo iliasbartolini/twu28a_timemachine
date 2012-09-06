@@ -38,13 +38,5 @@ public class TimeRecordController {
         return newTimesheet(timeRecordForm, errors);
     }
 
-    @RequestMapping(value = "/timesheet/datepicker", method = RequestMethod.GET)
-    public ModelAndView pickDate() {
-
-        ModelAndView modelAndView = new ModelAndView("ui/timesheet/date_picker");
-
-        HibernateConnection.getInstance().getSession().close();
-
-        return modelAndView;
-    }
+    
 }
