@@ -27,7 +27,7 @@
   </fieldset>
 </form>
 
-<div id="result"></div>
+<div id="result" style="color:red;"></div>
 
 <ul id="messages" class="hidden">
     <#list messages as item>

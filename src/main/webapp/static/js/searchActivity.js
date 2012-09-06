@@ -1,27 +1,36 @@
+var Messages = {
+    Alteast2CharsForSearch : "Alteast2CharsForSearch",
+    NoMatchingActivity : "NoMatchingActivity"
+};
+
 function Activity () {
 
-    this.getMessages = function() {
+    var _this = this;
 
-        var messages = [];
+    this.load = function() {
+        this.messages = {};
 
         $("#messages li").each(function() {
             var $current = $(this);
-            messages[$current.data("message-id")] = $current.text();
+            _this.messages[ $current.data("message-id") ] = $current.text();
         });
+    };
 
-        return messages;
+    this.load();
+
+    this.getMessages = function() {
+        return this.messages;
     };
 
     this.search = function(searchCriteria, callback)
     {
         if(searchCriteria.length <= 2) {
-
-
+             throw new Error(this.getMessages()[Messages.Alteast2CharsForSearch]);
         }
 
         $.post( "", { s: searchCriteria },function( data ) {
-
                 var activities = JSON.parse(data);
+
                 callback(activities);
         });
 
