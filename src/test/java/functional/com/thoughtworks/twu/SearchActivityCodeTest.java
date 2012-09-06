@@ -15,6 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 
 public class SearchActivityCodeTest extends BaseTest {
     private String validPasswordString = "Th0ughtW0rks@12";
@@ -32,12 +33,10 @@ public class SearchActivityCodeTest extends BaseTest {
     @Ignore("Search Activity Not Ready")
     public void shouldReturnActivityCodeToActivityCodeField() {
         //Assuage
-        String searchString = "TW_CORE TWU ATTENDEE";
         //Act
-        enterSearchString(searchString);
-        //Find element of list: There will be only one element
-        //Element.click()
-        //assertThat(webDriver.findElement(By.id("activity")).getText(),is(searchString));
+        String selectedActivityCode = searchAndSelectActivity("YTYOO96");
+        //Assert
+        assertThat(webDriver.findElement(By.id("activity")).getText(),is(selectedActivityCode));
     }
     @Test
     @Ignore("Search Activity Not Ready")
@@ -62,7 +61,7 @@ public class SearchActivityCodeTest extends BaseTest {
     public void shouldSetBillableFlagAsNoForNonBillableActivity() {
         //Assuage
         //Act
-        enterSearchString("TW_CORE TWU ATTENDEE");
+        enterSearchString("YTYOO96");
         //Find element of list: There will be only one element
         //Element.click()
         //assertThat(webDriver.findElement(By.id("activityCode")).getText(),is("No"));
@@ -77,5 +76,12 @@ public class SearchActivityCodeTest extends BaseTest {
         WebElement search = webDriver.findElement(By.id("searchCriteria"));
         search.sendKeys(searchString);
         search.submit();
+    }
+    private String searchAndSelectActivity(String searchString) {
+        enterSearchString(searchString);
+        WebElement searchResult = webDriver.findElement(By.className("ui-li-heading"));
+        String selectedActivityCode = searchResult.getText();
+        searchResult.click();
+        return selectedActivityCode;
     }
 }
