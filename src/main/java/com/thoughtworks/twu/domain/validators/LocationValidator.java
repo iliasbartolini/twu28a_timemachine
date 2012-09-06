@@ -2,7 +2,6 @@ package com.thoughtworks.twu.domain.validators;
 
 
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
-import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetRecord;
 import com.thoughtworks.twu.service.MessageService;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

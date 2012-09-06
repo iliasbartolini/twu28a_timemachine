@@ -125,7 +125,7 @@
             </div>
         </div>
 
-    <a href="/timemachine/timesheet/new" data-role="button" data-ajax="false">Submit Hella!</a>
+    <input type="submit" data-role="button" value="Submit" data-ajax="false" />
 
     </form>
 </div>

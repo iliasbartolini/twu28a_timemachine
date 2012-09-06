@@ -1,7 +1,5 @@
 package com.thoughtworks.twu.controller;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
-
-import com.thoughtworks.twu.domain.timesheet.forms.TimeSheetRecord;
 import com.thoughtworks.twu.domain.validators.ActivityValidator;
 import com.thoughtworks.twu.domain.validators.LocationValidator;
 import com.thoughtworks.twu.persistence.HibernateConnection;
@@ -19,19 +17,19 @@ public class TimeRecordController {
 
 
     @RequestMapping(value = "/timesheet/timeRecord", method = RequestMethod.GET)
-    public ModelAndView newTimesheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) {
+    public ModelAndView newTimesheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
         CountryService countryService = new CountryService();
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeRecord");
-        modelAndView.addObject("countries", countryService.getCountries());
-        modelAndView.addObject("states", countryService.getStates("USA"));
+        modelAndView.addObject("countries", countryService.getCountryNames());
+        modelAndView.addObject("states", countryService.getStateName("USA"));
         HibernateConnection.getInstance().getSession().close();
 
         return modelAndView;
     }
 
     @RequestMapping(value = "/timesheet/timeRecord", method = RequestMethod.POST)
-    public ModelAndView submittedTimeSheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) {
+    public ModelAndView submittedTimeSheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
         LocationValidator locationValidator = new LocationValidator();
         ActivityValidator validator = new ActivityValidator();
         locationValidator.validate(timeRecordForm, errors);
