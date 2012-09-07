@@ -5,9 +5,12 @@ import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+@Service
 public class EmployeeService {
 
     private HibernateConnection connection;

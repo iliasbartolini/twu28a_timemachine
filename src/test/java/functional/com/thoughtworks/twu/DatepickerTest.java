@@ -1,7 +1,7 @@
 package functional.com.thoughtworks.twu;
 
-import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,6 +11,7 @@ import java.net.UnknownHostException;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.matchers.JUnitMatchers.containsString;
 
 public class DatepickerTest extends BaseTest {
     private String datePickerUrl;
@@ -28,6 +29,7 @@ public class DatepickerTest extends BaseTest {
 
 
     @Test
+    @Ignore
     public void shouldShowErrorWhenBlank(){
 
         WebElement submit = webDriver.findElement(By.id("submit"));
@@ -37,9 +39,24 @@ public class DatepickerTest extends BaseTest {
         assertThat(message.getText(), is("Week ending date is required."));
     }
 
-    @After
-    public void tearDown(){
-        webDriver.close();
+    @Test
+    @Ignore
+    public void shouldLinkToNewTimesheetWithValidInput() {
+
+        WebElement calendar = webDriver.findElement(By.id("wecal"));
+
+
+        WebElement submit = webDriver.findElement(By.id("submit"));
+        submit.submit();
+
+        assertThat(webDriver.getCurrentUrl(), containsString("/timemachine/timesheet/newtimesheet"));
+
+
     }
+
+//    @After
+//    public void tearDown(){
+//        webDriver.close();
+//    }
 
 }
