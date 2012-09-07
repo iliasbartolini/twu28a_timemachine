@@ -12,6 +12,14 @@
     <script type="text/javascript" src="../static/js/lib/jquery.cookie.js"></script>
     <script type="text/javascript" src="../static/js/searchActivity.js"></script>
     <script type="text/javascript" src="../static/js/ui/displaySearchResults.js"></script>
+
+    <script>
+        $('#messages').on('click', ' > li', function () {
+            alert($(this).index());
+        });
+
+    </script>
+
 </head>
 <body>
 <form action="search_activity" id="searchForm">

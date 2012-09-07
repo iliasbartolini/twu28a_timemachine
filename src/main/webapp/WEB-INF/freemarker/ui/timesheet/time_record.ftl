@@ -18,19 +18,24 @@
     <script type="text/javascript" src="../static/js/ui/newTimesheetState.js"></script>
     <script>
         $(function () {
-            // create a datepicker with default settings
-            $("#date").scroller({ preset:'date' });
-        });
 
-        function readCookie(name) {
-            var nameEQ = name + "=";
+
+            var nameEQ = "activity_code=";
             var ca = document.cookie.split(';');
             for(var i=0;i < ca.length;i++) {
                 var c = ca[i];
                 while (c.charAt(0)==' ') c = c.substring(1,c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+                if (c.indexOf(nameEQ) == 0) {
+                    $("#header").children("h3").text(c.substring(nameEQ.length,c.length));
+                }
+
             }
-            return null;
+
+
+        });
+
+        function readCookie(name) {
+
 
         }
     </script>
@@ -44,8 +49,8 @@
 
 <div data-role="page" data-theme="a" id="index">
 
-    <div data-role="header">
-        <h1>New Time Sheet</h1>
+    <div data-role="header"  id="header">
+        <h3  >New Time Record</h3>
     </div>
 
     <script type="text/javascript">

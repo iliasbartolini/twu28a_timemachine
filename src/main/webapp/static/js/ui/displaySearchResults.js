@@ -40,8 +40,8 @@ $(function() {
                     $a.click(function() {
                        // $.cookie("ActivityCode", projectString, { path: '/' });
 
-
-                            createCookie('activity_code',projectString,30)  ;
+                            var selected_index = $("#messages").index();
+                            createCookie('activity_code',activities[selected_index].client + " " + activities[selected_index].project + " " + activities[selected_index].sub_project,30)  ;
                             console.log("cookie created");
 
 
