@@ -1,3 +1,5 @@
+
+
 $(function() {
 
     $("#searchForm").submit(function(event) {
@@ -36,7 +38,16 @@ $(function() {
                     $item.attr("data-icon", "check");
 
                     $a.click(function() {
-                        $.cookie("ActivityCode", projectString, { path: '/' });
+                       // $.cookie("ActivityCode", projectString, { path: '/' });
+
+
+                            createCookie('activity_code',projectString,30)  ;
+                            console.log("cookie created");
+
+
+
+
+
                     });
 
                     $list.append($item);
@@ -51,5 +62,17 @@ $(function() {
 
         return false;
     });
+
+    function createCookie(name,value,days) {
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime()+(days*24*60*60*1000));
+            var expires = "; expires="+date.toGMTString();
+        }
+        else var expires = "";
+        document.cookie = name+"="+value+expires+"; path=/";
+    }
+
 });
+
 
