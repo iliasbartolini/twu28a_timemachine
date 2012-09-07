@@ -17,6 +17,9 @@ public class EmployeeService {
     private Session session;
 
     public void saveEmployee(Employee employee) {
+        connection = HibernateConnection.getInstance();
+        session = connection.getSession();
+
         session.getTransaction().begin();
         session.save(employee);
         session.getTransaction().commit();
@@ -28,10 +31,15 @@ public class EmployeeService {
     }
 
     public List<Employee> getAllEmployees() {
+        connection = HibernateConnection.getInstance();
+        session = connection.getSession();
+
         return session.createQuery("from com.thoughtworks.twu.domain.Employee").list();
     }
 
     public Employee getEmployeeByLogin(String loginName) {
+        connection = HibernateConnection.getInstance();
+        session = connection.getSession();
 
         Criteria criteria = session.createCriteria(Employee.class);
 

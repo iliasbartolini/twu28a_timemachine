@@ -39,7 +39,7 @@ public class HibernateConnection {
     }
 
     public Session getSession() {
-        if ( !session.isConnected() )
+        if ( !session.isConnected() || !session.isOpen())
             createSession();
         return session;
     }
