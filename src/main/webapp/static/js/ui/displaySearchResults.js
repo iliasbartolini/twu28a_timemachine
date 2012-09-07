@@ -2,9 +2,12 @@
 
 $(function() {
 
+
+
     $("#searchForm").submit(function(event) {
 
         event.preventDefault();
+
 
 
         var $form = $( this ),
@@ -41,14 +44,18 @@ $(function() {
 
                     $a.click(function() {
 
-                        var selected_index = $list.index();
-                        alert(selected_index);
-                        createCookie('activity_code',activities[selected_index].client + " " + activities[selected_index].project + " " + activities[selected_index].sub_project,30)  ;
-                        console.log("cookie created");
+                        var selectedvalue = $(this).find("h3").text();
+
+
+                        createCookie('activity_code',selectedvalue,30)  ;
                     });
 
                     $list.append($item);
                     $list.listview("refresh");
+
+                    $('#activityList').children('a').on('click', function () {
+                        alert('Selected Value=' + $(this).text());
+                    });
                 }
 
                 $list.listview("refresh");
