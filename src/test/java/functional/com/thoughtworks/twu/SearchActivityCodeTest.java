@@ -81,10 +81,6 @@ public class SearchActivityCodeTest extends BaseTest {
         search.submit();
     }
 
-    private WebElement waitForVisibilityOfElementById(String elementid) throws TimeoutException {
-        return (new WebDriverWait(webDriver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id(elementid))));
-    }
-
     private String searchAndSelectActivity(String searchString) {
         webDriver.get(timeRecordUrl);
         enterSearchString(searchString);

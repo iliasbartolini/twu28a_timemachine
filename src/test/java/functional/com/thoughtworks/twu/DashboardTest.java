@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.UnknownHostException;
 
@@ -29,8 +31,8 @@ public class DashboardTest extends BaseTest {
     @Test
     public void shouldJumpToDatepickerPage() throws Exception {
         webDriver.get(dashboardUrl);
-        WebElement datepickerlink = webDriver.findElement(By.id("new_timesheet"));
-        datepickerlink.click();
+        WebElement datePickerLink = webDriver.findElement(By.id("new_timesheet"));
+        datePickerLink.click();
         assertThat(webDriver.getCurrentUrl(), containsString(datePickerPath));
     }
 

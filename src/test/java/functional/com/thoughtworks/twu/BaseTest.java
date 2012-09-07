@@ -1,10 +1,13 @@
 package functional.com.thoughtworks.twu;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -43,12 +46,15 @@ public class BaseTest {
         WebElement submitButton = webDriver.findElement(By.className("btn-submit"));
         submitButton.submit();
     }
+    protected WebElement waitForVisibilityOfElementById(String elementid) throws TimeoutException {
+        return (new WebDriverWait(webDriver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id(elementid))));
+    }
     public void setUpAndroid() {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         String userAgent = "Android 4.0.4 - Opera 12.00";
         firefoxProfile.setPreference("general.useragent.override", userAgent);
         webDriver = new FirefoxDriver(firefoxProfile);
-        webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
 
