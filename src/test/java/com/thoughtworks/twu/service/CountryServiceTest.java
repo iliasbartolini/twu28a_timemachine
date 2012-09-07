@@ -1,6 +1,9 @@
 package com.thoughtworks.twu.service;
 
 import com.thoughtworks.twu.domain.Country;
+import com.thoughtworks.twu.domain.LocationPresences;
+import com.thoughtworks.twu.persistence.CountryRepository;
+import com.thoughtworks.twu.persistence.LocationPresencesRepository;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -8,40 +11,41 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class CountryServiceTest {
     @Test
     public void testGetCountries() throws Exception {
         Country country = new Country();
         country.setName("Beautiful Country");
+        ArrayList<Country> countries = new ArrayList<Country>();
+        countries.add(country);
 
-        CountryService countryService = expectedService(country);
+        CountryRepository countryRepository = mock(CountryRepository.class);
+        when(countryRepository.getCountries()).thenReturn(countries);
 
-        List<Country> countries = countryService.getCountries();
-        assertThat(countries.size(), is(1));
-        assertThat(countries.get(0), is(country));
+        CountryService countryService = new CountryService(countryRepository, null);
+
+        assertThat(countryService.getCountries().size(), is(1));
     }
 
-    private CountryService expectedService(Country ... countries) {
-        CountryRepository repository = new InMemoryCountryRepository(countries);
+    @Test
+    public void testGetStates() throws Exception {
+        LocationPresences locationPresences = new LocationPresences();
+        locationPresences.setCountryCode("USA");
+        locationPresences.setState("NY");
+        locationPresences.setThoughtworksPresence(1);
 
-        return new CountryService(repository);
-    }
+        ArrayList<LocationPresences> locationPresenceses = new ArrayList<LocationPresences>();
+        locationPresenceses.add(locationPresences);
 
-    private class InMemoryCountryRepository extends CountryRepository {
+        LocationPresencesRepository locationPresencesRepository = mock(LocationPresencesRepository.class);
+        when(locationPresencesRepository.getStates("USA")).thenReturn(locationPresenceses);
 
-        private List<Country> countries = new ArrayList<Country>();
+        CountryService countryService = new CountryService(null, locationPresencesRepository);
 
-        private InMemoryCountryRepository(Country... countries) {
-            super(null);
-            for(Country country : countries) {
-                this.countries.add(country);
-            }
-        }
-
-        @Override
-        public List<Country> getCountries() {
-            return countries;
-        }
+        List<LocationPresences> states = countryService.getStates("USA");
+        assertThat(states.size(), is(1));
     }
 }

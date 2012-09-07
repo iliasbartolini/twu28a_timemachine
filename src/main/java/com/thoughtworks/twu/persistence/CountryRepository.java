@@ -1,7 +1,9 @@
-package com.thoughtworks.twu.service;
+package com.thoughtworks.twu.persistence;
 
 import com.thoughtworks.twu.domain.Country;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +11,6 @@ import java.util.List;
 
 @Repository
 public class CountryRepository {
-
 
     private SessionFactory sessionFactory;
 
@@ -19,6 +20,8 @@ public class CountryRepository {
     }
 
     public List<Country> getCountries() {
-        return sessionFactory.getCurrentSession().createCriteria(Country.class).list();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Country.class);
+        criteria.addOrder(Order.asc("name"));
+        return criteria.list();
     }
 }

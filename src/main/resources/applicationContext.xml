@@ -21,7 +21,7 @@
     <bean id="dataSource"
           class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
           p:driverClassName="${hibernate.driver_class}"
-          p:url="${hibernate.url}" p:username="${hibernate.user}"
+          p:url="${hibernateUrl}" p:username="${hibernate.user}"
           p:password="${hibernate.password}"/>
 
     <bean id="sessionFactory"

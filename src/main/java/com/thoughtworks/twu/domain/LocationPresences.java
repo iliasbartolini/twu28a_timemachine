@@ -6,19 +6,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table( name = "location_presences" )
+@Table(name = "location_presences")
 public class LocationPresences {
 
     @Id
     private int id;
 
-    @Column(name="COUNTRY_CODE")
+    @Column(name = "COUNTRY_CODE")
     private String countryCode;
 
-    @Column(name="state")
+    @Column(name = "state")
     private String state;
 
-    @Column(name="thoughtworks_presence")
+    @Column(name = "thoughtworks_presence")
     private int thoughtworksPresence;
 
     public String getCountryCode() {
