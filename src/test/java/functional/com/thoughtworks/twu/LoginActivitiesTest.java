@@ -4,10 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -41,7 +37,7 @@ public class LoginActivitiesTest extends BaseTest {
 
     @Test
     public void shouldBeAbleToRedirectToGivenURLAfterLoginAfterOneFailedLogin() throws Exception {
-        String path = ":9093/timemachine/timesheet/timeSheet";
+        String path = ":9093/timemachine/timesheet/newtimesheet";
         String url = InetAddress.getLocalHost().getHostName() + path;
         webDriver.get(url);
 
@@ -58,7 +54,7 @@ public class LoginActivitiesTest extends BaseTest {
 
     @Test
     public void shouldBeAbleToRedirectToGivenURLAfterLogin() throws Exception {
-        String path = ":9093/timemachine/timesheet/timeSheet";
+        String path = ":9093/timemachine/timesheet/newtimesheet";
         String url = InetAddress.getLocalHost().getHostName() + path;
         webDriver.get(url);
 

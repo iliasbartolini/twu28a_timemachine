@@ -35,19 +35,16 @@ $(function() {
                     $a.attr("href", "timerecord");
                     $a.attr("text",projectString);
                     $a.attr("data-ajax", "false");
+                    $a.attr("id", "activity" + i);
+
                     $item.attr("data-icon", "check");
 
                     $a.click(function() {
-                       // $.cookie("ActivityCode", projectString, { path: '/' });
 
-                            var selected_index = $("#messages").index();
-                            createCookie('activity_code',activities[selected_index].client + " " + activities[selected_index].project + " " + activities[selected_index].sub_project,30)  ;
-                            console.log("cookie created");
-
-
-
-
-
+                        var selected_index = $list.index();
+                        alert(selected_index);
+                        createCookie('activity_code',activities[selected_index].client + " " + activities[selected_index].project + " " + activities[selected_index].sub_project,30)  ;
+                        console.log("cookie created");
                     });
 
                     $list.append($item);
