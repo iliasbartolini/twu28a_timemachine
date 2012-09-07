@@ -34,7 +34,8 @@ public class TimesheetService {
 
 
     public Timesheet createNewTimesheet() {
-
+        connection = HibernateConnection.getInstance();
+        session = connection.getSession();
         session.getTransaction().begin();
         Timesheet timesheet = new Timesheet();
         session.save(timesheet);

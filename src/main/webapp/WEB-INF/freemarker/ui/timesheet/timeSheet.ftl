@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-
+<#import "/spring.ftl" as spring />
+<@spring.bind "timeRecordForm" />
 <html>
 <head>
     <title>Test UI</title>
@@ -39,7 +40,7 @@
         <a href="timeRecord" id="timeRecord" data-ajax="false" data-role="button" data-theme="a"  value="addtimeRecord" data-icon="plus">New Activity</a>
         <br>
 
-
+         <div>${timeRecordForm.country}</div>
 
 
         <button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">

@@ -20,6 +20,7 @@
 
     <script>
         $(document).ready(function(){
+
 //            $("#new_timesheet_form").validate();
             $("#newtimesheet")
                     .validate({

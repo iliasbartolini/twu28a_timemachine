@@ -18,9 +18,11 @@ public class HourPerDayValidator implements Validator {
 
         TimeRecordForm timeRecordForm = (TimeRecordForm) object;
 
-        if ((timeRecordForm.getMonday()*4)!= ((int)(timeRecordForm.getMonday()*4))){
+        if ((timeRecordForm.getMonday()*4)!= ((int)(timeRecordForm.getMonday().floatValue()*4))){
             errors.rejectValue("monday","Should Be in Increment Of 0.25");
         }
 
     }
+
+
 }
