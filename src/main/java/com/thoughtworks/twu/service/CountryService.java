@@ -8,34 +8,54 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class CountryService {
 
-    private HibernateConnection connection;
-    public Session session;
+    private CountryRepository repository;
 
-    private List<Country> countries;
-    private List<LocationPresences> locationPresences;
-
-    public List<Country> getCountries() {
-
-        connection = HibernateConnection.getInstance();
-        session = connection.getSession();
-
-        countries = session.createCriteria(Country.class).
-                addOrder(Order.asc("name")).
-                list();
-
-        return countries;
+    public CountryService() {
     }
 
-    public List<LocationPresences> getStates(String countryCode) {
-        connection = HibernateConnection.getInstance();
-        session = connection.getSession();
+    @Autowired
+    public CountryService(CountryRepository repository) {
+        this.repository = repository;
+    }
 
-        locationPresences = session.createCriteria(LocationPresences.class)
+    @Transactional
+    public List<Country> getCountries() {
+        return repository.getCountries();
+    }
+
+    //    private HibernateConnection connection;
+//    public Session session;
+//
+//    private List<Country> countries;
+//    private List<LocationPresences> locationPresences;
+
+//    public List<Country> getCountries() {
+//
+//        connection = HibernateConnection.getInstance();
+//        session = connection.getSession();
+//
+//        countries = session.createCriteria(Country.class).
+//                addOrder(Order.asc("name")).
+//                list();
+//
+//        return countries;
+//    }
+//
+    @Transactional
+    public List<LocationPresences> getStates(String countryCode) {
+        HibernateConnection connection = HibernateConnection.getInstance();
+        Session session = connection.getSession();
+
+        List locationPresences = session.createCriteria(LocationPresences.class)
                 .add(Restrictions.and(
                         Property.forName("state").isNotNull(),
                         Restrictions.eq("countryCode", countryCode)))

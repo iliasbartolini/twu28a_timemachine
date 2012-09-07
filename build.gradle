@@ -36,9 +36,10 @@ dependencies {
             'org.json:json:20090211',
             fileTree(dir: 'lib', include: '*.jar'),
             group: 'org.hibernate', name: 'hibernate-core', version: '4.+',
-            'org.codehaus.groovy:groovy-all:2.0.1'
+            'org.codehaus.groovy:groovy-all:2.0.1',
+            'cglib:cglib:2.2.2'
 
-            testCompile 'junit:junit:4.10',
+    testCompile 'junit:junit:4.10',
             'org.springframework:spring-test:3.1.1.RELEASE',
             'org.mockito:mockito-all:1.9.0',
             'org.testng:testng:6.1.1',
@@ -59,7 +60,7 @@ dependencies {
 
         doFirst {
             Properties props$environmentName = new Properties()
-            props$environmentName.load(new FileInputStream("$projectDir/properties/" + environmentName + ".properties"))
+            props$environmentName.load(new FileInputStream("$projectDir/src/main/resources/properties/" + environmentName + ".properties"))
             println props$environmentName
 
 
@@ -71,7 +72,6 @@ dependencies {
     }
 }
 
-
 task createWebXML(dependsOn:"classes"){
     def engine = new groovy.text.SimpleTemplateEngine()
     ext.serverName= InetAddress.getLocalHost().getHostName()
@@ -81,7 +81,6 @@ task createWebXML(dependsOn:"classes"){
         w << engine.createTemplate(webXmlTemplate).make([serverName: serverName, serverPort: serverPort]).toString()
     }
 }
-
 
 jettyRun
 {
@@ -112,7 +111,7 @@ functionalTest.doFirst {
 task hibernateConfig (dependsOn:"classes") {
     def env = rootProject.hasProperty("env") ? env : "DEV"
     Properties props = new Properties()
-    props.load(new FileInputStream("$projectDir/properties/" + env + ".properties"))
+    props.load(new FileInputStream("$projectDir/src/main/resources/properties/" + env + ".properties"))
     def engine = new groovy.text.SimpleTemplateEngine()
     file("$projectDir/src/main/resources/hibernate.cfg.xml").withWriter { w ->
         w << engine.createTemplate(hibernateConfigTemplate).make(props).toString()
@@ -120,7 +119,6 @@ task hibernateConfig (dependsOn:"classes") {
 
     println "Hibernate configuration file generated"
 }
-
 
 [jettyRunWar, jettyStop]*.stopPort = 8081
 [jettyRunWar, jettyStop]*.stopKey = 'stopKey'
