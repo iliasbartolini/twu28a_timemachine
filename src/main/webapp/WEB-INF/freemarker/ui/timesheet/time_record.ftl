@@ -103,11 +103,6 @@
 
         <input type="button" data-ajax="false" value="Search Activity Code" id="searchActivityCode" />
         <br>
-        Week Ending Date:
-        <div id="datepickerdiv">
-            <input name="wecal" type="text" data-role="datebox" id="wecal" data-options='{"mode":"calbox", "blackDays": [1,2,3,4,5,6], "highDays": [0], "overrideCalStartDay": 1, "overrideDateFormat": "%-d-%b-%Y" }'/>
-        </div>
-        <br>
         Country:
     <@spring.formSingleSelect "timeRecordForm.country",countries, "class= select1" />
         <div id="error" style="color: red;">
