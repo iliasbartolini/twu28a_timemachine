@@ -20,7 +20,7 @@ public class TimeRecordController {
     public ModelAndView newTimesheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
         CountryService countryService = new CountryService();
 
-        ModelAndView modelAndView = new ModelAndView("ui/timesheet/timerecord");
+        ModelAndView modelAndView = new ModelAndView("ui/timesheet/time_record");
         modelAndView.addObject("countries", countryService.getCountryNames());
         modelAndView.addObject("states", countryService.getStateName("USA"));
         HibernateConnection.getInstance().getSession().close();

@@ -40,7 +40,7 @@ public class TimeRecordControllerTest {
 
     @Test
     public void shouldBeAbleToGetViewNameOfController() throws Exception {
-        assertEquals("ui/timesheet/timerecord", controller.newTimesheet(timeRecordForm,bindingResult).getViewName());
+        assertEquals("ui/timesheet/time_record", controller.newTimesheet(timeRecordForm,bindingResult).getViewName());
     }
 
 
