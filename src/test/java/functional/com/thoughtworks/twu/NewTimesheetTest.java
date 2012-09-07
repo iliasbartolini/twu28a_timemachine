@@ -42,7 +42,6 @@ public class NewTimesheetTest extends BaseTest {
     @Test
     public void checkIfCountryBlankInitially() throws UnknownHostException {
         //Assuage
-        // Selenium browser = new WebDriverBackedSelenium(webDriver, url);
         webDriver.get(newTimesheetUrl);
 
         //Act

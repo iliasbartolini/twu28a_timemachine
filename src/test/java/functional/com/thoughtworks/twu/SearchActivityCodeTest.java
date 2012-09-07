@@ -9,10 +9,14 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.hamcrest.CoreMatchers.is;
 
 import static org.junit.Assert.assertThat;
+import static org.testng.AssertJUnit.assertNotNull;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -24,9 +28,11 @@ public class SearchActivityCodeTest extends BaseTest {
     @Before
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
-        timeRecordUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine/timesheet/search_activity";
+        timeRecordUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine/timesheet/timeSheet";
         webDriver.get(timeRecordUrl);
         super.submitCredentials(validPasswordString);
+        webDriver.findElement(By.id("timeRecord")).click();
+        webDriver.findElement(By.id("searchActivityCode")).click();
     }
     @Test
     @Ignore("Search Activity Not Ready")
@@ -46,13 +52,14 @@ public class SearchActivityCodeTest extends BaseTest {
         assertThat(getObtainedErrorMessage(),is(getExpectedErrorMessage("Alteast2CharsForSearch")));
     }
     @Test
-    @Ignore("Search Activity Not Ready")
+    //@Ignore("Search Activity Not Ready")
     public void shouldShowErrorForNoMatchFound() {
         //Assuage
         //Act
-        enterSearchString("XYZZ");
+        enterSearchString("XYZZZZZZZZ");
         //Assert
-        assertThat(getObtainedErrorMessage(),is(getExpectedErrorMessage("NoMatchingActivity")));
+        assertNotNull(webDriver.findElement(By.id("result")));
+        assertThat(webDriver.findElement(By.id("result")).getText(),is(getExpectedErrorMessage("NoMatchingActivity")));
     }
     @Test
     @Ignore("Search Activity Not Ready")
@@ -71,7 +78,10 @@ public class SearchActivityCodeTest extends BaseTest {
         webDriver.close();
     }
     private void enterSearchString(String searchString){
-        WebElement search = webDriver.findElement(By.id("searchCriteria"));
+        WebDriverWait wait = new WebDriverWait(webDriver, 10);
+        WebElement search = wait.until(ExpectedConditions.visibilityOf(webDriver.findElement(By.id("searchCriteria"))));
+        search = webDriver.findElement(By.id("searchCriteria"));
+        search.clear();
         search.sendKeys(searchString);
         search.submit();
     }

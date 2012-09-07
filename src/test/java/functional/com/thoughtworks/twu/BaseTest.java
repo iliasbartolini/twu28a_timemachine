@@ -36,6 +36,7 @@ public class BaseTest {
         String userAgent = "Android 4.0.4 - Opera 12.00";
         firefoxProfile.setPreference("general.useragent.override", userAgent);
         webDriver = new FirefoxDriver(firefoxProfile);
+        webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
 

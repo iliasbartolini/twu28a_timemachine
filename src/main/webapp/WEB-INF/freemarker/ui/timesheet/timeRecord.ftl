@@ -57,11 +57,11 @@
         </#list>
         </select>
 
-       <a href="search_activity" data-role="button" data-icon="search" data-ajax="false">Search Activity Code</a>
+       <a href="search_activity" data-role="button" data-icon="search" data-ajax="false" id="searchActivityCode">Search Activity Code</a>
 
 
         <label>Billable?</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <select name="billable"  data-role="slider">
+        <select id="billable "name="billable"  data-role="slider">
 
             <option value="false">No</option>
 
