@@ -20,13 +20,20 @@ import static org.mockito.Mockito.when;
 public class CountryServiceTest {
 
     private List<Country> countries = new ArrayList<Country>();
+<<<<<<< HEAD
     private CountryRepository countryRepository;
+=======
+    private List<LocationPresences> locationPresenceses = new ArrayList<LocationPresences>();
+    private CountryRepository countryRepository;
+    private LocationPresencesRepository locationPresencesRepository;
+>>>>>>> Willa/Felipe Finished country/state repository and service
     private CountryService countryService;
     private LocationPresencesRepository locationRepository;
     private List<LocationPresences> locationPresenceList = new ArrayList<LocationPresences>();
 
     @Before
     public void setUp() throws Exception {
+<<<<<<< HEAD
         Country countryWithoutTW = new Country();
         countryWithoutTW.setName("Beautiful City");
         countryWithoutTW.setCode("UEA");
@@ -69,3 +76,52 @@ public class CountryServiceTest {
     }
 
 }
+=======
+        Country country = new Country();
+        country.setName("Beautiful City");
+        country.setCode("Porto Alegre");
+        countries.add(country);
+
+        LocationPresences locationPresences = new LocationPresences();
+        locationPresences.setCountryCode("USA");
+        locationPresences.setState("NY");
+        locationPresences.setThoughtworksPresence(1);
+        locationPresenceses.add(locationPresences);
+
+        countryRepository = mock(CountryRepository.class);
+        locationPresencesRepository = mock(LocationPresencesRepository.class);
+        countryService = new CountryService(countryRepository, locationPresencesRepository);
+
+    }
+
+    @Test
+    public void testGetCountries() throws Exception {
+        when(countryRepository.getCountries()).thenReturn(countries);
+        assertThat(countryService.getCountries().size(), is(1));
+    }
+
+    @Test
+    public void testGetStates() throws Exception {
+        when(locationPresencesRepository.getStates("USA")).thenReturn(locationPresenceses);
+
+        List<LocationPresences> states = countryService.getStates("USA");
+        assertThat(states.size(), is(1));
+    }
+
+    @Test
+    public void testGetStateNames() throws Exception {
+        when(locationPresencesRepository.getStates("USA")).thenReturn(locationPresenceses);
+
+        List<String> states = countryService.getStateName("USA");
+        assertThat(states.toString(), is("[Select a state, NY]"));
+    }
+
+    @Test
+    public void testGetCountryNames() throws Exception {
+        when(countryRepository.getCountries()).thenReturn(countries);
+
+        assertThat(countryService.getCountryNames().toString(), is("[Select a country, Porto Alegre - Beautiful City]"));
+    }
+}
+
+>>>>>>> Willa/Felipe Finished country/state repository and service

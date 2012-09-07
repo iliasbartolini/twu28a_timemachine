@@ -21,15 +21,26 @@ import static org.junit.Assert.*;
 public class NewTimesheetTest extends BaseTest {
 
 
+<<<<<<< HEAD
+=======
+    private String validPasswordString = "Th0ughtW0rks@12";
+    private String newTimesheetUrl;
+    private CountryService countryService;
+
+>>>>>>> Willa/Felipe Finished country/state repository and service
     public NewTimesheetTest() throws UnknownHostException {
         super();
     }
 
     @Before
-    public void setup() throws UnknownHostException {
+    public void setup() throws Exception {
         super.setUpAndroid();
+<<<<<<< HEAD
         webDriver.get(dashboardUrl);
         super.submitCredentials(TestData.validPasswordString);
+=======
+        super.submitCredentials(validPasswordString);
+>>>>>>> Willa/Felipe Finished country/state repository and service
         webDriver.get(timeRecordUrl);
     }
 
@@ -46,7 +57,7 @@ public class NewTimesheetTest extends BaseTest {
         assertThat(country.isEnabled(), is(true));
     }
 
-
+    @Ignore("We should mock country service.")
     @Test
 
     public void shouldDisplayCountryListWithBothCountryCodeAndName() throws UnknownHostException {
@@ -77,6 +88,7 @@ public class NewTimesheetTest extends BaseTest {
         assertThat(state.isEnabled(), is(true));
     }
 
+    @Ignore
     @Test
     public void changeCountryUSAToOtherStatesEmpty() {
         selectCountry("USA - USA");
@@ -87,6 +99,7 @@ public class NewTimesheetTest extends BaseTest {
         assertEquals("", dropDownState.getFirstSelectedOption().getText());
     }
 
+    @Ignore
     @Test
     public void checkIfStateListIsAvailable() throws Exception {
         selectCountry("USA - USA");
