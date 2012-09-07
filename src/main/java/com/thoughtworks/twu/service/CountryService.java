@@ -3,13 +3,14 @@ package com.thoughtworks.twu.service;
 
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
+import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 
-import java.util.List;
+import java.util.*;
 
 public class CountryService {
 
@@ -43,4 +44,53 @@ public class CountryService {
 
         return locationPresences;
     }
+
+    public List<String> getCountryNames() throws Exception {
+        List<Country> countries = getCountries();
+        List<String> countryNames=new ArrayList<String>();
+        countryNames.add("Select a country");
+        for(Country country:countries)
+        {
+        countryNames.add(country.getCode()+" - "+country.getName());
+        }
+        return countryNames;
+    }
+
+    public List<String> getStateName(String countrycode) throws Exception {
+      List<LocationPresences> locationPresences=getStates(countrycode);
+        List<String> stateNames=new ArrayList<String>();
+        stateNames.add("Select a state");
+        for(LocationPresences state:locationPresences)
+        {
+             stateNames.add(state.getState());
+        }
+        return stateNames;
+
+
+       }
+
+    public List<String> getCountryCodes() throws Exception {
+        List<Country> countries = getCountries();
+        List<String> countryCodes=new ArrayList<String>();
+        countryCodes.add("first select");
+        for(Country country:countries)
+        {
+            countryCodes.add(country.getCode());
+        }
+        return countryCodes;
+    }
+
+    public Map trialGetMap(){
+        Map cityMap = new LinkedHashMap();
+        cityMap.put("LDN", "London");
+        cityMap.put("PRS", "Paris");
+        cityMap.put("NYC", "New York");
+
+        Map m = new HashMap();
+        m.put("cityMap", cityMap);
+        return m;
+    }
+
+
+
 }

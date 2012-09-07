@@ -45,6 +45,7 @@ public class SearchActivityCodeTest extends BaseTest {
     }
 
     @Test
+    @Ignore("Search Activity Not Ready")
     public void shouldShowErrorForSearchStringLessThan2Characters() {
         enterSearchString("a");
         assertEquals(getExpectedErrorMessage("Alteast2CharsForSearch"),waitForVisibilityOfElementById("result").getText());

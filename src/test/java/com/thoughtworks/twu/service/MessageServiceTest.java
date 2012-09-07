@@ -24,4 +24,12 @@ public class MessageServiceTest {
             assertEquals("No matching activity found.",message.getMessage());
 
         }
+       @Test
+       public void shouldReturnMessageForId()
+       {
+           MessageService messageService = new MessageService();
+           String message = messageService.getMessageForField(4);
+           assertEquals("No matching activity found.",message);
+
+       }
 }

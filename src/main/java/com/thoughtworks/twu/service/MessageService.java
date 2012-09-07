@@ -21,6 +21,11 @@ public class MessageService {
     public List<Message> getAllMessages() {
         return session.createQuery("from com.thoughtworks.twu.domain.Message").list();
     }
+    public String getMessageForField(int index)
+    {
+        List<Message>  messages = getAllMessages();
+        return messages.get(index).getMessage();
+    }
 
     public Message getMessageMessageById(String messageId) {
         return (Message) session.createCriteria(Message.class).

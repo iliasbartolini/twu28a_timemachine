@@ -8,11 +8,14 @@ import org.springframework.validation.Errors;
 
 public class HourPerDayValidator implements Validator {
     public boolean supports(Class<?> clazz) {
+
         return TimeRecordForm.class.isAssignableFrom(clazz);
+
     }
 
     @Override
     public void validate(Object object, Errors errors) {
+
         TimeRecordForm timeRecordForm = (TimeRecordForm) object;
 
         if ((timeRecordForm.getMonday()*4)!= ((int)(timeRecordForm.getMonday()*4))){

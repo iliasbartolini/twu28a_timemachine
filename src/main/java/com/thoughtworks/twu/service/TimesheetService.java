@@ -3,9 +3,11 @@ package com.thoughtworks.twu.service;
 import com.thoughtworks.twu.domain.Timesheet;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TimesheetService {
 
 
@@ -31,7 +33,7 @@ public class TimesheetService {
     }
 
 
-    public Timesheet addNewTimeSheet() {
+    public Timesheet createNewTimesheet() {
 
         session.getTransaction().begin();
         Timesheet timesheet = new Timesheet();

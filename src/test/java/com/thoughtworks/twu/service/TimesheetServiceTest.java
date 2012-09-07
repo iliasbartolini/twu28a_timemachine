@@ -31,7 +31,7 @@ public class TimesheetServiceTest {
     public void shouldAddNewTimesheet() {
         TimesheetService service = new TimesheetService();
 
-        Timesheet batmansTimesheet = service.addNewTimeSheet();
+        Timesheet batmansTimesheet = service.createNewTimesheet();
 
         List<Timesheet> timesheetList = service.getAllTimesheets();
 
