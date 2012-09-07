@@ -69,7 +69,7 @@ public class TimeRecordForm {
     }
 
     public Float getMonday() {
-        return monday;
+        return convertToFloat(monday);
     }
 
     public void setMonday(Float monday) {
@@ -77,7 +77,7 @@ public class TimeRecordForm {
     }
 
     public Float getTuesday() {
-        return tuesday;
+        return convertToFloat(tuesday);
     }
 
     public void setTuesday(Float tuesday) {
@@ -85,7 +85,7 @@ public class TimeRecordForm {
     }
 
     public Float getWednesday() {
-        return wednesday;
+        return convertToFloat(wednesday);
     }
 
     public void setWednesday(Float wednesday) {
@@ -93,7 +93,7 @@ public class TimeRecordForm {
     }
 
     public Float getThursday() {
-        return thursday;
+        return convertToFloat(thursday);
     }
 
     public void setThursday(Float thursday) {
@@ -101,7 +101,7 @@ public class TimeRecordForm {
     }
 
     public Float getFriday() {
-        return friday;
+        return convertToFloat(friday);
     }
 
     public void setFriday(Float friday) {
@@ -109,7 +109,7 @@ public class TimeRecordForm {
     }
 
     public Float getSaturday() {
-        return saturday;
+        return convertToFloat(saturday);
     }
 
     public void setSaturday(Float saturday) {
@@ -117,19 +117,18 @@ public class TimeRecordForm {
     }
 
     public Float getSunday() {
-        return sunday;
+        return convertToFloat(sunday);
     }
 
     public void setSunday(Float sunday) {
         this.sunday = sunday;
     }
 
-//  private Float defaultFloatValue (Float value)
-//  {
-//      return  value;
-//  }
-//    private Float defaultFloatValue ()
-//    {
-//        return  value;
-//    }
+    public float convertToFloat(Float value)
+    {
+        if(value==null)
+            return 0f;
+        else
+            return value;
+    }
 }

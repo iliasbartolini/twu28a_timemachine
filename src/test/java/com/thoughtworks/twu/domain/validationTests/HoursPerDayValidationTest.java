@@ -36,7 +36,6 @@ public void setUp(){
 @Test
 public void shouldAcceptedBlankInput(){
     TimeRecordForm timeRecordForm = new TimeRecordForm();
-
     BindException errors = new BindException(timeRecordForm,"monday");
     ValidationUtils.invokeValidator(hourPerDayValidator, timeRecordForm,errors);
     assertFalse(errors.hasErrors());
