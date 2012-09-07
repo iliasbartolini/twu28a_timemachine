@@ -1,7 +1,6 @@
 package functional.com.thoughtworks.twu;
 
 import com.thoughtworks.twu.domain.Message;
-import com.thoughtworks.twu.service.CountryService;
 import com.thoughtworks.twu.service.MessageService;
 import org.junit.After;
 import org.junit.Before;
@@ -19,18 +18,20 @@ import static org.junit.Assert.assertThat;
 import static org.testng.AssertJUnit.assertEquals;
 
 
-import java.net.InetAddress;
+
 import java.net.UnknownHostException;
 
 
 public class SearchActivityCodeTest extends BaseTest {
     private String validPasswordString = "Th0ughtW0rks@12";
-    private String timeRecordUrl;
-    private CountryService countryService;
+
+    public SearchActivityCodeTest() throws UnknownHostException {
+        super();
+    }
+
     @Before
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
-        timeRecordUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine/timesheet/timeSheet";
         webDriver.get(timeRecordUrl);
         super.submitCredentials(validPasswordString);
         webDriver.findElement(By.id("timeRecord")).click();
@@ -38,14 +39,14 @@ public class SearchActivityCodeTest extends BaseTest {
     }
 
     @Test
-    @Ignore("Search Activity Not Ready")
+    @Ignore("Integration Issues")
     public void shouldReturnActivityCodeToActivityCodeField() {
         String selectedActivityCode = searchAndSelectActivity("YTYOO96");
         assertThat(webDriver.findElement(By.id("activity")).getText(),is(selectedActivityCode));
     }
 
     @Test
-    @Ignore("Search Activity Not Ready")
+    @Ignore
     public void shouldShowErrorForSearchStringLessThan2Characters() {
         enterSearchString("a");
         assertEquals(getExpectedErrorMessage("Alteast2CharsForSearch"),waitForVisibilityOfElementById("result").getText());
