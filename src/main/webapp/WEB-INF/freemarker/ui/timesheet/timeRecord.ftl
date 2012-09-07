@@ -12,16 +12,43 @@
     <link rel="stylesheet" href="../static/css/jquery.mobile-1.2.0-alpha.1.min.css"/>
     <link rel="stylesheet" href="../static/css/mobiscroll-2.0.1.custom.min.css"/>
 
+    <link rel="stylesheet" type="text/css" href="../static/css/jqm-datebox.min.css" />
     <script type="text/javascript" src="../static/js/lib/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
+    <script type="text/javascript" src="../static/js/lib/jquery.form.js"></script>
+    <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="../static/js/lib/jquery.cookie.js"></script>
 
     <script type="text/javascript" src="../static/js/mobiscroll-2.0.1.custom.min.js"></script>
     <script type="text/javascript" src="../static/js/ui/newTimesheetState.js"></script>
-    <script>
-        $(function () {
-            // create a datepicker with default settings
-            $("#date").scroller({ preset:'date' });
-        });
+    <script type="text/javascript" src="/timemachine/static/js/lib/jqm-datebox-1.1.0.core.js"></script>
+    <script type="text/javascript" src="/timemachine/static/js/lib/jqm-datebox-1.1.0.mode.calbox.js"></script>
+    <script type="text/javascript" src="/timemachine/static/js/lib/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
 
+
+    <script>
+        $(document).ready(function(){
+
+//            $("#new_timesheet_form").validate();
+            $("#new_timesheet_form")
+                    .validate({
+                        rules: {
+                            wecal: {
+                                required: true
+                            }
+                        },
+                        messages: {
+                            wecal: "Week ending date is required."
+                        },
+                        errorPlacement: function(error, element) {
+
+                            error.insertAfter("#datepickerdiv");
+
+
+
+                        }
+                    });
+        });
         function readCookie(name) {
             var nameEQ = name + "=";
             var ca = document.cookie.split(';');
@@ -34,10 +61,7 @@
 
         }
     </script>
-    <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
-    <script type="text/javascript" src="../static/js/lib/jquery.form.js"></script>
-    <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="../static/js/lib/jquery.cookie.js"></script>
+
 
 </head>
 <body>
@@ -77,8 +101,12 @@
 
    <input type="button" data-ajax="false" value="Search Activity Code" id="activityButton" />
    <br>
-   Country:
-
+        Week Ending Date:
+        <div id="datepickerdiv">
+         <input name="wecal" type="text" data-role="datebox" id="wecal" data-options='{"mode":"calbox", "blackDays": [1,2,3,4,5,6], "highDays": [0], "overrideCalStartDay": 1, "overrideDateFormat": "%-d-%b-%Y" }'/>
+        </div>
+        <br>
+        Country:
     <@spring.formSingleSelect "timeRecordForm.country",countries, "class= select1" />
      <div id="error" style="color: red;">
      <@spring.showErrors "<br>"     />

@@ -9,13 +9,13 @@ public class TimeRecordForm {
     private String activity;
     private boolean billable = true;
     private String taskComment;
-    private float monday;
-    private float tuesday;
-    private float wednesday;
-    private float thursday;
-    private float friday;
-    private float saturday;
-    private float sunday;
+    private Float monday;
+    private Float tuesday;
+    private Float wednesday;
+    private Float thursday;
+    private Float friday;
+    private Float saturday;
+    private Float sunday;
 
     public Date getDate() {
         return date;
@@ -68,61 +68,68 @@ public class TimeRecordForm {
         this.taskComment = taskComment;
     }
 
-    public float getMonday() {
+    public Float getMonday() {
         return monday;
     }
 
-    public void setMonday(float monday) {
+    public void setMonday(Float monday) {
         this.monday = monday;
     }
 
-    public float getTuesday() {
+    public Float getTuesday() {
         return tuesday;
     }
 
-    public void setTuesday(float tuesday) {
+    public void setTuesday(Float tuesday) {
         this.tuesday = tuesday;
     }
 
-    public float getWednesday() {
+    public Float getWednesday() {
         return wednesday;
     }
 
-    public void setWednesday(float wednesday) {
+    public void setWednesday(Float wednesday) {
         this.wednesday = wednesday;
     }
 
-    public float getThursday() {
+    public Float getThursday() {
         return thursday;
     }
 
-    public void setThursday(float thursday) {
+    public void setThursday(Float thursday) {
         this.thursday = thursday;
     }
 
-    public float getFriday() {
+    public Float getFriday() {
         return friday;
     }
 
-    public void setFriday(float friday) {
+    public void setFriday(Float friday) {
         this.friday = friday;
     }
 
-    public float getSaturday() {
+    public Float getSaturday() {
         return saturday;
     }
 
-    public void setSaturday(float saturday) {
+    public void setSaturday(Float saturday) {
         this.saturday = saturday;
     }
 
-    public float getSunday() {
+    public Float getSunday() {
         return sunday;
     }
 
-    public void setSunday(float sunday) {
+    public void setSunday(Float sunday) {
         this.sunday = sunday;
     }
 
-
+//  private Float defaultFloatValue (Float value)
+//  {
+//      return  value;
+//  }
+//    private Float defaultFloatValue ()
+//    {
+//        return  value;
+//    }
 }

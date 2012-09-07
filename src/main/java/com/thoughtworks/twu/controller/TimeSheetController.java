@@ -27,6 +27,7 @@ public class TimeSheetController {
     @RequestMapping(value = "/timesheet/timeSheet", method = RequestMethod.GET)
     public ModelAndView getTimesheet() {
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeSheet");
+        HibernateConnection.getInstance().getSession().close();
         return modelAndView;
     }
 

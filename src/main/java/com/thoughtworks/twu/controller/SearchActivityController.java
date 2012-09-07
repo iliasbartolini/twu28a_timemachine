@@ -38,7 +38,7 @@ public class SearchActivityController {
     @RequestMapping(value = "/timesheet/search_activity", method = RequestMethod.POST)
     public @ResponseBody String searchActivities(@RequestParam("s") String query) throws JSONException {
         ActivityService service = new ActivityService();
-
+        HibernateConnection.getInstance().getSession().close();
         return service.getActivities(query).toString();
     }
 }
