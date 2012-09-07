@@ -16,7 +16,8 @@ import static org.hamcrest.CoreMatchers.is;
 
 import static org.junit.Assert.assertThat;
 import static org.testng.AssertJUnit.assertEquals;
-
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertNull;
 
 
 import java.net.UnknownHostException;
@@ -32,35 +33,36 @@ public class SearchActivityCodeTest extends BaseTest {
     @Before
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
-        webDriver.get(timeRecordUrl);
+        webDriver.get(newTimesheetUrl);//THIS COMMAND NEEDS TO BE DELETED AFTER REDIRECTION FROM "+ NEW TIMESHEET" BUTTON IS COMPLETED
         super.submitCredentials(validPasswordString);
         webDriver.findElement(By.id("timeRecord")).click();
         webDriver.findElement(By.id("searchActivityCode")).click();
     }
 
     @Test
-    @Ignore("Integration Issues")
+    @Ignore("Redirection Present but not added as title")
     public void shouldReturnActivityCodeToActivityCodeField() {
         String selectedActivityCode = searchAndSelectActivity("YTYOO96");
         assertThat(webDriver.findElement(By.id("activity")).getText(),is(selectedActivityCode));
     }
 
     @Test
-    @Ignore
+    @Ignore("Error message needs to be displayed")
     public void shouldShowErrorForSearchStringLessThan2Characters() {
+        webDriver.get(searchActivityUrl);//THIS COMMAND NEEDS TO BE DELETED AFTER REDIRECTION FROM "SEARCH ACTIVITY CODE" BUTTON IS COMPLETED
         enterSearchString("a");
         assertEquals(getExpectedErrorMessage("Alteast2CharsForSearch"),waitForVisibilityOfElementById("result").getText());
     }
 
     @Test
-    @Ignore("Inconsistency in response to be resolved")
+    @Ignore("Error message needs to be displayed")
     public void shouldShowErrorForNoMatchFound() {
         enterSearchString("XYZZ");
         assertEquals(getExpectedErrorMessage("NoMatchingActivity"),waitForVisibilityOfElementById("result").getText());
     }
 
     @Test
-    @Ignore("Search Activity Not Ready")
+    @Ignore("Not implemented")
     public void shouldSetBillableFlagAsNoForNonBillableActivity() {
         enterSearchString("YTYOO96");
         //Find element of list: There will be only one element
@@ -69,7 +71,7 @@ public class SearchActivityCodeTest extends BaseTest {
         //assertTrue(!webDriver.findElement(By.id("activity")).isEnabled())
     }
 
-    @After
+    //@After
     public void teardown() {
         webDriver.close();
     }

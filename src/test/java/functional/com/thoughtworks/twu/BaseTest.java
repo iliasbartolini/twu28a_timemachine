@@ -24,7 +24,7 @@ public class BaseTest {
     protected String datePickerPath = ":9093/timemachine/timesheet/datepicker";
     protected String newTimesheetPath = ":9093/timemachine/timesheet/newtimesheet";
     protected String timeRecordPath = ":9093/timemachine/timesheet/timerecord";
-    protected String searchActivityPath = ":9093/timemachine/timesheet/searchActivity";
+    protected String searchActivityPath = ":9093/timemachine/timesheet/search_activity";
     public BaseTest() throws UnknownHostException {
         String hostName = InetAddress.getLocalHost().getHostName();
         dashboardUrl = hostName +dashboardPagePath;
