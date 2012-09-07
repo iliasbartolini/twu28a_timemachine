@@ -22,7 +22,7 @@
     </div>
 
     <div class="ui-block-b" style=" max-width: 70px">
-        <a href="new" data-role = "button"  data-inline="true" data-theme="b" style="height:32px;padding-bottom:7px">Cancel</a>
+        <a href="timerecord" data-role = "button"  data-inline="true" data-theme="b" style="height:32px;padding-bottom:7px">Cancel</a>
     </div>
   </fieldset>
 </form>

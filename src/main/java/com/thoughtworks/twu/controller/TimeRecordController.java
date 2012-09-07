@@ -28,7 +28,7 @@ public class TimeRecordController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/timesheet/timeRecord", method = RequestMethod.POST)
+    @RequestMapping(value = "/timesheet/timerecord", method = RequestMethod.POST)
     public ModelAndView submittedTimeSheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
         LocationValidator locationValidator = new LocationValidator();
         ActivityValidator validator = new ActivityValidator();

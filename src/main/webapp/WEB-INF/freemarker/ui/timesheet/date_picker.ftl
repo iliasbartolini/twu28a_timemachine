@@ -51,7 +51,7 @@
 
 <div data-role="dialog" data-theme="a">
 
-    <form id="new_timesheet_form" action="temp_new_timesheet" method="get"
+    <form id="newtimesheet" action="newtimesheet" method="get"
           class="ui-body ui-body-a ui-corner-all">
 
         <div data-role="fieldcontain" id="datepickerdiv">

@@ -30,7 +30,7 @@ $(function() {
                     var projectString = activities[i].client + " " + activities[i].project + " " + activities[i].sub_project ;
 
                     $a.html('<h3 class="ui-li-heading">' + projectString + '</h3><p class="ui-li-desc">' + activities[i].sub_project_name +'</p>');
-                    $a.attr("href", "timeRecord");
+                    $a.attr("href", "timerecord");
                     $a.attr("text",projectString);
                     $item.attr("data-icon", "check");
 
