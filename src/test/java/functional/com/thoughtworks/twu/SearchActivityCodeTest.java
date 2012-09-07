@@ -49,7 +49,7 @@ public class SearchActivityCodeTest extends BaseTest {
         //Act
         enterSearchString("a");
         //Assert
-        assertThat(getObtainedErrorMessage(),is(getExpectedErrorMessage("Alteast2CharsForSearch")));
+        assertThat(waitForVisibilityOfElementById("result").getText(),is(getExpectedErrorMessage("Alteast2CharsForSearch")));
     }
     @Test
     //@Ignore("Search Activity Not Ready")
@@ -58,9 +58,14 @@ public class SearchActivityCodeTest extends BaseTest {
         //Act
         enterSearchString("XYZZZZZZZZ");
         //Assert
-        assertNotNull(webDriver.findElement(By.id("result")));
-        assertThat(webDriver.findElement(By.id("result")).getText(),is(getExpectedErrorMessage("NoMatchingActivity")));
+        //waitForVisibilityOfElementById("result");
+        //assertNotNull(webDriver.findElement(By.id("result")));
+        //assertThat(webDriver.findElement(By.id("result")).getText(),is(getExpectedErrorMessage("NoMatchingActivity")));
+        assertThat(waitForVisibilityOfElementById("result").getText(),is(getExpectedErrorMessage("NoMatchingActivity")));
     }
+
+
+
     @Test
     @Ignore("Search Activity Not Ready")
     public void shouldSetBillableFlagAsNoForNonBillableActivity() {
@@ -78,13 +83,19 @@ public class SearchActivityCodeTest extends BaseTest {
         webDriver.close();
     }
     private void enterSearchString(String searchString){
-        WebDriverWait wait = new WebDriverWait(webDriver, 10);
-        WebElement search = wait.until(ExpectedConditions.visibilityOf(webDriver.findElement(By.id("searchCriteria"))));
-        search = webDriver.findElement(By.id("searchCriteria"));
+        //WebDriverWait wait = waitForVisibilityOfElementById("searchCriteria");
+        //WebElement search = wait.until(ExpectedConditions.visibilityOf(webDriver.findElement(By.id("searchCriteria"))));
+        WebElement search = waitForVisibilityOfElementById("searchCriteria");
+        //search = webDriver.findElement(By.id("searchCriteria"));
         search.clear();
         search.sendKeys(searchString);
         search.submit();
     }
+
+    private WebElement waitForVisibilityOfElementById(String elementid) {
+        return (new WebDriverWait(webDriver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id(elementid))));
+    }
+
     private String searchAndSelectActivity(String searchString) {
         webDriver.get(timeRecordUrl);
         enterSearchString(searchString);
