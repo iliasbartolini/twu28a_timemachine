@@ -60,6 +60,9 @@
 
                     changeState.toggleStateList();
                 });
+                $("#activityButton").click(function(){
+                    alert("Barfi!");
+                });
             });
         </script>
 
@@ -68,22 +71,25 @@
     <form id="new_timesheet_form" data-ajax="false" modelAttribute="favoriteTimesheetForm" action="" method="post"
           class="ui-body ui-body-a ui-corner-all">
 
-        <label for="date">Week Ending</label>
-        <input id="date" name="date"/>
+
+
+   <br>
+
+   <input type="button" data-ajax="false" value="Search Activity Code" id="activityButton" />
+   <br>
    Country:
 
     <@spring.formSingleSelect "timeRecordForm.country",countries, "class= select1" />
-    <@spring.showErrors "<br>" />
+     <div id="error" style="color: red;">
+     <@spring.showErrors "<br>"     />
+        </div>
     <br>
     State:
     <@spring.formSingleSelect "timeRecordForm.state",states, "class=state" />
-    <@spring.showErrors "<br>" />
-        <br>
-        Activity:
+        <div id="error" style="color: red;">
+        <@spring.showErrors "<br><br>"     />
+        </div>
 
-         <@spring.formInput "timeRecordForm.activity" />
-         <@spring.showErrors "<br>" />
-        <br>
 
         <label>Billable?</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <select name="billable"  data-role="slider">
@@ -136,6 +142,7 @@
         </div>
 
     <input type="submit" data-role="button" value="Submit" data-ajax="false" />
+
 
     </form>
 </div>
