@@ -1,6 +1,6 @@
 package com.thoughtworks.twu.service;
 
-import com.thoughtworks.twu.domain.Time_Sheets;
+import com.thoughtworks.twu.domain.Timesheet;
 import com.thoughtworks.twu.domain.Timesheet;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
@@ -23,7 +23,7 @@ public class TimeRecordService {
         return session.createQuery("FROM com.thoughtworks.twu.domain.Time_reports WHERE TIME_SHEET_ID ='%" + timesheetID + "%'").list();
     }
 
-    public void saveTimeRecord(Time_Sheets timesheet) {
+    public void saveTimeRecord(Timesheet timesheet) {
         session.getTransaction().begin();
         session.save(timesheet);
         session.getTransaction().commit();

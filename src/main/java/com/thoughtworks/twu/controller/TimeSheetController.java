@@ -1,6 +1,7 @@
 package com.thoughtworks.twu.controller;
 
 
+import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.EmployeeService;
 import com.thoughtworks.twu.service.TimesheetService;
@@ -27,6 +28,8 @@ public class TimeSheetController {
     @RequestMapping(value = "/timesheet/timeSheet", method = RequestMethod.GET)
     public ModelAndView getTimesheet() {
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeSheet");
+        TimeRecordForm timeRecordForm = new TimeRecordForm();
+        modelAndView.addObject("timeRecordForm" ,timeRecordForm) ;
         HibernateConnection.getInstance().getSession().close();
         return modelAndView;
     }
