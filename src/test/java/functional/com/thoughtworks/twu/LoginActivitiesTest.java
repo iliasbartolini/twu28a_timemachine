@@ -41,7 +41,7 @@ public class LoginActivitiesTest extends BaseTest {
 
     @Test
     public void shouldBeAbleToRedirectToGivenURLAfterLoginAfterOneFailedLogin() throws Exception {
-        String path = ":9093/timemachine/timesheet/new";
+        String path = ":9093/timemachine/timesheet/timeSheet";
         String url = InetAddress.getLocalHost().getHostName() + path;
         webDriver.get(url);
 
@@ -58,7 +58,7 @@ public class LoginActivitiesTest extends BaseTest {
 
     @Test
     public void shouldBeAbleToRedirectToGivenURLAfterLogin() throws Exception {
-        String path = ":9093/timemachine/timesheet/new";
+        String path = ":9093/timemachine/timesheet/timeSheet";
         String url = InetAddress.getLocalHost().getHostName() + path;
         webDriver.get(url);
 

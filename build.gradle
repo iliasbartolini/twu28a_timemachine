@@ -43,7 +43,8 @@ dependencies {
             'org.mockito:mockito-all:1.9.0',
             'org.testng:testng:6.1.1',
             'org.seleniumhq.selenium:selenium-java:2.23.0',
-            'org.seleniumhq.selenium:selenium-firefox-driver:2.23.0'
+            'org.seleniumhq.selenium:selenium-firefox-driver:2.23.0',
+            'org.hamcrest:hamcrest-core:1.1'
 
     emma "emma:emma:2.0.5312"
     emma "emma:emma_ant:2.0.5312"

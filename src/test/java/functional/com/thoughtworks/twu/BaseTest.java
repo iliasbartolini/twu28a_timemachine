@@ -19,7 +19,6 @@ public class BaseTest {
     protected String userNameString = "test.twu";
 
     protected void submitCredentials(String passwordString) {
-
         WebElement username = webDriver.findElement(By.id("username"));
 
         username.clear();

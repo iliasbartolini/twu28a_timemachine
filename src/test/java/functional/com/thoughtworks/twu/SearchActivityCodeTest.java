@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,7 +16,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.hamcrest.CoreMatchers.is;
 
 import static org.junit.Assert.assertThat;
-import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertEquals;
+
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -34,43 +36,30 @@ public class SearchActivityCodeTest extends BaseTest {
         webDriver.findElement(By.id("timeRecord")).click();
         webDriver.findElement(By.id("searchActivityCode")).click();
     }
+
     @Test
     @Ignore("Search Activity Not Ready")
     public void shouldReturnActivityCodeToActivityCodeField() {
-        //Assuage
-        //Act
         String selectedActivityCode = searchAndSelectActivity("YTYOO96");
-        //Assert
         assertThat(webDriver.findElement(By.id("activity")).getText(),is(selectedActivityCode));
     }
+
     @Test
     public void shouldShowErrorForSearchStringLessThan2Characters() {
-        //Assuage
-        //Act
         enterSearchString("a");
-        //Assert
-        assertThat(waitForVisibilityOfElementById("result").getText(),is(getExpectedErrorMessage("Alteast2CharsForSearch")));
+        assertEquals(getExpectedErrorMessage("Alteast2CharsForSearch"),waitForVisibilityOfElementById("result").getText());
     }
+
     @Test
-    //@Ignore("Search Activity Not Ready")
+    @Ignore("Inconsistency in response to be resolved")
     public void shouldShowErrorForNoMatchFound() {
-        //Assuage
-        //Act
-        enterSearchString("XYZZZZZZZZ");
-        //Assert
-        //waitForVisibilityOfElementById("result");
-        //assertNotNull(webDriver.findElement(By.id("result")));
-        //assertThat(webDriver.findElement(By.id("result")).getText(),is(getExpectedErrorMessage("NoMatchingActivity")));
-        assertThat(waitForVisibilityOfElementById("result").getText(),is(getExpectedErrorMessage("NoMatchingActivity")));
+        enterSearchString("XYZZ");
+        assertEquals(getExpectedErrorMessage("NoMatchingActivity"),waitForVisibilityOfElementById("result").getText());
     }
-
-
 
     @Test
     @Ignore("Search Activity Not Ready")
     public void shouldSetBillableFlagAsNoForNonBillableActivity() {
-        //Assuage
-        //Act
         enterSearchString("YTYOO96");
         //Find element of list: There will be only one element
         //Element.click()
@@ -83,16 +72,12 @@ public class SearchActivityCodeTest extends BaseTest {
         webDriver.close();
     }
     private void enterSearchString(String searchString){
-        //WebDriverWait wait = waitForVisibilityOfElementById("searchCriteria");
-        //WebElement search = wait.until(ExpectedConditions.visibilityOf(webDriver.findElement(By.id("searchCriteria"))));
         WebElement search = waitForVisibilityOfElementById("searchCriteria");
-        //search = webDriver.findElement(By.id("searchCriteria"));
-        search.clear();
         search.sendKeys(searchString);
         search.submit();
     }
 
-    private WebElement waitForVisibilityOfElementById(String elementid) {
+    private WebElement waitForVisibilityOfElementById(String elementid) throws TimeoutException {
         return (new WebDriverWait(webDriver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id(elementid))));
     }
 
@@ -108,9 +93,5 @@ public class SearchActivityCodeTest extends BaseTest {
         MessageService messageService = new MessageService();
         Message message = messageService.getMessageMessageById(messageId);
         return message.getMessage();
-    }
-    private String getObtainedErrorMessage() {
-        WebElement messageElement = webDriver.findElement(By.id("result"));
-        return messageElement.getText();
     }
 }

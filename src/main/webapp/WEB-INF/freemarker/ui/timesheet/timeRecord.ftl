@@ -48,8 +48,6 @@
         </#list>
         </select>
 
-
-
         <select id="state" name="state" disabled="disabled">
             <option value="default" selected="selected">Select a state</option>
         <#list states as state>
