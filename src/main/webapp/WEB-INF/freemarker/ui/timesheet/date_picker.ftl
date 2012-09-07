@@ -21,7 +21,6 @@
     <script>
         $(document).ready(function(){
 
-//            $("#new_timesheet_form").validate();
             $("#newtimesheet")
                     .validate({
                         rules: {
@@ -33,11 +32,7 @@
                             wecal: "Week ending date is required."
                         },
                         errorPlacement: function(error, element) {
-
                             error.insertAfter("#datepickerdiv");
-
-
-
                         }
                     });
         });
