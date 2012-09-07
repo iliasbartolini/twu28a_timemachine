@@ -37,29 +37,26 @@ public class NewTimesheetTest extends BaseTest {
         countryService = new CountryService();
         webDriver.get(dashboardUrl);
         super.submitCredentials(validPasswordString);
+        webDriver.get(timeRecordUrl);
     }
 
     @Test
-    @Ignore("Page name conflict to be resolved")
     public void checkIfCountryBlankInitially() throws UnknownHostException {
-        webDriver.get(newTimesheetUrl);
         Select selectBox = new Select(webDriver.findElement(By.id("country")));
         assertThat(selectBox.getFirstSelectedOption().getText(), is("Select a country"));
     }
 
     @Test
-    @Ignore("Page name conflict to be resolved")
+    //@Ignore("Page name conflict to be resolved")
     public void checkIfCountryCanBeSelected() throws UnknownHostException {
-        webDriver.get(newTimesheetUrl);
         WebElement country = webDriver.findElement(By.id("country"));
         assertThat(country.isEnabled(), is(true));
     }
 
 
     @Test
-    @Ignore("Page name conflict to be resolved")
+    //@Ignore("Page name conflict to be resolved")
     public void checkIfEntireCountryListIsAvailable() throws UnknownHostException {
-        webDriver.get(newTimesheetUrl);
         List<String> obtainedCountryNames = getActualCountryList();
 
         List<String> expectedCountryNames = getExpectedCountryList(countryService);
@@ -68,10 +65,9 @@ public class NewTimesheetTest extends BaseTest {
 
 
     @Test
-    @Ignore("Page name conflict to be resolved")
+    //@Ignore("Page name conflict to be resolved")
     public void checkIfStateIsBlankInitially() throws UnknownHostException {
         //Assuage
-        webDriver.get(newTimesheetUrl);
         //Act
         WebElement state = webDriver.findElement(By.id("state"));
         Select dropDownState = new Select(state);
@@ -82,10 +78,10 @@ public class NewTimesheetTest extends BaseTest {
 
 
     @Test
-    @Ignore("Page name conflict to be resolved")
+    //@Ignore("Page name conflict to be resolved")
     public void checkIfStateIsDisabledOnPageLoad() throws UnknownHostException {
         //Assuage
-        webDriver.get(newTimesheetUrl);
+
         //Act
         WebElement state = webDriver.findElement(By.id("state"));
         //Assert
@@ -93,11 +89,10 @@ public class NewTimesheetTest extends BaseTest {
     }
 
     @Test
-    @Ignore("Page name conflict to be resolved")
+    //@Ignore("Page name conflict to be resolved")
     public void givenUSAIsSelectedStatesShouldBeEnabled() {
         //Assuage
 
-        webDriver.get(newTimesheetUrl);
 
         //Act
         selectCountry("USA - USA");
@@ -107,10 +102,9 @@ public class NewTimesheetTest extends BaseTest {
     }
 
     @Test
-    @Ignore("Page name conflict to be resolved")
+    //@Ignore("Page name conflict to be resolved")
     public void changeCountryUSAToOtherStatesEmpty() {
         //Assuage
-        webDriver.get(newTimesheetUrl);
         selectCountry("USA - USA");
         selectState("GA");
         //Act
@@ -121,10 +115,9 @@ public class NewTimesheetTest extends BaseTest {
     }
 
     @Test
-    @Ignore("Page name conflict to be resolved")
+    //@Ignore("Page name conflict to be resolved")
     public void checkIfStateListIsAvailable() throws Exception {
         //Assuage
-        webDriver.get(newTimesheetUrl);
         selectCountry("USA - USA");
         //Act
         List<String> obtainedStateNames = getActualStateList();

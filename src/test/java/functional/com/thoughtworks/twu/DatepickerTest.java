@@ -36,7 +36,7 @@ public class DatepickerTest extends BaseTest {
     }
 
     @Test
-    @Ignore
+    @Ignore("Link to put back date on timesheet pending")
     public void shouldLinkToNewTimesheetWithValidInput() {
 
         WebElement calendar = webDriver.findElement(By.id("wecal"));
