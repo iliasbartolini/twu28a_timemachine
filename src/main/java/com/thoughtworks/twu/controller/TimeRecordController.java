@@ -16,11 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class TimeRecordController {
 
 
-    @RequestMapping(value = "/timesheet/timeRecord", method = RequestMethod.GET)
+    @RequestMapping(value = "/timesheet/timerecord", method = RequestMethod.GET)
     public ModelAndView newTimesheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
         CountryService countryService = new CountryService();
 
-        ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeRecord");
+        ModelAndView modelAndView = new ModelAndView("ui/timesheet/timerecord");
         modelAndView.addObject("countries", countryService.getCountryNames());
         modelAndView.addObject("states", countryService.getStateName("USA"));
         HibernateConnection.getInstance().getSession().close();

@@ -22,12 +22,12 @@
     </div>
 
     <div class="ui-block-b" style=" max-width: 70px">
-        <a href="timerecord" data-role = "button"  data-inline="true" data-theme="b" style="height:32px;padding-bottom:7px">Cancel</a>
+        <a href="timerecord" data-ajax="false" data-role = "button"  data-inline="true" data-theme="b" style="height:32px;padding-bottom:7px">Cancel</a>
     </div>
   </fieldset>
 </form>
 
-<div id="result" style="color:red;"></div>
+<div id="result" style="color:#ff0000;"></div>
 
 <ul id="messages" class="hidden">
     <#list messages as item>

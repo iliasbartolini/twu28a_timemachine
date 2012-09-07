@@ -32,6 +32,7 @@ $(function() {
                     $a.html('<h3 class="ui-li-heading">' + projectString + '</h3><p class="ui-li-desc">' + activities[i].sub_project_name +'</p>');
                     $a.attr("href", "timerecord");
                     $a.attr("text",projectString);
+                    $a.attr("data-ajax", "false");
                     $item.attr("data-icon", "check");
 
                     $a.click(function() {

@@ -21,7 +21,7 @@
     <script>
         $(document).ready(function(){
 //            $("#new_timesheet_form").validate();
-            $("#new_timesheet_form")
+            $("#newtimesheet")
                     .validate({
                         rules: {
                             wecal: {

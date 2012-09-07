@@ -4,21 +4,21 @@ package functional.com.thoughtworks.twu;
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
 import com.thoughtworks.twu.service.CountryService;
-
-import org.junit.*;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-
-import org.openqa.selenium.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 
 public class NewTimesheetTest extends BaseTest {
@@ -36,7 +36,7 @@ public class NewTimesheetTest extends BaseTest {
         String url = InetAddress.getLocalHost().getHostName() + ":9093/timemachine";
         webDriver.get(url);
         super.submitCredentials(validPasswordString);
-        newTimesheetUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine/timesheet/timeRecord";
+        newTimesheetUrl = InetAddress.getLocalHost().getHostName() + ":9093/timemachine/timesheet/timerecord";
     }
 
     @Test
