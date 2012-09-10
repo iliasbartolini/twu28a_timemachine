@@ -67,7 +67,19 @@ public class DatepickerTest extends BaseTest {
         WebElement message = webDriver.findElement(By.xpath("//label[@class='error']"));
         assertEquals(message.getText(), getExpectedErrorMessage("DuplicateTimesheetForWeek"));
     }
+    @Test
+    public void shouldBeReadOnly() {
+        WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
+        newTimesheetButton.click();
 
+
+        WebElement calender = webDriver.findElement(By.id("wecal"));
+        calender.sendKeys("16-Sep-12");
+
+        assertThat(webDriver.findElement(By.id("wecal")).getAttribute("value"), is(""));
+
+
+    }
     @Test
     @Ignore("Link to put back date on timesheet pending")
     public void shouldLinkToNewTimesheetWithValidInput() {
