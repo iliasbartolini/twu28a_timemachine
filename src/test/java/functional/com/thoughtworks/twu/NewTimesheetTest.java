@@ -1,10 +1,9 @@
 package functional.com.thoughtworks.twu;
 
 
-import com.thoughtworks.twu.domain.LocationPresences;
-import com.thoughtworks.twu.service.CountryService;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,17 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.internal.matchers.IsCollectionContaining.hasItems;
+import static org.junit.Assert.*;
 
 
 public class NewTimesheetTest extends BaseTest {
 
 
     private String validPasswordString = "Th0ughtW0rks@12";
-    private CountryService countryService;
 
     public NewTimesheetTest() throws UnknownHostException {
         super();
@@ -34,7 +29,6 @@ public class NewTimesheetTest extends BaseTest {
     @Before
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
-        countryService = new CountryService();
         webDriver.get(dashboardUrl);
         super.submitCredentials(validPasswordString);
         webDriver.get(timeRecordUrl);
@@ -55,43 +49,29 @@ public class NewTimesheetTest extends BaseTest {
 
 
     @Test
+    @Ignore("TW Presence not yet implemented")
     public void shouldDisplayCountryListWithBothCountryCodeAndName() throws UnknownHostException {
         List<String> obtainedCountryNames = getActualCountryList();
         List<String> expectedCountryNames = getExpectedCountryList();
-        assertTrue(obtainedCountryNames.containsAll(expectedCountryNames));
+        assertThat(obtainedCountryNames, is(expectedCountryNames));
     }
 
     @Test
-    //@Ignore("Page name conflict to be resolved")
     public void checkIfStateIsBlankInitially() throws UnknownHostException {
-        //Assuage
-        //Act
         WebElement state = webDriver.findElement(By.id("state"));
         Select dropDownState = new Select(state);
-
-        //Assert
         assertEquals("", dropDownState.getFirstSelectedOption().getText());
     }
 
 
     @Test
-    //@Ignore("Page name conflict to be resolved")
     public void checkIfStateIsDisabledOnPageLoad() throws UnknownHostException {
-        //Assuage
-
-        //Act
         WebElement state = webDriver.findElement(By.id("state"));
-        //Assert
         assertThat(state.isEnabled(), is(false));
     }
 
     @Test
-    //@Ignore("Page name conflict to be resolved")
     public void givenUSAIsSelectedStatesShouldBeEnabled() {
-        //Assuage
-
-
-        //Act
         selectCountry("USA - USA");
         WebElement state = webDriver.findElement(By.id("state"));
 
@@ -99,12 +79,9 @@ public class NewTimesheetTest extends BaseTest {
     }
 
     @Test
-    //@Ignore("Page name conflict to be resolved")
     public void changeCountryUSAToOtherStatesEmpty() {
-        //Assuage
         selectCountry("USA - USA");
         selectState("GA");
-        //Act
         selectCountry("IND - India");
         WebElement state = webDriver.findElement(By.id("state"));
         Select dropDownState = new Select(state);
@@ -112,15 +89,11 @@ public class NewTimesheetTest extends BaseTest {
     }
 
     @Test
-    //@Ignore("Page name conflict to be resolved")
     public void checkIfStateListIsAvailable() throws Exception {
-        //Assuage
         selectCountry("USA - USA");
-        //Act
         List<String> obtainedStateNames = getActualStateList();
 
         List<String> expectedStateNames = getExpectedStateList();
-        //Assert
         assertEquals(expectedStateNames, obtainedStateNames);
 
     }
@@ -134,9 +107,20 @@ public class NewTimesheetTest extends BaseTest {
 
     private List<String> getExpectedCountryList() {
         List<String> expectedCountryNames = new ArrayList<String>();
+
         expectedCountryNames.add("Select a country");
-        expectedCountryNames.add("USA - USA");
+        expectedCountryNames.add("AUS - Australia");
+        expectedCountryNames.add("BRA - Brazil");
+        expectedCountryNames.add("CAN - Canada");
+        expectedCountryNames.add("CHN - China");
+        expectedCountryNames.add("DEU - Germany");
+        expectedCountryNames.add("GBR - UK");
         expectedCountryNames.add("IND - India");
+        expectedCountryNames.add("SGP - Singapore");
+        expectedCountryNames.add("UGA - Uganda");
+        expectedCountryNames.add("USA - USA");
+        expectedCountryNames.add("ZAF - Sth Africa");
+
         return expectedCountryNames;
     }
 
@@ -152,13 +136,66 @@ public class NewTimesheetTest extends BaseTest {
     }
 
     private List<String> getExpectedStateList() {
-        List<LocationPresences> expectedStates = countryService.getStates("USA");
-        List<String> expectedStateNames = new ArrayList<String>();
-        expectedStateNames.add("Select a state");
-        for (LocationPresences expectedState : expectedStates) {
-            expectedStateNames.add(expectedState.getState());
-        }
-        return expectedStateNames;
+        List<String> stateList = new ArrayList<String>();
+
+        stateList.add("Select a state");
+        stateList.add("AK");
+        stateList.add("AL");
+        stateList.add("AR");
+        stateList.add("AS");
+        stateList.add("AZ");
+        stateList.add("CA");
+        stateList.add("CO");
+        stateList.add("CT");
+        stateList.add("DC");
+        stateList.add("DE");
+        stateList.add("FL");
+        stateList.add("GA");
+        stateList.add("GU");
+        stateList.add("HI");
+        stateList.add("IA");
+        stateList.add("ID");
+        stateList.add("IL");
+        stateList.add("IN");
+        stateList.add("KS");
+        stateList.add("KY");
+        stateList.add("LA");
+        stateList.add("MA");
+        stateList.add("MD");
+        stateList.add("ME");
+        stateList.add("MI");
+        stateList.add("MN");
+        stateList.add("MO");
+        stateList.add("MS");
+        stateList.add("MT");
+        stateList.add("NC");
+        stateList.add("ND");
+        stateList.add("NE");
+        stateList.add("NH");
+        stateList.add("NJ");
+        stateList.add("NM");
+        stateList.add("NV");
+        stateList.add("NY");
+        stateList.add("OH");
+        stateList.add("OK");
+        stateList.add("OR");
+        stateList.add("PA");
+        stateList.add("PR");
+        stateList.add("RI");
+        stateList.add("SC");
+        stateList.add("SD");
+        stateList.add("TN");
+        stateList.add("TX");
+        stateList.add("UT");
+        stateList.add("VA");
+        stateList.add("VI");
+        stateList.add("VT");
+        stateList.add("WA");
+        stateList.add("WI");
+        stateList.add("WV");
+        stateList.add("WY");
+
+        return stateList;
     }
 
     private List<String> getActualStateList() {
