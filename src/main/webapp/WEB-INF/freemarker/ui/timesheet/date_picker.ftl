@@ -47,7 +47,7 @@
 
 <div data-role="dialog" data-theme="a">
 
-    <form id="newtimesheet" action="newtimesheet" method="get"
+    <form id="newtimesheet" action="new" method="get"
           class="ui-body ui-body-a ui-corner-all">
 
         <div data-role="fieldcontain" id="datepickerdiv">
