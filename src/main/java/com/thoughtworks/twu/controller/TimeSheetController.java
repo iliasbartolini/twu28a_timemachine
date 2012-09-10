@@ -33,12 +33,32 @@ public class TimeSheetController {
         this.timesheetService = timesheetService;
     }
 
+
     @RequestMapping(value = URLPaths.DATEPICKER_PATH, method = RequestMethod.GET)
     public ModelAndView weekEndingDate() {
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/date_picker");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/timesheet/timeSheet", method = RequestMethod.GET)
+    public ModelAndView getTimesheet() {
+        ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeSheet");
+        HibernateConnection.getInstance().getSession().close();
+        return modelAndView;
+    }
+
+
+//    @RequestMapping(value = "/timesheet/datepicker", method = RequestMethod.GET)
+//    public ModelAndView pickDate() {
+//
+//        ModelAndView modelAndView = new ModelAndView("ui/timesheet/date_picker");
+//
+//        HibernateConnection.getInstance().getSession().close();
+//
+//        return modelAndView;
+//    }
+
 
     @RequestMapping(value = URLPaths.NEW_TIMESHEET_PATH, method = RequestMethod.GET)
     public ModelAndView newTimeSheet(HttpServletRequest request) {

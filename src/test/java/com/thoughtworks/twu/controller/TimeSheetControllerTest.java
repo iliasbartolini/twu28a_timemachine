@@ -42,6 +42,7 @@ public class TimeSheetControllerTest {
         when(timesheetService.createNewTimesheet()).thenReturn(expectedTimesheet);
 
 
+
         request = mock(HttpServletRequest.class);
         when(request.getRemoteUser()).thenReturn("batman");
         when(request.getParameter("weekEndingDate")).thenReturn("10-SEP-2012");
