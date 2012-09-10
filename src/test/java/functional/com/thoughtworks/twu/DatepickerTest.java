@@ -1,5 +1,6 @@
 package functional.com.thoughtworks.twu;
 
+import com.thoughtworks.twu.constants.URLPaths;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -42,7 +43,7 @@ public class DatepickerTest extends BaseTest {
         WebElement calendar = webDriver.findElement(By.id("wecal"));
         WebElement submit = webDriver.findElement(By.id("submit"));
         submit.submit();
-        assertThat(webDriver.getCurrentUrl(), containsString(newTimesheetPath));
+        assertThat(webDriver.getCurrentUrl(), containsString(URLPaths.NEW_TIMESHEET_PATH));
         //Assertion needs to change
     }
     @After

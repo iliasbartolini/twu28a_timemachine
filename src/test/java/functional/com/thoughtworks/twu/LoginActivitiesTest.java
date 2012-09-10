@@ -1,5 +1,6 @@
 package functional.com.thoughtworks.twu;
 
+import com.thoughtworks.twu.constants.URLPaths;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +39,7 @@ public class LoginActivitiesTest extends BaseTest {
         submitCredentials(invalidPasswordString);
         assertNotNull(webDriver.findElement(By.id("msg")));
         submitCredentials(validPasswordString);
-        assertThat(webDriver.getCurrentUrl(), containsString(newTimesheetPath));
+        assertThat(webDriver.getCurrentUrl(), containsString(URLPaths.NEW_TIMESHEET_PATH));
     }
 
     @Test
@@ -46,7 +47,7 @@ public class LoginActivitiesTest extends BaseTest {
         webDriver.get(newTimesheetUrl);
         assertThat(webDriver.getCurrentUrl(), containsString("https://castest.thoughtworks.com/cas/login?"));
         submitCredentials(validPasswordString);
-        assertThat(webDriver.getCurrentUrl(), containsString(newTimesheetPath));
+        assertThat(webDriver.getCurrentUrl(), containsString(URLPaths.NEW_TIMESHEET_PATH));
     }
 
     @After

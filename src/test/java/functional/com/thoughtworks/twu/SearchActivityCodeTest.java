@@ -71,7 +71,7 @@ public class SearchActivityCodeTest extends BaseTest {
         //assertTrue(!webDriver.findElement(By.id("activity")).isEnabled())
     }
 
-    //@After
+    @After
     public void teardown() {
         webDriver.close();
     }

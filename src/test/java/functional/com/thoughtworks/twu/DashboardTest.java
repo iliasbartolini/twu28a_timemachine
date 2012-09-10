@@ -1,5 +1,6 @@
 package functional.com.thoughtworks.twu;
 
+import com.thoughtworks.twu.constants.URLPaths;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class DashboardTest extends BaseTest {
         webDriver.get(dashboardUrl);
         WebElement datePickerLink = webDriver.findElement(By.id("new_timesheet"));
         datePickerLink.click();
-        assertThat(webDriver.getCurrentUrl(), containsString(datePickerPath));
+        assertThat(webDriver.getCurrentUrl(), containsString(URLPaths.DATEPICKER_PATH));
     }
 
     @Test

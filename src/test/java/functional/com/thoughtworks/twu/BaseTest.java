@@ -1,5 +1,6 @@
 package functional.com.thoughtworks.twu;
 
+import com.thoughtworks.twu.constants.URLPaths;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -23,18 +24,15 @@ public class BaseTest {
     protected String newTimesheetUrl;
     protected String timeRecordUrl;
     protected String searchActivityUrl;
-    protected String dashboardPagePath = ":9093/timemachine";
-    protected String datePickerPath = ":9093/timemachine/timesheet/datepicker";
-    protected String newTimesheetPath = ":9093/timemachine/timesheet/newtimesheet";
-    protected String timeRecordPath = ":9093/timemachine/timesheet/timerecord";
-    protected String searchActivityPath = ":9093/timemachine/timesheet/search_activity";
+
+
     public BaseTest() throws UnknownHostException {
         String hostName = InetAddress.getLocalHost().getHostName();
-        dashboardUrl = hostName +dashboardPagePath;
-        datePickerUrl = hostName + datePickerPath;
-        newTimesheetUrl = hostName + newTimesheetPath;
-        timeRecordUrl = hostName + timeRecordPath;
-        searchActivityUrl = hostName + searchActivityPath;
+        dashboardUrl = hostName + URLPaths.DASHBOARD_PATH;
+        datePickerUrl = hostName + URLPaths.DATEPICKER_PATH;
+        newTimesheetUrl = hostName + URLPaths.NEW_TIMESHEET_PATH;
+        timeRecordUrl = hostName + URLPaths.TIME_RECORD_PATH;
+        searchActivityUrl = hostName + URLPaths.SEARCH_ACTIVITY_PATH;
     }
 
     protected void submitCredentials(String passwordString) {
