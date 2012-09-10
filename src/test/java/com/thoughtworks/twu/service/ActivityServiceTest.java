@@ -1,7 +1,9 @@
 package com.thoughtworks.twu.service;
 
 import com.thoughtworks.twu.domain.Activity;
+import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.json.JSONArray;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
 import static junit.framework.Assert.assertEquals;
 
 public class ActivityServiceTest {
+
 
     @Test
     public void shouldFetchListOfAllActivities() {
@@ -46,3 +49,5 @@ public class ActivityServiceTest {
 
 
 }
+
+
