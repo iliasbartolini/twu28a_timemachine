@@ -89,9 +89,5 @@ public class SearchActivityCodeTest extends BaseTest {
         searchResult.click();
         return selectedActivityCode;
     }
-    private String getExpectedErrorMessage(String messageId) {
-        MessageService messageService = new MessageService();
-        Message message = messageService.getMessageMessageById(messageId);
-        return message.getMessage();
-    }
+
 }

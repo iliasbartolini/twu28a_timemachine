@@ -40,6 +40,35 @@ public class DatepickerTest extends BaseTest {
     }
 
     @Test
+    @Ignore("Functionality pending")
+    public void shouldShowErrorWhenDuplicateDate(){
+
+        WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
+        newTimesheetButton.click();
+        WebElement openDatepickerButton = webDriver.findElement(By.xpath("//a[@title='Open Date Picker']"));
+        openDatepickerButton.click();
+        WebElement sundayButton = webDriver.findElement(By.className("ui-btn-up-e"));
+        sundayButton.click();
+
+        String selectedWeekEndingDate = webDriver.findElement(By.id("wecal")).getAttribute("value");
+
+        WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
+        dateSubmitButton.click();
+
+        WebElement timesheetSubmitButton = webDriver.findElement(By.id("submit"));
+        timesheetSubmitButton.click();
+
+        newTimesheetButton.click();
+        openDatepickerButton.click();
+        sundayButton.click();
+        dateSubmitButton.click();
+
+
+        WebElement message = webDriver.findElement(By.xpath("//label[@class='error']"));
+        assertEquals(message.getText(), getExpectedErrorMessage("DuplicateTimesheetForWeek"));
+    }
+
+    @Test
     @Ignore("Link to put back date on timesheet pending")
     public void shouldLinkToNewTimesheetWithValidInput() {
 

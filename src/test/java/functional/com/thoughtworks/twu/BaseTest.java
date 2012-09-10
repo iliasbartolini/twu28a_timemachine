@@ -1,6 +1,8 @@
 package functional.com.thoughtworks.twu;
 
 import com.thoughtworks.twu.constants.URLPaths;
+import com.thoughtworks.twu.domain.Message;
+import com.thoughtworks.twu.service.MessageService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -54,6 +56,12 @@ public class BaseTest {
         firefoxProfile.setPreference("general.useragent.override", userAgent);
         webDriver = new FirefoxDriver(firefoxProfile);
         webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    }
+
+    protected String getExpectedErrorMessage(String messageId) {
+        MessageService messageService = new MessageService();
+        Message message = messageService.getMessageMessageById(messageId);
+        return message.getMessage();
     }
 
 
