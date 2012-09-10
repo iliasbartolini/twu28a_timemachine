@@ -10,14 +10,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created with IntelliJ IDEA.
- * User: priyanka
- * Date: 10/9/12
- * Time: 11:02 AM
- * To change this template use File | Settings | File Templates.
- */
-
 public class CountryServiceTest {
     private CountryService countryService;
 
@@ -34,8 +26,4 @@ public class CountryServiceTest {
 
     }
 
-    public void testGetStateName() throws Exception {
-
-
-    }
 }
