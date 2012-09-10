@@ -26,11 +26,13 @@ public class DatepickerTest extends BaseTest {
 
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
-        webDriver.get(datePickerUrl);
+        webDriver.get(dashboardUrl);
         super.submitCredentials(validPasswordString);
     }
     @Test
     public void shouldShowErrorWhenBlank(){
+        WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
+        newTimesheetButton.click();
         WebElement submit = webDriver.findElement(By.id("submit"));
         submit.submit();
         WebElement message = webDriver.findElement(By.xpath("//label[@class='error']"));
@@ -55,6 +57,17 @@ public class DatepickerTest extends BaseTest {
 
         WebElement weekEndingDisplay = webDriver.findElement(By.id("weekEndingDate"));
         assertEquals(selectedWeekEndingDate, weekEndingDisplay.getText());
+    }
+
+    @Test
+    public void shouldReturnToDashboardOnCancel() {
+        WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
+        newTimesheetButton.click();
+
+        WebElement cancelButton = webDriver.findElement(By.id("cancel"));
+        cancelButton.click();
+
+        assertThat(webDriver.getCurrentUrl(), containsString(URLPaths.DASHBOARD_PATH));
     }
     @After
     public void tearDown(){
