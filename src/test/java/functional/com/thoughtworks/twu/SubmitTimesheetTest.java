@@ -2,15 +2,14 @@ package functional.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import static org.junit.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 import java.net.UnknownHostException;
 import java.util.List;
+
+import static org.testng.Assert.assertTrue;
 
 public class SubmitTimesheetTest extends BaseTest {
     private String validPasswordString = "Th0ughtW0rks@12";
@@ -25,8 +24,9 @@ public class SubmitTimesheetTest extends BaseTest {
         webDriver.get(dashboardUrl);
         super.submitCredentials(validPasswordString);
     }
+
+
     @Test
-    @Ignore("Functionality Pending")
     public void shouldBeAbleToSubmitTimesheet() {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
