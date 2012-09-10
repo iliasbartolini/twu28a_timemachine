@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
@@ -27,7 +29,7 @@ public class BaseTest {
     protected String newTimesheetUrl;
     protected String timeRecordUrl;
     protected String searchActivityUrl;
-
+    private Map<String, String> expectedMessages = new HashMap<String, String>();
 
     public BaseTest() throws UnknownHostException {
         String hostName = InetAddress.getLocalHost().getHostName();
@@ -36,6 +38,22 @@ public class BaseTest {
         newTimesheetUrl = hostName + basePath + URLPaths.NEW_TIMESHEET_PATH;
         timeRecordUrl = hostName + basePath + URLPaths.TIME_RECORD_PATH;
         searchActivityUrl = hostName + basePath + URLPaths.SEARCH_ACTIVITY_PATH;
+
+        expectedMessages.put("UserNamePasswordCannotBeBlank","Username is a required field.  Password is a required field.");
+        expectedMessages.put("UserNamePasswordMismatch","The credentials you provided cannot be determined to be authentic.");
+        expectedMessages.put("NoExistingTimesheets","You don't have any saved timesheets.  ");
+        expectedMessages.put("Alteast2CharsForSearch","Type in more than two characters.");
+        expectedMessages.put("NoMatchingActivity","No matching activity found.");
+        expectedMessages.put("TimesheetnameBlank","Name field cannot be left blank.");
+        expectedMessages.put("DuplicateFavTimesheet","Duplicate name. Please try another name.");
+        expectedMessages.put("CountryCannotBeUnspecified","Country is required.");
+        expectedMessages.put("StateCannotBeUnspecified","State is required.");
+        expectedMessages.put("ActivityCannotBeUnspecified","Activity is required.");
+        expectedMessages.put("WeekCannotBeUnspecified","Week ending date is required.");
+        expectedMessages.put("DuplicateTimesheetForWeek","Week ending date is already associated with a Time Report.");
+        expectedMessages.put("TaskCommentCannotBeUnspecified","Task Comment is required.");
+        expectedMessages.put("HoursLessThan40","Your total billed hours for the week are less than 40. Do you want to continue submitting this timesheet?");
+        expectedMessages.put("PublicHolidayConfirmation","<Date> was a public holiday in <Country>. Are you sure you want to enter hours for it");
     }
 
     protected void submitCredentials(String passwordString) {
@@ -59,9 +77,7 @@ public class BaseTest {
     }
 
     protected String getExpectedErrorMessage(String messageId) {
-        MessageService messageService = new MessageService();
-        Message message = messageService.getMessageMessageById(messageId);
-        return message.getMessage();
+        return expectedMessages.get(messageId);
     }
 
 
