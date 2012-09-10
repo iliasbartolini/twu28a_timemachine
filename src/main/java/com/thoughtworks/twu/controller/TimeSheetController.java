@@ -27,7 +27,7 @@ public class TimeSheetController {
     }
 
     @RequestMapping(value = URLPaths.DATEPICKER_PATH, method = RequestMethod.GET)
-    public ModelAndView pickDate() {
+    public ModelAndView weekEndingDate() {
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/date_picker");
 

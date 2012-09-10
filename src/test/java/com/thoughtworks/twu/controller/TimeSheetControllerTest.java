@@ -19,65 +19,59 @@ import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 
 
-    public class TimeSheetControllerTest {
-        TimeSheetController controller;
-        Employee expectedEmployee;
-        Timesheet expectedTimesheet;
-        HttpServletRequest request;
+public class TimeSheetControllerTest {
+    TimeSheetController controller;
+    Employee expectedEmployee;
+    Timesheet expectedTimesheet;
+    HttpServletRequest request;
 
-        @Before
-        public void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
 
-            expectedEmployee = new Employee();
-            expectedTimesheet = new Timesheet();
+        expectedEmployee = new Employee();
+        expectedTimesheet = new Timesheet();
 
-            EmployeeService employeeService = mock(EmployeeService.class);
-            when(employeeService.getEmployeeByLogin("batman")).thenReturn(expectedEmployee);
-
-
-            TimesheetService timesheetService = mock(TimesheetService.class);
-            when(timesheetService.createNewTimesheet()).thenReturn(expectedTimesheet);
+        EmployeeService employeeService = mock(EmployeeService.class);
+        when(employeeService.getEmployeeByLogin("batman")).thenReturn(expectedEmployee);
 
 
-            request = mock(HttpServletRequest.class);
-            when(request.getRemoteUser()).thenReturn("batman");
-
-            controller = new TimeSheetController(employeeService, timesheetService);
-        }
+        TimesheetService timesheetService = mock(TimesheetService.class);
+        when(timesheetService.createNewTimesheet()).thenReturn(expectedTimesheet);
 
 
-        @Test
-        public void shouldBeAbleToDisplayDatePickerDialog() throws Exception {
-            assertEquals("ui/timesheet/date_picker", controller.pickDate().getViewName());
-        }
+        request = mock(HttpServletRequest.class);
+        when(request.getRemoteUser()).thenReturn("batman");
 
-        @Test
-        public void shouldDisplayNewTimeSheetView() {
-            assertEquals("ui/timesheet/newtimesheet", controller.newTimeSheet(request).getViewName());
-        }
-
-        @Test
-        public void shouldAddEmployeeToModel() {
-
-
-
-            ModelAndView modelAndView = controller.newTimeSheet(request);
-            Employee actualEmployee = (Employee) modelAndView.getModel().get("employee");
-
-            assertThat(actualEmployee, is(expectedEmployee));
-
-        }
-
-        @Test
-        public void shouldAddTimesheetToModel() {
-
-
-            ModelAndView modelAndView = controller.newTimeSheet(request);
-            Timesheet actualTimesheet = (Timesheet) modelAndView.getModel().get("timesheet");
-
-            assertThat(actualTimesheet, is(expectedTimesheet));
-
-        }
-
+        controller = new TimeSheetController(employeeService, timesheetService);
     }
+
+
+    @Test
+    public void shouldBeAbleToDisplayDatePickerDialog() throws Exception {
+        assertEquals("ui/timesheet/date_picker", controller.weekEndingDate().getViewName());
+    }
+
+    @Test
+    public void shouldDisplayNewTimeSheetView() {
+        assertEquals("ui/timesheet/newtimesheet", controller.newTimeSheet(request).getViewName());
+    }
+
+    @Test
+    public void shouldAddEmployeeToModel() {
+
+        ModelAndView modelAndView = controller.newTimeSheet(request);
+        Employee actualEmployee = (Employee) modelAndView.getModel().get("employee");
+
+        assertThat(actualEmployee, is(expectedEmployee));
+    }
+
+    @Test
+    public void shouldAddTimesheetToModel() {
+
+        ModelAndView modelAndView = controller.newTimeSheet(request);
+        Timesheet actualTimesheet = (Timesheet) modelAndView.getModel().get("timesheet");
+
+        assertThat(actualTimesheet, is(expectedTimesheet));
+    }
+}
 

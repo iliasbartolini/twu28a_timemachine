@@ -1,5 +1,6 @@
 package com.thoughtworks.twu.controller;
 import com.thoughtworks.twu.constants.URLPaths;
+
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.validators.ActivityValidator;
 import com.thoughtworks.twu.domain.validators.LocationValidator;
@@ -31,17 +32,18 @@ public class TimeRecordController {
 
     @RequestMapping(value = URLPaths.TIME_RECORD_PATH, method = RequestMethod.POST)
     public ModelAndView submittedTimeSheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
+
         LocationValidator locationValidator = new LocationValidator();
-        ActivityValidator validator = new ActivityValidator();
+        ActivityValidator activityValidator = new ActivityValidator();
+
         locationValidator.validate(timeRecordForm, errors);
-        validator.validate(timeRecordForm, errors);
-        if(errors.hasErrors()){
-            return newTimesheet(timeRecordForm,errors);
-        }
-        else
-        {
-           ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeSheet");
-            modelAndView.addObject("timeRecordForm",timeRecordForm);
+        activityValidator.validate(timeRecordForm, errors);
+
+        if (errors.hasErrors()) {
+            return newTimesheet(timeRecordForm, errors);
+        } else {
+            ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeSheet");
+            modelAndView.addObject("timeRecordForm", timeRecordForm);
             return modelAndView;
         }
     }

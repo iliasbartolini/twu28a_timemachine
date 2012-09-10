@@ -36,7 +36,7 @@ public class DatepickerTest extends BaseTest {
         WebElement submit = webDriver.findElement(By.id("submit"));
         submit.submit();
         WebElement message = webDriver.findElement(By.xpath("//label[@class='error']"));
-        assertThat(message.getText(), is("Week ending date is required."));
+        assertThat(message.getText(), is("Week weekEndingDate date is required."));
     }
 
     @Test
