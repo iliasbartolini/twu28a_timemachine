@@ -7,7 +7,10 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import static org.junit.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import java.net.UnknownHostException;
+import java.util.List;
 
 public class SubmitTimesheetTest extends BaseTest {
     private String validPasswordString = "Th0ughtW0rks@12";
@@ -34,11 +37,22 @@ public class SubmitTimesheetTest extends BaseTest {
 
         String selectedWeekEndingDate = webDriver.findElement(By.id("wecal")).getAttribute("value");
 
-        WebElement submitButton = webDriver.findElement(By.id("submit"));
-        submitButton.click();
+        WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
+        dateSubmitButton.click();
 
-        WebElement weekEndingDisplay = webDriver.findElement(By.id("weekEndingDate"));
-        assertEquals(selectedWeekEndingDate, weekEndingDisplay.getText());
+        WebElement timesheetSubmitButton = webDriver.findElement(By.id("submit"));
+        timesheetSubmitButton.click();
+
+        List<WebElement> submittedTimesheets = webDriver.findElements(By.id("timesheet_list"));
+
+        boolean containsDate = false;
+        for(WebElement element : submittedTimesheets) {
+            if(element.getText().equals(selectedWeekEndingDate)) {
+                containsDate = true;
+                break;
+            }
+        }
+        assertTrue(containsDate);
     }
     @After
     public void teardown() {

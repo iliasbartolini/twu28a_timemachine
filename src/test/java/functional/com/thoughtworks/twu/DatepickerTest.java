@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import java.net.UnknownHostException;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
 
@@ -40,11 +41,20 @@ public class DatepickerTest extends BaseTest {
     @Ignore("Link to put back date on timesheet pending")
     public void shouldLinkToNewTimesheetWithValidInput() {
 
-        WebElement calendar = webDriver.findElement(By.id("wecal"));
-        WebElement submit = webDriver.findElement(By.id("submit"));
-        submit.submit();
-        assertThat(webDriver.getCurrentUrl(), containsString(URLPaths.NEW_TIMESHEET_PATH));
-        //Assertion needs to change
+        WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
+        newTimesheetButton.click();
+        WebElement openDatepickerButton = webDriver.findElement(By.xpath("//a[@title='Open Date Picker']"));
+        openDatepickerButton.click();
+        WebElement sundayButton = webDriver.findElement(By.className("ui-btn-up-e"));
+        sundayButton.click();
+
+        String selectedWeekEndingDate = webDriver.findElement(By.id("wecal")).getAttribute("value");
+
+        WebElement submitButton = webDriver.findElement(By.id("submit"));
+        submitButton.click();
+
+        WebElement weekEndingDisplay = webDriver.findElement(By.id("weekEndingDate"));
+        assertEquals(selectedWeekEndingDate, weekEndingDisplay.getText());
     }
     @After
     public void tearDown(){
