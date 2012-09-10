@@ -3,6 +3,8 @@ package com.thoughtworks.twu.service;
 import com.thoughtworks.twu.domain.Timesheet;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +23,12 @@ public class TimesheetService {
     }
 
     public List<Timesheet> getAllTimesheets() {
-        return session.createQuery("from com.thoughtworks.twu.domain.Timesheet").list();
+
+        connection = HibernateConnection.getInstance();
+        session = connection.getSession();
+
+        return session.createCriteria(Timesheet.class)
+                .list();
     }
 
     public void saveTimesheet(Timesheet timesheet) {
@@ -31,6 +38,7 @@ public class TimesheetService {
         session.getTransaction().begin();
         session.save(timesheet);
         session.getTransaction().commit();
+        session.close();
     }
 
     public Timesheet createNewTimesheet() {
@@ -42,5 +50,13 @@ public class TimesheetService {
         session.getTransaction().commit();
 
         return timesheet;
+    }
+
+    public List<Timesheet> getAllTimesheetsByUser(String remoteUser) {
+        connection = HibernateConnection.getInstance();
+        session = connection.getSession();
+
+        return session.createCriteria(Timesheet.class)
+                .add(Restrictions.eq("employeeNumber", remoteUser)).list();
     }
 }

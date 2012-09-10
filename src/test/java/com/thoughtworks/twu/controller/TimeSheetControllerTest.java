@@ -32,6 +32,7 @@ public class TimeSheetControllerTest {
     public void setUp() throws Exception {
 
         expectedEmployee = new Employee();
+        expectedEmployee.setEmployeeNumber("5678");
         expectedTimesheet = new Timesheet();
 
         EmployeeService employeeService = mock(EmployeeService.class);
@@ -75,12 +76,15 @@ public class TimeSheetControllerTest {
         timesheetForm.setWeekEndingDate("15-Sep-12");
 
         expectedTimesheet.setWeekEndingDate(new SimpleDateFormat("dd-MMM-yy").parse("15-Sep-12"));
+        expectedTimesheet.setEmployeeNumber(String.valueOf(expectedEmployee.getEmployeeNumber()));
 
         TimesheetService timesheetService = mock(TimesheetService.class);
         EmployeeService employeService = mock(EmployeeService.class);
 
+        when(employeService.getEmployeeByLogin("batman")).thenReturn(expectedEmployee);
+
         TimeSheetController controller = new TimeSheetController(employeService, timesheetService);
-        controller.submitTimesheet(timesheetForm);
+        controller.submitTimesheet(timesheetForm, request);
 
         verify(timesheetService).saveTimesheet(expectedTimesheet);
     }

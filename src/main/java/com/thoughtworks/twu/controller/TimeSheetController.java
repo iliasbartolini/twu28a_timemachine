@@ -2,6 +2,7 @@ package com.thoughtworks.twu.controller;
 
 
 import com.thoughtworks.twu.constants.URLPaths;
+import com.thoughtworks.twu.domain.Employee;
 import com.thoughtworks.twu.domain.Timesheet;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.timesheet.forms.TimesheetForm;
@@ -74,9 +75,11 @@ public class TimeSheetController {
     }
 
     @RequestMapping(value = "/timesheet/submit", method = RequestMethod.POST)
-    public String submitTimesheet(@ModelAttribute("timesheet") TimesheetForm timesheet) {
+    public String submitTimesheet(@ModelAttribute("timesheet") TimesheetForm timesheet,HttpServletRequest request) {
 
-        timesheetService.saveTimesheet(timesheet.toTimesheet());
+        Employee employee = employeeService.getEmployeeByLogin(request.getRemoteUser());
+
+        timesheetService.saveTimesheet(timesheet.toTimesheet(employee));
 
         return "redirect:/";
     }

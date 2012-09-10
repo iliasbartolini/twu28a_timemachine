@@ -2,12 +2,7 @@ package com.thoughtworks.twu.domain;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-
+import javax.persistence.*;
 
 
 @Entity
@@ -18,7 +13,7 @@ public class Employee {
     private int id;
     private String name;
     private String login;
-    private String employee_decimal;
+    private String employeeNumber;
 
     @Id
     @GeneratedValue(generator = "id")
@@ -39,12 +34,13 @@ public class Employee {
         this.login = login;
     }
 
-    public String getEmployee_decimal() {
-        return employee_decimal;
+    @Column(name = "employee_number")
+    public String getEmployeeNumber() {
+        return employeeNumber;
     }
 
-    public void setEmployee_decimal(String employee_decimal) {
-        this.employee_decimal = employee_decimal;
+    public void setEmployeeNumber(String employeeNumber) {
+        this.employeeNumber = employeeNumber;
     }
 
 

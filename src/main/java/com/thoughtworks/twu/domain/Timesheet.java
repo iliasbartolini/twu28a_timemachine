@@ -22,7 +22,7 @@ public class Timesheet {
         this.id = id;
     }
 
-    private String employee_decimal;
+    private String employeeNumber;
 
     private Date weekEndingDate;
 
@@ -31,12 +31,13 @@ public class Timesheet {
     private String updated_by;
     private Date updated_at;
 
-    public String getEmployee_decimal() {
-        return employee_decimal;
+    @Column(name="employee_number")
+    public String getEmployeeNumber() {
+        return employeeNumber;
     }
 
-    public void setEmployee_decimal(String employee_decimal) {
-        this.employee_decimal = employee_decimal;
+    public void setEmployeeNumber(String employeeNumber) {
+        this.employeeNumber = employeeNumber;
     }
 
     @Column(name = "WEEK_ENDING_DATE")
@@ -89,7 +90,7 @@ public class Timesheet {
         Timesheet timesheet = (Timesheet) o;
 
         if (id != timesheet.id) return false;
-        if (employee_decimal != null ? !employee_decimal.equals(timesheet.employee_decimal) : timesheet.employee_decimal != null)
+        if (employeeNumber != null ? !employeeNumber.equals(timesheet.employeeNumber) : timesheet.employeeNumber != null)
             return false;
         if (weekEndingDate != null ? !weekEndingDate.equals(timesheet.weekEndingDate) : timesheet.weekEndingDate != null)
             return false;
@@ -100,7 +101,7 @@ public class Timesheet {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (employee_decimal != null ? employee_decimal.hashCode() : 0);
+        result = 31 * result + (employeeNumber != null ? employeeNumber.hashCode() : 0);
         result = 31 * result + (weekEndingDate != null ? weekEndingDate.hashCode() : 0);
         return result;
     }

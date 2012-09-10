@@ -33,7 +33,7 @@ public class EmployeeServiceTest {
 
         Employee employee = new Employee();
         employee.setName("Andy");
-        employee.setEmployee_decimal("1234");
+        employee.setEmployeeNumber("1234");
         employee.setLogin("ashaw");
 
         service.saveEmployee(employee);

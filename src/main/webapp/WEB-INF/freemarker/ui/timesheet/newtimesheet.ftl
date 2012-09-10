@@ -38,7 +38,7 @@
 
         <div>Employee name: ${employee.name}</div>
         <div>Employee login: ${employee.login}</div>
-        <div>Employee number: ${employee.employee_decimal}</div>
+        <div>Employee number: ${employee.employeeNumber}</div>
         <label>Week Ending</label>
         <input type="text" name="weekEndingDate" id="weekEndingDate" value="${weekEndingDate}" />
         <br>

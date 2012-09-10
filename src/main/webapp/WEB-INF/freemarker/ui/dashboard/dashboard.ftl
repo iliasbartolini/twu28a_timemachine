@@ -29,8 +29,9 @@
 
     <ul data-role="listview" id="timesheet_list" data-divider-theme="a">
         <li data-role="list-divider">Week Ending</li>
-        <li><a href="">2/9/2012</a></li>
-        <li><a href="">9/9/2012</a></li>
+        <#list timesheets as item >
+            <li><a href="#">${item.weekEndingDate?string.medium}</a></li>
+        </#list>
     </ul>
 
 

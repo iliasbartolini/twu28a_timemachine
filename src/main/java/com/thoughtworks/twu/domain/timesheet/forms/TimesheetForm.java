@@ -1,5 +1,6 @@
 package com.thoughtworks.twu.domain.timesheet.forms;
 
+import com.thoughtworks.twu.domain.Employee;
 import com.thoughtworks.twu.domain.Timesheet;
 
 import java.text.DateFormat;
@@ -14,7 +15,7 @@ public class TimesheetForm {
         this.weekEndingDate = weekEndingDate;
     }
 
-    public Timesheet toTimesheet()  {
+    public Timesheet toTimesheet(Employee employee)  {
 
         DateFormat date = new SimpleDateFormat("dd-MMM-yy");
         Timesheet timesheet = new Timesheet();
@@ -23,6 +24,8 @@ public class TimesheetForm {
         } catch (ParseException e) {
             return null;
         }
+
+        timesheet.setEmployeeNumber(String.valueOf(employee.getEmployeeNumber()));
         return timesheet;
     }
 
