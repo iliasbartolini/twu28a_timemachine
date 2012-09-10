@@ -1,9 +1,7 @@
 package com.thoughtworks.twu.service;
 
 import com.thoughtworks.twu.domain.Activity;
-import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.json.JSONArray;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;

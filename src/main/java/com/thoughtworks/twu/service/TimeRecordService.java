@@ -1,7 +1,6 @@
 package com.thoughtworks.twu.service;
 
 import com.thoughtworks.twu.domain.Timesheet;
-import com.thoughtworks.twu.domain.Timesheet;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
 

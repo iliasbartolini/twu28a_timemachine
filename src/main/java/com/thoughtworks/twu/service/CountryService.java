@@ -3,12 +3,14 @@ package com.thoughtworks.twu.service;
 
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
-import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
+import com.thoughtworks.twu.persistence.CountryRepository;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
@@ -19,6 +21,19 @@ public class CountryService {
 
     private List<Country> countries;
     private List<LocationPresences> locationPresences;
+    private CountryRepository countryRepository;
+
+    @Autowired
+    public CountryService(CountryRepository countryRepository) {
+        this.countryRepository = countryRepository;
+    }
+
+    public List<Country> loadCountryList() {
+        return this.countryRepository.loadCountries();
+    }
+
+    public CountryService() {
+    }
 
     private List<Country> getCountries() {
 
@@ -70,7 +85,8 @@ public class CountryService {
         connection = HibernateConnection.getInstance();
         session = connection.getSession();
 
-        countries = session.createCriteria(LocationPresences.class).add(Restrictions.eq("thoughtworksPresence",1)).list();
+        countries = session.createCriteria(LocationPresences.class).add(Restrictions.eq("thoughtworksPresence", 1)).list();
         return countries;
     }
+
 }

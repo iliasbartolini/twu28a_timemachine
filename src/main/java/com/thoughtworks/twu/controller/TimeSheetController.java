@@ -2,9 +2,11 @@ package com.thoughtworks.twu.controller;
 
 
 import com.thoughtworks.twu.constants.URLPaths;
+
 import com.thoughtworks.twu.domain.Employee;
 import com.thoughtworks.twu.domain.Timesheet;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
+
 import com.thoughtworks.twu.domain.timesheet.forms.TimesheetForm;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.EmployeeService;
@@ -17,10 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
 public class TimeSheetController {

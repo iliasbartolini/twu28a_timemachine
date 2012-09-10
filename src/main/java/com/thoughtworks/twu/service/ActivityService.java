@@ -4,7 +4,6 @@ import com.thoughtworks.twu.domain.Activity;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
