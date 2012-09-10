@@ -1,12 +1,10 @@
 package functional.com.thoughtworks.twu;
 
 
-import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
 import com.thoughtworks.twu.service.CountryService;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,6 +17,8 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.internal.matchers.IsCollectionContaining.hasItems;
 
 
 public class NewTimesheetTest extends BaseTest {
@@ -41,7 +41,7 @@ public class NewTimesheetTest extends BaseTest {
     }
 
     @Test
-    public void checkIfCountryBlankInitially() throws UnknownHostException {
+    public void shouldShowSelectCountryMessageOnPageLoad() throws UnknownHostException {
         Select selectBox = new Select(webDriver.findElement(By.id("country")));
         assertThat(selectBox.getFirstSelectedOption().getText(), is("Select a country"));
     }
@@ -55,14 +55,11 @@ public class NewTimesheetTest extends BaseTest {
 
 
     @Test
-    //@Ignore("Page name conflict to be resolved")
-    public void checkIfEntireCountryListIsAvailable() throws UnknownHostException {
+    public void shouldDisplayCountryListWithBothCountryCodeAndName() throws UnknownHostException {
         List<String> obtainedCountryNames = getActualCountryList();
-
-        List<String> expectedCountryNames = getExpectedCountryList(countryService);
-        assertEquals(expectedCountryNames, obtainedCountryNames);
+        List<String> expectedCountryNames = getExpectedCountryList();
+        assertTrue(obtainedCountryNames.containsAll(expectedCountryNames));
     }
-
 
     @Test
     //@Ignore("Page name conflict to be resolved")
@@ -136,21 +133,19 @@ public class NewTimesheetTest extends BaseTest {
     }
 
 
-    private List<String> getExpectedCountryList(CountryService countryService) {
-        List<Country> expectedCountries = countryService.getCountries();
+    private List<String> getExpectedCountryList() {
         List<String> expectedCountryNames = new ArrayList<String>();
         expectedCountryNames.add("Select a country");
-        for (Country expectedCountry : expectedCountries) {
-            expectedCountryNames.add(expectedCountry.getCode()+" - "+expectedCountry.getName());
-        }
+        expectedCountryNames.add("USA - USA");
+        expectedCountryNames.add("IND - India");
         return expectedCountryNames;
     }
 
-    private List<String> getActualCountryList() {
+    private ArrayList<String> getActualCountryList() {
         WebElement country = webDriver.findElement(By.id("country"));
         Select dropDown = new Select(country);
         List<WebElement> options = dropDown.getOptions();
-        List<String> obtainedCountryNames = new ArrayList<String>();
+        ArrayList<String> obtainedCountryNames = new ArrayList<String>();
         for (WebElement pageCountry : options) {
             obtainedCountryNames.add(pageCountry.getText());
         }

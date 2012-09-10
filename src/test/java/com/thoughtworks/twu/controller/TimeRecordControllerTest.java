@@ -29,13 +29,14 @@ public class TimeRecordControllerTest {
         bindingResult = mock(BindingResult.class);
     }
     @Test
+
     public void shouldReceiveACountryList() throws Exception {
         //Given
         CountryService countryService = new CountryService();
         //When
-        List<Country> countries = countryService.getCountries();
+        List<String> countries = countryService.getCountryNames();
         //Then
-        assertThat(countries.size(), is(239));
+        assertThat(countries.size(), is(240));
     }
 
     @Test
