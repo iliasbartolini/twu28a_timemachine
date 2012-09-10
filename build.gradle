@@ -4,12 +4,15 @@ apply plugin: 'idea'
 apply plugin: 'war'
 apply from:'emma.gradle'
 
+import org.apache.tools.ant.filters.*
+
 ext
 {
    hibernateConfigTemplate = file("$projectDir/src/main/resources/hibernate.cfg.xml.template")
    webXmlTemplate = file("$webAppDir/WEB-INF/web.xml.template")
    generatedWebXmlFile = file("$webAppDir/WEB-INF/web.xml")
    serverPort = 9093
+
 }
 
 repositories {
@@ -51,7 +54,7 @@ dependencies {
 }
 
 
-['QA', 'CI', 'DEV'].each { def environmentName ->
+['QA', 'CI', 'DEV','PRODUCTION'].each { def environmentName ->
     //create dynamic tasks
     tasks.add(name: "war$environmentName", type: War, evaluationDependsOn: war) {
         destinationDir = file("$projectDir/build/libs/")
@@ -59,15 +62,18 @@ dependencies {
         outputs.dir destinationDir
 
         doFirst {
-            Properties props$environmentName = new Properties()
-            props$environmentName.load(new FileInputStream("$projectDir/properties/" + environmentName + ".properties"))
-            println props$environmentName
+
+            Properties props = new Properties()
+            props.load(new FileInputStream("$projectDir/properties/" + environmentName + ".properties"))
 
 
             def engine = new groovy.text.SimpleTemplateEngine()
             file(generatedWebXmlFile).withWriter { w ->
-                w << engine.createTemplate(webXmlTemplate).make(props$environmentName).toString()
+                w << engine.createTemplate(webXmlTemplate).make(props).toString()
+             filter(ReplaceTokens, tokens: props)
             }
+
+
         }
     }
 }
@@ -75,11 +81,15 @@ dependencies {
 
 task createWebXML(dependsOn:"classes"){
     def engine = new groovy.text.SimpleTemplateEngine()
+    casLogin="https://castest.thoughtworks.com/cas/login"
+    casServer="https://castest.thoughtworks.com/cas"
+
     ext.serverName= InetAddress.getLocalHost().getHostName()
     if(rootProject.hasProperty("hostName"))
         ext.serverName = rootProject.getAt("hostName")
-    file("$webAppDir/WEB-INF/web.xml").withWriter { w ->
-        w << engine.createTemplate(webXmlTemplate).make([serverName: serverName, serverPort: serverPort]).toString()
+
+    file(generatedWebXmlFile).withWriter { w ->
+        w << engine.createTemplate(webXmlTemplate).make(serverName: serverName, serverPort: serverPort, casLogin: casLogin, casServer:casServer).toString()
     }
 }
 
