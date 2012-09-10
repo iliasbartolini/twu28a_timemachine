@@ -27,7 +27,7 @@ public class CountryServiceTest {
        countryService= new CountryService();
     }
     @Test
-    public void testShouldGetAllCountriesWithTWPresence() throws Exception {
+    public void shouldGetAllCountriesWithTWPresence() throws Exception {
         List<Country> country = new ArrayList<Country>();
         country=countryService.getCountriesWithTWPresence();
         assertEquals(15,country.size());
