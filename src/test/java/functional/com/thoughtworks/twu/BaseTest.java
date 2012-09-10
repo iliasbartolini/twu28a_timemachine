@@ -48,7 +48,7 @@ public class BaseTest {
         submitButton.submit();
     }
     protected WebElement waitForVisibilityOfElementById(String elementid) throws TimeoutException {
-        return (new WebDriverWait(webDriver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id(elementid))));
+        return (new WebDriverWait(webDriver, 60).until(ExpectedConditions.visibilityOfElementLocated(By.id(elementid))));
     }
     public void setUpAndroid() {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
