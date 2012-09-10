@@ -1,6 +1,5 @@
 package com.thoughtworks.twu.controller;
 
-import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.service.CountryService;
 import org.junit.Before;

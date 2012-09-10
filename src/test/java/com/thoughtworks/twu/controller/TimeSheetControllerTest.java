@@ -3,19 +3,21 @@ package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.domain.Employee;
 import com.thoughtworks.twu.domain.Timesheet;
+import com.thoughtworks.twu.domain.timesheet.forms.TimesheetForm;
 import com.thoughtworks.twu.service.EmployeeService;
 import com.thoughtworks.twu.service.TimesheetService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.testng.Assert.assertEquals;
 
 
@@ -24,6 +26,7 @@ public class TimeSheetControllerTest {
     Employee expectedEmployee;
     Timesheet expectedTimesheet;
     HttpServletRequest request;
+    private Timesheet timesheet;
 
     @Before
     public void setUp() throws Exception {
@@ -41,10 +44,10 @@ public class TimeSheetControllerTest {
 
         request = mock(HttpServletRequest.class);
         when(request.getRemoteUser()).thenReturn("batman");
+        when(request.getParameter("weekEndingDate")).thenReturn("10-SEP-2012");
 
         controller = new TimeSheetController(employeeService, timesheetService);
     }
-
 
     @Test
     public void shouldBeAbleToDisplayDatePickerDialog() throws Exception {
@@ -52,12 +55,12 @@ public class TimeSheetControllerTest {
     }
 
     @Test
-    public void shouldDisplayNewTimeSheetView() {
+    public void shouldDisplayNewTimeSheetView() throws ParseException {
         assertEquals("ui/timesheet/newtimesheet", controller.newTimeSheet(request).getViewName());
     }
 
     @Test
-    public void shouldAddEmployeeToModel() {
+    public void shouldAddEmployeeToModel() throws ParseException {
 
         ModelAndView modelAndView = controller.newTimeSheet(request);
         Employee actualEmployee = (Employee) modelAndView.getModel().get("employee");
@@ -66,12 +69,19 @@ public class TimeSheetControllerTest {
     }
 
     @Test
-    public void shouldAddTimesheetToModel() {
+    public void shouldSaveTimeSheet() throws Exception {
+        TimesheetForm timesheetForm = new TimesheetForm();
+        timesheetForm.setWeekEndingDate("15-Sep-12");
 
-        ModelAndView modelAndView = controller.newTimeSheet(request);
-        Timesheet actualTimesheet = (Timesheet) modelAndView.getModel().get("timesheet");
+        expectedTimesheet.setWeekEndingDate(new SimpleDateFormat("dd-MMM-yy").parse("15-Sep-12"));
 
-        assertThat(actualTimesheet, is(expectedTimesheet));
+        TimesheetService timesheetService = mock(TimesheetService.class);
+        EmployeeService employeService = mock(EmployeeService.class);
+
+        TimeSheetController controller = new TimeSheetController(employeService, timesheetService);
+        controller.submitTimesheet(timesheetForm);
+
+        verify(timesheetService).saveTimesheet(expectedTimesheet);
     }
 }
 

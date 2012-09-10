@@ -24,12 +24,12 @@
             $("#newtimesheet")
                     .validate({
                         rules: {
-                            wecal: {
+                            weekEndingDate: {
                                 required: true
                             }
                         },
                         messages: {
-                            wecal: "Week ending date is required."
+                            weekEndingDate: "Week ending date is required."
                         },
                         errorPlacement: function(error, element) {
                             error.insertAfter("#datepickerdiv");
@@ -47,11 +47,11 @@
 
 <div data-role="dialog" data-theme="a">
 
-    <form id="newtimesheet" action="new" method="get"
+    <form id="newtimesheet" action="new" data-ajax="false" method="get"
           class="ui-body ui-body-a ui-corner-all">
 
         <div data-role="fieldcontain" id="datepickerdiv">
-            <input name="wecal" type="text" data-role="datebox" id="wecal" data-options='{"mode":"calbox", "blackDays": [1,2,3,4,5,6], "highDays": [0], "overrideCalStartDay": 1, "overrideDateFormat": "%-d-%b-%Y" }'/>
+            <input name="weekEndingDate" type="text" data-role="datebox" id="wecal" data-options='{"mode":"calbox", "blackDays": [1,2,3,4,5,6], "highDays": [0], "overrideCalStartDay": 1, "overrideDateFormat": "%-d-%b-%Y" }'/>
         </div>
 
 

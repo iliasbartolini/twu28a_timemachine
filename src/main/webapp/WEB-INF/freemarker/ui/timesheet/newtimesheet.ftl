@@ -33,17 +33,14 @@
         <h1>My New Timesheet</h1>
     </div>
 
-    <form id="new_timesheet_form"
+    <form id="new_timesheet_form" action="submit" data-ajax="false" method="POST"
           class="ui-body ui-body-a ui-corner-all">
 
         <div>Employee name: ${employee.name}</div>
         <div>Employee login: ${employee.login}</div>
         <div>Employee number: ${employee.employee_decimal}</div>
-        <div>Week ending date: </div>
-        <div>Timesheet ID: ${timesheet.id}</div>
-
         <label>Week Ending</label>
-        <input type="text" name="task" id="task" value=""/>
+        <input type="text" name="weekEndingDate" id="weekEndingDate" value="${weekEndingDate}" />
         <br>
         <br>
 

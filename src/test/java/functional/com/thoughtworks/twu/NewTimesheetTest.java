@@ -125,7 +125,6 @@ public class NewTimesheetTest extends BaseTest {
 
     }
 
-
     private void selectCountry(String countryName) {
         WebElement country = webDriver.findElement(By.id("country"));
         Select dropDownCountry = new Select(country);

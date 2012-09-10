@@ -13,22 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class DashboardController {
 
-
     @RequestMapping(value = URLPaths.DASHBOARD_PATH, method = RequestMethod.GET)
     public ModelAndView show(HttpServletRequest request) {
 
         EmployeeService service = new EmployeeService();
 
         ModelAndView modelAndView = new ModelAndView("ui/dashboard/dashboard");
-
         modelAndView.addObject("employee", service.getEmployeeByLogin(request.getRemoteUser()));
         modelAndView.addObject("datepicker_path", URLPaths.DATEPICKER_PATH);
         HibernateConnection.getInstance().getSession().close();
         return modelAndView;
     }
-
-
-
 }
 
 

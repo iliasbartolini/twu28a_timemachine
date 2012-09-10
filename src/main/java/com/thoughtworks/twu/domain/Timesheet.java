@@ -2,11 +2,8 @@ package com.thoughtworks.twu.domain;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.sql.Date;
+import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -26,7 +23,9 @@ public class Timesheet {
     }
 
     private String employee_decimal;
-    private Date week_ending_date;
+
+    private Date weekEndingDate;
+
     private String created_by;
     private Date created_at;
     private String updated_by;
@@ -40,12 +39,13 @@ public class Timesheet {
         this.employee_decimal = employee_decimal;
     }
 
-    public Date getWeek_ending_date() {
-        return week_ending_date;
+    @Column(name = "WEEK_ENDING_DATE")
+    public Date getWeekEndingDate() {
+        return weekEndingDate;
     }
 
-    public void setWeek_ending_date(Date week_ending_date) {
-        this.week_ending_date = week_ending_date;
+    public void setWeekEndingDate(Date weekEndingDate) {
+        this.weekEndingDate = weekEndingDate;
     }
 
     public String getCreated_by() {
@@ -91,7 +91,7 @@ public class Timesheet {
         if (id != timesheet.id) return false;
         if (employee_decimal != null ? !employee_decimal.equals(timesheet.employee_decimal) : timesheet.employee_decimal != null)
             return false;
-        if (week_ending_date != null ? !week_ending_date.equals(timesheet.week_ending_date) : timesheet.week_ending_date != null)
+        if (weekEndingDate != null ? !weekEndingDate.equals(timesheet.weekEndingDate) : timesheet.weekEndingDate != null)
             return false;
 
         return true;
@@ -101,7 +101,7 @@ public class Timesheet {
     public int hashCode() {
         int result = id;
         result = 31 * result + (employee_decimal != null ? employee_decimal.hashCode() : 0);
-        result = 31 * result + (week_ending_date != null ? week_ending_date.hashCode() : 0);
+        result = 31 * result + (weekEndingDate != null ? weekEndingDate.hashCode() : 0);
         return result;
     }
 }

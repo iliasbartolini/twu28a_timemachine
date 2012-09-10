@@ -20,18 +20,18 @@ public class TimesheetService {
 
     }
 
-
-
     public List<Timesheet> getAllTimesheets() {
         return session.createQuery("from com.thoughtworks.twu.domain.Timesheet").list();
     }
 
     public void saveTimesheet(Timesheet timesheet) {
+        connection = HibernateConnection.getInstance();
+        session = connection.getSession();
+
         session.getTransaction().begin();
         session.save(timesheet);
         session.getTransaction().commit();
     }
-
 
     public Timesheet createNewTimesheet() {
         connection = HibernateConnection.getInstance();
@@ -42,6 +42,5 @@ public class TimesheetService {
         session.getTransaction().commit();
 
         return timesheet;
-
     }
 }
