@@ -20,7 +20,7 @@ public class CountryService {
     private List<Country> countries;
     private List<LocationPresences> locationPresences;
 
-    public List<Country> getCountries() {
+    private List<Country> getCountries() {
 
         connection = HibernateConnection.getInstance();
         session = connection.getSession();
@@ -47,50 +47,30 @@ public class CountryService {
 
     public List<String> getCountryNames() throws Exception {
         List<Country> countries = getCountries();
-        List<String> countryNames=new ArrayList<String>();
+        List<String> countryNames = new ArrayList<String>();
         countryNames.add("Select a country");
-        for(Country country:countries)
-        {
-        countryNames.add(country.getCode()+" - "+country.getName());
+        for (Country country : countries) {
+            countryNames.add(country.getCode() + " - " + country.getName());
         }
         return countryNames;
     }
 
     public List<String> getStateName(String countrycode) throws Exception {
-      List<LocationPresences> locationPresences=getStates(countrycode);
-        List<String> stateNames=new ArrayList<String>();
+        List<LocationPresences> locationPresences = getStates(countrycode);
+        List<String> stateNames = new ArrayList<String>();
         stateNames.add("Select a state");
-        for(LocationPresences state:locationPresences)
-        {
-             stateNames.add(state.getState());
+        for (LocationPresences state : locationPresences) {
+            stateNames.add(state.getState());
         }
         return stateNames;
-
-
-       }
-
-    public List<String> getCountryCodes() throws Exception {
-        List<Country> countries = getCountries();
-        List<String> countryCodes=new ArrayList<String>();
-        countryCodes.add("first select");
-        for(Country country:countries)
-        {
-            countryCodes.add(country.getCode());
-        }
-        return countryCodes;
     }
 
-    public Map trialGetMap(){
-        Map cityMap = new LinkedHashMap();
-        cityMap.put("LDN", "London");
-        cityMap.put("PRS", "Paris");
-        cityMap.put("NYC", "New York");
+    public List<Country> getCountriesWithTWPresence() {
 
-        Map m = new HashMap();
-        m.put("cityMap", cityMap);
-        return m;
+        connection = HibernateConnection.getInstance();
+        session = connection.getSession();
+
+        countries = session.createCriteria(LocationPresences.class).add(Restrictions.eq("thoughtworksPresence",1)).list();
+        return countries;
     }
-
-
-
 }
