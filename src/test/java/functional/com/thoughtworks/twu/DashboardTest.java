@@ -31,7 +31,7 @@ public class DashboardTest extends BaseTest {
         WebElement datePickerLink = webDriver.findElement(By.id("new_timesheet"));
 
         datePickerLink.click();
-        assertNotNull(waitForVisibilityOfElementById("wecal"));
+        assertNotNull(waitForVisibilityOfElementById("weekEndingDate"));
     }
 
     @Test

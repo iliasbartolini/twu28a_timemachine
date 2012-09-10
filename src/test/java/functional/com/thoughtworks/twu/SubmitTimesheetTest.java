@@ -37,7 +37,7 @@ public class SubmitTimesheetTest extends BaseTest {
         WebElement sundayButton = webDriver.findElement(By.className("ui-btn-up-e"));
         sundayButton.click();
 
-        String selectedWeekEndingDate = webDriver.findElement(By.id("wecal")).getAttribute("value");
+        String selectedWeekEndingDate = webDriver.findElement(By.id("weekEndingDate")).getAttribute("value");
 
         WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
         dateSubmitButton.click();

@@ -42,7 +42,6 @@ public class DatepickerTest extends BaseTest {
     }
 
     @Test
-    @Ignore("Functionality pending")
     public void shouldShowErrorWhenDuplicateDate(){
 
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
@@ -52,7 +51,7 @@ public class DatepickerTest extends BaseTest {
         WebElement sundayButton = webDriver.findElement(By.className("ui-btn-up-e"));
         sundayButton.click();
 
-        String selectedWeekEndingDate = webDriver.findElement(By.id("wecal")).getAttribute("value");
+        String selectedWeekEndingDate = webDriver.findElement(By.id("weekEndingDate")).getAttribute("value");
 
         WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
         dateSubmitButton.click();
@@ -75,10 +74,10 @@ public class DatepickerTest extends BaseTest {
         newTimesheetButton.click();
 
 
-        WebElement calender = webDriver.findElement(By.id("wecal"));
+        WebElement calender = webDriver.findElement(By.id("weekEndingDate"));
         calender.sendKeys("16-Sep-12");
 
-        assertThat(webDriver.findElement(By.id("wecal")).getAttribute("value"), is(""));
+        assertThat(webDriver.findElement(By.id("weekEndingDate")).getAttribute("value"), is(""));
 
 
     }
@@ -93,7 +92,7 @@ public class DatepickerTest extends BaseTest {
         WebElement sundayButton = webDriver.findElement(By.className("ui-btn-up-e"));
         sundayButton.click();
 
-        String selectedWeekEndingDate = webDriver.findElement(By.id("wecal")).getAttribute("value");
+        String selectedWeekEndingDate = webDriver.findElement(By.id("weekEndingDate")).getAttribute("value");
 
         WebElement submitButton = webDriver.findElement(By.id("submit"));
         submitButton.click();
