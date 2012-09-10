@@ -45,11 +45,6 @@ import static org.testng.Assert.assertEquals;
             controller = new TimeSheetController(employeeService, timesheetService);
         }
 
-        @Ignore
-        @Test
-        public void shouldBeAbleToGetViewNameOfController() throws Exception {
-            assertEquals("ui/timesheet/timeSheet", controller.getTimesheet().getViewName());
-        }
 
         @Test
         public void shouldBeAbleToDisplayDatePickerDialog() throws Exception {

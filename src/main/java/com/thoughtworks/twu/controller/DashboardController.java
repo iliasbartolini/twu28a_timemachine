@@ -1,5 +1,6 @@
 package com.thoughtworks.twu.controller;
 
+import com.thoughtworks.twu.constants.URLPaths;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.EmployeeService;
 import org.springframework.stereotype.Controller;
@@ -13,21 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 public class DashboardController {
 
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = URLPaths.DASHBOARD_PATH, method = RequestMethod.GET)
     public ModelAndView show(HttpServletRequest request) {
 
-        //System.out.println(request.getRemoteUser());
         EmployeeService service = new EmployeeService();
 
         ModelAndView modelAndView = new ModelAndView("ui/dashboard/dashboard");
 
-       // modelAndView.addObject("employee", "Andy");
-        //System.out.println(service.getEmployeeByLogin(request.getRemoteUser())+"----------------");
         modelAndView.addObject("employee", service.getEmployeeByLogin(request.getRemoteUser()));
-
+        modelAndView.addObject("datepicker_path", URLPaths.DATEPICKER_PATH);
         HibernateConnection.getInstance().getSession().close();
-//        modelAndView.addObject("test", "Andy");
-        //modelAndView.getModelMap().addAttribute("test", "Andy");
         return modelAndView;
     }
 

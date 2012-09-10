@@ -1,5 +1,6 @@
 package com.thoughtworks.twu.controller;
 
+import com.thoughtworks.twu.constants.URLPaths;
 import com.thoughtworks.twu.domain.Message;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.ActivityService;
@@ -18,7 +19,7 @@ import java.util.List;
 @Controller
 public class SearchActivityController {
 
-    @RequestMapping(value = "/timesheet/search_activity", method = RequestMethod.GET)
+    @RequestMapping(value = URLPaths.SEARCH_ACTIVITY_PATH, method = RequestMethod.GET)
     public ModelAndView loadSearchActivityView() {
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/search_activity");
@@ -35,7 +36,7 @@ public class SearchActivityController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/timesheet/search_activity", method = RequestMethod.POST)
+    @RequestMapping(value = URLPaths.SEARCH_ACTIVITY_PATH, method = RequestMethod.POST)
     public @ResponseBody String searchActivities(@RequestParam("s") String query) throws JSONException {
         ActivityService service = new ActivityService();
         String result = service.getActivities(query).toString();

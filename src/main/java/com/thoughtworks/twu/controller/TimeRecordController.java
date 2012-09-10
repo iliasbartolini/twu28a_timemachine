@@ -1,4 +1,5 @@
 package com.thoughtworks.twu.controller;
+import com.thoughtworks.twu.constants.URLPaths;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.validators.ActivityValidator;
 import com.thoughtworks.twu.domain.validators.LocationValidator;
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class TimeRecordController {
 
 
-    @RequestMapping(value = "/timesheet/timerecord", method = RequestMethod.GET)
+    @RequestMapping(value = URLPaths.TIME_RECORD_PATH, method = RequestMethod.GET)
     public ModelAndView newTimesheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
         CountryService countryService = new CountryService();
 
@@ -28,7 +29,7 @@ public class TimeRecordController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/timesheet/timerecord", method = RequestMethod.POST)
+    @RequestMapping(value = URLPaths.TIME_RECORD_PATH, method = RequestMethod.POST)
     public ModelAndView submittedTimeSheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
         LocationValidator locationValidator = new LocationValidator();
         ActivityValidator validator = new ActivityValidator();

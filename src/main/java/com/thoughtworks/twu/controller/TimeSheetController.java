@@ -1,6 +1,7 @@
 package com.thoughtworks.twu.controller;
 
 
+import com.thoughtworks.twu.constants.URLPaths;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.EmployeeService;
@@ -25,17 +26,7 @@ public class TimeSheetController {
         this.timesheetService = timesheetService;
     }
 
-    @RequestMapping(value = "/timesheet/timeSheet", method = RequestMethod.GET)
-    public ModelAndView getTimesheet() {
-        ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeSheet");
-        TimeRecordForm timeRecordForm = new TimeRecordForm();
-        modelAndView.addObject("timeRecordForm" ,timeRecordForm) ;
-        HibernateConnection.getInstance().getSession().close();
-        return modelAndView;
-    }
-
-
-    @RequestMapping(value = "/timesheet/datepicker", method = RequestMethod.GET)
+    @RequestMapping(value = URLPaths.DATEPICKER_PATH, method = RequestMethod.GET)
     public ModelAndView pickDate() {
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/date_picker");
@@ -45,7 +36,7 @@ public class TimeSheetController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/timesheet/newtimesheet", method = RequestMethod.GET)
+    @RequestMapping(value = URLPaths.NEW_TIMESHEET_PATH, method = RequestMethod.GET)
     public ModelAndView newTimeSheet(HttpServletRequest request) {
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/newtimesheet");

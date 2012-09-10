@@ -19,6 +19,7 @@ public class BaseTest {
 
     protected WebDriver webDriver;
     protected String userNameString = "test.twu";
+    protected String basePath = ":9093/timemachine";
     protected String dashboardUrl;
     protected String datePickerUrl;
     protected String newTimesheetUrl;
@@ -28,11 +29,11 @@ public class BaseTest {
 
     public BaseTest() throws UnknownHostException {
         String hostName = InetAddress.getLocalHost().getHostName();
-        dashboardUrl = hostName + URLPaths.DASHBOARD_PATH;
-        datePickerUrl = hostName + URLPaths.DATEPICKER_PATH;
-        newTimesheetUrl = hostName + URLPaths.NEW_TIMESHEET_PATH;
-        timeRecordUrl = hostName + URLPaths.TIME_RECORD_PATH;
-        searchActivityUrl = hostName + URLPaths.SEARCH_ACTIVITY_PATH;
+        dashboardUrl = hostName + basePath + URLPaths.DASHBOARD_PATH;
+        datePickerUrl = hostName + basePath + URLPaths.DATEPICKER_PATH;
+        newTimesheetUrl = hostName + basePath + URLPaths.NEW_TIMESHEET_PATH;
+        timeRecordUrl = hostName + basePath + URLPaths.TIME_RECORD_PATH;
+        searchActivityUrl = hostName + basePath + URLPaths.SEARCH_ACTIVITY_PATH;
     }
 
     protected void submitCredentials(String passwordString) {
