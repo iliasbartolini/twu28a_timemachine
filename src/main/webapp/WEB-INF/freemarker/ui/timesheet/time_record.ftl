@@ -18,19 +18,7 @@
     <script type="text/javascript" src="../static/js/lib/jquery.cookie.js"></script>
     <script type="text/javascript" src="../static/js/timesheet/new_timesheet_state.js"></script>
     <script type="text/javascript" src="../static/js/timesheet/time_record.js"></script>
-
-    <script>
-        $(function () {
-            var activityCode = $.cookie("activity_code");
-
-            if ( activityCode ) {
-                $("#header").children("h3").text(activityCode);
-                $.removeCookie('activity_code');
-            } else {
-                $("#header").children("h3").text("New Time Record");
-            }
-        });
-    </script>
+    <script type="text/javascript" src="../static/js/ui/timesheet/time_record.js"></script>
 </head>
 <body>
 
@@ -39,124 +27,6 @@
     <div data-role="header" id="header">
         <h3>New Time Record</h3>
     </div>
-
-    <script type="text/javascript">
-        $.validator.addMethod("valueNotEquals", function(value, element, arg){
-            return arg != value;
-        }, "Value must not equal arg.");
-        $("#index").die("pageinit");
-        $('#index').live("pageinit", function () {
-            $('#new_timesheet_form').validate({
-                        rules: {
-                            country: {
-                               valueNotEquals:"Select a country"
-                            },
-                            state: {
-                                valueNotEquals:"Select a state"
-                            } ,
-                            monday:{
-                                digits:true,
-                                max:24
-                            },
-                            tuesday:{
-                                digits:true,
-                                max:24
-                            },
-                            wednesday:{
-                                digits:true,
-                                max:24
-                            },
-                            thursday:{
-                                digits:true,
-                                max:24
-                            },
-                            friday:{
-                                digits:true,
-                                max:24
-                            },
-                            saturday:{
-                                digits:true,
-                                max:24
-                            },
-                            sunday:{
-                                digits:true,
-                                max:24
-                            }
-                        },
-                        messages: {
-                            country: "Country is required.",
-                            state:"State is required",
-                            monday:{
-                                digits: "Enter a number",
-                                max: "Enter a value less than or equal to 24"
-                            },
-                            tuesday:{
-                                digits: "Enter a number",
-                                max: "Enter a value less than or equal to 24"
-                            },
-                            wednesday:{
-                                digits: "Enter a number",
-                                max: "Enter a value less than or equal to 24"
-                            },
-                            thursday:{
-                                digits: "Enter a number",
-                                max: "Enter a value less than or equal to 24"
-                            },
-                            friday:{
-                                digits: "Enter a number",
-                                max: "Enter a value less than or equal to 24"
-                            },
-                            saturday:{
-                                digits: "Enter a number",
-                                max: "Enter a value less than or equal to 24"
-                            },
-                            sunday:{
-                                digits: "Enter a number",
-                                max: "Enter a value less than or equal to 24"
-                            }
-
-                        },
-                        errorPlacement: function(error, element) {
-                            $(".colorError[for=" + $(element).attr("name") + "]").html(error);
-                        }
-                    });
-            $('#state').selectmenu('disable');
-            var changeState = new NewTimesheetState();
-            changeState.toggleStateList();
-
-            $(".select1").change(function () {
-                changeState.toggleStateList();
-            });
-
-            $("#new_timesheet_form").submit(function() {
-
-                var hours = [];
-                $(".hour").each(function() {
-                    hours.push($(this).val());
-                });
-
-                console.log(hours);
-
-                try {
-                    var timeRecord = new TimeRecord();
-                    timeRecord.validateHours(hours);
-                } catch(err) {
-
-                    console.log(err);
-
-                    var response = prompt("Do you really want to submit less than 40 hours? Why you don't work this week?");
-
-                    if ( response ) {
-                        alert("Are you sure?");
-                    }
-                    else {
-                        alert("I'm afraid");
-                    }
-                }
-            });
-        });
-    </script>
-
 
     <form id="new_timesheet_form" data-ajax="false" modelAttribute="favoriteTimesheetForm" action="" method="post"
           class="ui-body ui-body-a ui-corner-all">
