@@ -29,7 +29,7 @@ public class BaseTest {
     protected String newTimesheetUrl;
     protected String timeRecordUrl;
     protected String searchActivityUrl;
-    private Map<String, String> expectedMessages = new HashMap<String, String>();
+    protected Map<String, String> expectedMessages = new HashMap<String, String>();
 
     public BaseTest() throws UnknownHostException {
         String hostName = InetAddress.getLocalHost().getHostName();

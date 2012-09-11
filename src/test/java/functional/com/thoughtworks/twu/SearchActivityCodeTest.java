@@ -15,9 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.hamcrest.CoreMatchers.is;
 
 import static org.junit.Assert.assertThat;
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertNull;
+import static org.testng.AssertJUnit.*;
 
 
 import java.net.UnknownHostException;
@@ -33,10 +31,12 @@ public class SearchActivityCodeTest extends BaseTest {
     @Before
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
-        webDriver.get(newTimesheetUrl);//THIS COMMAND NEEDS TO BE DELETED AFTER REDIRECTION FROM "+ NEW TIMESHEET" BUTTON IS COMPLETED
+        webDriver.get(newTimesheetUrl);
         super.submitCredentials(validPasswordString);
-        webDriver.findElement(By.id("timeRecord")).click();
-        webDriver.findElement(By.id("searchActivityCode")).click();
+        webDriver.get(searchActivityUrl);
+        //The following two commands need to be executed once redirections are complete
+//        webDriver.findElement(By.id("timeRecord")).click();
+//        webDriver.findElement(By.id("searchActivityCode")).click();
     }
 
     @Test
@@ -47,18 +47,15 @@ public class SearchActivityCodeTest extends BaseTest {
     }
 
     @Test
-    @Ignore("Error message needs to be displayed")
     public void shouldShowErrorForSearchStringLessThan2Characters() {
-        webDriver.get(searchActivityUrl);//THIS COMMAND NEEDS TO BE DELETED AFTER REDIRECTION FROM "SEARCH ACTIVITY CODE" BUTTON IS COMPLETED
         enterSearchString("a");
         assertEquals(getExpectedErrorMessage("Alteast2CharsForSearch"),waitForVisibilityOfElementById("result").getText());
     }
 
     @Test
-    @Ignore("Error message needs to be displayed")
     public void shouldShowErrorForNoMatchFound() {
         enterSearchString("XYZZ");
-        assertEquals(getExpectedErrorMessage("NoMatchingActivity"),waitForVisibilityOfElementById("result").getText());
+        assertTrue(new WebDriverWait(webDriver, 60).until(ExpectedConditions.textToBePresentInElement(By.id("result"), expectedMessages.get("NoMatchingActivity"))));
     }
 
     @Test

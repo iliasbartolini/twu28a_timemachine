@@ -25,7 +25,7 @@ $(function() {
 
                 if ( activities.length == 0 ) {
                     $("#result").text(activity.getMessages()[Messages.NoMatchingActivity]);
-                    return;
+                  return;
                 }
 
                 for(var i in activities) {
