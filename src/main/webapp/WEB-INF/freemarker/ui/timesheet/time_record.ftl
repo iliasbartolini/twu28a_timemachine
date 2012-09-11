@@ -22,11 +22,11 @@
 
             var nameEQ = "activity_code=";
             var ca = document.cookie.split(';');
-            for(var i=0;i < ca.length;i++) {
+            for (var i = 0; i < ca.length; i++) {
                 var c = ca[i];
-                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
                 if (c.indexOf(nameEQ) == 0) {
-                    $("#header").children("h3").text(c.substring(nameEQ.length,c.length));
+                    $("#header").children("h3").text(c.substring(nameEQ.length, c.length));
                 } else {
                     $("#header").children("h3").text("New Time Record");
                 }
@@ -51,49 +51,61 @@
 
 <div data-role="page" data-theme="a" id="index">
 
-    <div data-role="header"  id="header">
-        <h3  >New Time Record</h3>
+    <div data-role="header" id="header">
+        <h3>New Time Record</h3>
     </div>
 
     <script type="text/javascript">
-           $("#index").die("pageinit");
-            $('#index').live("pageinit",function(){
+        $.validator.addMethod("valueNotEquals", function(value, element, arg){
+            return arg != value;
+        }, "Value must not equal arg.");
+        $("#index").die("pageinit");
+        $('#index').live("pageinit", function () {
+            $('#new_timesheet_form').validate({
+                        rules: {
+                            country: {
+                               valueNotEquals:"Select a country"
+                            },
+                            state: {
+                                valueNotEquals:"Select a state"
+                            }
+                        },
+                        messages: {
+                            country: "Country is required.",
+                            state:"State is required"
+                        },
+                        errorPlacement: function(error, element) {
+                            $(".colorError[for=" + $(element).attr("name") + "]").html(error);
+                        }
+                    });
+            $('#state').selectmenu('disable');
+            var changeState = new NewTimesheetState();
+            changeState.toggleStateList();
 
-                $('#state').selectmenu('disable');
-               var changeState = new NewTimesheetState();
-                 changeState.toggleStateList();
-                $(".select1").change(function () {
-
-
-                    changeState.toggleStateList();
-                });
+            $(".select1").change(function () {
+                changeState.toggleStateList();
             });
-        </script>
-
+        });
+    </script>
 
 
     <form id="new_timesheet_form" data-ajax="false" modelAttribute="favoriteTimesheetForm" action="" method="post"
           class="ui-body ui-body-a ui-corner-all">
 
-        <label for="date">Week Ending</label>
-        <input id="date" name="date"/>
-   Country:
-
     <@spring.formSingleSelect "timeRecordForm.country",countries, "class= select1" />
-    <@spring.showErrors "<br>" />
-    <br>
-    State:
+        <div for="country" class="colorError">
+        <@spring.showErrors "<br>" />
+        </div>
+        <br>
     <@spring.formSingleSelect "timeRecordForm.state",states, "class=state" />
-    <@spring.showErrors "<br>" />
-        <br>
-        Activity:
-
-         <@spring.formInput "timeRecordForm.activity" />
-         <@spring.showErrors "<br>" />
+        <div for="state" class="colorError">
+        <@spring.showErrors "<br>"/>
+        </div>
         <br>
 
+        <a href="search_activity" data-role="button" data-ajax="false">Select a activity code</a>
         <label>Billable?</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <select name="billable"  data-role="slider">
+        <select name="billable" data-role="slider">
 
             <option value="false">No</option>
 
@@ -102,17 +114,13 @@
         </select>
 
 
-
-
-
-
-
         <input type="text" name="task" placeholder="Type task" id="task" value=""/>
 
         <div class="ui-grid-d">
             <div class="ui-block-a">
                 Mon
-                <input type="text" name="monday" id="monday" value=""/></div>
+                <input type="text" name="monday" id="monday" value=""/>
+            </div>
             <div class="ui-block-b">
                 Tues
                 <input type="text" name="tuesday" id="tuesday" value=""/>
@@ -142,12 +150,10 @@
             </div>
         </div>
 
-    <input type="submit" data-role="button" value="Submit" data-ajax="false" />
+        <input type="submit" data-role="button" value="Submit" data-ajax="false"/>
 
     </form>
 </div>
-
-
 </body>
 </html>
 
