@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "time_sheets")
+@Table(name = "time_records")
 
 public class TimeRecord {
 
