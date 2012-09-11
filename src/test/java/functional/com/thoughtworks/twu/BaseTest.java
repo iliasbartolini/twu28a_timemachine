@@ -28,6 +28,7 @@ public class BaseTest {
     protected String newTimesheetUrl;
     protected String timeRecordUrl;
     protected String searchActivityUrl;
+    protected String weekEndingUrl;
     protected Map<String, String> expectedMessages = new HashMap<String, String>();
 
     public BaseTest() throws UnknownHostException {
@@ -37,6 +38,7 @@ public class BaseTest {
         newTimesheetUrl = hostName + basePath + URLPaths.NEW_TIMESHEET_PATH;
         timeRecordUrl = hostName + basePath + URLPaths.TIME_RECORD_PATH;
         searchActivityUrl = hostName + basePath + URLPaths.SEARCH_ACTIVITY_PATH;
+        weekEndingUrl = hostName + basePath + URLPaths.WEEK_ENDING_PATH;
 
         expectedMessages.put("UserNamePasswordCannotBeBlank","Username is a required field.  Password is a required field.");
         expectedMessages.put("UserNamePasswordMismatch","The credentials you provided cannot be determined to be authentic.");

@@ -10,6 +10,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.AssertJUnit;
 
 import java.net.UnknownHostException;
 
@@ -17,6 +20,8 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class DatepickerTest extends BaseTest {
 
@@ -51,9 +56,6 @@ public class DatepickerTest extends BaseTest {
         openDatepickerButton.click();
         WebElement sundayButton = webDriver.findElement(By.className("ui-btn-up-e"));
         sundayButton.click();
-
-        String selectedWeekEndingDate = webDriver.findElement(By.id("weekEndingDate")).getAttribute("value");
-
         WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
         dateSubmitButton.click();
 
@@ -101,7 +103,6 @@ public class DatepickerTest extends BaseTest {
         WebElement weekEndingDisplay = webDriver.findElement(By.id("weekEndingDate"));
         assertEquals(selectedWeekEndingDate, weekEndingDisplay.getText());
     }
-
     @Test
     public void shouldReturnToDashboardOnCancel() {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
@@ -112,12 +113,12 @@ public class DatepickerTest extends BaseTest {
 
         assertThat(webDriver.getCurrentUrl(), containsString(URLPaths.DASHBOARD_PATH));
     }
-
-
-
-
-
-
+    @Test
+    @Ignore("Issue not handled")
+    public void shouldNotBeAllowableToManipulateThroughURL() {
+        webDriver.get(weekEndingUrl+"8-Oct-12");
+        assertFalse(new WebDriverWait(webDriver, 60).until(ExpectedConditions.textToBePresentInElement(By.id("new_timesheet_form"), "8-Oct-12")));
+    }
     @After
     public void tearDown(){
         webDriver.close();

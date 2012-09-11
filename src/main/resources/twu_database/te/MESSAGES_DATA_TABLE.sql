@@ -14,3 +14,4 @@ Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (12,'DuplicateTimesheetForWe
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (13,'TaskCommentCannotBeUnspecified','Task Comment is required.');
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (14,'HoursLessThan40','Your total billed hours for the week are less than 40. Do you want to continue submitting this timesheet?');
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (15,'PublicHolidayConfirmation','"Date" was a public holiday in "Country". Are you sure you want to enter hours for it?');
+Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (16,'HoursCannotBeZero','Hours must be entered for each activity in order to submit.');

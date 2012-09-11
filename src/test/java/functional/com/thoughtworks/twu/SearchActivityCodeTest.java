@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.hamcrest.CoreMatchers.is;
 
+import static org.hamcrest.text.StringContains.containsString;
 import static org.junit.Assert.assertThat;
 import static org.testng.AssertJUnit.*;
 
@@ -63,14 +64,24 @@ public class SearchActivityCodeTest extends BaseTest {
     public void checkForPlaceholderTextOnEmptySearchBar() {
         assertEquals("Search...Type in 2 or more characters",waitForVisibilityOfElementById("searchCriteria").getAttribute("placeholder").toString());
     }
+
+    @Test
+    @Ignore("Not handled")
+    public void shouldHandleUnderscoreProperly() {
+        String searchString = "SER_E";
+        enterSearchString(searchString);
+        List<WebElement> searchResults = webDriver.findElements(By.className("ui-link-inherit"));
+        for(WebElement element : searchResults) {
+            assertThat(element.getText(),containsString(searchString));
+        }
+    }
     @Test
     @Ignore("Not implemented")
     public void shouldSetBillableFlagAsNoForNonBillableActivity() {
         enterSearchString("YTYOO96");
-        //Find element of list: There will be only one element
-        //Element.click()
-        //assertThat(webDriver.findElement(By.id("activity")).getText(),is("No"));
-        //assertTrue(!webDriver.findElement(By.id("activity")).isEnabled())
+        webDriver.findElement(By.id("activity0")).click();
+        assertEquals("No",webDriver.findElement(By.className("ui-slider-label")).getText());
+        assertTrue(!webDriver.findElement(By.className("ui-slider-label")).isEnabled());
     }
 
     @After
