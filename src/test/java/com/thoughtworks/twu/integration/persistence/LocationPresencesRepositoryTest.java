@@ -1,10 +1,10 @@
 package com.thoughtworks.twu.integration.persistence;
 
-import com.thoughtworks.twu.domain.Country;
-import com.thoughtworks.twu.persistence.CountryRepository;
+
+import com.thoughtworks.twu.domain.LocationPresences;
+import com.thoughtworks.twu.persistence.LocationPresencesRepository;
 import com.thoughtworks.twu.persistence.RepositoryContextConfiguration;
 import org.hibernate.SessionFactory;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,40 +20,27 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = CountryRepositoryTest.Config.class)
+@ContextConfiguration(classes = LocationPresencesRepositoryTest.Config.class)
 @TransactionConfiguration(transactionManager = "repoTransactionManager", defaultRollback = false)
 @Transactional
-public class CountryRepositoryTest {
+public class LocationPresencesRepositoryTest {
 
     @Autowired
     private SessionFactory sessionFactory;
-    private CountryRepository repository;
 
-    @Before
-    public void setUp() throws Exception
-    {
-     repository = new CountryRepository(sessionFactory);
-    }
     @Test
-    public void testGetCountries() throws Exception {
+    public void testGetStateForUsa() throws Exception {
+        LocationPresencesRepository repository = new LocationPresencesRepository(sessionFactory);
 
+        List<LocationPresences> states = repository.getStates("USA");
 
-        List<Country> countries = repository.loadCountries();
-
-        assertThat(countries.size(), is(239));
-    }
-    @Test
-    public void  shouldLoadCountriesWithTWPresence() throws Exception{
-
-        List<Country> countries=repository.loadCountriesWithTWPresence();
-        assertThat(countries.size(),is(11));
-
+        assertThat(states.size(), is(55));
     }
 
     @Configuration
     static class Config extends RepositoryContextConfiguration {
         Config() {
-            super("classpath:twu_database/te/COUNTRIES_DATA_TABLE.sql", "classpath:twu_database/te/LOCATION_PRESENCES_DATA_TABLE.sql");
+            super("classpath:twu_database/te/LOCATION_PRESENCES_DATA_TABLE.sql");
         }
     }
 }

@@ -39,7 +39,8 @@ dependencies {
             'org.json:json:20090211',
             fileTree(dir: 'lib', include: '*.jar'),
             group: 'org.hibernate', name: 'hibernate-core', version: '4.+',
-            'org.codehaus.groovy:groovy-all:2.0.1'
+            'org.codehaus.groovy:groovy-all:2.0.1',
+            'cglib:cglib-nodep:2.2'
 
             testCompile 'junit:junit:4.10',
             'org.springframework:spring-test:3.1.1.RELEASE',

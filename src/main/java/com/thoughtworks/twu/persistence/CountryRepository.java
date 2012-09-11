@@ -2,7 +2,10 @@ package com.thoughtworks.twu.persistence;
 
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,4 +30,8 @@ public class CountryRepository {
         return sessionFactory.getCurrentSession().createCriteria(Country.class).list();
     }
 
-}
+     public List<Country> loadCountriesWithTWPresence() {
+        return sessionFactory.getCurrentSession().createQuery("select distinct c from Country c,LocationPresences lp where c.code = lp.countryCode and lp.thoughtworksPresence=1").list() ;
+
+     }
+ }
