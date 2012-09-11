@@ -1,4 +1,4 @@
-package com.thoughtworks.twu.persistence;
+package com.thoughtworks.twu.integration.persistence;
 
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;

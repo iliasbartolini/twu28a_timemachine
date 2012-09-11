@@ -16,36 +16,22 @@
 
     <script type="text/javascript" src="../static/js/mobiscroll-2.0.1.custom.min.js"></script>
     <script type="text/javascript" src="../static/js/ui/newTimesheetState.js"></script>
-    <script>
-        $(function () {
-
-
-            var nameEQ = "activity_code=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) == 0) {
-                    $("#header").children("h3").text(c.substring(nameEQ.length, c.length));
-                } else {
-                    $("#header").children("h3").text("New Time Record");
-                }
-
-            }
-
-
-        });
-
-        function readCookie(name) {
-
-
-        }
-    </script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.cookie.js"></script>
+    <script>
+        $(function () {
+            var activityCode = $.cookie("activity_code");
 
+            if ( activityCode ) {
+                $("#header").children("h3").text(activityCode);
+                $.removeCookie('activity_code');
+            } else {
+                $("#header").children("h3").text("New Time Record");
+            }
+        });
+    </script>
 </head>
 <body>
 
@@ -156,4 +142,3 @@
 </div>
 </body>
 </html>
-
