@@ -31,7 +31,7 @@ public class DashboardController {
         modelAndView.addObject("employee", service.getEmployeeByLogin(request.getRemoteUser()));
         modelAndView.addObject("datepicker_path", URLPaths.DATEPICKER_PATH);
         modelAndView.addObject("timesheets", timesheets);
-        
+
         HibernateConnection.getInstance().getSession().close();
         return modelAndView;
     }

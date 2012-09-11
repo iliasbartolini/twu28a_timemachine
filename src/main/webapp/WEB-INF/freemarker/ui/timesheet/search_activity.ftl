@@ -11,6 +11,7 @@
     <script type="text/javascript" src="../static/js/lib/jquery.form.js" ></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../static/js/messages/messages.js"></script>
     <script type="text/javascript" src="../static/js/timesheet/search_activity.js"></script>
     <script type="text/javascript" src="../static/js/ui/timesheet/display_search_results.js"></script>
 </head>

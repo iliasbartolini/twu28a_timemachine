@@ -2,6 +2,8 @@ var Messages = {
     Alteast2CharsForSearch : "Alteast2CharsForSearch",
     NoMatchingActivity : "NoMatchingActivity",
     WeekCannotBeUnspecified : "WeekCannotBeUnspecified",
+    HoursLessThan40: "HoursLessThan40",
+    HoursCannotBeZero:"HoursCannotBeZero",
     messages: [],
     loadMessages : function() {
         $("#messages li").each(function() {
@@ -15,6 +17,7 @@ var Messages = {
 };
 
 $(function(){
+    console.log(Messages);
     Messages.loadMessages();
 });
 

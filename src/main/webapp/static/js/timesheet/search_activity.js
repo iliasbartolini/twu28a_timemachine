@@ -1,8 +1,3 @@
-var Messages = {
-    Alteast2CharsForSearch : "Alteast2CharsForSearch",
-    NoMatchingActivity : "NoMatchingActivity"
-};
-
 function Activity () {
 
     var _this = this;

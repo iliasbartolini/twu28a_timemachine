@@ -12,8 +12,12 @@ function TimeRecord() {
 
         console.log("Total Hours => " + totalHours);
 
+        if( totalHours == 0){
+            throw new Error(Messages.HoursCannotBeZero);
+        }
+
         if ( totalHours < 40 ) {
-            throw new Error("ShouldBeLesss");
+            throw new Error(Messages.HoursLessThan40);
         }
     };
 }

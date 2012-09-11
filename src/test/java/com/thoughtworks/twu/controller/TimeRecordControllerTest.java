@@ -3,14 +3,11 @@ package com.thoughtworks.twu.controller;
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
-import com.thoughtworks.twu.persistence.CountryRepository;
-import com.thoughtworks.twu.persistence.LocationPresencesRepository;
 import com.thoughtworks.twu.service.CountryService;
+import com.thoughtworks.twu.service.MessageService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +31,7 @@ public class TimeRecordControllerTest {
     private List<String> expectedNames = new ArrayList<String>();
     private List<String> expectedStatesName = new ArrayList<String>();
     private List<LocationPresences> locationPresenceList=  new ArrayList<LocationPresences>();
+    private MessageService messageService;
 
     @Before
     public void setUp() throws Exception {
@@ -60,7 +58,8 @@ public class TimeRecordControllerTest {
         expectedStatesName.add("GA");
 
         countryService = mock(CountryService.class);
-        controller = new TimeRecordController(countryService);
+        messageService = mock(MessageService.class);
+        controller = new TimeRecordController(countryService, messageService);
     }
 
     @Test

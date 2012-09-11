@@ -16,12 +16,13 @@
     <script type="text/javascript" src="../static/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../static/js/lib/jquery.mobile.simpledialog.min.js"></script>
     <script type="text/javascript" src="../static/js/timesheet/new_timesheet_state.js"></script>
+    <script type="text/javascript" src="../static/js/messages/messages.js"></script>
     <script type="text/javascript" src="../static/js/timesheet/time_record.js"></script>
     <script type="text/javascript" src="../static/js/ui/timesheet/time_record.js"></script>
 </head>
 <body>
-
 <div data-role="page" data-theme="a" id="index">
 
     <div data-role="header" id="header">
@@ -45,11 +46,8 @@
         <a href="search_activity" data-role="button" data-ajax="false">Select a activity code</a>
         <label>Billable?</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <select name="billable" data-role="slider">
-
             <option value="false">No</option>
-
             <option value="true">Yes</option>
-
         </select>
 
 
@@ -59,26 +57,31 @@
             <div class="ui-block-a">
                 Mon
                 <input type="text" class="hour" name="monday" id="monday" value=""/>
+
                 <div for="monday" class="colorError"></div>
             </div>
             <div class="ui-block-b">
                 Tues
                 <input type="text" class="hour" name="tuesday" id="tuesday" value=""/>
+
                 <div for="tuesday" class="colorError"></div>
             </div>
             <div class="ui-block-c">
                 Weds
                 <input type="text" class="hour" name="wednesday" id="wednesday" value=""/>
+
                 <div for="wednesday" class="colorError"></div>
             </div>
             <div class="ui-block-d">
                 Thur
                 <input type="text" class="hour" name="thursday" id="thursday" value=""/>
+
                 <div for="thursday" class="colorError"></div>
             </div>
             <div class="ui-block-e">
                 Fri
                 <input type="text" class="hour" name="friday" id="friday" value=""/>
+
                 <div for="friday" class="colorError"></div>
             </div>
         </div>
@@ -87,22 +90,31 @@
             <div class="ui-block-a">
                 Sat
                 <input type="text" class="hour" name="saturday" id="saturday" value=""/>
+
                 <div for="saturday" class="colorError"></div>
             </div>
             <div class="ui-block-b">
                 Sun
                 <input type="text" class="hour" name="sunday" id="sunday" value=""/>
+
                 <div for="sunday" class="colorError"></div>
             </div>
         </div>
         <div class="ui-grid-a">
             <div class="ui-block-a">
                 <input type="submit" data-role="button" value="Submit" data-ajax="false"/>
-             </div>
+            </div>
             <div class="ui-block-b">
                 <input type="button" data-role="button" value="Cancel" data-ajax="false"/>
             </div>
     </form>
+
+    <ul id="messages" class="hidden">
+    <#list messages as item>
+        <li data-message-id='${item.getMessageId()}'>${item.getMessage()}</li>
+    </#list>
+    </ul>
+
 </div>
 </body>
 </html>

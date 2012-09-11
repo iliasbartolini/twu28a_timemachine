@@ -4,6 +4,7 @@ import com.thoughtworks.twu.constants.URLPaths;
 
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
+import com.thoughtworks.twu.domain.Message;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.validators.ActivityValidator;
 import com.thoughtworks.twu.domain.validators.HourPerDayValidator;
@@ -11,6 +12,7 @@ import com.thoughtworks.twu.domain.validators.LocationValidator;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.CountryService;
 
+import com.thoughtworks.twu.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,12 +27,13 @@ import java.util.List;
 @Controller
 public class TimeRecordController {
 
-    @Autowired
     private CountryService countryService;
+    private MessageService messageService;
 
-
-    public TimeRecordController(CountryService countryService) {
+    @Autowired
+    public TimeRecordController(CountryService countryService, MessageService messageService) {
         this.countryService = countryService;
+        this.messageService = messageService;
     }
 
     public TimeRecordController() {
@@ -38,11 +41,18 @@ public class TimeRecordController {
 
     @RequestMapping(value = URLPaths.TIME_RECORD_PATH, method = RequestMethod.GET)
     public ModelAndView newTimesheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
+
+        List<Message> messages = new ArrayList<>();
+        messages.add(messageService.getMessageMessageById("HoursLessThan40"));
+        messages.add(messageService.getMessageMessageById("HoursCannotBeZero"));
+
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/time_record");
 
         modelAndView.addObject("countries", loadCountryNames(countryService.loadCountryListWithTWPresence()));
         modelAndView.addObject("states", loadStateNames(countryService.getStates("USA")));
-     return modelAndView;
+        modelAndView.addObject("messages", messages);
+
+        return modelAndView;
     }
 
     @RequestMapping(value = URLPaths.TIME_RECORD_PATH, method = RequestMethod.POST)
