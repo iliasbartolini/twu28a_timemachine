@@ -4,6 +4,7 @@ var Messages = {
     WeekCannotBeUnspecified : "WeekCannotBeUnspecified",
     HoursLessThan40: "HoursLessThan40",
     HoursCannotBeZero:"HoursCannotBeZero",
+    TaskCommentCannotBeUnspecified: "TaskCommentCannotBeUnspecified",
     messages: [],
     loadMessages : function() {
         $("#messages li").each(function() {
@@ -16,8 +17,7 @@ var Messages = {
     }
 };
 
-$(function(){
-    console.log(Messages);
+$('#index').live("pageinit", function () {
     Messages.loadMessages();
 });
 

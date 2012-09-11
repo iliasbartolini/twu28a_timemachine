@@ -17,8 +17,8 @@
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.cookie.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile.simpledialog.min.js"></script>
-    <script type="text/javascript" src="../static/js/timesheet/new_timesheet_state.js"></script>
     <script type="text/javascript" src="../static/js/messages/messages.js"></script>
+    <script type="text/javascript" src="../static/js/timesheet/new_timesheet_state.js"></script>
     <script type="text/javascript" src="../static/js/timesheet/time_record.js"></script>
     <script type="text/javascript" src="../static/js/ui/timesheet/time_record.js"></script>
 </head>
@@ -39,7 +39,7 @@
         <br>
     <@spring.formSingleSelect "timeRecordForm.state",states, "class=state" />
         <div for="state" class="colorError">
-        <@spring.showErrors "<br>"/>
+            <@spring.showErrors "<br>"/>
         </div>
         <br>
 
@@ -51,7 +51,9 @@
         </select>
 
 
-        <input type="text" name="task" placeholder="Type task" id="task" value=""/>
+        <input type="text" name="task" placeholder="Activity Comment" id="task" value=""/>
+        <div for="task" class="colorError">
+        </div>
 
         <div class="ui-grid-d">
             <div class="ui-block-a">

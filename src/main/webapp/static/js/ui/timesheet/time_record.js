@@ -14,9 +14,6 @@ $.validator.addMethod("valueNotEquals",
         return arg != value;
     }, "Value must not equal arg.");
 
-
-$("#index").die("pageinit");
-
 $('#index').live("pageinit", function () {
     $('#new_timesheet_form').validate({
         rules:{
@@ -53,11 +50,14 @@ $('#index').live("pageinit", function () {
             sunday:{
                 digits:true,
                 max:24
+            },
+            task:{
+                required:true
             }
         },
         messages:{
-            country:"Country is required.",
-            state:"State is required",
+            country: "Country is required.",
+            state: "State is required",
             monday:{
                 digits:"Enter a number",
                 max:"Enter a value less than or equal to 24"
@@ -85,6 +85,9 @@ $('#index').live("pageinit", function () {
             sunday:{
                 digits:"Enter a number",
                 max:"Enter a value less than or equal to 24"
+            },
+            task:{
+                required: Messages.getMessage(Messages.TaskCommentCannotBeUnspecified)
             }
         },
         errorPlacement:function (error, element) {
