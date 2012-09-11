@@ -5,6 +5,7 @@ var Messages = {
     HoursLessThan40: "HoursLessThan40",
     HoursCannotBeZero:"HoursCannotBeZero",
     TaskCommentCannotBeUnspecified: "TaskCommentCannotBeUnspecified",
+    ActivityCannotBeUnspecified: "ActivityCannotBeUnspecified",
     messages: [],
     loadMessages : function() {
         $("#messages li").each(function() {

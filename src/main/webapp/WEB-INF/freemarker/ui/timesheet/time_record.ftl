@@ -32,58 +32,62 @@
     <form id="new_timesheet_form" data-ajax="false" modelAttribute="favoriteTimesheetForm" action="" method="post"
           class="ui-body ui-body-a ui-corner-all">
 
-    <@spring.formSingleSelect "timeRecordForm.country",countries, "class= select1" />
+        <!-- Country -->
+        <@spring.formSingleSelect "timeRecordForm.country",countries, "class= select1" />
         <div for="country" class="colorError">
-        <@spring.showErrors "<br>" />
+            <@spring.showErrors "<br>" />
         </div>
         <br>
-    <@spring.formSingleSelect "timeRecordForm.state",states, "class=state" />
+
+        <!-- State -->
+        <@spring.formSingleSelect "timeRecordForm.state",states, "class=state" />
         <div for="state" class="colorError">
             <@spring.showErrors "<br>"/>
         </div>
         <br>
 
+        <!-- Activity code -->
         <a href="search_activity" data-role="button" data-ajax="false">Select a activity code</a>
+        <input type="hidden" name="activity" value="" >
+        <div for="activity" class="colorError"></div>
+
+        <!-- Billable -->
         <label>Billable?</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <select name="billable" data-role="slider">
             <option value="false">No</option>
             <option value="true" selected="selected">Yes</option>
         </select>
 
-
+        <!-- Activity Comment -->
         <input type="text" name="task" placeholder="Activity Comment" id="task" value=""/>
         <div for="task" class="colorError">
         </div>
 
+        <!-- Hours -->
         <div class="ui-grid-d">
             <div class="ui-block-a">
                 Mon
                 <input type="text" class="hour" name="monday" id="monday" value=""/>
-
                 <div for="monday" class="colorError"></div>
             </div>
             <div class="ui-block-b">
                 Tues
                 <input type="text" class="hour" name="tuesday" id="tuesday" value=""/>
-
                 <div for="tuesday" class="colorError"></div>
             </div>
             <div class="ui-block-c">
                 Weds
                 <input type="text" class="hour" name="wednesday" id="wednesday" value=""/>
-
                 <div for="wednesday" class="colorError"></div>
             </div>
             <div class="ui-block-d">
                 Thur
                 <input type="text" class="hour" name="thursday" id="thursday" value=""/>
-
                 <div for="thursday" class="colorError"></div>
             </div>
             <div class="ui-block-e">
                 Fri
                 <input type="text" class="hour" name="friday" id="friday" value=""/>
-
                 <div for="friday" class="colorError"></div>
             </div>
         </div>
@@ -92,16 +96,16 @@
             <div class="ui-block-a">
                 Sat
                 <input type="text" class="hour" name="saturday" id="saturday" value=""/>
-
                 <div for="saturday" class="colorError"></div>
             </div>
             <div class="ui-block-b">
                 Sun
                 <input type="text" class="hour" name="sunday" id="sunday" value=""/>
-
                 <div for="sunday" class="colorError"></div>
             </div>
         </div>
+
+        <!-- Action buttons -->
         <div class="ui-grid-a">
             <div class="ui-block-a">
                 <input type="submit" data-role="button" value="Submit" data-ajax="false"/>
@@ -109,6 +113,7 @@
             <div class="ui-block-b">
                 <input type="button" data-role="button" value="Cancel" data-ajax="false"/>
             </div>
+        </div>
     </form>
 
     <ul id="messages" class="hidden">

@@ -46,6 +46,7 @@ public class TimeRecordController {
         messages.add(messageService.getMessageMessageById("HoursLessThan40"));
         messages.add(messageService.getMessageMessageById("HoursCannotBeZero"));
         messages.add(messageService.getMessageMessageById("TaskCommentCannotBeUnspecified"));
+        messages.add(messageService.getMessageMessageById("ActivityCannotBeUnspecified"));
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/time_record");
 

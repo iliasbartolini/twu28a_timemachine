@@ -1,18 +1,20 @@
 $(function () {
-    var activityCode = $.cookie("activity_code");
+    var activityCode = $.cookie("activity");
 
     if (activityCode) {
         $("#header").children("h3").text(activityCode);
-        $.removeCookie('activity_code');
+        $("input[name=activity]").val(activityCode);
+        $.removeCookie('activity');
     } else {
         $("#header").children("h3").text("New Time Record");
+        $("input[name=activity]").val("");
     }
 });
-
+$.validator.setDefaults({ ignore: '' });
 $.validator.addMethod("valueNotEquals",
     function (value, element, arg) {
         return arg != value;
-    }, "Value must not equal arg.");
+    }, "Value must not equal     arg.");
 
 $('#index').live("pageinit", function () {
     $('#new_timesheet_form').validate({
@@ -53,6 +55,9 @@ $('#index').live("pageinit", function () {
             },
             task:{
                 required:true
+            },
+            activity: {
+                required: true
             }
         },
         messages:{
@@ -88,6 +93,9 @@ $('#index').live("pageinit", function () {
             },
             task:{
                 required: Messages.getMessage(Messages.TaskCommentCannotBeUnspecified)
+            },
+            activity: {
+                required: Messages.getMessage(Messages.ActivityCannotBeUnspecified)
             }
         },
         errorPlacement:function (error, element) {
