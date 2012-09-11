@@ -47,7 +47,7 @@
         <label>Billable?</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <select name="billable" data-role="slider">
             <option value="false">No</option>
-            <option value="true">Yes</option>
+            <option value="true" selected="selected">Yes</option>
         </select>
 
 

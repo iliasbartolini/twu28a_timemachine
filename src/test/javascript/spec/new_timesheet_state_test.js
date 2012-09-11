@@ -36,7 +36,5 @@ describe("New Timesheet", function () {
         expect(function() { timeRecord.validateHours(hours); }).toThrow(Messages.HoursCannotBeZero);
     });
 
-    it
-
 
 });
