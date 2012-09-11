@@ -1,5 +1,6 @@
 package functional.com.thoughtworks.twu;
 
+import constants.TestData;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -13,7 +14,6 @@ import java.util.List;
 import static org.testng.Assert.assertTrue;
 
 public class SubmitTimesheetTest extends BaseTest {
-    private String validPasswordString = "Th0ughtW0rks@12";
 
     public SubmitTimesheetTest() throws UnknownHostException {
         super();
@@ -23,7 +23,7 @@ public class SubmitTimesheetTest extends BaseTest {
     public void setup() throws Exception {
         super.setUpAndroid();
         webDriver.get(dashboardUrl);
-        super.submitCredentials(validPasswordString);
+        super.submitCredentials(TestData.validPasswordString);
     }
 
 

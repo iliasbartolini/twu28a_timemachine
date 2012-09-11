@@ -1,6 +1,7 @@
 package functional.com.thoughtworks.twu;
 
 
+import constants.TestData;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -20,7 +21,6 @@ import static org.junit.Assert.*;
 public class NewTimesheetTest extends BaseTest {
 
 
-    private String validPasswordString = "Th0ughtW0rks@12";
 
     public NewTimesheetTest() throws UnknownHostException {
         super();
@@ -30,7 +30,7 @@ public class NewTimesheetTest extends BaseTest {
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
         webDriver.get(dashboardUrl);
-        super.submitCredentials(validPasswordString);
+        super.submitCredentials(TestData.validPasswordString);
         webDriver.get(timeRecordUrl);
     }
 

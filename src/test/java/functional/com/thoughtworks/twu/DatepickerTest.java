@@ -3,6 +3,7 @@ package functional.com.thoughtworks.twu;
 
 import com.thoughtworks.twu.constants.URLPaths;
 
+import constants.TestData;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -18,7 +19,6 @@ import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
 
 public class DatepickerTest extends BaseTest {
-    private String validPasswordString = "Th0ughtW0rks@12";
 
     public DatepickerTest() throws UnknownHostException {
         super();
@@ -29,7 +29,7 @@ public class DatepickerTest extends BaseTest {
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
         webDriver.get(dashboardUrl);
-        super.submitCredentials(validPasswordString);
+        super.submitCredentials(TestData.validPasswordString);
     }
     @Test
     public void shouldShowErrorWhenBlank(){

@@ -1,8 +1,8 @@
 package functional.com.thoughtworks.twu;
 
+
 import com.thoughtworks.twu.constants.URLPaths;
-import com.thoughtworks.twu.domain.Message;
-import com.thoughtworks.twu.service.MessageService;
+import constants.TestData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +22,6 @@ public class BaseTest {
 
 
     protected WebDriver webDriver;
-    protected String userNameString = "test.twu";
     protected String basePath = ":9093/timemachine";
     protected String dashboardUrl;
     protected String datePickerUrl;
@@ -59,7 +58,7 @@ public class BaseTest {
     protected void submitCredentials(String passwordString) {
         WebElement username = webDriver.findElement(By.id("username"));
         username.clear();
-        username.sendKeys(userNameString);
+        username.sendKeys(TestData.userName);
         WebElement password = webDriver.findElement(By.id("password"));
         password.sendKeys(passwordString);
         WebElement submitButton = webDriver.findElement(By.className("btn-submit"));

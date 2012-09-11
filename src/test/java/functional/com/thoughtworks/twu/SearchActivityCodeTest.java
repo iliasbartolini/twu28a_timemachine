@@ -2,6 +2,7 @@ package functional.com.thoughtworks.twu;
 
 import com.thoughtworks.twu.domain.Message;
 import com.thoughtworks.twu.service.MessageService;
+import constants.TestData;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -22,7 +23,6 @@ import java.net.UnknownHostException;
 
 
 public class SearchActivityCodeTest extends BaseTest {
-    private String validPasswordString = "Th0ughtW0rks@12";
 
     public SearchActivityCodeTest() throws UnknownHostException {
         super();
@@ -32,7 +32,7 @@ public class SearchActivityCodeTest extends BaseTest {
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
         webDriver.get(newTimesheetUrl);
-        super.submitCredentials(validPasswordString);
+        super.submitCredentials(TestData.validPasswordString);
         webDriver.get(searchActivityUrl);
         //The following two commands need to be executed once redirections are complete
 //        webDriver.findElement(By.id("timeRecord")).click();
