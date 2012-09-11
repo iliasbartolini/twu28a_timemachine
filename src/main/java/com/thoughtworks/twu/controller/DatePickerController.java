@@ -2,6 +2,7 @@ package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.constants.URLPaths;
 import com.thoughtworks.twu.domain.Employee;
+import com.thoughtworks.twu.domain.Message;
 import com.thoughtworks.twu.domain.timesheet.forms.DatePickerForm;
 import com.thoughtworks.twu.domain.validators.DatePickerValidator;
 import com.thoughtworks.twu.service.DatePickerService;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class DatePickerController {
@@ -34,27 +37,28 @@ public class DatePickerController {
 
     @RequestMapping(value = URLPaths.DATEPICKER_PATH, method = RequestMethod.GET)
     public ModelAndView getDatePicker(@ModelAttribute("datePickerForm") DatePickerForm date, BindingResult errors) {
+        List<Message> messages = new ArrayList<Message>();
+        messages.add(messageService.getMessageMessageById("WeekCannotBeUnspecified"));
+
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/date_picker");
         modelAndView.addObject("errors", errors);
+        modelAndView.addObject("messages", messages);
         return modelAndView;
     }
 
     @RequestMapping(value = URLPaths.DATEPICKER_PATH, method = RequestMethod.POST)
     public ModelAndView submitWeekendDate(@ModelAttribute("datePickerForm") DatePickerForm date, BindingResult errors, HttpServletRequest request) {
-
-
         Employee employee = employeeService.getEmployeeByLogin(request.getRemoteUser());
 
         Validator datePickerValidator = new DatePickerValidator(datePickerService, employee, messageService);
         datePickerValidator.validate(date, errors);
 
         if(errors.hasErrors()){
-            ModelAndView modelAndView = new ModelAndView("ui/timesheet/date_picker");
-            modelAndView.addObject("errors", errors);
-            return modelAndView;
+            return getDatePicker(date, errors);
         }
         else {
             return new ModelAndView("redirect:/timesheet/new?weekEndingDate=" + date.getWeekEndingDate());
         }
     }
+
 }

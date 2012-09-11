@@ -9,13 +9,12 @@ function Activity () {
 
    this.load = function() {
         this.messages = {};
-       var $list = $("#activityList");
-       $list.empty();
+        var $list = $("#activityList");
+        $list.empty();
         $("#messages li").each(function() {
-            var $current = $(this);
+        var $current = $(this);
             _this.messages[ $current.data("message-id") ] = $current.text();
         });
-
    };
 
     this.load();
@@ -30,14 +29,11 @@ function Activity () {
              throw new Error(this.getMessages()[Messages.Alteast2CharsForSearch]);
         }
 
-
-
         $.post( "", { s: searchCriteria },function( data ) {
                 var activities = JSON.parse(data);
 
                 callback(activities);
         });
-
     };
 }
 

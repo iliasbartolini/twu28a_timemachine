@@ -16,6 +16,7 @@
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.form.js" ></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="../static/js/messages.js"></script>
 
     <script type="text/javascript" src="/timemachine/static/js/lib/jqm-datebox-1.1.0.core.js"></script>
     <script type="text/javascript" src="/timemachine/static/js/lib/jqm-datebox-1.1.0.mode.calbox.js"></script>
@@ -23,7 +24,9 @@
 
 
     <script>
-        $(document).ready(function(){
+        $(function(){
+
+            console.log(Messages.getMessage(Messages.WeekCannotBeUnspecified));
 
             $("#newtimesheet")
                     .validate({
@@ -33,22 +36,16 @@
                             }
                         },
                         messages: {
-                            weekEndingDate: "Week ending date is required."
+                            weekEndingDate: Messages.getMessage(Messages.WeekCannotBeUnspecified)
                         },
                         errorPlacement: function(error, element) {
                             error.insertAfter("#datepickerdiv");
                         }
                     });
         });
-
-
-
     </script>
-
-
 </head>
 <body>
-
 <div data-role="dialog" data-theme="a">
 
     <form id="newtimesheet" action="" data-ajax="false" method="post"
@@ -60,25 +57,17 @@
                 <div for="weekEndingDate" class="error">${errors.getFieldError("weekEndingDate").getCode()}</div>
             </#if>
         </div>
-
-        
-
-
-
-
         <div class="ui-grid-a">
             <div class="ui-block-a"><button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">OK</button></div>
             <div class="ui-block-b"><a href="/timemachine/" data-role="button" id="cancel">Cancel</a></div>
         </div>
     </form>
+
+    <ul id="messages" class="hidden">
+        <#list messages as item>
+            <li data-message-id='${item.getMessageId()}'>${item.getMessage()}</li>
+        </#list>
+    </ul>
 </div>
-
-
-
-<script>
-
-</script>
-
 </body>
 </html>
-

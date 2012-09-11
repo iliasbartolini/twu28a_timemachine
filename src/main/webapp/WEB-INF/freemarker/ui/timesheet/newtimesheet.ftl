@@ -36,19 +36,11 @@
     <form id="new_timesheet_form" action="submit" data-ajax="false" method="POST"
           class="ui-body ui-body-a ui-corner-all">
 
-        <div>Employee name: ${employee.name}</div>
-        <div>Employee login: ${employee.login}</div>
-        <div>Employee number: ${employee.employeeNumber}</div>
-        <label>Week Ending</label>
-        <input type="text" name="weekEndingDate" id="weekEndingDate" value="${weekEndingDate}" />
-        <br>
-        <br>
 
+        <h4>Week Ending: ${weekEndingDate}</h4>
 
         <a href="timerecord" id="timeRecord" data-ajax="false" data-role="button" data-theme="a"  value="addtimeRecord" data-icon="plus">New Activity</a>
         <br>
-
-
 
         <button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">
             Submit
