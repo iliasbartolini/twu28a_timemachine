@@ -42,6 +42,7 @@ public class DatepickerTest extends BaseTest {
     }
 
     @Test
+    @Ignore("Not yet Done")
     public void shouldShowErrorWhenDuplicateDate(){
 
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
