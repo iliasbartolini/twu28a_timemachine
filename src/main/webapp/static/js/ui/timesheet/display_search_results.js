@@ -3,9 +3,11 @@ $(function () {
 
         event.preventDefault();
 
-        var $form = $(this),
-            searchCriteria = $form.find('input[name="searchCriteria"]').val(),
-            url = $form.attr('action');
+
+
+        var $form = $( this ),
+            searchCriteria = $form.find( 'input[name="searchCriteria"]' ).val().replace("_","!_"),
+            url = $form.attr( 'action' );
 
         try {
             var activity = new Activity();
