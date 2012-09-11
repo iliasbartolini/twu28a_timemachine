@@ -2,7 +2,6 @@ package com.thoughtworks.twu.integration.persistence;
 
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.persistence.CountryRepository;
-import com.thoughtworks.twu.persistence.RepositoryContextConfiguration;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;

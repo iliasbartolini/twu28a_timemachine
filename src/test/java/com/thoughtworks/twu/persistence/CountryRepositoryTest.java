@@ -1,8 +1,6 @@
-package com.thoughtworks.twu.integration.persistence;
+package com.thoughtworks.twu.persistence;
 
-
-import com.thoughtworks.twu.domain.LocationPresences;
-import com.thoughtworks.twu.persistence.LocationPresencesRepository;
+import com.thoughtworks.twu.domain.Country;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,27 +17,28 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = LocationPresencesRepositoryTest.Config.class)
+@ContextConfiguration(classes = CountryRepositoryTest.Config.class)
 @TransactionConfiguration(transactionManager = "repoTransactionManager", defaultRollback = false)
 @Transactional
-public class LocationPresencesRepositoryTest {
+public class CountryRepositoryTest {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Test
-    public void testGetStateForUsa() throws Exception {
-        LocationPresencesRepository repository = new LocationPresencesRepository(sessionFactory);
+    public void testGetCountries() throws Exception {
+        CountryRepository repository = new CountryRepository(sessionFactory);
 
-        List<LocationPresences> states = repository.getStates("USA");
+        List<Country> countries = repository.loadCountries();
 
-        assertThat(states.size(), is(55));
+        assertThat(countries.size(), is(239));
     }
 
     @Configuration
     static class Config extends RepositoryContextConfiguration {
         Config() {
-            super("classpath:twu_database/te/LOCATION_PRESENCES_DATA_TABLE.sql");
+            super("classpath:twu_database/te/COUNTRIES_DATA_TABLE.sql");
         }
     }
 }
+

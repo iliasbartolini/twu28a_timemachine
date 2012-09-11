@@ -1,8 +1,7 @@
-package com.thoughtworks.twu.integration.persistence;
+package com.thoughtworks.twu.persistence;
 
 
 import com.thoughtworks.twu.domain.LocationPresences;
-import com.thoughtworks.twu.persistence.LocationPresencesRepository;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,3 +42,4 @@ public class LocationPresencesRepositoryTest {
         }
     }
 }
+

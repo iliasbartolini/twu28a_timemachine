@@ -25,7 +25,6 @@ public class CountryService {
     private CountryRepository countryRepository;
     private LocationPresencesRepository locationPresencesRepository;
 
-
     @Autowired
     public CountryService(CountryRepository countryRepository, LocationPresencesRepository locationPresencesRepository) {
         this.countryRepository = countryRepository;
@@ -50,10 +49,10 @@ public class CountryService {
     }
 
 
-
     public List<Country> loadCountryListWithTWPresence() {
 
         return countryRepository.loadCountriesWithTWPresence();
-    }
 
+
+    }
 }

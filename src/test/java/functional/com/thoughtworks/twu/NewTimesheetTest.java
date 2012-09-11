@@ -19,13 +19,12 @@ import static org.junit.Assert.*;
 
 public class NewTimesheetTest extends BaseTest {
 
-
     public NewTimesheetTest() throws UnknownHostException {
         super();
     }
 
     @Before
-    public void setup() throws UnknownHostException {
+    public void setup() throws Exception {
         super.setUpAndroid();
         webDriver.get(dashboardUrl);
         super.submitCredentials(TestData.validPasswordString);
@@ -44,7 +43,6 @@ public class NewTimesheetTest extends BaseTest {
         WebElement country = webDriver.findElement(By.id("country"));
         assertThat(country.isEnabled(), is(true));
     }
-
 
     @Test
 
@@ -75,6 +73,7 @@ public class NewTimesheetTest extends BaseTest {
 
         assertThat(state.isEnabled(), is(true));
     }
+
 
     @Test
     public void changeCountryUSAToOtherStatesEmpty() {
@@ -218,7 +217,7 @@ public class NewTimesheetTest extends BaseTest {
 
     @After
     public void tearDown() {
-              webDriver.close();
+        webDriver.close();
     }
 
 
