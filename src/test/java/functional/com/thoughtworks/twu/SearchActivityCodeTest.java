@@ -20,6 +20,8 @@ import static org.testng.AssertJUnit.*;
 
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SearchActivityCodeTest extends BaseTest {
@@ -57,7 +59,6 @@ public class SearchActivityCodeTest extends BaseTest {
         enterSearchString("XYZZ");
         assertTrue(new WebDriverWait(webDriver, 60).until(ExpectedConditions.textToBePresentInElement(By.id("result"), expectedMessages.get("NoMatchingActivity"))));
     }
-
     @Test
     @Ignore("Not implemented")
     public void shouldSetBillableFlagAsNoForNonBillableActivity() {
@@ -68,10 +69,10 @@ public class SearchActivityCodeTest extends BaseTest {
         //assertTrue(!webDriver.findElement(By.id("activity")).isEnabled())
     }
 
-    @After
-    public void teardown() {
-        webDriver.close();
-    }
+//    @After
+//    public void teardown() {
+//        webDriver.close();
+//    }
     private void enterSearchString(String searchString){
         WebElement search = waitForVisibilityOfElementById("searchCriteria");
         search.sendKeys(searchString);
