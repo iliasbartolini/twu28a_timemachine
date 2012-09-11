@@ -52,11 +52,6 @@ public class TimeSheetControllerTest {
     }
 
     @Test
-    public void shouldBeAbleToDisplayDatePickerDialog() throws Exception {
-        assertEquals("ui/timesheet/date_picker", controller.weekEndingDate().getViewName());
-    }
-
-    @Test
     public void shouldDisplayNewTimeSheetView() throws ParseException {
         assertEquals("ui/timesheet/newtimesheet", controller.newTimeSheet(request).getViewName());
     }

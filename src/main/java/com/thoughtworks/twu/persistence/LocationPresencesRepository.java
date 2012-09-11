@@ -7,6 +7,7 @@ import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,11 +16,15 @@ public class LocationPresencesRepository {
 
     private SessionFactory sessionFactory;
 
+    public LocationPresencesRepository() {
+    }
+
     @Autowired
     public LocationPresencesRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
+    @Transactional
     public List<LocationPresences> getStates(String countryCode) {
         return sessionFactory.getCurrentSession().createCriteria(LocationPresences.class)
                 .add(Restrictions.and(

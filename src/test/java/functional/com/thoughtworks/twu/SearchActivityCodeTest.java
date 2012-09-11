@@ -33,9 +33,8 @@ public class SearchActivityCodeTest extends BaseTest {
     @Before
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
-        webDriver.get(newTimesheetUrl);
-        super.submitCredentials(TestData.validPasswordString);
         webDriver.get(searchActivityUrl);
+        super.submitCredentials(TestData.validPasswordString);
         //The following two commands need to be executed once redirections are complete
 //        webDriver.findElement(By.id("timeRecord")).click();
 //        webDriver.findElement(By.id("searchActivityCode")).click();

@@ -33,18 +33,18 @@ public class LoginActivitiesTest extends BaseTest {
 
     @Test
     public void shouldBeAbleToRedirectToGivenURLAfterLoginAfterOneFailedLogin() throws Exception {
-        webDriver.get(newTimesheetUrl);
+        webDriver.get(dashboardUrl);
         submitCredentials(TestData.invalidPasswordString);
         submitCredentials(TestData.validPasswordString);
-        assertThat(webDriver.getCurrentUrl(), containsString(URLPaths.NEW_TIMESHEET_PATH));
+        assertThat(webDriver.getCurrentUrl(), containsString(URLPaths.DASHBOARD_PATH));
     }
 
     @Test
     public void shouldBeAbleToRedirectToGivenURLAfterLogin() throws Exception {
-        webDriver.get(newTimesheetUrl);
+        webDriver.get(dashboardUrl);
         assertThat(webDriver.getCurrentUrl(), containsString("https://castest.thoughtworks.com/cas/login?"));
         submitCredentials(TestData.validPasswordString);
-        assertThat(webDriver.getCurrentUrl(), containsString(URLPaths.NEW_TIMESHEET_PATH));
+        assertThat(webDriver.getCurrentUrl(), containsString(URLPaths.DASHBOARD_PATH));
     }
 
     @After
