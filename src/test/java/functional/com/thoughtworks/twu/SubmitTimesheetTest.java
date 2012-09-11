@@ -38,7 +38,7 @@ public class SubmitTimesheetTest extends BaseTest {
         sundayButton.click();
 
         String selectedWeekEndingDate = webDriver.findElement(By.id("weekEndingDate")).getAttribute("value");
-
+        System.out.print(selectedWeekEndingDate);
         WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
         dateSubmitButton.click();
 
@@ -49,6 +49,7 @@ public class SubmitTimesheetTest extends BaseTest {
 
         boolean containsDate = false;
         for(WebElement element : submittedTimesheets) {
+            System.out.print(element.getText());
             if(element.getText().equals(selectedWeekEndingDate)) {
                 containsDate = true;
                 break;
