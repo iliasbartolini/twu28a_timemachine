@@ -13,7 +13,7 @@ public class MessageServiceTest {
             MessageService service = new MessageService();
             List<Message> messages = service.getAllMessages();
 
-            assertEquals(15, messages.size());
+            assertEquals(16, messages.size());
         }
 
         @Test

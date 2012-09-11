@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.hamcrest.CoreMatchers.is;
 
-import static org.hamcrest.text.StringContains.containsString;
+import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.testng.AssertJUnit.*;
 
