@@ -3,10 +3,10 @@ package com.thoughtworks.twu.service;
 import com.thoughtworks.twu.domain.Timesheet;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -36,6 +36,10 @@ public class TimesheetService {
         session = connection.getSession();
 
         session.getTransaction().begin();
+        Date today = new Date(System.currentTimeMillis());
+
+        timesheet.setUpdatedAt(today);
+        timesheet.setCreatedAt(today);
         session.save(timesheet);
         session.getTransaction().commit();
         session.close();

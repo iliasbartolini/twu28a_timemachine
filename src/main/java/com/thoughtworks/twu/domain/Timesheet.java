@@ -10,6 +10,12 @@ import java.util.Date;
 @Table( name = "time_sheets" )
 public class Timesheet {
     public int id;
+    private String employeeNumber;
+    private Date weekEndingDate;
+    private String created_by; //Fill
+    private Date createdAt;
+    private String updated_by; //Fill
+    private Date updatedAt;
 
     @Id
     @GeneratedValue(generator="id")
@@ -21,15 +27,6 @@ public class Timesheet {
     public void setId(int id) {
         this.id = id;
     }
-
-    private String employeeNumber;
-
-    private Date weekEndingDate;
-
-    private String created_by;
-    private Date created_at;
-    private String updated_by;
-    private Date updated_at;
 
     @Column(name="employee_number")
     public String getEmployeeNumber() {
@@ -57,12 +54,13 @@ public class Timesheet {
         this.created_by = created_by;
     }
 
-    public Date getCreated_at() {
-        return created_at;
+    @Column(name= "created_at")
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getUpdated_by() {
@@ -73,14 +71,14 @@ public class Timesheet {
         this.updated_by = updated_by;
     }
 
-    public Date getUpdated_at() {
-        return updated_at;
+    @Column(name = "updated_at")
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
-
 
     @Override
     public boolean equals(Object o) {

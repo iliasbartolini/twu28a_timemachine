@@ -30,7 +30,12 @@
     <ul data-role="listview" id="timesheet_list" data-divider-theme="a">
         <li data-role="list-divider">Week Ending</li>
         <#list timesheets as item >
-            <li><a href="#">${item.weekEndingDate?string.medium}</a></li>
+            <li>
+                <div class ="ui-grid-a">
+                    <div class="ui-block-a">${item.weekEndingDate?string("dd-MMM-yy")}</div>
+                    <div class="ui-block-b">${item.createdAt?string("dd-MMM-yy")}</div>
+                </div>
+            </li>
         </#list>
     </ul>
 
