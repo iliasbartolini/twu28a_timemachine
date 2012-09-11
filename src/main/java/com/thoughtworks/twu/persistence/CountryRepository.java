@@ -30,8 +30,10 @@ public class CountryRepository {
         return sessionFactory.getCurrentSession().createCriteria(Country.class).list();
     }
 
+     @Transactional
      public List<Country> loadCountriesWithTWPresence() {
-        return sessionFactory.getCurrentSession().createQuery("select distinct c from Country c,LocationPresences lp where c.code = lp.countryCode and lp.thoughtworksPresence=1").list() ;
+        return sessionFactory.getCurrentSession().createQuery("select distinct c from Country c,LocationPresences lp " +
+                                                              "where c.code = lp.countryCode and lp.thoughtworksPresence=1").list() ;
 
      }
  }

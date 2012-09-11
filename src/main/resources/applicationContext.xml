@@ -33,6 +33,16 @@
                 hibernate.dialect=org.hibernate.dialect.H2Dialect
             </value>
         </property>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.thoughtworks.twu.domain.Country</value>
+                <value>com.thoughtworks.twu.domain.LocationPresences</value>
+                <value>com.thoughtworks.twu.domain.Employee</value>
+                <value>com.thoughtworks.twu.domain.Activity</value>
+                <value>com.thoughtworks.twu.domain.Employee</value>
+            </list>
+        </property>
+
     </bean>
 
     <bean id="transactionManager"

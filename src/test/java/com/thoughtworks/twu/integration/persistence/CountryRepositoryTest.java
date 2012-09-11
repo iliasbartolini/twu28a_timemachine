@@ -37,8 +37,7 @@ public class CountryRepositoryTest {
     @Test
     public void testGetCountries() throws Exception {
 
-
-        List<Country> countries = repository.loadCountries();
+       List<Country> countries = repository.loadCountries();
 
         assertThat(countries.size(), is(239));
     }

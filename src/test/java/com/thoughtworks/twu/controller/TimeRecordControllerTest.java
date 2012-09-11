@@ -1,6 +1,10 @@
 package com.thoughtworks.twu.controller;
 
+import com.thoughtworks.twu.domain.Country;
+import com.thoughtworks.twu.domain.LocationPresences;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
+import com.thoughtworks.twu.persistence.CountryRepository;
+import com.thoughtworks.twu.persistence.LocationPresencesRepository;
 import com.thoughtworks.twu.service.CountryService;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -8,34 +12,55 @@ import org.junit.Test;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TimeRecordControllerTest {
 
     TimeRecordController controller;
+
+    private CountryService countryService ;
+
     private TimeRecordForm timeRecordForm;
     private BindingResult bindingResult;
 
+    private List<Country> countries = new ArrayList<Country>();
+    private List<String> expectedNames = new ArrayList<String>();
+    private List<String> expectedStatesName = new ArrayList<String>();
+    private List<LocationPresences> locationPresenceList=  new ArrayList<LocationPresences>();
+
     @Before
     public void setUp() throws Exception {
-        controller = new TimeRecordController();
+
         timeRecordForm = new TimeRecordForm();
         bindingResult = mock(BindingResult.class);
-    }
-    @Test
 
-    public void shouldReceiveACountryList() throws Exception {
-        //Given
-        CountryService countryService = new CountryService();
-        //When
-        List<String> countries = countryService.getCountryNames();
-        //Then
-        assertThat(countries.size(), is(240));
+        Country country = new Country();
+        country.setName("USA");
+        country.setCode("USA");
+
+        countries.add(country);
+        expectedNames.add("Select a country");
+        expectedNames.add("USA - USA");
+
+
+
+        LocationPresences locationPresences = new LocationPresences();
+        locationPresences.setCountryCode("USA");
+        locationPresences.setState("GA");
+        locationPresences.setThoughtworksPresence(1);
+        locationPresenceList.add(locationPresences);
+        expectedStatesName.add("Select a state");
+        expectedStatesName.add("GA");
+
+        countryService = mock(CountryService.class);
+        controller = new TimeRecordController(countryService);
     }
 
     @Test
@@ -43,16 +68,23 @@ public class TimeRecordControllerTest {
         assertEquals("ui/timesheet/time_record", controller.newTimesheet(timeRecordForm,bindingResult).getViewName());
     }
 
-
-    @Ignore
     @Test
-    public void shouldShowNewFavoriteForm() throws Exception {
-        TimeRecordController controller = new TimeRecordController();
-        ModelAndView modelAndView = controller.newTimesheet(timeRecordForm,bindingResult);
-        List<String> countries = (List<String>) modelAndView.getModel().get("countries");
+    public void shouldReturnCountryNames() throws Exception
+    {
+       List<String> countryNames = controller.loadCountryNames(countries);
+       assertThat(countryNames, is(expectedNames));
 
-        assertThat(countries.size(), is(240));
     }
 
+    @Test
+    public void shouldReturnStateNames() throws Exception
+    {
+        when(countryService.getStates("USA")).thenReturn(locationPresenceList);
+
+        List<String> stateNames= controller.loadStateNames(locationPresenceList);
+
+        assertEquals(expectedStatesName, stateNames);
+
+    }
 
 }

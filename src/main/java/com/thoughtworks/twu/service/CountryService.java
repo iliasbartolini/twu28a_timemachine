@@ -5,27 +5,31 @@ import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
 import com.thoughtworks.twu.persistence.CountryRepository;
 import com.thoughtworks.twu.persistence.HibernateConnection;
+import com.thoughtworks.twu.persistence.LocationPresencesRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class CountryService {
 
-    private HibernateConnection connection;
-    public Session session;
 
     private List<Country> countries;
     private List<LocationPresences> locationPresences;
     private CountryRepository countryRepository;
+    private LocationPresencesRepository locationPresencesRepository;
+
 
     @Autowired
-    public CountryService(CountryRepository countryRepository) {
+    public CountryService(CountryRepository countryRepository, LocationPresencesRepository locationPresencesRepository) {
         this.countryRepository = countryRepository;
+        this.locationPresencesRepository = locationPresencesRepository;
     }
 
     public List<Country> loadCountryList() {
@@ -37,56 +41,19 @@ public class CountryService {
 
     private List<Country> getCountries() {
 
-        connection = HibernateConnection.getInstance();
-        session = connection.getSession();
-
-        countries = session.createCriteria(Country.class).
-                addOrder(Order.asc("name")).
-                list();
-
-        return countries;
+        return countryRepository.loadCountries();
     }
 
     public List<LocationPresences> getStates(String countryCode) {
-        connection = HibernateConnection.getInstance();
-        session = connection.getSession();
 
-        locationPresences = session.createCriteria(LocationPresences.class)
-                .add(Restrictions.and(
-                        Property.forName("state").isNotNull(),
-                        Restrictions.eq("countryCode", countryCode)))
-                .addOrder(Order.asc("state")).list();
-
-        return locationPresences;
+        return locationPresencesRepository.getStates(countryCode);
     }
 
-    public List<String> getCountryNames() throws Exception {
-        List<Country> countries = getCountries();
-        List<String> countryNames = new ArrayList<String>();
-        countryNames.add("Select a country");
-        for (Country country : countries) {
-            countryNames.add(country.getCode() + " - " + country.getName());
-        }
-        return countryNames;
-    }
 
-    public List<String> getStateName(String countrycode) throws Exception {
-        List<LocationPresences> locationPresences = getStates(countrycode);
-        List<String> stateNames = new ArrayList<String>();
-        stateNames.add("Select a state");
-        for (LocationPresences state : locationPresences) {
-            stateNames.add(state.getState());
-        }
-        return stateNames;
-    }
 
-    public List<Country> getCountriesWithTWPresence() {
+    public List<Country> loadCountryListWithTWPresence() {
 
-        connection = HibernateConnection.getInstance();
-        session = connection.getSession();
-
-        countries = session.createCriteria(LocationPresences.class).add(Restrictions.eq("thoughtworksPresence", 1)).list();
-        return countries;
+        return countryRepository.loadCountriesWithTWPresence();
     }
 
 }
