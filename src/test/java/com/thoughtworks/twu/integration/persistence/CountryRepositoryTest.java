@@ -30,22 +30,23 @@ public class CountryRepositoryTest {
     private CountryRepository repository;
 
     @Before
-    public void setUp() throws Exception
-    {
-     repository = new CountryRepository(sessionFactory);
+    public void setUp() throws Exception {
+        repository = new CountryRepository(sessionFactory);
     }
+
     @Test
     public void testGetCountries() throws Exception {
 
-       List<Country> countries = repository.loadCountries();
+        List<Country> countries = repository.loadCountries();
 
         assertThat(countries.size(), is(239));
     }
-    @Test
-    public void  shouldLoadCountriesWithTWPresence() throws Exception{
 
-        List<Country> countries=repository.loadCountriesWithTWPresence();
-        assertThat(countries.size(),is(11));
+    @Test
+    public void shouldLoadCountriesWithTWPresence() throws Exception {
+
+        List<Country> countries = repository.loadCountriesWithTWPresence();
+        assertThat(countries.size(), is(11));
 
     }
 

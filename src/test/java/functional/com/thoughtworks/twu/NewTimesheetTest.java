@@ -21,7 +21,6 @@ import static org.junit.Assert.*;
 public class NewTimesheetTest extends BaseTest {
 
 
-
     public NewTimesheetTest() throws UnknownHostException {
         super();
     }
@@ -41,15 +40,15 @@ public class NewTimesheetTest extends BaseTest {
     }
 
     @Test
-    //@Ignore("Page name conflict to be resolved")
-    public void checkIfCountryCanBeSelected() throws UnknownHostException {
+
+    public void checkIfCountryCanBeSelected() throws Exception {
         WebElement country = webDriver.findElement(By.id("country"));
         assertThat(country.isEnabled(), is(true));
     }
 
 
     @Test
-    @Ignore("TW Presence not yet implemented")
+
     public void shouldDisplayCountryListWithBothCountryCodeAndName() throws UnknownHostException {
         List<String> obtainedCountryNames = getActualCountryList();
         List<String> expectedCountryNames = getExpectedCountryList();
@@ -57,7 +56,7 @@ public class NewTimesheetTest extends BaseTest {
     }
 
     @Test
-    public void checkIfStateIsBlankInitially() throws UnknownHostException {
+    public void checkIfStateIsBlankInitially() throws Exception {
         WebElement state = webDriver.findElement(By.id("state"));
         Select dropDownState = new Select(state);
         assertEquals("", dropDownState.getFirstSelectedOption().getText());
@@ -220,7 +219,7 @@ public class NewTimesheetTest extends BaseTest {
 
     @After
     public void tearDown() {
-        webDriver.close();
+              webDriver.close();
     }
 
 
