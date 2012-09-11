@@ -10,20 +10,13 @@
     <script type="text/javascript" src="./static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
     <script type="text/javascript" src="./static/js/lib/jquery.form.js" ></script>
     <script type="text/javascript" src="./static/js/lib/jquery.validate.min.js"></script>
-
-
-
 </head>
 <body>
 
 <div data-role="page" data-theme="a">
-
-
     <div data-role="header" id="header">
         <h1>Welcome ${employee.name}</h1>
     </div>
-
-
 
     <a href="timesheet/week-ending-date" id="new_timesheet" data-inline="true" data-rel="dialog" data-transition="pop" data-ajax="false" data-role="button" type="add" data-theme="a" name="add" value="add_timesheet" data-icon="plus">New timesheet</a>
 
@@ -38,9 +31,6 @@
             </li>
         </#list>
     </ul>
-
-
 </div>
-
 </body>
 </html>
