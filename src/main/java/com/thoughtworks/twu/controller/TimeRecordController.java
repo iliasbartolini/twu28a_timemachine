@@ -6,6 +6,7 @@ import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.validators.ActivityValidator;
+import com.thoughtworks.twu.domain.validators.HourPerDayValidator;
 import com.thoughtworks.twu.domain.validators.LocationValidator;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.CountryService;
@@ -49,14 +50,16 @@ public class TimeRecordController {
 
         LocationValidator locationValidator = new LocationValidator();
         ActivityValidator activityValidator = new ActivityValidator();
+        HourPerDayValidator hourPerDayValidator=new HourPerDayValidator();
 
         locationValidator.validate(timeRecordForm, errors);
         activityValidator.validate(timeRecordForm, errors);
+        hourPerDayValidator.validate(timeRecordForm,errors);
 
         if (errors.hasErrors()) {
             return newTimesheet(timeRecordForm, errors);
         } else {
-            ModelAndView modelAndView = new ModelAndView("ui/timesheet/timeSheet");
+            ModelAndView modelAndView = new ModelAndView(URLPaths.NEW_TIMESHEET_PATH);
             modelAndView.addObject("timeRecordForm", timeRecordForm);
             return modelAndView;
         }
