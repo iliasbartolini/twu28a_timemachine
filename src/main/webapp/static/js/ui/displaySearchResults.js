@@ -17,6 +17,8 @@ $(function() {
         try {
             var activity = new Activity();
             $("#result").text("");
+            searchCriteria = $.trim(searchCriteria);
+
             activity.search(searchCriteria, function(activities) {
 
                 var $list = $("#activityList");
