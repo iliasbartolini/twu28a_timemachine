@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../static/css/base.css" />
     <link rel="stylesheet" href="../static/css/jquery.mobile-1.2.0-alpha.1.min.css" />
+
     <script type="text/javascript" src="../static/js/lib/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.form.js" ></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.cookie.js"></script>
-    <script type="text/javascript" src="../static/js/searchActivity.js"></script>
-    <script type="text/javascript" src="../static/js/ui/displaySearchResults.js"></script>
-
-
-
+    <script type="text/javascript" src="../static/js/timesheet/search_activity.js"></script>
+    <script type="text/javascript" src="../static/js/ui/timesheet/display_search_results.js"></script>
 </head>
 <body>
 <div data-role="page" data-theme="a">

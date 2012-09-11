@@ -16,13 +16,10 @@
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.form.js" ></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="../static/js/messages.js"></script>
-
-    <script type="text/javascript" src="/timemachine/static/js/lib/jqm-datebox-1.1.0.core.js"></script>
-    <script type="text/javascript" src="/timemachine/static/js/lib/jqm-datebox-1.1.0.mode.calbox.js"></script>
-    <script type="text/javascript" src="/timemachine/static/js/lib/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
-
-
+    <script type="text/javascript" src="../static/js/lib/jqm-datebox-1.1.0.core.js"></script>
+    <script type="text/javascript" src="../static/js/lib/jqm-datebox-1.1.0.mode.calbox.js"></script>
+    <script type="text/javascript" src="../static/js/lib/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
+    <script type="text/javascript" src="../static/js/messages/messages.js"></script>
     <script>
         $(function(){
 

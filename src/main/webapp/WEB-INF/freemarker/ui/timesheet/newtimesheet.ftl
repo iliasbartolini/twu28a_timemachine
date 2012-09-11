@@ -10,23 +10,14 @@
     <link rel="stylesheet" href="../static/css/mobiscroll-2.0.1.custom.min.css"/>
 
     <script type="text/javascript" src="../static/js/lib/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="../static/js/mobiscroll-2.0.1.custom.min.js"></script>
-
-    <script type="text/javascript" src="/timemachine/static/js/lib/jqm-datebox-1.1.0.core.js"></script>
-    <script type="text/javascript" src="/timemachine/static/js/lib/jqm-datebox-1.1.0.mode.calbox.js"></script>
-    <script type="text/javascript" src="/timemachine/static/js/lib/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
-
-    <script>
-
-
-    </script>
+    <script type="text/javascript" src="../static/js/lib/mobiscroll-2.0.1.custom.min.js"></script>
+    <script type="text/javascript" src="../static/js/lib/jqm-datebox-1.1.0.core.js"></script>
+    <script type="text/javascript" src="../static/js/lib/jqm-datebox-1.1.0.mode.calbox.js"></script>
+    <script type="text/javascript" src="../static/js/lib/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
-
-
 </head>
-
 
 <div data-role="page" data-theme="a">
     <div data-role="header">
