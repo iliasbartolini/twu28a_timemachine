@@ -1,9 +1,11 @@
 package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.domain.Employee;
+import com.thoughtworks.twu.domain.Message;
 import com.thoughtworks.twu.domain.timesheet.forms.DatePickerForm;
 import com.thoughtworks.twu.service.DatePickerService;
 import com.thoughtworks.twu.service.EmployeeService;
+import com.thoughtworks.twu.service.MessageService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.validation.BindException;
@@ -28,6 +30,8 @@ public class DatePickerControllerTest {
     private DatePickerController datePickerController;
     private DatePickerForm datePickerForm;
     private Employee employee;
+    private MessageService messageService;
+    private Message duplicateTimesheetForWeek;
 
 
     @Before
@@ -35,13 +39,20 @@ public class DatePickerControllerTest {
 
         mockEmployee();
         mockHttpRequest();
+        mockMessageService();
         datePickerService = mock(DatePickerService.class);
-        datePickerController = new DatePickerController(datePickerService, employeeService);
+        datePickerController = new DatePickerController(datePickerService, employeeService, messageService);
 
         datePickerForm = new DatePickerForm();
         datePickerForm.setWeekEndingDate("15-Sep-12");
 
         errors = new BindException(datePickerForm, "datePickerForm");
+    }
+
+    private void mockMessageService() {
+        messageService = mock(MessageService.class);
+        duplicateTimesheetForWeek = new Message("Duplicated week ending date", "DuplicateTimesheetForWeek");
+        when(messageService.getMessageMessageById("DuplicateTimesheetForWeek")).thenReturn(duplicateTimesheetForWeek);
     }
 
     private void mockHttpRequest() {

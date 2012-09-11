@@ -1,9 +1,11 @@
 package com.thoughtworks.twu.domain.validationTests;
 
 import com.thoughtworks.twu.domain.Employee;
+import com.thoughtworks.twu.domain.Message;
 import com.thoughtworks.twu.domain.timesheet.forms.DatePickerForm;
 import com.thoughtworks.twu.domain.validators.DatePickerValidator;
 import com.thoughtworks.twu.service.DatePickerService;
+import com.thoughtworks.twu.service.MessageService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,6 +24,8 @@ public class DatePickerValidatorTest {
     private String WEEK_ENDING_DATE;
     private Employee employee;
     private DatePickerService datePickerService;
+    private MessageService messageService;
+    private Message duplicateTimesheetForWeek;
 
     @Before
     public void setUp() throws Exception {
@@ -33,6 +37,9 @@ public class DatePickerValidatorTest {
         datePickerForm.setWeekEndingDate(WEEK_ENDING_DATE);
 
         datePickerService = mock(DatePickerService.class);
+        messageService = mock(MessageService.class);
+        duplicateTimesheetForWeek = new Message("Duplicated week ending date", "DuplicateTimesheetForWeek");
+        when(messageService.getMessageMessageById("DuplicateTimesheetForWeek")).thenReturn(duplicateTimesheetForWeek);
     }
 
     @Test
@@ -40,11 +47,11 @@ public class DatePickerValidatorTest {
 
         when(datePickerService.hasWeekEndingDate(WEEK_ENDING_DATE, employee)).thenReturn(true);
 
-        DatePickerValidator datePickerValidator = new DatePickerValidator(datePickerService, employee);
+        DatePickerValidator datePickerValidator = new DatePickerValidator(datePickerService, employee, messageService);
         datePickerValidator.validate(datePickerForm, errors);
 
         assertEquals(true, errors.hasErrors());
-        assertEquals("Duplicated week ending date.", errors.getFieldError("weekEndingDate").getCode());
+        assertEquals(duplicateTimesheetForWeek.getMessage(), errors.getFieldError("weekEndingDate").getCode());
     }
 
     @Test
@@ -52,10 +59,9 @@ public class DatePickerValidatorTest {
 
         when(datePickerService.hasWeekEndingDate(WEEK_ENDING_DATE, employee)).thenReturn(false);
 
-        DatePickerValidator datePickerValidator = new DatePickerValidator(datePickerService, employee);
+        DatePickerValidator datePickerValidator = new DatePickerValidator(datePickerService, employee, messageService);
         datePickerValidator.validate(datePickerForm, errors);
 
         assertEquals(false,errors.hasErrors());
     }
-
 }

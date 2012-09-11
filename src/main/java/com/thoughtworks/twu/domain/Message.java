@@ -16,6 +16,14 @@ public class Message {
     @Column(name = "message_id")
     private String messageId;
 
+    public Message(String message, String messageId) {
+        this.message = message;
+        this.messageId = messageId;
+    }
+
+    public Message() {
+    }
+
     public String getMessage() {
         return message;
     }

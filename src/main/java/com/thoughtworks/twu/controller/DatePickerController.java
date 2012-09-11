@@ -6,6 +6,7 @@ import com.thoughtworks.twu.domain.timesheet.forms.DatePickerForm;
 import com.thoughtworks.twu.domain.validators.DatePickerValidator;
 import com.thoughtworks.twu.service.DatePickerService;
 import com.thoughtworks.twu.service.EmployeeService;
+import com.thoughtworks.twu.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,11 +23,13 @@ public class DatePickerController {
 
     private final DatePickerService datePickerService;
     private final EmployeeService employeeService;
+    private MessageService messageService;
 
     @Autowired
-    public DatePickerController(DatePickerService datePickerService, EmployeeService employeeService) {
+    public DatePickerController(DatePickerService datePickerService, EmployeeService employeeService, MessageService messageService) {
         this.datePickerService = datePickerService;
         this.employeeService = employeeService;
+        this.messageService = messageService;
     }
 
     @RequestMapping(value = URLPaths.DATEPICKER_PATH, method = RequestMethod.GET)
@@ -42,7 +45,7 @@ public class DatePickerController {
 
         Employee employee = employeeService.getEmployeeByLogin(request.getRemoteUser());
 
-        Validator datePickerValidator = new DatePickerValidator(datePickerService, employee);
+        Validator datePickerValidator = new DatePickerValidator(datePickerService, employee, messageService);
         datePickerValidator.validate(date, errors);
 
         if(errors.hasErrors()){
