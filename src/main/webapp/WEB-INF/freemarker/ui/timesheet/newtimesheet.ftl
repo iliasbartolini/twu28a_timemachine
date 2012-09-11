@@ -35,9 +35,8 @@
 
     <form id="new_timesheet_form" action="submit" data-ajax="false" method="POST"
           class="ui-body ui-body-a ui-corner-all">
-
-
         <h4>Week Ending: ${weekEndingDate}</h4>
+        <input type="hidden" name="weekEndingDate" value="${weekEndingDate}"/>
 
         <a href="timerecord" id="timeRecord" data-ajax="false" data-role="button" data-theme="a"  value="addtimeRecord" data-icon="plus">New Activity</a>
         <br>
