@@ -1,14 +1,11 @@
 package functional.com.thoughtworks.twu;
 
-import com.thoughtworks.twu.domain.Message;
-import com.thoughtworks.twu.service.MessageService;
 import constants.TestData;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,7 +18,6 @@ import static org.testng.AssertJUnit.*;
 
 
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.List;
 
 
