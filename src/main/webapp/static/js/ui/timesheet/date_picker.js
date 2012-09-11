@@ -1,9 +1,8 @@
-$(function(){
+$('#index').live("pageinit", function () {
 
     console.log(Messages.getMessage(Messages.WeekCannotBeUnspecified));
 
-    $("#newtimesheet")
-        .validate({
+    $("#newtimesheet").validate({
             rules: {
                 weekEndingDate: {
                     required: true

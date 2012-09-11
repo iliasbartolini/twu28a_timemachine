@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../static/js/ui/timesheet/date_picker.js"></script>
 </head>
 <body>
-<div data-role="dialog" data-theme="a">
+<div data-role="dialog" data-theme="a" id="index">
 
     <form id="newtimesheet" action="" data-ajax="false" method="post"
           class="ui-body ui-body-a ui-corner-all">
