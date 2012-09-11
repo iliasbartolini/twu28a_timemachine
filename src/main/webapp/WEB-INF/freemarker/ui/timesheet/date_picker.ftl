@@ -20,27 +20,7 @@
     <script type="text/javascript" src="../static/js/lib/jqm-datebox-1.1.0.mode.calbox.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
     <script type="text/javascript" src="../static/js/messages/messages.js"></script>
-    <script>
-        $(function(){
-
-            console.log(Messages.getMessage(Messages.WeekCannotBeUnspecified));
-
-            $("#newtimesheet")
-                    .validate({
-                        rules: {
-                            weekEndingDate: {
-                                required: true
-                            }
-                        },
-                        messages: {
-                            weekEndingDate: Messages.getMessage(Messages.WeekCannotBeUnspecified)
-                        },
-                        errorPlacement: function(error, element) {
-                            error.insertAfter("#datepickerdiv");
-                        }
-                    });
-        });
-    </script>
+    <script type="text/javascript" src="../static/js/timesheet/ui/date_picker.js"></script>
 </head>
 <body>
 <div data-role="dialog" data-theme="a">
