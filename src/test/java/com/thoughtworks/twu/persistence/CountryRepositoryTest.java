@@ -29,7 +29,7 @@ public class CountryRepositoryTest {
     public void testGetCountries() throws Exception {
         CountryRepository repository = new CountryRepository(sessionFactory);
 
-        List<Country> countries = repository.getCountries();
+        List<Country> countries = repository.loadCountries();
 
         assertThat(countries.size(), is(239));
     }
