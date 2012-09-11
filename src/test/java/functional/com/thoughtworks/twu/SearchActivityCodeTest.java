@@ -59,6 +59,11 @@ public class SearchActivityCodeTest extends BaseTest {
         enterSearchString("XYZZ");
         assertTrue(new WebDriverWait(webDriver, 60).until(ExpectedConditions.textToBePresentInElement(By.id("result"), expectedMessages.get("NoMatchingActivity"))));
     }
+
+    @Test
+    public void checkForPlaceholderTextOnEmptySearchBar() {
+        assertEquals("Search...Type in 2 or more characters",waitForVisibilityOfElementById("searchCriteria").getAttribute("placeholder").toString());
+    }
     @Test
     @Ignore("Not implemented")
     public void shouldSetBillableFlagAsNoForNonBillableActivity() {
@@ -69,10 +74,10 @@ public class SearchActivityCodeTest extends BaseTest {
         //assertTrue(!webDriver.findElement(By.id("activity")).isEnabled())
     }
 
-//    @After
-//    public void teardown() {
-//        webDriver.close();
-//    }
+    @After
+    public void teardown() {
+        webDriver.close();
+    }
     private void enterSearchString(String searchString){
         WebElement search = waitForVisibilityOfElementById("searchCriteria");
         search.sendKeys(searchString);
