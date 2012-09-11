@@ -26,9 +26,11 @@ $(function() {
 
 
                 if ( activities.length == 0 ) {
+
                     $("#result").text(activity.getMessages()[Messages.NoMatchingActivity]);
                   return;
                 }
+
 
                 for(var i in activities) {
                     var $item = $("<li><a/></li>"),

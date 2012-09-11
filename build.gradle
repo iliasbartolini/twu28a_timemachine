@@ -4,6 +4,7 @@ apply plugin: 'idea'
 apply plugin: 'war'
 apply from:'emma.gradle'
 
+
 import org.apache.tools.ant.filters.*
 
 ext
@@ -14,11 +15,12 @@ ext
    serverPort = 9093
    environment = rootProject.hasProperty("environment") ? environment : "DEV"
 
-}
 
 repositories {
     mavenCentral()
+
 }
+
 
 dependencies {
     compile 'org.mybatis:mybatis:3.1.1',
@@ -61,10 +63,8 @@ war {
         destinationDir = file("$projectDir/build/libs/")
         archiveName = 'timemachine-' + environment + '.war'
         outputs.dir destinationDir
-
-
-
 }
+
 
 
 task createWebXML(dependsOn:"classes"){
@@ -110,8 +110,6 @@ functionalTest.doFirst {
 
 
 processResources.doFirst {
-
-
     println environment
 
     Properties props = new Properties()
@@ -129,7 +127,6 @@ processResources.doFirst {
     }
 
 }
-
 
 
 [jettyRunWar, jettyStop]*.stopPort = 8081

@@ -26,6 +26,7 @@ function Activity () {
     this.search = function(searchCriteria, callback)
     {
         if(searchCriteria.length < 2) {
+            console.log("reached here");
              throw new Error(this.getMessages()[Messages.Alteast2CharsForSearch]);
         }
 
