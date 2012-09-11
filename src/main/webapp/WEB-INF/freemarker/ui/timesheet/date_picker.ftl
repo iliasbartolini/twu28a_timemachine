@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<#import "/spring.ftl" as spring />
+<@spring.bind "datePickerForm" />
+<@spring.bind "errors" />
+
 <html>
 <head>
     <title>Test UI</title>
@@ -47,12 +51,18 @@
 
 <div data-role="dialog" data-theme="a">
 
-    <form id="newtimesheet" action="new" data-ajax="false" method="get"
+    <form id="newtimesheet" action="" data-ajax="false" method="post"
           class="ui-body ui-body-a ui-corner-all">
 
         <div data-role="fieldcontain" id="datepickerdiv">
             <input name="weekEndingDate" type="text" data-role="datebox" id="weekEndingDate" data-options='{"mode":"calbox", "blackDays": [1,2,3,4,5,6], "highDays": [0], "overrideCalStartDay": 1, "overrideDateFormat": "%-d-%b-%Y" }'/>
+            <#if errors.hasErrors() >
+                <div for="weekEndingDate" class="error">${errors.getFieldError("weekEndingDate").getCode()}</div>
+            </#if>
         </div>
+
+        
+
 
 
 
