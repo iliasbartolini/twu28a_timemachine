@@ -21,7 +21,7 @@
     <form action="search_activity" id="searchForm">
       <fieldset class="ui-grid-a" >
         <div class="ui-block-a" style="" id="home">
-            <input type="search" id="searchCriteria" name="searchCriteria" style="width:80%" placeholder="Search...type in more than 2 chars"  >
+            <input type="search" id="searchCriteria" name="searchCriteria" style="width:80%" placeholder="Search…type in 2 or more characters"  >
             <ul data-role="listview" data-theme="g" id="activityList"></ul>
         </div>
 
@@ -30,7 +30,7 @@
         </div>
       </fieldset>
     </form>
-    <div id="result" style="color:red;"></div>
+    <div id="result" style="color:red;"> </div>
     <ul id="messages" class="hidden">
     <#list messages as item>
         <li data-message-id='${item.getMessageId()}'>${item.getMessage()}</li>
@@ -38,7 +38,6 @@
     </ul
 </div>
 
->
 
 </body>
 </html>
