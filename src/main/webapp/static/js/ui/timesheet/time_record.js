@@ -1,10 +1,9 @@
 $(function () {
-    var activityCode = $.cookie("activity");
-
+    var activityCode = $.cookie("activity_code");
     if (activityCode) {
         $("#header").children("h3").text(activityCode);
         $("input[name=activity]").val(activityCode);
-        $.removeCookie('activity');
+        $.removeCookie('activity_code');
     } else {
         $("#header").children("h3").text("New Time Record");
         $("input[name=activity]").val("");
