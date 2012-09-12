@@ -110,13 +110,13 @@ public class DatepickerTest extends BaseTest {
     public void duplicateWeekEndingMessageShouldDisappearWhenBlankWeekEndingDateSubmitted() {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
-        chooseParticularSundayAsWeekEndingDate(1);
+        chooseParticularSundayAsWeekEndingDate(2);
         WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
         dateSubmitButton.click();
         WebElement timesheetSubmitButton = webDriver.findElement(By.id("submit"));
         timesheetSubmitButton.click();
         waitForVisibilityOfElementById("new_timesheet").click();
-        chooseParticularSundayAsWeekEndingDate(1);
+        chooseParticularSundayAsWeekEndingDate(2);
         waitForVisibilityOfElementById("submit").click();
         waitForVisibilityOfElementById("submit").click();
         WebElement message = webDriver.findElement(By.xpath("//label[@class='error']"));
