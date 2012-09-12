@@ -36,6 +36,7 @@ public class TimeRecordController {
 
     public TimeRecordController() {
     }
+
     @Autowired
     public TimeRecordController(CountryService countryService, TimeRecordService timeRecordService, MessageService messageService) {
 
@@ -46,6 +47,7 @@ public class TimeRecordController {
 
     @RequestMapping(value = URLPaths.TIME_RECORD_PATH, method = RequestMethod.GET)
     public ModelAndView newTimesheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
+
 
         List<Message> messages = new ArrayList<Message>();
         messages.add(messageService.getMessageById("HoursLessThan40"));
@@ -59,7 +61,7 @@ public class TimeRecordController {
         modelAndView.addObject("states", loadStateNames(countryService.getStates("USA")));
         modelAndView.addObject("messages", messages);
 
-        return modelAndView;
+        return showTimeRecord();
     }
 
     @RequestMapping(value = URLPaths.TIME_RECORD_PATH, method = RequestMethod.POST)
@@ -74,7 +76,7 @@ public class TimeRecordController {
         hourPerDayValidator.validate(timeRecordForm, errors);
 
         if (errors.hasErrors()) {
-            return newTimesheet(timeRecordForm, errors);
+            return showTimeRecord();
         } else {
             ModelAndView modelAndView = new ModelAndView(URLPaths.NEW_TIMESHEET_PATH);
             modelAndView.addObject("timeRecordForm", timeRecordForm);
@@ -106,5 +108,23 @@ public class TimeRecordController {
         timeRecordService.save(timeRecord);
 
     }
+
+
+    private ModelAndView showTimeRecord() {
+        List<Message> messages = new ArrayList<Message>();
+        messages.add(messageService.getMessageById("HoursLessThan40"));
+        messages.add(messageService.getMessageById("HoursCannotBeZero"));
+        messages.add(messageService.getMessageById("TaskCommentCannotBeUnspecified"));
+        messages.add(messageService.getMessageById("ActivityCannotBeUnspecified"));
+
+        ModelAndView modelAndView = new ModelAndView("ui/timesheet/time_record");
+
+        modelAndView.addObject("countries", loadCountryNames(countryService.loadCountryListWithTWPresence()));
+        modelAndView.addObject("states", loadStateNames(countryService.getStates("USA")));
+        modelAndView.addObject("messages", messages);
+
+        return modelAndView;
+    }
+
 
 }

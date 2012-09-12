@@ -70,6 +70,18 @@ public class TimeRecordRepositoryTest {
 
     }
 
+    @Test
+    public void shouldBeAbleToSave() {
+        timeRecordRepository = new TimeRecordRepository(sessionFactory);
+        timeRecordRepository.save(newTimeRecords);
+
+        sessionFactory.getCurrentSession().flush();
+        sessionFactory.getCurrentSession().clear();
+
+        List<TimeRecord> allTimeRecords = timeRecordRepository.getAllTimeRecords(newTimeRecords.getId());
+        assertThat(allTimeRecords.size(), is(1));
+    }
+
 
     @Configuration
     static class Config extends RepositoryContextConfiguration {

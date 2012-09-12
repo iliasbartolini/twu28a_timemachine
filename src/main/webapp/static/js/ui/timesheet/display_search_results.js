@@ -27,7 +27,7 @@ $(function () {
 
                 for (var i in activities) {
                     var $item = $("<li><a/></li>"),
-                        $a = $item.find("a");
+                    $a = $item.find("a");
 
                     var projectString = activities[i].client + " " + activities[i].project + " " + activities[i].sub_project;
 
@@ -47,9 +47,6 @@ $(function () {
                     $list.append($item);
                     $list.listview("refresh");
 
-                    $('#activityList').children('a').on('click', function () {
-                        alert('Selected Value=' + $(this).text());
-                    });
                 }
 
                 $list.listview("refresh");
