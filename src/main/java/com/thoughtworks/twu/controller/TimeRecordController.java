@@ -48,10 +48,10 @@ public class TimeRecordController {
     public ModelAndView newTimesheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
 
         List<Message> messages = new ArrayList<Message>();
-        messages.add(messageService.getMessageMessageById("HoursLessThan40"));
-        messages.add(messageService.getMessageMessageById("HoursCannotBeZero"));
-        messages.add(messageService.getMessageMessageById("TaskCommentCannotBeUnspecified"));
-        messages.add(messageService.getMessageMessageById("ActivityCannotBeUnspecified"));
+        messages.add(messageService.getMessageById("HoursLessThan40"));
+        messages.add(messageService.getMessageById("HoursCannotBeZero"));
+        messages.add(messageService.getMessageById("TaskCommentCannotBeUnspecified"));
+        messages.add(messageService.getMessageById("ActivityCannotBeUnspecified"));
 
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/time_record");
 

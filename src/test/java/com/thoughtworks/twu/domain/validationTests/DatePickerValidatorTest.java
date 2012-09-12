@@ -2,7 +2,7 @@ package com.thoughtworks.twu.domain.validationTests;
 
 import com.thoughtworks.twu.domain.Employee;
 import com.thoughtworks.twu.domain.Message;
-import com.thoughtworks.twu.domain.timesheet.forms.DatePickerForm;
+import com.thoughtworks.twu.domain.timesheet.forms.TimesheetForm;
 import com.thoughtworks.twu.domain.validators.DatePickerValidator;
 import com.thoughtworks.twu.service.DatePickerService;
 import com.thoughtworks.twu.service.MessageService;
@@ -19,49 +19,74 @@ import org.springframework.validation.BindException;
 
 public class DatePickerValidatorTest {
 
-    private DatePickerForm datePickerForm;
+    private TimesheetForm timesheetForm = new TimesheetForm();
     private BindException errors;
-    private String WEEK_ENDING_DATE;
+    private String WEEK_ENDING_DATE = "15-Sep-12";
     private Employee employee;
     private DatePickerService datePickerService;
     private MessageService messageService;
     private Message duplicateTimesheetForWeek;
+    private DatePickerValidator datePickerValidator;
+    private Message weekEndingDateCanNotBeNotEmpty;
 
     @Before
     public void setUp() throws Exception {
 
-        datePickerForm = new DatePickerForm();
-        errors = new BindException(datePickerForm, "datePickerForm");
-        WEEK_ENDING_DATE = "15-Sep-12";
+        errors = new BindException(timesheetForm, "timesheetForm");
         employee = new Employee();
-        datePickerForm.setWeekEndingDate(WEEK_ENDING_DATE);
 
         datePickerService = mock(DatePickerService.class);
+        mockMessages();
+
+        datePickerValidator = new DatePickerValidator(datePickerService, employee, messageService);
+    }
+
+    private void mockMessages() {
         messageService = mock(MessageService.class);
+
         duplicateTimesheetForWeek = new Message("Duplicated week ending date", "DuplicateTimesheetForWeek");
-        when(messageService.getMessageMessageById("DuplicateTimesheetForWeek")).thenReturn(duplicateTimesheetForWeek);
+        weekEndingDateCanNotBeNotEmpty = new Message("Week ending date is required.", "WeekCannotBeUnspecified");
+
+        when(messageService.getMessageById("DuplicateTimesheetForWeek")).thenReturn(duplicateTimesheetForWeek);
+        when(messageService.getMessageById("WeekCannotBeUnspecified")).thenReturn(weekEndingDateCanNotBeNotEmpty);
     }
 
     @Test
-    public void shouldFailValidationIfTimesheetWithSameWeekEndingDateExists(){
-
+    public void shouldFailValidationIfTimesheetWithSameWeekEndingDateExists() {
+        //Given
+        timesheetForm.setWeekEndingDate(WEEK_ENDING_DATE);
         when(datePickerService.hasWeekEndingDate(WEEK_ENDING_DATE, employee)).thenReturn(true);
 
-        DatePickerValidator datePickerValidator = new DatePickerValidator(datePickerService, employee, messageService);
-        datePickerValidator.validate(datePickerForm, errors);
+        //When
+        datePickerValidator.validate(timesheetForm, errors);
 
+        //Then
         assertEquals(true, errors.hasErrors());
         assertEquals(duplicateTimesheetForWeek.getMessage(), errors.getFieldError("weekEndingDate").getCode());
     }
 
     @Test
-    public void shouldNotFailValidationIfTimesheetWithSameWeekEndingDateDoesNotExists(){
-
+    public void shouldNotFailValidationIfTimesheetWithSameWeekEndingDateDoesNotExists() {
+        //Given
+        timesheetForm.setWeekEndingDate(WEEK_ENDING_DATE);
         when(datePickerService.hasWeekEndingDate(WEEK_ENDING_DATE, employee)).thenReturn(false);
 
-        DatePickerValidator datePickerValidator = new DatePickerValidator(datePickerService, employee, messageService);
-        datePickerValidator.validate(datePickerForm, errors);
+        //When
+        datePickerValidator.validate(timesheetForm, errors);
 
-        assertEquals(false,errors.hasErrors());
+        //Then
+        assertEquals(false, errors.hasErrors());
+    }
+
+    @Test
+    public void shouldNotAcceptEmptyDateField() throws Exception {
+        //Given
+        timesheetForm.setWeekEndingDate("");
+
+        //When
+        datePickerValidator.validate(timesheetForm, errors);
+
+        //Then
+        assertEquals(weekEndingDateCanNotBeNotEmpty.getMessage(), errors.getFieldError("weekEndingDate").getCode());
     }
 }

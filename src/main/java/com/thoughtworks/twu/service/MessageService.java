@@ -31,7 +31,7 @@ public class MessageService {
         return messages.get(index).getMessage();
     }
 
-    public Message getMessageMessageById(String messageId) {
+    public Message getMessageById(String messageId) {
         connection = HibernateConnection.getInstance();
         session = connection.getSession();
 

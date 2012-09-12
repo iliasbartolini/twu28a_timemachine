@@ -43,6 +43,7 @@ public class DashboardTest extends BaseTest {
         assertEquals("Welcome Tester", header.getText());
     }
     @Test
+    @Ignore
     public void shouldSortTimesheetsInReverseChronologicalOrderByWeekendingDate() {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();

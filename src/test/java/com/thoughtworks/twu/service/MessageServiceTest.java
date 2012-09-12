@@ -19,7 +19,7 @@ public class MessageServiceTest {
         @Test
         public void shouldReturnMessageForMessageId(){
             MessageService service = new MessageService();
-            Message message = service.getMessageMessageById("NoMatchingActivity");
+            Message message = service.getMessageById("NoMatchingActivity");
 
             assertEquals("No matching activity found.",message.getMessage());
 

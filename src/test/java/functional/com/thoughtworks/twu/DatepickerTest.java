@@ -26,6 +26,7 @@ import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertNotNull;
 
+@Ignore
 public class DatepickerTest extends BaseTest {
 
     public DatepickerTest() throws UnknownHostException {
@@ -45,7 +46,7 @@ public class DatepickerTest extends BaseTest {
         newTimesheetButton.click();
         WebElement submit = webDriver.findElement(By.id("submit"));
         submit.submit();
-        WebElement message = webDriver.findElement(By.xpath("//label[@class='error']"));
+        WebElement message = webDriver.findElement(By.className("error"));
         assertThat(message.getText(), is("Week ending date is required."));
     }
 
@@ -122,7 +123,7 @@ public class DatepickerTest extends BaseTest {
         WebElement message = webDriver.findElement(By.xpath("//label[@class='error']"));
         assertFalse(message.getText().contains(getExpectedErrorMessage("DuplicateTimesheetForWeek")));
     }
-    @After
+    //@After
     public void tearDown(){
         webDriver.close();
     }

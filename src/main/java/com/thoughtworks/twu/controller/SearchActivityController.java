@@ -27,8 +27,8 @@ public class SearchActivityController {
 
 
         List<Message> messages = new ArrayList<Message>();
-        messages.add(service.getMessageMessageById("Alteast2CharsForSearch"));
-        messages.add(service.getMessageMessageById("NoMatchingActivity"));
+        messages.add(service.getMessageById("Alteast2CharsForSearch"));
+        messages.add(service.getMessageById("NoMatchingActivity"));
 
         modelAndView.addObject("messages", messages) ;
 

@@ -18,7 +18,7 @@
         <h1>Welcome ${employee.name}</h1>
     </div>
 
-    <a href="timesheet/week-ending-date" id="new_timesheet" data-inline="true" data-rel="dialog" data-transition="pop" data-ajax="false" data-role="button" type="add" data-theme="a" name="add" value="add_timesheet" data-icon="plus">New timesheet</a>
+    <a href="timesheet/new" id="new_timesheet" data-inline="true" data-rel="dialog" data-transition="pop" data-ajax="false" data-role="button" type="add" data-theme="a" name="add" value="add_timesheet" data-icon="plus">New timesheet</a>
 
     <ul data-role="listview" id="timesheet_list" data-divider-theme="a">
         <li data-role="list-divider">Week Ending</li>
