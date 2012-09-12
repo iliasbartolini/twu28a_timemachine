@@ -3,7 +3,7 @@
 <@spring.bind "datePickerForm" />
 <@spring.bind "errors" />
 
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Test UI</title>
     <link rel="stylesheet" href="../static/css/base.css?1" />
@@ -30,10 +30,12 @@
 
         <div data-role="fieldcontain" id="datepickerdiv">
             <input name="weekEndingDate" type="text" data-role="datebox" id="weekEndingDate" data-options='{"mode":"calbox", "blackDays": [1,2,3,4,5,6], "highDays": [0], "overrideCalStartDay": 1, "overrideDateFormat": "%d-%b-%y" }'/>
-            <#if errors.hasErrors() >
-                <div for="weekEndingDate" class="colorError">${errors.getFieldError("weekEndingDate").getCode()}</div>
-            </#if>
         </div>
+        <#if errors.hasErrors() >
+            <div for="weekEndingDate" class="colorError">${errors.getFieldError("weekEndingDate").getCode()}</div>
+        <#else>
+            <div for="weekEndingDate" class="colorError error"></div>
+        </#if>
         <div class="ui-grid-a">
             <div class="ui-block-a"><button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">OK</button></div>
             <div class="ui-block-b"><a href="/timemachine/" data-role="button" id="cancel">Cancel</a></div>
