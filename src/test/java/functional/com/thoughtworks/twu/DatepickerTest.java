@@ -23,6 +23,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertNotNull;
 
 public class DatepickerTest extends BaseTest {
@@ -106,7 +107,6 @@ public class DatepickerTest extends BaseTest {
 
 
     @Test
-    @Ignore("Issue not handled")
     public void duplicateWeekEndingMessageShouldDisappearWhenBlankWeekEndingDateSubmitted() {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
@@ -120,8 +120,7 @@ public class DatepickerTest extends BaseTest {
         waitForVisibilityOfElementById("submit").click();
         waitForVisibilityOfElementById("submit").click();
         WebElement message = webDriver.findElement(By.xpath("//label[@class='error']"));
-        assertThat(message.getText(), is("Week ending date is required."));
-        assertNull(webDriver.findElement(By.className("error")));
+        assertFalse(message.getText().contains(getExpectedErrorMessage("DuplicateTimesheetForWeek")));
     }
     @After
     public void tearDown(){
