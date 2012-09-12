@@ -32,15 +32,15 @@ public class EmployeeServiceTest {
         EmployeeService service = new EmployeeService();
 
         Employee employee = new Employee();
-        employee.setName("Andy");
-        employee.setEmployeeNumber("1234");
-        employee.setLogin("ashaw");
+        employee.setName("AndyTest");
+        employee.setEmployeeNumber("9999");
+        employee.setLogin("andytest");
 
         service.saveEmployee(employee);
 
-        Employee result = service.getEmployeeByLogin("ashaw");
+        Employee result = service.getEmployeeByLogin("andytest");
 
-        assertEquals("Andy", result.getName());
+        assertEquals("AndyTest", result.getName());
 
     }
 
