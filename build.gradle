@@ -3,9 +3,10 @@ apply plugin: 'jetty'
 apply plugin: 'idea'
 apply plugin: 'war'
 apply from:'emma.gradle'
-
+ant.importBuild 'build.xml'
 
 import org.apache.tools.ant.filters.*
+import java.sql.Driver
 
 ext
 {
@@ -18,9 +19,12 @@ ext
 }
 repositories {
     mavenCentral()
-
+    flatDir name: 'localRepository', dirs: 'lib'
 }
 
+configurations {
+    driver
+}
 
 dependencies {
     compile 'org.mybatis:mybatis:3.1.1',
@@ -56,6 +60,8 @@ dependencies {
 
     emma "emma:emma:2.0.5312"
     emma "emma:emma_ant:2.0.5312"
+
+    driver name: 'ojdbc14'
 }
 
 
@@ -134,4 +140,22 @@ processResources.doFirst {
 
 functionalTest.doLast {
     jettyStop.execute()
+}
+
+
+//task deployDB2 << {
+////    ant.taskdef(resource: 'PRODUCTION.properties') {
+////        classpath {
+////            fileset(dir: 'libs', includes: '*.jar')
+////        }
+////    }
+//    ant.deployDB3(){
+//        fileset(dir: 'src') {
+//            include(name: 'build.xml')
+//            exclude(name: '**.java')
+//        }
+//    }
+//}
+task deployDB(dependsOn: deployDB3) << {
+//    println 'Hello, from Gradle'
 }

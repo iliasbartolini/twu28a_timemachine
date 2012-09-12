@@ -1,0 +1,32 @@
+<project name="timemachine">
+    <path id="antclasspath">
+        <fileset dir="lib">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <property name="pathvar" refid="antclasspath" />
+    <echo message="Classpath is ${pathvar}"/>
+
+    <target name="deployDB3">
+        <echo>Hello, from Ant</echo>
+        <sql
+                driver = "oracle.jdbc.OracleDriver"
+                url="jdbc:oracle:thin:@chioradev01.thoughtworks.com:1521:TETST1"
+                userid="TE_TST1"
+                password="TMetSt8q"
+                print="yes"
+                classpathref="antclasspath"
+                >
+            <path>
+                <fileset dir="./src/main/resources/twu_database/te/">
+                    <include name="MESSAGE_INSERT_DATA.sql"/>
+                    <!--<include name="data*.sql"/>-->
+                </fileset>
+            </path>
+        </sql>
+    </target>
+
+</project>
+
+
