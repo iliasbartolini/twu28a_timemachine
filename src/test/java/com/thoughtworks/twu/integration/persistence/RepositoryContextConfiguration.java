@@ -2,6 +2,7 @@ package com.thoughtworks.twu.integration.persistence;
 
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
+import com.thoughtworks.twu.domain.TimeRecord;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -35,6 +36,8 @@ public abstract class RepositoryContextConfiguration {
         return new LocalSessionFactoryBuilder(repoDataSource())
                 .addAnnotatedClass(Country.class)
                 .addAnnotatedClass(LocationPresences.class).
+                 addAnnotatedClass(TimeRecord.class).
+
                         buildSessionFactory();
     }
 

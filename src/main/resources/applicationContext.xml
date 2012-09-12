@@ -20,8 +20,10 @@
         runscript from 'classpath:twu_database/te/COUNTRIES_DATA_TABLE.sql'\;
         runscript from 'classpath:twu_database/te/LOCATION_PRESENCES_DATA_TABLE.sql'\;
         runscript from 'classpath:twu_database/te/MESSAGES_DATA_TABLE.sql'\;
+        runscript from 'classpath:twu_database/te/TIME_RECORDS_DATA_TABLE.sql'\;
         runscript from 'classpath:twu_database/te/EMPLOYEES_DATA_TABLE.sql'\;
         runscript from 'classpath:twu_database/te/ACTIVITIES_DATA_TABLE.sql';DB_CLOSE_ON_EXIT=FALSE;"/>
+
         <property name="username" value="sa"/>
         <property name="password" value=""/>
     </bean>
@@ -40,6 +42,7 @@
                 <value>com.thoughtworks.twu.domain.Employee</value>
                 <value>com.thoughtworks.twu.domain.Activity</value>
                 <value>com.thoughtworks.twu.domain.Employee</value>
+                <value>com.thoughtworks.twu.domain.TimeRecord</value>
             </list>
         </property>
 

@@ -2,22 +2,19 @@ package com.thoughtworks.twu.domain;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
-@Table(name = "time_records")
-
+@Table(name = "TIME_RECORDS")
 public class TimeRecord {
 
     @Id
-    @GeneratedValue(generator = "id")
-    @GenericGenerator(name = "id", strategy = "increment")
-
+//    @GeneratedValue(generator = "id")
+//    @GenericGenerator(name = "id", strategy = "increment")
     private int id;
+
+
     private int time_sheet_id;
     private String project;
     private String sub_project;
