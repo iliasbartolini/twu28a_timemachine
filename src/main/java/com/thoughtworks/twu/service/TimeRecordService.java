@@ -12,15 +12,10 @@ import java.util.List;
 @Service
 public class TimeRecordService {
 
-    private HibernateConnection connection;
-    private Session session;
-
     @Autowired
     private TimeRecordRepository timeReportRepository;
 
     public TimeRecordService() {
-        connection = HibernateConnection.getInstance();
-        session = connection.getSession();
 
     }
 
