@@ -22,6 +22,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNull;
+import static org.testng.AssertJUnit.assertNotNull;
 
 public class DatepickerTest extends BaseTest {
 
@@ -59,7 +61,7 @@ public class DatepickerTest extends BaseTest {
         waitForVisibilityOfElementById("new_timesheet").click();
         chooseParticularSundayAsWeekEndingDate(1);
         waitForVisibilityOfElementById("submit").click();
-        assertEquals(webDriver.findElement(By.className("error")).getText(),getExpectedErrorMessage("DuplicateTimesheetForWeek"));
+        assertEquals(webDriver.findElement(By.className("error")).getText(), getExpectedErrorMessage("DuplicateTimesheetForWeek"));
     }
     @Test
     public void shouldBeReadOnly() {
@@ -97,6 +99,25 @@ public class DatepickerTest extends BaseTest {
     public void shouldNotBeAllowableToManipulateThroughURL() {
         webDriver.get(weekEndingUrl+"8-Oct-12");
         assertFalse(new WebDriverWait(webDriver, 60).until(ExpectedConditions.textToBePresentInElement(By.id("new_timesheet_form"), "8-Oct-12")));
+    }
+
+    @Test
+    @Ignore("Issue not handled")
+    public void duplicateWeekEndingMessageShouldDisappearWhenBlankWeekEndingDateSubmitted() {
+        WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
+        newTimesheetButton.click();
+        chooseParticularSundayAsWeekEndingDate(1);
+        WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
+        dateSubmitButton.click();
+        WebElement timesheetSubmitButton = webDriver.findElement(By.id("submit"));
+        timesheetSubmitButton.click();
+        waitForVisibilityOfElementById("new_timesheet").click();
+        chooseParticularSundayAsWeekEndingDate(1);
+        waitForVisibilityOfElementById("submit").click();
+        waitForVisibilityOfElementById("submit").click();
+        WebElement message = webDriver.findElement(By.xpath("//label[@class='error']"));
+        assertThat(message.getText(), is("Week ending date is required."));
+        assertNull(webDriver.findElement(By.className("error")));
     }
     @After
     public void tearDown(){

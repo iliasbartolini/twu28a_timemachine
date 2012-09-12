@@ -72,6 +72,17 @@ public class SearchActivityCodeTest extends BaseTest {
         }
     }
     @Test
+    @Ignore("Not handled")
+    public void shouldHandleModulusProperly() {
+        String searchString = "RORZ%YTYOO96";
+        enterSearchString(searchString);
+        List<WebElement> searchResults = webDriver.findElements(By.className("ui-link-inherit"));
+        for(WebElement element : searchResults) {
+            assertThat(element.getText(),containsString("RORZ"));
+            assertThat(element.getText(),containsString("YTYOO96"));
+        }
+    }
+    @Test
     @Ignore("Not implemented")
     public void shouldSetBillableFlagAsNoForNonBillableActivity() {
         enterSearchString("YTYOO96");
