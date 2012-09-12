@@ -63,7 +63,7 @@ public class TimeRecordController {
     }
 
     @RequestMapping(value = URLPaths.TIME_RECORD_PATH, method = RequestMethod.POST)
-    public ModelAndView submittedTimeSheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
+    public ModelAndView submitTimeRecord(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
 
         LocationValidator locationValidator = new LocationValidator();
         ActivityValidator activityValidator = new ActivityValidator();

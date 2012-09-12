@@ -9,6 +9,10 @@ import java.util.Date;
 @Entity
 @Table( name = "time_sheets" )
 public class Timesheet {
+
+    public static final String STATUS_SUBMITTED = "submitted";
+    public static final String STATUS_OPEN = "open";
+
     public int id;
     private String employeeNumber;
     private Date weekEndingDate;
@@ -16,6 +20,8 @@ public class Timesheet {
     private Date createdAt;
     private String updated_by; //Fill
     private Date updatedAt;
+    private String status;
+    public int expenses;
 
     @Id
     @GeneratedValue(generator="id")
@@ -78,6 +84,15 @@ public class Timesheet {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Column(name="status")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
