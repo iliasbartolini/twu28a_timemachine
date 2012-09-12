@@ -1,5 +1,7 @@
 package com.thoughtworks.twu.domain.timesheet.forms;
 
+import com.thoughtworks.twu.domain.TimeRecord;
+
 import java.util.Date;
 
 public class TimeRecordForm {
@@ -130,5 +132,14 @@ public class TimeRecordForm {
             return 0f;
         else
             return value;
+    }
+
+    public TimeRecord toTimeRecord(int timesheetID) {
+        TimeRecord timeRecord = new TimeRecord();
+        timeRecord.setProject(getActivity());
+        timeRecord.setCountry(getCountry());
+        timeRecord.setTime_sheet_id(timesheetID);
+        timeRecord.setState(getState());
+        return timeRecord;
     }
 }

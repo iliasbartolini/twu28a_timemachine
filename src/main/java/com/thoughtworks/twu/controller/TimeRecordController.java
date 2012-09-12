@@ -4,13 +4,16 @@ import com.thoughtworks.twu.constants.URLPaths;
 
 import com.thoughtworks.twu.domain.Country;
 import com.thoughtworks.twu.domain.LocationPresences;
+import com.thoughtworks.twu.domain.Message;
+import com.thoughtworks.twu.domain.TimeRecord;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.validators.ActivityValidator;
 import com.thoughtworks.twu.domain.validators.HourPerDayValidator;
 import com.thoughtworks.twu.domain.validators.LocationValidator;
-import com.thoughtworks.twu.persistence.HibernateConnection;
 import com.thoughtworks.twu.service.CountryService;
 
+import com.thoughtworks.twu.service.MessageService;
+import com.thoughtworks.twu.service.TimeRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,36 +28,50 @@ import java.util.List;
 @Controller
 public class TimeRecordController {
 
-    @Autowired
     private CountryService countryService;
+    private MessageService messageService;
 
+    private TimeRecordService timeRecordService;
 
-    public TimeRecordController(CountryService countryService) {
-        this.countryService = countryService;
-    }
 
     public TimeRecordController() {
+    }
+    @Autowired
+    public TimeRecordController(CountryService countryService, TimeRecordService timeRecordService, MessageService messageService) {
+
+        this.countryService = countryService;
+        this.timeRecordService = timeRecordService;
+        this.messageService = messageService;
     }
 
     @RequestMapping(value = URLPaths.TIME_RECORD_PATH, method = RequestMethod.GET)
     public ModelAndView newTimesheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
+
+        List<Message> messages = new ArrayList<Message>();
+        messages.add(messageService.getMessageMessageById("HoursLessThan40"));
+        messages.add(messageService.getMessageMessageById("HoursCannotBeZero"));
+        messages.add(messageService.getMessageMessageById("TaskCommentCannotBeUnspecified"));
+        messages.add(messageService.getMessageMessageById("ActivityCannotBeUnspecified"));
+
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/time_record");
 
         modelAndView.addObject("countries", loadCountryNames(countryService.loadCountryListWithTWPresence()));
         modelAndView.addObject("states", loadStateNames(countryService.getStates("USA")));
-     return modelAndView;
+        modelAndView.addObject("messages", messages);
+
+        return modelAndView;
     }
 
     @RequestMapping(value = URLPaths.TIME_RECORD_PATH, method = RequestMethod.POST)
-    public ModelAndView submittedTimeSheet(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
+    public ModelAndView submitTimeRecord(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
 
         LocationValidator locationValidator = new LocationValidator();
         ActivityValidator activityValidator = new ActivityValidator();
-        HourPerDayValidator hourPerDayValidator=new HourPerDayValidator();
+        HourPerDayValidator hourPerDayValidator = new HourPerDayValidator();
 
         locationValidator.validate(timeRecordForm, errors);
         activityValidator.validate(timeRecordForm, errors);
-        hourPerDayValidator.validate(timeRecordForm,errors);
+        hourPerDayValidator.validate(timeRecordForm, errors);
 
         if (errors.hasErrors()) {
             return newTimesheet(timeRecordForm, errors);
@@ -64,7 +81,6 @@ public class TimeRecordController {
             return modelAndView;
         }
     }
-
 
     public List<String> loadCountryNames(List<Country> countries) {
         List<String> countryNames = new ArrayList<String>();
@@ -84,4 +100,11 @@ public class TimeRecordController {
         }
         return stateNames;
     }
+
+    public void save(TimeRecordForm timeRecordForm, int timesheetID) {
+        TimeRecord timeRecord = timeRecordForm.toTimeRecord(timesheetID);
+        timeRecordService.save(timeRecord);
+
+    }
+
 }

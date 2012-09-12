@@ -3,6 +3,7 @@ package com.thoughtworks.twu.service;
 import com.thoughtworks.twu.domain.Timesheet;
 import com.thoughtworks.twu.persistence.HibernateConnection;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +62,6 @@ public class TimesheetService {
         session = connection.getSession();
 
         return session.createCriteria(Timesheet.class)
-                .add(Restrictions.eq("employeeNumber", remoteUser)).list();
+                .add(Restrictions.eq("employeeNumber", remoteUser)).addOrder(Order.desc("weekEndingDate")).list();
     }
 }

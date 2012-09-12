@@ -14,10 +14,28 @@ describe("New Timesheet", function () {
     });
 
     it("should ask for confirmation when total hours is less than 40",function() {
-        var hours = [0, 0, 0, 0, 0, 0, 0];
+        var hours = [39.99, 0, 0, 0, 0, 0, 0];
 
         var timeRecord = new TimeRecord();
 
-        expect(function() { timeRecord.validateHours(hours); }).toThrow();
+        expect(function() { timeRecord.validateHours(hours); }).toThrow(Messages.HoursLessThan40);
     });
+
+    it("should not throw exception if greater than 40",function() {
+        var hours = [20, 20, 0, 0, 0, 0, 0];
+
+        var timeRecord = new TimeRecord();
+
+        expect(function() { timeRecord.validateHours(hours); }).not.toThrow();
+    });
+
+    it("should not accept zero hours",function() {
+        var hours = [0, 0, 0, 0, 0, 0, 0];
+
+        var timeRecord = new TimeRecord();
+        expect(function() { timeRecord.validateHours(hours); }).toThrow(Messages.HoursCannotBeZero);
+    });
+
+
+
 });

@@ -2,6 +2,10 @@ var Messages = {
     Alteast2CharsForSearch : "Alteast2CharsForSearch",
     NoMatchingActivity : "NoMatchingActivity",
     WeekCannotBeUnspecified : "WeekCannotBeUnspecified",
+    HoursLessThan40: "HoursLessThan40",
+    HoursCannotBeZero:"HoursCannotBeZero",
+    TaskCommentCannotBeUnspecified: "TaskCommentCannotBeUnspecified",
+    ActivityCannotBeUnspecified: "ActivityCannotBeUnspecified",
     messages: [],
     loadMessages : function() {
         $("#messages li").each(function() {
@@ -14,7 +18,7 @@ var Messages = {
     }
 };
 
-$(function(){
+$('#index').live("pageinit", function () {
     Messages.loadMessages();
 });
 

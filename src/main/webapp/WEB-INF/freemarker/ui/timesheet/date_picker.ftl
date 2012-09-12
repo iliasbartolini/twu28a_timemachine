@@ -20,30 +20,10 @@
     <script type="text/javascript" src="../static/js/lib/jqm-datebox-1.1.0.mode.calbox.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
     <script type="text/javascript" src="../static/js/messages/messages.js"></script>
-    <script>
-        $(function(){
-
-            console.log(Messages.getMessage(Messages.WeekCannotBeUnspecified));
-
-            $("#newtimesheet")
-                    .validate({
-                        rules: {
-                            weekEndingDate: {
-                                required: true
-                            }
-                        },
-                        messages: {
-                            weekEndingDate: Messages.getMessage(Messages.WeekCannotBeUnspecified)
-                        },
-                        errorPlacement: function(error, element) {
-                            error.insertAfter("#datepickerdiv");
-                        }
-                    });
-        });
-    </script>
+    <script type="text/javascript" src="../static/js/ui/timesheet/date_picker.js"></script>
 </head>
 <body>
-<div data-role="dialog" data-theme="a">
+<div data-role="dialog" data-theme="a" id="index">
 
     <form id="newtimesheet" action="" data-ajax="false" method="post"
           class="ui-body ui-body-a ui-corner-all">
@@ -51,7 +31,7 @@
         <div data-role="fieldcontain" id="datepickerdiv">
             <input name="weekEndingDate" type="text" data-role="datebox" id="weekEndingDate" data-options='{"mode":"calbox", "blackDays": [1,2,3,4,5,6], "highDays": [0], "overrideCalStartDay": 1, "overrideDateFormat": "%d-%b-%y" }'/>
             <#if errors.hasErrors() >
-                <div for="weekEndingDate" class="error">${errors.getFieldError("weekEndingDate").getCode()}</div>
+                <div for="weekEndingDate" class="colorError">${errors.getFieldError("weekEndingDate").getCode()}</div>
             </#if>
         </div>
         <div class="ui-grid-a">
