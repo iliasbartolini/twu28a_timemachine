@@ -6,7 +6,7 @@ $(function () {
 
 
         var $form = $( this ),
-            searchCriteria = $form.find( 'input[name="searchCriteria"]' ).val().replace("_","!_"),
+            searchCriteria = $form.find( 'input[name="searchCriteria"]' ).val(),
             url = $form.attr( 'action' );
 
         try {

@@ -49,6 +49,15 @@ public class ActivityServiceTest {
     }
 
     @Test
+    public void shouldReturnActivityListWhenUnderscoreIsUsed() {
+
+        JSONArray  activities = service.getActivities("ser_e");
+
+        assertEquals(5, activities.length());
+    }
+
+
+    @Test
     @Ignore
     public void shouldPerformAndWhenSearchCriteriaContainsModulus() throws Exception {
 
