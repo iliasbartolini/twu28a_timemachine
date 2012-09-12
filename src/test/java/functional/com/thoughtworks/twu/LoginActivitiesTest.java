@@ -26,7 +26,6 @@ public class LoginActivitiesTest extends BaseTest {
     @Test
     public void shouldBeAbleToLoginWithCAS() throws Exception {
         webDriver.get(dashboardUrl);
-        System.out.println(webDriver.getCurrentUrl());
         super.submitCredentials(TestData.validPasswordString);
         assertNotNull(webDriver.findElement(By.name("add")));
     }

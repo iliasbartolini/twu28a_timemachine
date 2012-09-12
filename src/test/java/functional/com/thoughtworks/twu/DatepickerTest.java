@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.AssertJUnit;
 
 import java.net.UnknownHostException;
@@ -48,40 +49,25 @@ public class DatepickerTest extends BaseTest {
     @Test
     @Ignore("Not yet Done")
     public void shouldShowErrorWhenDuplicateDate(){
-
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
-        WebElement openDatepickerButton = webDriver.findElement(By.xpath("//a[@title='Open Date Picker']"));
-        openDatepickerButton.click();
-        WebElement sundayButton = webDriver.findElement(By.className("ui-btn-up-e"));
-        sundayButton.click();
+        chooseParticularSundayAsWeekEndingDate(1);
         WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
         dateSubmitButton.click();
-
         WebElement timesheetSubmitButton = webDriver.findElement(By.id("submit"));
         timesheetSubmitButton.click();
-
-        newTimesheetButton.click();
-        openDatepickerButton.click();
-        sundayButton.click();
-        dateSubmitButton.click();
-
-
-        WebElement message = webDriver.findElement(By.xpath("//label[@class='error']"));
-        assertEquals(message.getText(), getExpectedErrorMessage("DuplicateTimesheetForWeek"));
+        waitForVisibilityOfElementById("new_timesheet").click();
+        chooseParticularSundayAsWeekEndingDate(1);
+        waitForVisibilityOfElementById("submit").click();
+        assertEquals(webDriver.findElement(By.className("error")).getText(),getExpectedErrorMessage("DuplicateTimesheetForWeek"));
     }
     @Test
     public void shouldBeReadOnly() {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
-
-
         WebElement calender = webDriver.findElement(By.id("weekEndingDate"));
         calender.sendKeys("16-Sep-12");
-
         assertThat(webDriver.findElement(By.id("weekEndingDate")).getAttribute("value"), is(""));
-
-
     }
     @Test
     @Ignore("Link to put back date on timesheet pending")
@@ -89,16 +75,10 @@ public class DatepickerTest extends BaseTest {
 
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
-        WebElement openDatepickerButton = webDriver.findElement(By.xpath("//a[@title='Open Date Picker']"));
-        openDatepickerButton.click();
-        WebElement sundayButton = webDriver.findElement(By.className("ui-btn-up-e"));
-        sundayButton.click();
-
+        chooseParticularSundayAsWeekEndingDate(1);
         String selectedWeekEndingDate = webDriver.findElement(By.id("weekEndingDate")).getAttribute("value");
-
-        WebElement submitButton = webDriver.findElement(By.id("submit"));
-        submitButton.click();
-
+        WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
+        dateSubmitButton.click();
         WebElement weekEndingDisplay = webDriver.findElement(By.id("weekEndingDate"));
         assertEquals(selectedWeekEndingDate, weekEndingDisplay.getText());
     }

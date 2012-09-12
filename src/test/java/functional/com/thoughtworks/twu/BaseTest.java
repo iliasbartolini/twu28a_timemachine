@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -55,6 +56,7 @@ public class BaseTest {
         expectedMessages.put("TaskCommentCannotBeUnspecified","Task Comment is required.");
         expectedMessages.put("HoursLessThan40","Your total billed hours for the week are less than 40. Do you want to continue submitting this timesheet?");
         expectedMessages.put("PublicHolidayConfirmation","<Date> was a public holiday in <Country>. Are you sure you want to enter hours for it");
+        expectedMessages.put("HoursCannotBeZero","Hours must be entered for each activity in order to submit.");
     }
 
     protected void submitCredentials(String passwordString) {
@@ -80,6 +82,11 @@ public class BaseTest {
     protected String getExpectedErrorMessage(String messageId) {
         return expectedMessages.get(messageId);
     }
-
+    protected void chooseParticularSundayAsWeekEndingDate(int sundayNumber){
+        WebElement openDatepickerButton = webDriver.findElement(By.xpath("//a[@title='Open Date Picker']"));
+        openDatepickerButton.click();
+        List<WebElement> sundayButton = webDriver.findElements(By.className("ui-btn-up-e"));
+        sundayButton.get(sundayNumber-1).click();
+    }
 
 }

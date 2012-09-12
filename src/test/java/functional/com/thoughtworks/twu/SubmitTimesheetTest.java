@@ -32,13 +32,9 @@ public class SubmitTimesheetTest extends BaseTest {
     public void shouldBeAbleToSubmitTimesheet() {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
-        WebElement openDatepickerButton = webDriver.findElement(By.xpath("//a[@title='Open Date Picker']"));
-        openDatepickerButton.click();
-        WebElement sundayButton = webDriver.findElement(By.className("ui-btn-up-e"));
-        sundayButton.click();
+        chooseParticularSundayAsWeekEndingDate(1);
 
         String selectedWeekEndingDate = webDriver.findElement(By.id("weekEndingDate")).getAttribute("value");
-        System.out.print(selectedWeekEndingDate);
         WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
         dateSubmitButton.click();
 
@@ -49,7 +45,6 @@ public class SubmitTimesheetTest extends BaseTest {
 
         boolean containsDate = false;
         for(WebElement element : submittedTimesheets) {
-            System.out.print(element.getText());
             if(element.getText().equals(selectedWeekEndingDate)) {
                 containsDate = true;
                 break;

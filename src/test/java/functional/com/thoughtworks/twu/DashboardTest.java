@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 public class DashboardTest extends BaseTest {
 
@@ -31,7 +32,6 @@ public class DashboardTest extends BaseTest {
     public void shouldJumpToDatepickerPage() throws Exception {
         webDriver.get(dashboardUrl);
         WebElement datePickerLink = webDriver.findElement(By.id("new_timesheet"));
-
         datePickerLink.click();
         assertNotNull(waitForVisibilityOfElementById("weekEndingDate"));
     }
@@ -47,23 +47,32 @@ public class DashboardTest extends BaseTest {
     public void shouldSortTimesheetsInReverseChronologicalOrderByWeekendingDate() {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
-        WebElement openDatepickerButton = webDriver.findElement(By.xpath("//a[@title='Open Date Picker']"));
-        openDatepickerButton.click();
-        List<WebElement> sundayButton = webDriver.findElements(By.className("ui-btn-up-e"));
-        System.out.print(sundayButton.size());
-        sundayButton.get(0).click();
+        chooseParticularSundayAsWeekEndingDate(1);
+        String selectedWeekEndingDate1 = webDriver.findElement(By.id("weekEndingDate")).getAttribute("value");
         WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
         dateSubmitButton.click();
         WebElement timesheetSubmitButton = webDriver.findElement(By.id("submit"));
         timesheetSubmitButton.click();
-
-        newTimesheetButton.click();
-        openDatepickerButton.click();
-        sundayButton.get(1).click();
-        dateSubmitButton.click();
+        waitForVisibilityOfElementById("new_timesheet").click();
+        chooseParticularSundayAsWeekEndingDate(2);
+        String selectedWeekEndingDate2 = webDriver.findElement(By.id("weekEndingDate")).getAttribute("value");
+        waitForVisibilityOfElementById("submit").click();
+        waitForVisibilityOfElementById("submit").click();
+        assertTrue(getPositionOfParticularTimesheetGivenWeekendingDateDate(selectedWeekEndingDate2) < (getPositionOfParticularTimesheetGivenWeekendingDateDate(selectedWeekEndingDate1)));
     }
     @After
     public void tearDown() {
         webDriver.close();
     }
+    private int getPositionOfParticularTimesheetGivenWeekendingDateDate(String date) {
+        List<WebElement> submittedTimesheets = webDriver.findElements(By.className("ui-block-a"));
+        int i;
+        for (i = 0; i < submittedTimesheets.size(); i++) {
+            if(submittedTimesheets.get(i).getText().substring(0,9).equals(date)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }
