@@ -26,7 +26,7 @@ import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertNotNull;
 
-@Ignore
+
 public class DatepickerTest extends BaseTest {
 
     public DatepickerTest() throws UnknownHostException {
@@ -47,7 +47,7 @@ public class DatepickerTest extends BaseTest {
         WebElement submit = webDriver.findElement(By.id("submit"));
         submit.submit();
         WebElement message = webDriver.findElement(By.className("error"));
-        assertThat(message.getText(), is("Week ending date is required."));
+        assertThat(message.getText(), is(getExpectedErrorMessage("WeekCannotBeUnspecified")));
     }
 
     @Test
@@ -55,8 +55,6 @@ public class DatepickerTest extends BaseTest {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
         chooseParticularSundayAsWeekEndingDate(3);
-        WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
-        dateSubmitButton.click();
         WebElement timesheetSubmitButton = webDriver.findElement(By.id("submit"));
         timesheetSubmitButton.click();
         waitForVisibilityOfElementById("new_timesheet").click();
@@ -75,7 +73,7 @@ public class DatepickerTest extends BaseTest {
     }
 
     @Test
-    @Ignore("Link to put back date on timesheet pending")
+    @Ignore("Not needed any more as same page is being used")
     public void shouldLinkToNewTimesheetWithValidInput() {
 
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
@@ -89,6 +87,7 @@ public class DatepickerTest extends BaseTest {
     }
 
     @Test
+    @Ignore("Not needed any more as same page is being used")
     public void shouldReturnToDashboardOnCancel() {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
@@ -100,30 +99,43 @@ public class DatepickerTest extends BaseTest {
     }
 
     @Test
-    @Ignore("Issue not handled")
+    @Ignore("Not needed any more as same page is being used")
     public void shouldNotBeAllowableToManipulateThroughURL() {
         webDriver.get(weekEndingUrl+"8-Oct-12");
         assertFalse(new WebDriverWait(webDriver, 60).until(ExpectedConditions.textToBePresentInElement(By.id("new_timesheet_form"), "8-Oct-12")));
     }
 
-
     @Test
+    @Ignore("Not needed any more as same page is being used")
     public void duplicateWeekEndingMessageShouldDisappearWhenBlankWeekEndingDateSubmitted() {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
         chooseParticularSundayAsWeekEndingDate(2);
-        WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
-        dateSubmitButton.click();
         WebElement timesheetSubmitButton = webDriver.findElement(By.id("submit"));
         timesheetSubmitButton.click();
         waitForVisibilityOfElementById("new_timesheet").click();
         chooseParticularSundayAsWeekEndingDate(2);
         waitForVisibilityOfElementById("submit").click();
         waitForVisibilityOfElementById("submit").click();
-        WebElement message = webDriver.findElement(By.xpath("//label[@class='error']"));
+        WebElement message = webDriver.findElement(By.className("colorError"));
         assertFalse(message.getText().contains(getExpectedErrorMessage("DuplicateTimesheetForWeek")));
     }
-    //@After
+
+    @Test
+    @Ignore("BUG")
+    public void pageCrashingOnRefreshAfterDuplicateTimesheetMessage() {
+        WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
+        newTimesheetButton.click();
+        chooseParticularSundayAsWeekEndingDate(2);
+        WebElement timesheetSubmitButton = webDriver.findElement(By.id("submit"));
+        timesheetSubmitButton.click();
+        waitForVisibilityOfElementById("new_timesheet").click();
+        chooseParticularSundayAsWeekEndingDate(2);
+        waitForVisibilityOfElementById("submit").click();
+        webDriver.get(submitUrl);
+        assertNotNull(waitForVisibilityOfElementById("submit"));
+    }
+    @After
     public void tearDown(){
         webDriver.close();
     }

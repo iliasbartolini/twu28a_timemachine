@@ -30,11 +30,11 @@ public class SearchActivityCodeTest extends BaseTest {
     @Before
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
-        webDriver.get(searchActivityUrl);
+        webDriver.get(dashboardUrl);
         super.submitCredentials(TestData.validPasswordString);
-        //The following two commands need to be executed once redirections are complete
-//        webDriver.findElement(By.id("timeRecord")).click();
-//        webDriver.findElement(By.id("searchActivityCode")).click();
+        webDriver.findElement(By.id("new_timesheet")).click();
+        webDriver.findElement(By.id("timeRecord")).click();
+        webDriver.findElement(By.id("searchActivity")).click();
     }
 
     @Test
@@ -62,7 +62,6 @@ public class SearchActivityCodeTest extends BaseTest {
     }
 
     @Test
-    @Ignore("Not handled")
     public void shouldHandleUnderscoreProperly() {
         String searchString = "SER_E";
         enterSearchString(searchString);

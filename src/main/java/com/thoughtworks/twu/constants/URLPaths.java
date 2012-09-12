@@ -8,5 +8,6 @@ public class URLPaths {
     public static final String TIME_RECORD_PATH = "/timesheet/timerecord";
     public static final String SEARCH_ACTIVITY_PATH = "/timesheet/search_activity";
     public static final String WEEK_ENDING_PATH = "/timesheet/new?weekEndingDate=";
+    public static final String SUBMIT_PATH = "/timesheet/submit";
 
 }

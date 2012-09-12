@@ -47,7 +47,7 @@
         <br>
 
         <!-- Activity code -->
-        <a href="search_activity" data-role="button" data-ajax="false">Select a activity code</a>
+        <a href="search_activity" id="searchActivity" data-role="button" data-ajax="false">Select a activity code</a>
         <input type="hidden" name="activity" value="" >
         <div for="activity" class="colorError"></div>
 
