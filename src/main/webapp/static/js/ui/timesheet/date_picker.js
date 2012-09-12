@@ -12,7 +12,7 @@ $('#index').live("pageinit", function () {
                 weekEndingDate: Messages.getMessage(Messages.WeekCannotBeUnspecified)
             },
             errorPlacement: function(error, element) {
-                error.insertAfter("#datepickerdiv");
+                $("div[for='weekEndingDate']").html(error);
             }
         });
 });

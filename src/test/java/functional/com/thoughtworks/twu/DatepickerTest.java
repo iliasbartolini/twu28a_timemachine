@@ -32,12 +32,12 @@ public class DatepickerTest extends BaseTest {
     }
 
     @Before
-
     public void setup() throws UnknownHostException {
         super.setUpAndroid();
         webDriver.get(dashboardUrl);
         super.submitCredentials(TestData.validPasswordString);
     }
+
     @Test
     public void shouldShowErrorWhenBlank(){
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
@@ -49,7 +49,6 @@ public class DatepickerTest extends BaseTest {
     }
 
     @Test
-    @Ignore("Not yet Done")
     public void shouldShowErrorWhenDuplicateDate(){
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
@@ -61,8 +60,9 @@ public class DatepickerTest extends BaseTest {
         waitForVisibilityOfElementById("new_timesheet").click();
         chooseParticularSundayAsWeekEndingDate(1);
         waitForVisibilityOfElementById("submit").click();
-        assertEquals(webDriver.findElement(By.className("error")).getText(), getExpectedErrorMessage("DuplicateTimesheetForWeek"));
+        assertEquals(webDriver.findElement(By.className("colorError")).getText(),getExpectedErrorMessage("DuplicateTimesheetForWeek"));
     }
+
     @Test
     public void shouldBeReadOnly() {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
@@ -71,6 +71,7 @@ public class DatepickerTest extends BaseTest {
         calender.sendKeys("16-Sep-12");
         assertThat(webDriver.findElement(By.id("weekEndingDate")).getAttribute("value"), is(""));
     }
+
     @Test
     @Ignore("Link to put back date on timesheet pending")
     public void shouldLinkToNewTimesheetWithValidInput() {
@@ -84,6 +85,7 @@ public class DatepickerTest extends BaseTest {
         WebElement weekEndingDisplay = webDriver.findElement(By.id("weekEndingDate"));
         assertEquals(selectedWeekEndingDate, weekEndingDisplay.getText());
     }
+
     @Test
     public void shouldReturnToDashboardOnCancel() {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
@@ -94,12 +96,14 @@ public class DatepickerTest extends BaseTest {
 
         assertThat(webDriver.getCurrentUrl(), containsString(URLPaths.DASHBOARD_PATH));
     }
+
     @Test
     @Ignore("Issue not handled")
     public void shouldNotBeAllowableToManipulateThroughURL() {
         webDriver.get(weekEndingUrl+"8-Oct-12");
         assertFalse(new WebDriverWait(webDriver, 60).until(ExpectedConditions.textToBePresentInElement(By.id("new_timesheet_form"), "8-Oct-12")));
     }
+
 
     @Test
     @Ignore("Issue not handled")
