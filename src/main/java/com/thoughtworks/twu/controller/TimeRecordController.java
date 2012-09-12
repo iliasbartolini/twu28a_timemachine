@@ -2,10 +2,7 @@ package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.constants.URLPaths;
 
-import com.thoughtworks.twu.domain.Country;
-import com.thoughtworks.twu.domain.LocationPresences;
-import com.thoughtworks.twu.domain.Message;
-import com.thoughtworks.twu.domain.TimeRecord;
+import com.thoughtworks.twu.domain.*;
 import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.validators.ActivityValidator;
 import com.thoughtworks.twu.domain.validators.HourPerDayValidator;
@@ -20,8 +17,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +65,7 @@ public class TimeRecordController {
     }
 
     @RequestMapping(value = URLPaths.TIME_RECORD_PATH, method = RequestMethod.POST)
-    public ModelAndView submitTimeRecord(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
+    public ModelAndView submittedTimeRecord(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
 
         LocationValidator locationValidator = new LocationValidator();
         ActivityValidator activityValidator = new ActivityValidator();
@@ -122,6 +122,7 @@ public class TimeRecordController {
         modelAndView.addObject("countries", loadCountryNames(countryService.loadCountryListWithTWPresence()));
         modelAndView.addObject("states", loadStateNames(countryService.getStates("USA")));
         modelAndView.addObject("messages", messages);
+
 
         return modelAndView;
     }

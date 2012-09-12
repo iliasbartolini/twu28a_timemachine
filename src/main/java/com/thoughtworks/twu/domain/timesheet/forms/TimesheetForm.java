@@ -9,7 +9,8 @@ import java.text.SimpleDateFormat;
 
 public class TimesheetForm {
     
-    private String weekEndingDate = "";
+    private String weekEndingDate="";
+    private String id;
 
     public void setWeekEndingDate(String weekEndingDate) {
         this.weekEndingDate = weekEndingDate;
@@ -33,6 +34,7 @@ public class TimesheetForm {
         return weekEndingDate;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,6 +42,7 @@ public class TimesheetForm {
 
         TimesheetForm that = (TimesheetForm) o;
 
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (weekEndingDate != null ? !weekEndingDate.equals(that.weekEndingDate) : that.weekEndingDate != null)
             return false;
 
@@ -48,6 +51,12 @@ public class TimesheetForm {
 
     @Override
     public int hashCode() {
-        return weekEndingDate != null ? weekEndingDate.hashCode() : 0;
+        int result = weekEndingDate != null ? weekEndingDate.hashCode() : 0;
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        return result;
+    }
+
+    public String getId() {
+        return id;
     }
 }

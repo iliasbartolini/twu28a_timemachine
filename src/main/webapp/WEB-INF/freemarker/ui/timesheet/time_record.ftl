@@ -29,7 +29,7 @@
         <h3>New Time Record</h3>
     </div>
 
-    <form id="new_timesheet_form" data-ajax="false" modelAttribute="favoriteTimesheetForm" action="" method="post"
+    <form id="new_timesheet_form" data-ajax="false" modelAttribute="timeRecordForm" action="" method="post"
           class="ui-body ui-body-a ui-corner-all">
 
         <!-- Country -->

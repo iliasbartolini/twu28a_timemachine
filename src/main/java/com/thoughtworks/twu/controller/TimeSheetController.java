@@ -5,6 +5,7 @@ import com.thoughtworks.twu.constants.URLPaths;
 
 import com.thoughtworks.twu.domain.Employee;
 
+import com.thoughtworks.twu.domain.Timesheet;
 import com.thoughtworks.twu.domain.timesheet.forms.TimesheetForm;
 import com.thoughtworks.twu.domain.validators.DatePickerValidator;
 import com.thoughtworks.twu.persistence.HibernateConnection;
@@ -46,25 +47,40 @@ public class TimeSheetController {
         modelAndView.addObject("employee", employeeService.getEmployeeByLogin(request.getRemoteUser()));
         modelAndView.addObject("errors", errors);
 
-        HibernateConnection.getInstance().getSession().close();
         return modelAndView;
     }
 
     @RequestMapping(value = "/timesheet/submit", method = RequestMethod.POST)
-    public ModelAndView submitTimesheet(@ModelAttribute("timesheetForm") TimesheetForm timesheet, BindingResult errors, HttpServletRequest request) {
+    public ModelAndView submitTimesheet(@ModelAttribute("timesheetForm") TimesheetForm timesheetForm, BindingResult errors, HttpServletRequest request) {
 
         Employee employee = employeeService.getEmployeeByLogin(request.getRemoteUser());
 
         DatePickerValidator datePickerValidator = new DatePickerValidator(datePickerService, employee, messageService);
-        datePickerValidator.validate(timesheet, errors);
+        datePickerValidator.validate(timesheetForm, errors);
 
         if (!errors.hasErrors()) {
-            timesheetService.saveTimesheet(timesheet.toTimesheet(employee));
+            Timesheet timesheet = timesheetForm.toTimesheet(employee);
+            timesheetService.saveTimesheet(timesheet);
             return new ModelAndView("redirect:/");
         } else {
             return newTimeSheet(request, null, errors);
         }
+
+//
+//        //WW
+//        Timesheet unsubmittedSheet = timesheetService.getTimeSheetById(Integer.valueOf(timesheetForm.getId()));
+//        unsubmittedSheet.setIsSubmitted(true);
+//        timesheetService.saveTimesheet(unsubmittedSheet);
+//        return "redirect:/";
     }
+
+//    public void saveTimesheet(TimesheetForm timesheetForm, HttpServletRequest request) {
+//
+//        Employee employee = employeeService.getEmployeeByLogin(request.getRemoteUser());
+//
+//        Timesheet newTimesheet = timesheetForm.toTimesheet(employee);
+//        timesheetService.saveTimesheet(newTimesheet);
+//    }
 }
 
 

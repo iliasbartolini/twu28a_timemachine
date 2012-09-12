@@ -32,7 +32,7 @@ public class TimesheetService {
                 .list();
     }
 
-    public void saveTimesheet(Timesheet timesheet) {
+    public long saveTimesheet(Timesheet timesheet) {
         connection = HibernateConnection.getInstance();
         session = connection.getSession();
 
@@ -41,9 +41,11 @@ public class TimesheetService {
 
         timesheet.setUpdatedAt(today);
         timesheet.setCreatedAt(today);
-        session.save(timesheet);
+        session.saveOrUpdate(timesheet);
+        long timesheetID = timesheet.getId();
         session.getTransaction().commit();
         session.close();
+        return timesheetID;
     }
 
     public Timesheet createNewTimesheet() {
@@ -51,17 +53,24 @@ public class TimesheetService {
         session = connection.getSession();
         session.getTransaction().begin();
         Timesheet timesheet = new Timesheet();
-        session.save(timesheet);
+        session.saveOrUpdate(timesheet);
         session.getTransaction().commit();
-
+        session.close();
         return timesheet;
     }
 
     public List<Timesheet> getAllTimesheetsByUser(String remoteUser) {
         connection = HibernateConnection.getInstance();
         session = connection.getSession();
-
         return session.createCriteria(Timesheet.class)
                 .add(Restrictions.eq("employeeNumber", remoteUser)).addOrder(Order.desc("weekEndingDate")).list();
+    }
+
+    public Timesheet getTimeSheetById(int timesheetId) {
+        connection = HibernateConnection.getInstance();
+        session = connection.getSession();
+        return (Timesheet)session.get(Timesheet.class, timesheetId);
+
+
     }
 }
