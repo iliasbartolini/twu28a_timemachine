@@ -52,7 +52,7 @@ public class Activity {
     public void setSub_project_name(String sub_project_name) {
         this.sub_project_name = sub_project_name;
     }
-
+    @Column(name = "client")
     public String getClient() {
         return client;
     }
@@ -61,6 +61,7 @@ public class Activity {
         this.client = client;
     }
 
+    @Column(name = "project")
     public String getProject() {
         return project;
     }
@@ -69,6 +70,7 @@ public class Activity {
         this.project = project;
     }
 
+    @Column(name = "sub_project")
     public String getSub_project() {
         return sub_project;
     }
