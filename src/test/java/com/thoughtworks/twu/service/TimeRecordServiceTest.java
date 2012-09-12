@@ -23,8 +23,9 @@ public class TimeRecordServiceTest {
 
     @Before
     public void setup(){
-        newTimeRecords = new TimeRecord();
         timeRecords = new ArrayList<TimeRecord>();
+
+        newTimeRecords = new TimeRecord();
         newTimeRecords.setTime_sheet_id(0);
         newTimeRecords.setId(0);
         newTimeRecords.setProject("TWU");

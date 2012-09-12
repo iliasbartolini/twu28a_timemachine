@@ -35,9 +35,5 @@ public class TimeRecordRepository {
 
     public void save(TimeRecord newTimeRecords) {
         sessionFactory.getCurrentSession().save(newTimeRecords);
-
-
     }
-
-
 }
