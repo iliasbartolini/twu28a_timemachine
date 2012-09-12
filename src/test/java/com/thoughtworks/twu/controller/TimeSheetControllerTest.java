@@ -42,7 +42,6 @@ public class TimeSheetControllerTest {
 
     @Before
     public void setUp() throws Exception {
-
         mockMessageService();
         employeeService = mockEmployee();
         timesheetService = mockTimesheetService();
@@ -56,12 +55,20 @@ public class TimeSheetControllerTest {
         timesheetForm = new TimesheetForm();
         timesheetForm.setWeekEndingDate("15-Sep-12");
 
+        expectedTimesheet = new Timesheet();
+        expectedTimesheet.setWeekEndingDate(new SimpleDateFormat("dd-MMM-yy").parse("15-Sep-12"));
+        expectedTimesheet.setEmployeeNumber(String.valueOf(expectedEmployee.getEmployeeNumber()));
+        expectedTimesheet.setIsSubmitted(true);
+
+        employeeService = mock(EmployeeService.class);
+        when(employeeService.getEmployeeByLogin("batman")).thenReturn(expectedEmployee);
         errors = new BindException(timesheetForm, "timesheetForm");
+
+
     }
 
     private TimesheetService mockTimesheetService() {
-        expectedTimesheet = new Timesheet();
-        TimesheetService timesheetService = mock(TimesheetService.class);
+        timesheetService = mock(TimesheetService.class);
         when(timesheetService.createNewTimesheet()).thenReturn(expectedTimesheet);
         return timesheetService;
     }
@@ -96,10 +103,8 @@ public class TimeSheetControllerTest {
 
         assertThat(actualEmployee, is(expectedEmployee));
     }
-
     @Test
     public void shouldSaveTimeSheet() throws Exception {
-
         expectedTimesheet.setWeekEndingDate(new SimpleDateFormat("dd-MMM-yy").parse("15-Sep-12"));
         expectedTimesheet.setEmployeeNumber(String.valueOf(expectedEmployee.getEmployeeNumber()));
 
@@ -120,5 +125,18 @@ public class TimeSheetControllerTest {
 
         assertThat(errors.hasErrors(), is(true));
     }
+
+    @Test
+    public void shouldBeAbleToSaveTimesheet() throws Exception {
+        controller.saveTimesheet(timesheetForm, request);
+        verify(timesheetService).saveTimesheet(eq(expectedTimesheet));
+
+    }
+    @Test
+    public void shouldSubmitTimesheet() throws Exception {
+        controller.submitTimesheet(timesheetForm, errors, request);
+        verify(timesheetService).saveTimesheet(expectedTimesheet);
+    }
+
 }
 

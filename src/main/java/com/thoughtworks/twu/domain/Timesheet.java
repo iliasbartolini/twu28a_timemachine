@@ -22,6 +22,7 @@ public class Timesheet {
     private Date updatedAt;
     private String status;
     public int expenses;
+    private boolean isSubmitted = false;
 
     @Id
     @GeneratedValue(generator="id")
@@ -117,5 +118,9 @@ public class Timesheet {
         result = 31 * result + (employeeNumber != null ? employeeNumber.hashCode() : 0);
         result = 31 * result + (weekEndingDate != null ? weekEndingDate.hashCode() : 0);
         return result;
+    }
+
+    public void setIsSubmitted(boolean submitted) {
+        isSubmitted = submitted;
     }
 }

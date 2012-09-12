@@ -1,7 +1,5 @@
 package com.thoughtworks.twu.domain;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 
@@ -13,7 +11,6 @@ public class TimeRecord {
 //    @GeneratedValue(generator = "id")
 //    @GenericGenerator(name = "id", strategy = "increment")
     private int id;
-
 
     private int time_sheet_id;
     private String project;

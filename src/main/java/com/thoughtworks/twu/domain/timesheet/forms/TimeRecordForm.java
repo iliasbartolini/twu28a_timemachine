@@ -18,6 +18,7 @@ public class TimeRecordForm {
     private Float friday;
     private Float saturday;
     private Float sunday;
+    private String weekEndingDate;
 
     public Date getDate() {
         return date;
@@ -141,5 +142,13 @@ public class TimeRecordForm {
         timeRecord.setTime_sheet_id(timesheetID);
         timeRecord.setState(getState());
         return timeRecord;
+    }
+
+    public String getWeekEndingDate() {
+        return weekEndingDate;
+    }
+
+    public void setWeekEndingDate(String weekEndingDate) {
+        this.weekEndingDate = weekEndingDate;
     }
 }

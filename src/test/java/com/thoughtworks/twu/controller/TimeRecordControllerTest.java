@@ -17,9 +17,7 @@ import java.util.List;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class TimeRecordControllerTest {
@@ -86,7 +84,7 @@ public class TimeRecordControllerTest {
 
     @Test
     public void shouldBeAbleToGetViewNameOfController() throws Exception {
-        assertEquals("ui/timesheet/time_record", controller.newTimesheet(timeRecordForm, bindingResult).getViewName());
+        assertEquals("ui/timesheet/time_record", controller.newTimeRecord(timeRecordForm, bindingResult).getViewName());
     }
 
     @Test

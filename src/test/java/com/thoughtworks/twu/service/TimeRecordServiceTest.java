@@ -1,18 +1,15 @@
 package com.thoughtworks.twu.service;
 
 import com.thoughtworks.twu.domain.TimeRecord;
+import org.junit.Test;
 import com.thoughtworks.twu.persistence.TimeRecordRepository;
 import org.junit.Before;
-import org.junit.Test;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.isNull;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class TimeRecordServiceTest {
 
@@ -23,6 +20,7 @@ public class TimeRecordServiceTest {
 
     @Before
     public void setup(){
+        newTimeRecords = new TimeRecord();
         timeRecords = new ArrayList<TimeRecord>();
 
         newTimeRecords = new TimeRecord();
@@ -34,6 +32,7 @@ public class TimeRecordServiceTest {
         timeRecordRepository = mock(TimeRecordRepository.class);
         timeRecordService = new TimeRecordService(timeRecordRepository);
     }
+
     @Test
     public void shouldBeAbleToReturnAllTimeRecordsBasedOnTimesheetID() throws Exception {
 
