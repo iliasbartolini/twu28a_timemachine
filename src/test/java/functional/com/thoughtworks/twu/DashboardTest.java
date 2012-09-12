@@ -43,18 +43,17 @@ public class DashboardTest extends BaseTest {
         assertEquals("Welcome Tester", header.getText());
     }
     @Test
-    @Ignore
     public void shouldSortTimesheetsInReverseChronologicalOrderByWeekendingDate() {
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
-        chooseParticularSundayAsWeekEndingDate(1);
+        chooseParticularSundayAsWeekEndingDate(4);
         String selectedWeekEndingDate1 = webDriver.findElement(By.id("weekEndingDate")).getAttribute("value");
         WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
         dateSubmitButton.click();
         WebElement timesheetSubmitButton = webDriver.findElement(By.id("submit"));
         timesheetSubmitButton.click();
         waitForVisibilityOfElementById("new_timesheet").click();
-        chooseParticularSundayAsWeekEndingDate(2);
+        chooseParticularSundayAsWeekEndingDate(5);
         String selectedWeekEndingDate2 = webDriver.findElement(By.id("weekEndingDate")).getAttribute("value");
         waitForVisibilityOfElementById("submit").click();
         waitForVisibilityOfElementById("submit").click();

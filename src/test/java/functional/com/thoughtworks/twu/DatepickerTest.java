@@ -53,13 +53,13 @@ public class DatepickerTest extends BaseTest {
     public void shouldShowErrorWhenDuplicateDate(){
         WebElement newTimesheetButton = webDriver.findElement(By.id("new_timesheet"));
         newTimesheetButton.click();
-        chooseParticularSundayAsWeekEndingDate(1);
+        chooseParticularSundayAsWeekEndingDate(3);
         WebElement dateSubmitButton = webDriver.findElement(By.id("submit"));
         dateSubmitButton.click();
         WebElement timesheetSubmitButton = webDriver.findElement(By.id("submit"));
         timesheetSubmitButton.click();
         waitForVisibilityOfElementById("new_timesheet").click();
-        chooseParticularSundayAsWeekEndingDate(1);
+        chooseParticularSundayAsWeekEndingDate(3);
         waitForVisibilityOfElementById("submit").click();
         assertEquals(webDriver.findElement(By.className("colorError")).getText(),getExpectedErrorMessage("DuplicateTimesheetForWeek"));
     }
