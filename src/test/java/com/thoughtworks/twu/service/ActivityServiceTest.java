@@ -54,7 +54,7 @@ public class ActivityServiceTest {
 
         JSONArray  activities = service.getActivities("ser_e");
 
-        assertEquals(5, activities.length());
+        assertEquals(4, activities.length());
     }
 
 
