@@ -74,13 +74,13 @@ public class TimeSheetController {
 //        return "redirect:/";
     }
 
-//    public void saveTimesheet(TimesheetForm timesheetForm, HttpServletRequest request) {
-//
-//        Employee employee = employeeService.getEmployeeByLogin(request.getRemoteUser());
-//
-//        Timesheet newTimesheet = timesheetForm.toTimesheet(employee);
-//        timesheetService.saveTimesheet(newTimesheet);
-//    }
+    public void saveTimesheet(TimesheetForm timesheetForm, HttpServletRequest request) {
+
+        Employee employee = employeeService.getEmployeeByLogin(request.getRemoteUser());
+
+        Timesheet newTimesheet = timesheetForm.toTimesheet(employee);
+        timesheetService.saveTimesheet(newTimesheet);
+    }
 }
 
 

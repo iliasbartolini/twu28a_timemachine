@@ -42,6 +42,7 @@ public class TimeSheetControllerTest {
 
     @Before
     public void setUp() throws Exception {
+        mockMessageService();
         employeeService = mockEmployee();
         timesheetService = mockTimesheetService();
         datepickerService = mock(DatePickerService.class);
@@ -63,7 +64,7 @@ public class TimeSheetControllerTest {
         when(employeeService.getEmployeeByLogin("batman")).thenReturn(expectedEmployee);
         errors = new BindException(timesheetForm, "timesheetForm");
 
-        mockMessageService();
+
     }
 
     private TimesheetService mockTimesheetService() {
@@ -134,7 +135,7 @@ public class TimeSheetControllerTest {
     @Test
     public void shouldSubmitTimesheet() throws Exception {
         controller.submitTimesheet(timesheetForm, errors, request);
-        verify(timesheetService).saveTimesheet(same(expectedTimesheet));
+        verify(timesheetService).saveTimesheet(expectedTimesheet);
     }
 
 }
