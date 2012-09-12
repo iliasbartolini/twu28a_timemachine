@@ -49,7 +49,6 @@ public class ActivityServiceTest {
     }
 
     @Test
-    @Ignore
     public void shouldReturnActivityListWhenUnderscoreIsUsed() {
 
         JSONArray  activities = service.getActivities("ser_e");
