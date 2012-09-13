@@ -38,10 +38,12 @@ public class SearchActivityCodeTest extends BaseTest {
     }
 
     @Test
-    @Ignore("Redirection Present but not added as title")
+    @Ignore("Problem with text identification of Search Activity")
     public void shouldReturnActivityCodeToActivityCodeField() {
-        String selectedActivityCode = searchAndSelectActivity("YTYOO96");
-        assertThat(webDriver.findElement(By.id("activity")).getText(),is(selectedActivityCode));
+        enterSearchString("SZD_TRN");
+        WebElement selectedActivityCode = webDriver.findElement(By.className("ui-li-heading"));
+        selectedActivityCode.click();
+        assertThat(webDriver.findElement(By.id("header")).getText(),is(selectedActivityCode.getText()));
     }
 
     @Test
@@ -71,7 +73,7 @@ public class SearchActivityCodeTest extends BaseTest {
         }
     }
     @Test
-    @Ignore("Not handled")
+    @Ignore("BUG Not handled")
     public void shouldHandleModulusProperly() {
         String searchString = "RORZ%YTYOO96";
         enterSearchString(searchString);
@@ -103,7 +105,7 @@ public class SearchActivityCodeTest extends BaseTest {
     private String searchAndSelectActivity(String searchString) {
         webDriver.get(timeRecordUrl);
         enterSearchString(searchString);
-        WebElement searchResult = webDriver.findElement(By.className("ui-li-heading"));
+        WebElement searchResult = webDriver.findElement(By.id("activity0"));
         String selectedActivityCode = searchResult.getText();
         searchResult.click();
         return selectedActivityCode;
