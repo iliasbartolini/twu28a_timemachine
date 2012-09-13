@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,5 +91,11 @@ public class BaseTest {
         List<WebElement> sundayButton = webDriver.findElements(By.className("ui-btn-up-e"));
         sundayButton.get(sundayNumber-1).click();
     }
-
+    protected List<String> convertListOfWebElementsToListOfStrings(List<WebElement> listOfWebElements) {
+        List<String> listOfString = new ArrayList<String>();
+        for(WebElement element : listOfWebElements) {
+            listOfString.add(element.getText());
+        }
+        return listOfString;
+    }
 }

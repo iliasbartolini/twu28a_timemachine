@@ -108,7 +108,7 @@
         <!-- Action buttons -->
         <div class="ui-grid-a">
             <div class="ui-block-a">
-                <input type="submit" data-role="button" value="Submit" data-ajax="false"/>
+                <input type="submit" id="submitTimeRecord" data-role="button" value="Submit" data-ajax="false"/>
             </div>
             <div class="ui-block-b">
                 <input type="button" data-role="button" value="Cancel" data-ajax="false"/>
