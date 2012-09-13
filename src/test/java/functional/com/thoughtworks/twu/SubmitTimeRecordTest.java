@@ -33,11 +33,9 @@ public class SubmitTimeRecordTest extends  BaseTest{
         assertTrue(stringErrorMessages.contains(getExpectedErrorMessage("ActivityCannotBeUnspecified")));
     }
     @Test
-    public void shouldAllowAnyDataInActivityComment() {
-        WebElement activityCommentElement = waitForVisibilityOfElementById("task");
-        String activityCommentString = "ertyusdfgh8765";
-        activityCommentElement.sendKeys(activityCommentString);
-        assertEquals(activityCommentElement.getText(),activityCommentString);
+    public void shouldShowMessageWhenTaskCommentBlank() {
+        List<String> stringErrorMessages = getAllErrorMessagesDisplayed();
+        assertTrue(stringErrorMessages.contains(getExpectedErrorMessage("TaskCommentCannotBeUnspecified")));
     }
     //@After
     public void teardown() {
