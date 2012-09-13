@@ -44,6 +44,12 @@
         <a href="timerecord" id="timeRecord" data-ajax="false" data-role="button" data-theme="a"  value="addtimeRecord" data-icon="plus">New Activity</a>
         <br>
 
+        <ul data-role="listview">
+            <#list timeRecords as item>
+                <li>${item.activity}</li>
+            </#list>
+        </ul>
+
         <button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">
             Submit
         </button>

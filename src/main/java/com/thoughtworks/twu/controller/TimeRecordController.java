@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,7 +67,7 @@ public class TimeRecordController {
     }
 
     @RequestMapping(value = URLPaths.TIME_RECORD_PATH, method = RequestMethod.POST)
-    public ModelAndView submittedTimeRecord(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
+    public ModelAndView submittedTimeRecord(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors, HttpServletRequest request) throws Exception {
 
         LocationValidator locationValidator = new LocationValidator();
         ActivityValidator activityValidator = new ActivityValidator();
@@ -78,9 +80,18 @@ public class TimeRecordController {
         if (errors.hasErrors()) {
             return showTimeRecord();
         } else {
-            ModelAndView modelAndView = new ModelAndView(URLPaths.NEW_TIMESHEET_PATH);
-            modelAndView.addObject("timeRecordForm", timeRecordForm);
-            return modelAndView;
+            //Danca Kuduro
+
+            List<TimeRecordForm> timeRecordForms = (List<TimeRecordForm>) request.getSession().getAttribute("timeRecordsList");
+
+            if ( timeRecordForms == null ) {
+                timeRecordForms = new ArrayList<TimeRecordForm>();
+            }
+
+            timeRecordForms.add(timeRecordForm);
+            request.getSession().setAttribute("timeRecordsList", timeRecordForms);
+
+            return new ModelAndView(new RedirectView("new"));
         }
     }
 

@@ -6,6 +6,7 @@ import com.thoughtworks.twu.constants.URLPaths;
 import com.thoughtworks.twu.domain.Employee;
 
 import com.thoughtworks.twu.domain.Timesheet;
+import com.thoughtworks.twu.domain.timesheet.forms.TimeRecordForm;
 import com.thoughtworks.twu.domain.timesheet.forms.TimesheetForm;
 import com.thoughtworks.twu.domain.validators.DatePickerValidator;
 import com.thoughtworks.twu.persistence.HibernateConnection;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class TimeSheetController {
@@ -43,6 +46,11 @@ public class TimeSheetController {
     @RequestMapping(value = URLPaths.NEW_TIMESHEET_PATH, method = RequestMethod.GET)
     public ModelAndView newTimeSheet(HttpServletRequest request, @ModelAttribute("timesheetForm") TimesheetForm timesheet, BindingResult errors) {
 
+        List<TimeRecordForm> timeRecordForms = (List<TimeRecordForm>) request.getSession().getAttribute("timeRecordsList");
+        if (timeRecordForms == null) {
+            timeRecordForms = new ArrayList<TimeRecordForm>();
+        }
+
         String weekEndingDate = (String) request.getSession().getAttribute("weekEndingDate");
         timesheet.setWeekEndingDate(weekEndingDate == null ? "" : weekEndingDate);
 
@@ -50,6 +58,7 @@ public class TimeSheetController {
 
         modelAndView.addObject("employee", employeeService.getEmployeeByLogin(request.getRemoteUser()));
         modelAndView.addObject("errors", errors);
+        modelAndView.addObject("timeRecords", timeRecordForms);
 
         return modelAndView;
     }
@@ -70,27 +79,15 @@ public class TimeSheetController {
         datePickerValidator.validate(timesheetForm, errors);
 
         if (!errors.hasErrors()) {
+            request.getSession().removeAttribute("timeRecordsList");
+            request.getSession().removeAttribute("weekEndingDate");
+
             Timesheet timesheet = timesheetForm.toTimesheet(employee);
             timesheetService.saveTimesheet(timesheet);
             return new ModelAndView("redirect:/");
         } else {
             return newTimeSheet(request, timesheetForm, errors);
         }
-
-//
-//        //WW
-//        Timesheet unsubmittedSheet = timesheetService.getTimeSheetById(Integer.valueOf(timesheetForm.getId()));
-//        unsubmittedSheet.setIsSubmitted(true);
-//        timesheetService.saveTimesheet(unsubmittedSheet);
-//        return "redirect:/";
-    }
-
-    public void saveTimesheet(TimesheetForm timesheetForm, HttpServletRequest request) {
-
-        Employee employee = employeeService.getEmployeeByLogin(request.getRemoteUser());
-
-        Timesheet newTimesheet = timesheetForm.toTimesheet(employee);
-        timesheetService.saveTimesheet(newTimesheet);
     }
 }
 

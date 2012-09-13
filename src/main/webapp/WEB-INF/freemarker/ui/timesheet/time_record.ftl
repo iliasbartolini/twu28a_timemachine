@@ -31,25 +31,25 @@
 
     <form id="new_timesheet_form" data-ajax="false" modelAttribute="timeRecordForm" action="" method="post"
           class="ui-body ui-body-a ui-corner-all">
-
-        <!-- Country -->
-        <@spring.formSingleSelect "timeRecordForm.country",countries, "class= select1" />
-        <div for="country" class="colorError">
-            <@spring.showErrors "<br>" />
-        </div>
-        <br>
-
-        <!-- State -->
-        <@spring.formSingleSelect "timeRecordForm.state",states, "class=state" />
-        <div for="state" class="colorError">
-            <@spring.showErrors "<br>"/>
-        </div>
-        <br>
-
         <!-- Activity code -->
         <a href="search_activity" id="searchActivity" data-role="button" data-ajax="false">Select a activity code</a>
         <input type="hidden" name="activity" value="" >
         <div for="activity" class="colorError"></div>
+
+        <!-- Country -->
+    <@spring.formSingleSelect "timeRecordForm.country",countries, "class= select1" />
+        <div for="country" class="colorError">
+        <@spring.showErrors "<br>" />
+        </div>
+        <br>
+
+        <!-- State -->
+    <@spring.formSingleSelect "timeRecordForm.state",states, "class=state" />
+        <div for="state" class="colorError">
+        <@spring.showErrors "<br>"/>
+        </div>
+        <br>
+
 
         <!-- Billable -->
         <label>Billable?</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
