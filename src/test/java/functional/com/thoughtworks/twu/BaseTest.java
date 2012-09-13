@@ -98,4 +98,13 @@ public class BaseTest {
         }
         return listOfString;
     }
+    protected  List<String> getAllErrorMessagesDisplayed() {
+        webDriver.findElement(By.id("submitTimeRecord")).click();
+        List<WebElement> errorMessages = webDriver.findElements(By.className("colorError"));
+        List<String> errorMessageStrings = new ArrayList<String>();
+        for(WebElement element : errorMessages) {
+            errorMessageStrings.add(element.getText());
+        }
+        return errorMessageStrings;
+    }
 }

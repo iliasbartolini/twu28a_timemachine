@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import static org.junit.Assert.assertThat;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 
@@ -28,13 +29,19 @@ public class SubmitTimeRecordTest extends  BaseTest{
     }
     @Test
     public void shouldShowMessageWhenActivityNotChosen() {
-        webDriver.findElement(By.id("submitTimeRecord")).click();
-        List<WebElement> errorMessages = webDriver.findElements(By.className("colorError"));
-        List<String> stringErrorMessages = convertListOfWebElementsToListOfStrings(errorMessages);
+        List<String> stringErrorMessages = getAllErrorMessagesDisplayed();
         assertTrue(stringErrorMessages.contains(getExpectedErrorMessage("ActivityCannotBeUnspecified")));
     }
-    @After
+    @Test
+    public void shouldAllowAnyDataInActivityComment() {
+        WebElement activityCommentElement = waitForVisibilityOfElementById("task");
+        String activityCommentString = "ertyusdfgh8765";
+        activityCommentElement.sendKeys(activityCommentString);
+        assertEquals(activityCommentElement.getText(),activityCommentString);
+    }
+    //@After
     public void teardown() {
         webDriver.close();
     }
+
 }
