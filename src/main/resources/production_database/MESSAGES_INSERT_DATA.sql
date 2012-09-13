@@ -1,3 +1,9 @@
+declare
+  countOfTable int;
+begin
+  DELETE FROM MESSAGES;
+  select count(*) into countOfTable from MESSAGES;
+  if countOfTable = 0 then
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (1,'UserNamePasswordCannotBeBlank','Username is a required field.  Password is a required field.');
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (2,'UserNamePasswordMismatch','The credentials you provided cannot be determined to be authentic.');
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (3,'NoExistingTimesheets','You don''t have any saved timesheets.  ');
@@ -14,3 +20,6 @@ Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (13,'TaskCommentCannotBeUnsp
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (14,'HoursLessThan40','Your total billed hours for the week are less than 40. Do you want to continue submitting this timesheet?');
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (15,'PublicHolidayConfirmation','"Date" was a public holiday in "Country". Are you sure you want to enter hours for it?');
 Insert into MESSAGES (ID,MESSAGE_ID,MESSAGE) values (16,'HoursCannotBeZero','Hours must be entered for each activity in order to submit.');
+
+  end if;
+end;

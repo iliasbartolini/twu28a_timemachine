@@ -15,7 +15,6 @@ ext
    generatedWebXmlFile = file("$webAppDir/WEB-INF/web.xml")
    serverPort = 9093
    environment = rootProject.hasProperty("environment") ? environment : "DEV"
-
 }
 repositories {
     mavenCentral()
@@ -24,6 +23,7 @@ repositories {
 
 configurations {
     driver
+//    sshAntTask
 }
 
 dependencies {
@@ -45,6 +45,7 @@ dependencies {
             'org.codehaus.jackson:jackson-core-lgpl:1.9.9',
             'org.codehaus.jackson:jackson-mapper-lgpl:1.9.9',
             'org.json:json:20090211',
+//            'org.apahe.ant:ant-jsch:1.7.1',
             fileTree(dir: 'lib', include: '*.jar'),
             group: 'org.hibernate', name: 'hibernate-core', version: '4.+',
             'org.codehaus.groovy:groovy-all:2.0.1',
@@ -62,6 +63,7 @@ dependencies {
     emma "emma:emma_ant:2.0.5312"
 
     driver name: 'ojdbc14'
+//    sshAntTask 'org.apache.ant:ant-jsch:1.7.1', 'jsch:jsch:0.1.48'
 }
 
 
@@ -143,19 +145,8 @@ functionalTest.doLast {
 }
 
 
-//task deployDB2 << {
-////    ant.taskdef(resource: 'PRODUCTION.properties') {
-////        classpath {
-////            fileset(dir: 'libs', includes: '*.jar')
-////        }
-////    }
-//    ant.deployDB3(){
-//        fileset(dir: 'src') {
-//            include(name: 'build.xml')
-//            exclude(name: '**.java')
-//        }
-//    }
-//}
-task deployDB(dependsOn: deployDB3) << {
-//    println 'Hello, from Gradle'
+task deployDB() << {
+    deployDbByAnt.execute()
+
 }
+

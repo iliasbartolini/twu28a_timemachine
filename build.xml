@@ -6,27 +6,33 @@
     </path>
 
     <property name="pathvar" refid="antclasspath" />
-    <echo message="Classpath is ${pathvar}"/>
 
-    <target name="deployDB3">
+    <target name="deployDbByAnt" depends="loadProperties">
+        <loadproperties srcFile="./properties/PRODUCTION.properties" />
         <echo>Hello, from Ant</echo>
+        <echo message="Remote DB Deploy"/>
+        <echo message="url is ${hibernateConnectionUrl}"/>
+        <echo message="userName is ${username}" />
+        <echo message="password is ${password}" />
+
         <sql
                 driver = "oracle.jdbc.OracleDriver"
-                url="jdbc:oracle:thin:@chioradev01.thoughtworks.com:1521:TETST1"
-                userid="TE_TST1"
-                password="TMetSt8q"
-                print="yes"
+                url="${hibernateConnectionUrl}"
+                userid="${username}"
+                password="${password}"
                 classpathref="antclasspath"
+                delimiter = "/"
+                delimitertype="row"
+                keepformat="yes"
                 >
             <path>
-                <fileset dir="./src/main/resources/twu_database/te/">
-                    <include name="MESSAGE_INSERT_DATA.sql"/>
-                    <!--<include name="data*.sql"/>-->
+                <fileset dir="./src/main/resources/production_database/">
+                    <include name="MESSAGES_CREATE_TABLE.sql"/>
+                    <include name="MESSAGES_INSERT_DATA.sql"/>
                 </fileset>
             </path>
         </sql>
     </target>
 
 </project>
-
 
