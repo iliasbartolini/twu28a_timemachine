@@ -111,7 +111,7 @@
                 <input type="submit" id="submitTimeRecord" data-role="button" value="Submit" data-ajax="false"/>
             </div>
             <div class="ui-block-b">
-                <input type="button" data-role="button" value="Cancel" data-ajax="false"/>
+                <a href="new" type="button" data-role="button" value="Cancel" data-ajax="false">Cancel</a>
             </div>
         </div>
     </form>
