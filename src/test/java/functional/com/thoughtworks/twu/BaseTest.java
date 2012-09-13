@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.InetAddress;
@@ -79,7 +80,7 @@ public class BaseTest {
         String userAgent = "Android 4.0.4 - Opera 12.00";
         firefoxProfile.setPreference("general.useragent.override", userAgent);
         webDriver = new FirefoxDriver(firefoxProfile);
-        webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     protected String getExpectedErrorMessage(String messageId) {
@@ -106,5 +107,20 @@ public class BaseTest {
             errorMessageStrings.add(element.getText());
         }
         return errorMessageStrings;
+    }
+    protected void selectCountry(String countryName) {
+        WebElement country = webDriver.findElement(By.id("country"));
+        Select dropDownCountry = new Select(country);
+        dropDownCountry.selectByValue(countryName);
+    }
+    protected void enterSearchString(String searchString){
+        WebElement search = waitForVisibilityOfElementById("searchCriteria");
+        search.sendKeys(searchString);
+        search.submit();
+    }
+    protected void searchAndSelectActivity(String searchString) {
+        enterSearchString(searchString);
+        WebElement searchResult = webDriver.findElement(By.id("activity0"));
+        searchResult.click();
     }
 }

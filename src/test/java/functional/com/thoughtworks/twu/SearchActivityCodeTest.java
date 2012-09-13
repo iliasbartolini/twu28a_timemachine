@@ -96,19 +96,7 @@ public class SearchActivityCodeTest extends BaseTest {
     public void teardown() {
         webDriver.close();
     }
-    private void enterSearchString(String searchString){
-        WebElement search = waitForVisibilityOfElementById("searchCriteria");
-        search.sendKeys(searchString);
-        search.submit();
-    }
 
-    private String searchAndSelectActivity(String searchString) {
-        webDriver.get(timeRecordUrl);
-        enterSearchString(searchString);
-        WebElement searchResult = webDriver.findElement(By.id("activity0"));
-        String selectedActivityCode = searchResult.getText();
-        searchResult.click();
-        return selectedActivityCode;
-    }
+
 
 }

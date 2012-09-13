@@ -37,9 +37,8 @@ public class SubmitTimeRecordTest extends  BaseTest{
         List<String> stringErrorMessages = getAllErrorMessagesDisplayed();
         assertTrue(stringErrorMessages.contains(getExpectedErrorMessage("TaskCommentCannotBeUnspecified")));
     }
-    //@After
+    @After
     public void teardown() {
         webDriver.close();
     }
-
 }

@@ -59,7 +59,7 @@
         </select>
 
         <!-- Activity Comment -->
-        <input type="text" name="task" placeholder="Activity Comment" id="task" value=""/>
+        <input type="text" name="task" placeholder="Activity Comment" id="taskComment" value=""/>
         <div for="task" class="colorError">
         </div>
 
