@@ -131,12 +131,6 @@ public class TimeSheetControllerTest {
     }
 
     @Test
-    public void shouldBeAbleToSaveTimesheet() throws Exception {
-        controller.saveTimesheet(timesheetForm, request);
-        verify(timesheetService).saveTimesheet(eq(expectedTimesheet));
-
-    }
-    @Test
     public void shouldSubmitTimesheet() throws Exception {
         controller.submitTimesheet(timesheetForm, errors, request);
         verify(timesheetService).saveTimesheet(expectedTimesheet);
