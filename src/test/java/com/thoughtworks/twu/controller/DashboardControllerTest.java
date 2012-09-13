@@ -1,13 +1,10 @@
 package com.thoughtworks.twu.controller;
 
-import com.thoughtworks.twu.domain.Timesheet;
-import com.thoughtworks.twu.service.TimesheetService;
+import com.thoughtworks.twu.service.EmployeeService;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -28,18 +25,18 @@ public class DashboardControllerTest {
 
         assertThat(modelAndView.getViewName(), is("ui/dashboard/dashboard"));
     }
-//
-//    @Test
-//    public void shouldLoadTimesheets() throws Exception {
-//        TimesheetService timesheetService = mock(TimesheetService.class);
-//
-//        DashboardController controller = new DashboardController(timesheetService);
-//
-//        HttpServletRequest request = mock(HttpServletRequest.class);
-//
-//        ModelAndView modelAndView = controller.show(request);
-//
-//        List<Timesheet> timesheets = (List<Timesheet>) modelAndView.getModel().get("timesheets");
-//        assertThat(timesheets.size(), is(1));
-//    }
+
+    @Test
+    public void shouldRedirectToErrorPageWhenNoMatchingRecordsFound()
+    {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        when(request.getRemoteUser()).thenReturn("test");
+        EmployeeService employeeService= mock(EmployeeService.class);
+        when(employeeService.getEmployeeByLogin("test")).thenReturn(null);
+        DashboardController dashboardController = new DashboardController();
+        ModelAndView modelAndView = dashboardController.show(request);
+        assertThat(modelAndView.getViewName(),is("ui/error"));
+    }
+
+
 }

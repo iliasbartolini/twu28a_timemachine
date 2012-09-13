@@ -25,12 +25,20 @@ public class DashboardController {
 
         Employee employee = service.getEmployeeByLogin(request.getRemoteUser());
 
-        List<Timesheet> timesheets = timesheetService.getAllTimesheetsByUser(employee.getEmployeeNumber());
+        ModelAndView modelAndView;
 
-        ModelAndView modelAndView = new ModelAndView("ui/dashboard/dashboard");
-        modelAndView.addObject("employee", service.getEmployeeByLogin(request.getRemoteUser()));
-        modelAndView.addObject("datepicker_path", URLPaths.DATEPICKER_PATH);
-        modelAndView.addObject("timesheets", timesheets);
+        if(employee == null) {
+            modelAndView = new ModelAndView("ui/error");
+        } else {
+            List<Timesheet> timesheets = timesheetService.getAllTimesheetsByUser(employee.getEmployeeNumber());
+
+            modelAndView = new ModelAndView("ui/dashboard/dashboard");
+            modelAndView.addObject("employee", service.getEmployeeByLogin(request.getRemoteUser()));
+            modelAndView.addObject("datepicker_path", URLPaths.DATEPICKER_PATH);
+            modelAndView.addObject("timesheets", timesheets);
+        }
+
+
 
         HibernateConnection.getInstance().getSession().close();
         return modelAndView;
