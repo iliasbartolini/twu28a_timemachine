@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,6 +40,7 @@ public class TimeSheetControllerTest {
     private DatePickerService datepickerService;
     private BindException errors;
     private TimesheetForm timesheetForm;
+    private HttpSession session;
 
     @Before
     public void setUp() throws Exception {
@@ -47,8 +49,10 @@ public class TimeSheetControllerTest {
         timesheetService = mockTimesheetService();
         datepickerService = mock(DatePickerService.class);
         request = mock(HttpServletRequest.class);
+        session = mock(HttpSession.class);
         when(request.getRemoteUser()).thenReturn("batman");
-        when(request.getParameter("weekEndingDate")).thenReturn("10-SEP-2012");
+        when(request.getSession()).thenReturn(session);
+        when(request.getSession().getAttribute("weekEndingDate")).thenReturn("10-SEP-2012");
 
         controller = new TimeSheetController(datepickerService, employeeService, timesheetService, messageService);
 
@@ -92,13 +96,13 @@ public class TimeSheetControllerTest {
 
     @Test
     public void shouldDisplayNewTimeSheetView() throws ParseException {
-        assertEquals("ui/timesheet/newtimesheet", controller.newTimeSheet(request, null, errors).getViewName());
+        assertEquals("ui/timesheet/newtimesheet", controller.newTimeSheet(request, timesheetForm, errors).getViewName());
     }
 
     @Test
     public void shouldAddEmployeeToModel() throws ParseException {
 
-        ModelAndView modelAndView = controller.newTimeSheet(request, null, errors);
+        ModelAndView modelAndView = controller.newTimeSheet(request, timesheetForm, errors);
         Employee actualEmployee = (Employee) modelAndView.getModel().get("employee");
 
         assertThat(actualEmployee, is(expectedEmployee));

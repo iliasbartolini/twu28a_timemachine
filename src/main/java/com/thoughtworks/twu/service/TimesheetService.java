@@ -73,4 +73,12 @@ public class TimesheetService {
 
 
     }
+
+    public Timesheet createTimesheetIfNotExists(String timesheetId) {
+        if ( timesheetId.isEmpty() ) {
+             return createNewTimesheet();
+        }
+
+        return getTimeSheetById(Integer.parseInt(timesheetId));
+    }
 }

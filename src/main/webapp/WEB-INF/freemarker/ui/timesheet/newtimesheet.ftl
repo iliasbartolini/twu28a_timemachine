@@ -20,7 +20,7 @@
     <script type="text/javascript" src="../static/js/lib/jquery.mobile.datebox.i18n.en_US.utf8.js"></script>
     <script type="text/javascript" src="../static/js/messages/messages.js"></script>
     <script type="text/javascript" src="../static/js/ui/timesheet/date_picker.js"></script>
-
+    <script type="text/javascript" src="../static/js/timesheet/new_timesheet.js"></script>
 </head>
 
 <div data-role="page" data-theme="a">

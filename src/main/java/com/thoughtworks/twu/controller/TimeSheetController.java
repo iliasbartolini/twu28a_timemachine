@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,12 +43,22 @@ public class TimeSheetController {
     @RequestMapping(value = URLPaths.NEW_TIMESHEET_PATH, method = RequestMethod.GET)
     public ModelAndView newTimeSheet(HttpServletRequest request, @ModelAttribute("timesheetForm") TimesheetForm timesheet, BindingResult errors) {
 
+        String weekEndingDate = (String) request.getSession().getAttribute("weekEndingDate");
+        timesheet.setWeekEndingDate(weekEndingDate == null ? "" : weekEndingDate);
+
         ModelAndView modelAndView = new ModelAndView("ui/timesheet/newtimesheet");
 
         modelAndView.addObject("employee", employeeService.getEmployeeByLogin(request.getRemoteUser()));
         modelAndView.addObject("errors", errors);
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "timesheet/save_partial", method = RequestMethod.POST)
+    @ResponseBody
+    public String savePartialData(HttpServletRequest request, TimesheetForm timesheetForm) {
+        request.getSession().setAttribute("weekEndingDate", timesheetForm.getWeekEndingDate());
+        return "true";
     }
 
     @RequestMapping(value = "/timesheet/submit", method = RequestMethod.POST)
@@ -63,7 +74,7 @@ public class TimeSheetController {
             timesheetService.saveTimesheet(timesheet);
             return new ModelAndView("redirect:/");
         } else {
-            return newTimeSheet(request, null, errors);
+            return newTimeSheet(request, timesheetForm, errors);
         }
 
 //
