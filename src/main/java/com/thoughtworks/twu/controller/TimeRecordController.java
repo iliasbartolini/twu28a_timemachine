@@ -50,19 +50,6 @@ public class TimeRecordController {
     @RequestMapping(value = URLPaths.TIME_RECORD_PATH, method = RequestMethod.GET)
     public ModelAndView newTimeRecord(@ModelAttribute("timeRecordForm") TimeRecordForm timeRecordForm, BindingResult errors) throws Exception {
 
-
-        List<Message> messages = new ArrayList<Message>();
-        messages.add(messageService.getMessageById("HoursLessThan40"));
-        messages.add(messageService.getMessageById("HoursCannotBeZero"));
-        messages.add(messageService.getMessageById("TaskCommentCannotBeUnspecified"));
-        messages.add(messageService.getMessageById("ActivityCannotBeUnspecified"));
-
-        ModelAndView modelAndView = new ModelAndView("ui/timesheet/time_record");
-
-        modelAndView.addObject("countries", loadCountryNames(countryService.loadCountryListWithTWPresence()));
-        modelAndView.addObject("states", loadStateNames(countryService.getStates("USA")));
-        modelAndView.addObject("messages", messages);
-
         return showTimeRecord();
     }
 
@@ -80,11 +67,10 @@ public class TimeRecordController {
         if (errors.hasErrors()) {
             return showTimeRecord();
         } else {
-            //Danca Kuduro
-
+            //Danza Kuduro
             List<TimeRecordForm> timeRecordForms = (List<TimeRecordForm>) request.getSession().getAttribute("timeRecordsList");
 
-            if ( timeRecordForms == null ) {
+            if (timeRecordForms == null) {
                 timeRecordForms = new ArrayList<TimeRecordForm>();
             }
 

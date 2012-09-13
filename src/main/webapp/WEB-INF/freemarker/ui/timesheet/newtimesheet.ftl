@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="../static/css/base.css"/>
     <link rel="stylesheet" href="../static/css/jquery.mobile-1.2.0-alpha.1.min.css"/>
     <link rel="stylesheet" href="../static/css/mobiscroll-2.0.1.custom.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/jqm-datebox.min.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/jqm-datebox.min.css"/>
 
     <script type="text/javascript" src="../static/js/lib/jquery-1.7.2.min.js?1"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.mobile-1.2.0-alpha.1.min.js"></script>
-    <script type="text/javascript" src="../static/js/lib/jquery.form.js" ></script>
+    <script type="text/javascript" src="../static/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="../static/js/lib/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../static/js/lib/jqm-datebox-1.1.0.core.js"></script>
     <script type="text/javascript" src="../static/js/lib/jqm-datebox-1.1.0.mode.calbox.js"></script>
@@ -32,27 +32,43 @@
           class="ui-body ui-body-a ui-corner-all">
         <h4>Week Ending:</h4>
 
-        <input name="weekEndingDate" value="${timesheetForm.weekEndingDate}" type="text" data-role="datebox" id="weekEndingDate" data-options='{"mode":"calbox", "blackDays": [1,2,3,4,5,6], "highDays": [0], "overrideCalStartDay": 1, "overrideDateFormat": "%d-%b-%y" }'/>
+        <input name="weekEndingDate" value="${timesheetForm.weekEndingDate}" type="text" data-role="datebox"
+               id="weekEndingDate"
+               data-options='{"mode":"calbox", "blackDays": [1,2,3,4,5,6], "highDays": [0], "overrideCalStartDay": 1, "overrideDateFormat": "%d-%b-%y" }'/>
 
-        <#if errors.hasErrors() >
-            <div for="weekEndingDate" class="colorError error">${errors.getFieldError("weekEndingDate").getCode()}</div>
-        <#else>
-            <div for="weekEndingDate" class="colorError error"></div>
-        </#if>
+    <#if errors.hasErrors() >
+        <div for="weekEndingDate" class="colorError error">${errors.getFieldError("weekEndingDate").getCode()}</div>
+    <#else>
+        <div for="weekEndingDate" class="colorError error"></div>
+    </#if>
 
 
-        <a href="timerecord" id="timeRecord" data-ajax="false" data-role="button" data-theme="a"  value="addtimeRecord" data-icon="plus">New Activity</a>
+        <a href="timerecord" id="timeRecord" data-ajax="false" data-role="button" data-theme="a" value="addtimeRecord"
+           data-icon="plus">New Activity</a>
         <br>
 
         <ul data-role="listview">
-            <#list timeRecords as item>
-                <li>${item.activity}</li>
-            </#list>
+        <#list timeRecords as item>
+            <li>${item.activity}</li>
+        </#list>
         </ul>
 
-        <button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">
-            Submit
-        </button>
+
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+
+                <button type="submit" data-theme="a" data-ajax="true" name="submit" id="submit" value="submit-value">
+                    Submit
+                </button>
+
+            </div>
+
+            <div class="ui-block-b">
+                <a href="/timemachine" type="button" data-role="button" value="Cancel" data-ajax="false">Cancel</a>
+            </div>
+        </div>
+
+
     </form>
 </div>
 
